@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Pappprito Animated</title>
+<title>Pappprito Ultimate Screen</title>
 
 <style>
 body{
     margin:0;
     overflow:hidden;
+    font-family: Arial;
     background:#000;
 }
 
@@ -16,77 +17,90 @@ body{
     width:100%;
     height:100%;
     object-fit:cover;
-    animation: zoom 10s infinite alternate;
+    animation: zoom 12s infinite alternate;
 }
 
 @keyframes zoom{
     0%{ transform:scale(1); }
-    100%{ transform:scale(1.1); }
+    100%{ transform:scale(1.15); }
 }
 
-/* PLATE FLOAT */
-.plate{
+/* DARK OVERLAY */
+.overlay{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+}
+
+/* PRODUCT FLOAT */
+.product{
     position:absolute;
-    bottom:50px;
+    bottom:80px;
     left:50%;
     transform:translateX(-50%);
-    width:500px;
-    animation: float 3s ease-in-out infinite;
+    width:450px;
+    animation: float 4s ease-in-out infinite;
 }
 
 @keyframes float{
     0%{ transform:translate(-50%,0); }
-    50%{ transform:translate(-50%,-25px); }
+    50%{ transform:translate(-50%,-30px); }
     100%{ transform:translate(-50%,0); }
+}
+
+/* SMOKE MULTI */
+.smoke{
+    position:absolute;
+    bottom:200px;
+    left:50%;
+    width:120px;
+    height:180px;
+    background:rgba(255,255,255,0.2);
+    filter:blur(25px);
+    border-radius:50%;
+    animation: smoke 5s infinite;
+}
+
+.smoke:nth-child(2){
+    left:45%;
+    animation-delay:1s;
+}
+.smoke:nth-child(3){
+    left:55%;
+    animation-delay:2s;
+}
+
+@keyframes smoke{
+    0%{ transform:translate(-50%,0) scale(1); opacity:0.6; }
+    100%{ transform:translate(-50%,-180px) scale(2); opacity:0; }
 }
 
 /* EGG GLOW */
 .egg{
     position:absolute;
-    bottom:180px;
-    left:60%;
-    width:80px;
-    border-radius:50%;
-    animation: glowEgg 2s infinite alternate;
-}
-
-@keyframes glowEgg{
-    from{ box-shadow:0 0 10px yellow; }
-    to{ box-shadow:0 0 40px orange; }
-}
-
-/* SMOKE */
-.smoke{
-    position:absolute;
     bottom:200px;
-    left:50%;
-    width:100px;
-    height:150px;
-    background:rgba(255,255,255,0.2);
-    filter:blur(20px);
+    left:58%;
+    width:90px;
+    height:90px;
     border-radius:50%;
-    animation: smoke 4s infinite;
+    box-shadow:0 0 30px yellow;
+    animation: eggGlow 2s infinite alternate;
 }
 
-@keyframes smoke{
-    0%{
-        transform:translate(-50%,0) scale(1);
-        opacity:0.5;
-    }
-    100%{
-        transform:translate(-50%,-150px) scale(2);
-        opacity:0;
-    }
+@keyframes eggGlow{
+    from{ box-shadow:0 0 20px yellow; }
+    to{ box-shadow:0 0 60px orange; }
 }
 
 /* TEXT */
-.text{
+.title{
     position:absolute;
     top:100px;
     width:100%;
     text-align:center;
-    color:#fff;
     font-size:60px;
+    color:#fff;
     font-weight:bold;
     animation: glow 2s infinite alternate;
 }
@@ -94,6 +108,64 @@ body{
 @keyframes glow{
     from{ text-shadow:0 0 10px red; }
     to{ text-shadow:0 0 30px yellow; }
+}
+
+/* PRICE */
+.price{
+    position:absolute;
+    right:80px;
+    top:50%;
+    transform:translateY(-50%);
+    background:red;
+    padding:30px;
+    border-radius:50%;
+    font-size:40px;
+    color:#fff;
+    font-weight:bold;
+    box-shadow:0 0 40px red;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+    0%{ transform:translateY(-50%) scale(1); }
+    50%{ transform:translateY(-50%) scale(1.1); }
+    100%{ transform:translateY(-50%) scale(1); }
+}
+
+/* BADGE */
+.badge{
+    position:absolute;
+    left:50px;
+    top:50px;
+    background:orange;
+    padding:10px 20px;
+    border-radius:20px;
+    font-weight:bold;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink{
+    50%{ opacity:0.5; }
+}
+
+/* SPARKLES */
+.sparkle{
+    position:absolute;
+    width:10px;
+    height:10px;
+    background:white;
+    border-radius:50%;
+    animation: sparkle 2s infinite;
+}
+
+.sparkle:nth-child(1){ top:30%; left:20%; }
+.sparkle:nth-child(2){ top:60%; left:70%; }
+.sparkle:nth-child(3){ top:40%; left:50%; }
+
+@keyframes sparkle{
+    0%{ opacity:0; transform:scale(0); }
+    50%{ opacity:1; transform:scale(1.5); }
+    100%{ opacity:0; transform:scale(0); }
 }
 </style>
 
@@ -104,17 +176,66 @@ body{
 <!-- BACKGROUND -->
 <img src="rapsilog.jpg" class="bg">
 
-<!-- TEXT -->
-<div class="text">sa Rapsilog</div>
+<div class="overlay"></div>
 
-<!-- SMOKE EFFECT -->
+<!-- TEXT -->
+<div class="title" id="title">Rapsilog</div>
+
+<!-- BADGE -->
+<div class="badge" id="badge">NEW</div>
+
+<!-- PRICE -->
+<div class="price" id="price">₱85</div>
+
+<!-- SMOKE -->
+<div class="smoke"></div>
+<div class="smoke"></div>
 <div class="smoke"></div>
 
-<!-- PLATE (kung may hiwalay ka) -->
-<!-- <img src="plate.png" class="plate"> -->
-
-<!-- EGG GLOW (fake highlight) -->
+<!-- EGG GLOW -->
 <div class="egg"></div>
+
+<!-- PRODUCT -->
+<img src="rapsilog.jpg" class="product" id="product">
+
+<!-- SPARKLES -->
+<div class="sparkle"></div>
+<div class="sparkle"></div>
+<div class="sparkle"></div>
+
+<script>
+
+/* 🔁 AUTO SLIDESHOW */
+const items = [
+    {
+        title: "Rapsilog",
+        price: "₱85",
+        img: "rapsilog.jpg"
+    },
+    {
+        title: "Chicken Meal",
+        price: "₱99",
+        img: "rapsilog.jpg"
+    },
+    {
+        title: "Burger Combo",
+        price: "₱79",
+        img: "rapsilog.jpg"
+    }
+];
+
+let i = 0;
+
+setInterval(() => {
+    i = (i + 1) % items.length;
+
+    document.getElementById("title").innerText = items[i].title;
+    document.getElementById("price").innerText = items[i].price;
+    document.getElementById("product").src = items[i].img;
+
+}, 4000);
+
+</script>
 
 </body>
 </html>
