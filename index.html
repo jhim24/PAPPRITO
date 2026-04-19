@@ -71,7 +71,7 @@ body{
     border-radius:10px;
 }
 
-/* 🔥 PRICE HIGHLIGHT (ADDED LANG) */
+/* 🔥 PRICE HIGHLIGHT */
 .price{
     display:inline-block;
     background:#ff0000;
@@ -92,10 +92,53 @@ body{
     border-left:1px solid #ddd;
 }
 
-.details img{
+/* 🔥 PREVIEW WRAPPER */
+.preview-wrapper{
+    position:relative;
+    border-radius:12px;
+    overflow:hidden;
+}
+
+/* RUNNING LIGHT (NASA HARAP NA) */
+.preview-wrapper::before{
+    content:"";
+    position:absolute;
+    top:-4px;
+    left:-4px;
+    right:-4px;
+    bottom:-4px;
+    border-radius:15px;
+    background:linear-gradient(90deg, red, orange, yellow, red);
+    animation: runLight 3s linear infinite;
+    z-index:1;
+    filter:blur(4px);
+}
+
+/* INNER COVER (para border lang makita) */
+.preview-wrapper::after{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background:#fff;
+    border-radius:12px;
+    z-index:2;
+}
+
+/* IMAGE */
+.preview-wrapper img{
+    position:relative;
+    z-index:3;
     width:100%;
-    border-radius:10px;
-    margin-bottom:10px;
+    border-radius:12px;
+}
+
+/* ANIMATION */
+@keyframes runLight{
+    0%{ transform:rotate(0deg); }
+    100%{ transform:rotate(360deg); }
 }
 
 /* BUTTON */
@@ -107,37 +150,6 @@ body{
     color:#fff;
     border-radius:10px;
     margin-top:20px;
-}
-    /* 🔥 PREVIEW GLOW FRAME */
-.preview-wrapper{
-    position:relative;
-    border-radius:12px;
-    overflow:hidden;
-}
-
-/* RUNNING LIGHT BORDER */
-.preview-wrapper::before{
-    content:"";
-    position:absolute;
-    inset:-3px;
-    background:linear-gradient(90deg, red, yellow, red);
-    border-radius:15px;
-    animation: runLight 3s linear infinite;
-    z-index:1;
-}
-
-/* IMAGE */
-.preview-wrapper img{
-    position:relative;
-    z-index:2;
-    width:100%;
-    border-radius:12px;
-}
-
-/* ANIMATION */
-@keyframes runLight{
-    0%{ transform:rotate(0deg); }
-    100%{ transform:rotate(360deg); }
 }
 </style>
 
@@ -167,13 +179,17 @@ body{
 
 <!-- RIGHT PANEL -->
 <div class="details">
+
     <div class="preview-wrapper">
         <img id="img" src="rapsilog.jpg">
     </div>
 
     <h2 id="name">Select Item</h2>
     <p class="price" id="price">₱0</p>
+
+    <button class="btn">Add to Cart</button>
 </div>
+
 <script>
 
 const menuData = {
