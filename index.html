@@ -11,36 +11,42 @@ body{
     font-family:Arial;
     display:flex;
     height:100vh;
+    background:#f5f5f5;
 }
 
 /* SIDEBAR */
 .sidebar{
     width:220px;
-    background:#fff;
-    border-right:1px solid #ddd;
+    background:linear-gradient(to bottom, #ffcc00, #ff9900);
     padding:20px;
 }
 
 .sidebar h2{
-    color:#d62828;
+    margin-bottom:20px;
 }
 
 .menu-item{
     padding:12px;
-    margin:10px 0;
+    margin:8px 0;
     border-radius:10px;
     cursor:pointer;
+    font-weight:bold;
 }
 
-.menu-item:hover{
-    background:#ffe5e5;
+.menu-item:hover,
+.active{
+    background:#d62828;
+    color:#fff;
 }
 
 /* MAIN */
 .main{
     flex:1;
     padding:20px;
-    background:#f5f5f5;
+}
+
+.main h2{
+    color:#d62828;
 }
 
 /* GRID */
@@ -50,43 +56,108 @@ body{
     gap:20px;
 }
 
-/* CARD */
+/* 🔥 CARD DESIGN */
 .card{
-    background:#fff;
-    padding:15px;
-    border-radius:15px;
+    background:linear-gradient(135deg, #fff, #fff5cc);
+    padding:20px;
+    border-radius:20px;
     text-align:center;
     cursor:pointer;
-    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    box-shadow:0 8px 20px rgba(0,0,0,0.15);
+    transition:0.3s;
+    position:relative;
+    overflow:hidden;
 }
 
+/* GLOW BORDER */
+.card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:20px;
+    padding:2px;
+    background:linear-gradient(45deg,#ffcc00,#ff0000);
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+}
+
+/* SHINE EFFECT */
+.card::after{
+    content:"";
+    position:absolute;
+    top:-100%;
+    left:-100%;
+    width:200%;
+    height:200%;
+    background:linear-gradient(120deg, transparent, rgba(255,255,255,0.5), transparent);
+    transform:rotate(25deg);
+    transition:0.5s;
+}
+
+.card:hover::after{
+    top:100%;
+    left:100%;
+}
+
+/* HOVER */
 .card:hover{
-    transform:scale(1.05);
+    transform:translateY(-8px) scale(1.05);
+    box-shadow:0 15px 35px rgba(0,0,0,0.3);
+}
+
+/* TITLE */
+.card h3{
+    margin:10px 0;
+}
+
+/* PRICE BADGE */
+.card p{
+    position:absolute;
+    top:10px;
+    right:10px;
+    background:#d62828;
+    color:#fff;
+    padding:5px 12px;
+    border-radius:20px;
+    font-size:14px;
+    font-weight:bold;
 }
 
 /* RIGHT PANEL */
 .details{
-    width:300px;
+    width:280px;
     background:#fff;
     padding:20px;
-    border-left:1px solid #ddd;
+    border-left:2px solid #eee;
+}
+
+.details h2{
+    color:#d62828;
 }
 
 .price{
-    color:#d62828;
     font-size:22px;
     font-weight:bold;
+    margin:10px 0;
 }
 
 /* BUTTON */
 .btn{
     width:100%;
     padding:15px;
-    background:#ff9f1c;
+    background:#d62828;
     border:none;
     color:#fff;
     border-radius:10px;
-    margin-top:20px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+.btn:hover{
+    background:#a61c1c;
 }
 </style>
 
@@ -97,20 +168,20 @@ body{
 <!-- SIDEBAR -->
 <div class="sidebar">
     <h2>🍽 Menu</h2>
-    <div class="menu-item" onclick="loadMenu('beef')">Beef</div>
-    <div class="menu-item" onclick="loadMenu('pork')">Pork</div>
-    <div class="menu-item" onclick="loadMenu('chicken')">Chicken</div>
-    <div class="menu-item" onclick="loadMenu('seafood')">Seafood</div>
-    <div class="menu-item" onclick="loadMenu('veggies')">Veggies</div>
-    <div class="menu-item" onclick="loadMenu('noodles')">Noodles</div>
-    <div class="menu-item" onclick="loadMenu('sides')">Sides</div>
-    <div class="menu-item" onclick="loadMenu('drinks')">Drinks</div>
-    <div class="menu-item" onclick="loadMenu('beers')">Beers</div>
+    <div class="menu-item active" onclick="loadMenu('beef', this)">Beef</div>
+    <div class="menu-item" onclick="loadMenu('pork', this)">Pork</div>
+    <div class="menu-item" onclick="loadMenu('chicken', this)">Chicken</div>
+    <div class="menu-item" onclick="loadMenu('seafood', this)">Seafood</div>
+    <div class="menu-item" onclick="loadMenu('veggies', this)">Veggies</div>
+    <div class="menu-item" onclick="loadMenu('noodles', this)">Noodles</div>
+    <div class="menu-item" onclick="loadMenu('sides', this)">Sides</div>
+    <div class="menu-item" onclick="loadMenu('drinks', this)">Drinks</div>
+    <div class="menu-item" onclick="loadMenu('beers', this)">Beers</div>
 </div>
 
 <!-- MAIN -->
 <div class="main">
-    <h2 id="categoryTitle">Menu</h2>
+    <h2 id="categoryTitle">BEEF</h2>
     <div class="cards" id="menu"></div>
 </div>
 
@@ -191,21 +262,21 @@ beers:[
 
 };
 
-function loadMenu(category){
+function loadMenu(category, el){
+    document.querySelectorAll(".menu-item").forEach(i=>i.classList.remove("active"));
+    el.classList.add("active");
+
+    document.getElementById("categoryTitle").innerText = category.toUpperCase();
+
     const container = document.getElementById("menu");
-    const title = document.getElementById("categoryTitle");
-
-    title.innerText = category.toUpperCase();
-
     container.innerHTML = "";
 
-    menuData[category].forEach(item => {
+    menuData[category].forEach(item=>{
         container.innerHTML += `
         <div class="card" onclick="selectItem('${item.name}', ${item.price})">
             <h3>${item.name}</h3>
             <p>₱${item.price}</p>
-        </div>
-        `;
+        </div>`;
     });
 }
 
@@ -213,6 +284,9 @@ function selectItem(name, price){
     document.getElementById("name").innerText = name;
     document.getElementById("price").innerText = "₱" + price;
 }
+
+/* DEFAULT LOAD */
+loadMenu('beef', document.querySelector('.menu-item'));
 
 </script>
 
