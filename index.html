@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Pappprito POS UI</title>
+<title>Pappprito POS</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -15,7 +15,7 @@ body{
 
 /* SIDEBAR */
 .sidebar{
-    width:200px;
+    width:220px;
     background:#fff;
     border-right:1px solid #ddd;
     padding:20px;
@@ -26,7 +26,7 @@ body{
 }
 
 .menu-item{
-    padding:10px;
+    padding:12px;
     margin:10px 0;
     border-radius:10px;
     cursor:pointer;
@@ -43,32 +43,25 @@ body{
     background:#f5f5f5;
 }
 
-/* CARDS */
+/* GRID */
 .cards{
     display:grid;
-    grid-template-columns:repeat(auto-fill, minmax(200px,1fr));
+    grid-template-columns:repeat(auto-fill, minmax(180px,1fr));
     gap:20px;
 }
 
+/* CARD */
 .card{
     background:#fff;
     padding:15px;
     border-radius:15px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.1);
     text-align:center;
     cursor:pointer;
-    transition:0.3s;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
 }
 
 .card:hover{
     transform:scale(1.05);
-}
-
-.card img{
-    width:100%;
-    height:120px;
-    object-fit:cover;
-    border-radius:10px;
 }
 
 /* RIGHT PANEL */
@@ -79,14 +72,9 @@ body{
     border-left:1px solid #ddd;
 }
 
-.details img{
-    width:100%;
-    border-radius:10px;
-}
-
 .price{
     color:#d62828;
-    font-size:20px;
+    font-size:22px;
     font-weight:bold;
 }
 
@@ -97,10 +85,8 @@ body{
     background:#ff9f1c;
     border:none;
     color:#fff;
-    font-size:16px;
     border-radius:10px;
     margin-top:20px;
-    cursor:pointer;
 }
 </style>
 
@@ -111,57 +97,123 @@ body{
 <!-- SIDEBAR -->
 <div class="sidebar">
     <h2>🍽 Menu</h2>
-    <div class="menu-item">Beef</div>
-    <div class="menu-item">Pork</div>
-    <div class="menu-item">Chicken</div>
-    <div class="menu-item">Seafood</div>
-    <div class="menu-item">Drinks</div>
+    <div class="menu-item" onclick="loadMenu('beef')">Beef</div>
+    <div class="menu-item" onclick="loadMenu('pork')">Pork</div>
+    <div class="menu-item" onclick="loadMenu('chicken')">Chicken</div>
+    <div class="menu-item" onclick="loadMenu('seafood')">Seafood</div>
+    <div class="menu-item" onclick="loadMenu('veggies')">Veggies</div>
+    <div class="menu-item" onclick="loadMenu('noodles')">Noodles</div>
+    <div class="menu-item" onclick="loadMenu('sides')">Sides</div>
+    <div class="menu-item" onclick="loadMenu('drinks')">Drinks</div>
+    <div class="menu-item" onclick="loadMenu('beers')">Beers</div>
 </div>
 
 <!-- MAIN -->
 <div class="main">
-
-    <h2>Popular Items</h2>
-
-    <div class="cards">
-
-        <div class="card" onclick="showItem('Rapsilog','₱85','rapsilog.jpg')">
-            <img src="rapsilog.jpg">
-            <h3>Rapsilog</h3>
-            <p>₱85</p>
-        </div>
-
-        <div class="card" onclick="showItem('Chicken Meal','₱99','rapsilog.jpg')">
-            <img src="rapsilog.jpg">
-            <h3>Chicken Meal</h3>
-            <p>₱99</p>
-        </div>
-
-        <div class="card" onclick="showItem('Burger','₱79','rapsilog.jpg')">
-            <img src="rapsilog.jpg">
-            <h3>Burger</h3>
-            <p>₱79</p>
-        </div>
-
-    </div>
-
+    <h2 id="categoryTitle">Menu</h2>
+    <div class="cards" id="menu"></div>
 </div>
 
 <!-- RIGHT PANEL -->
 <div class="details">
-    <img id="img" src="rapsilog.jpg">
-    <h2 id="name">Rapsilog</h2>
-    <p class="price" id="price">₱85</p>
-
+    <h2 id="name">Select Item</h2>
+    <p class="price" id="price">₱0</p>
     <button class="btn">Add to Cart</button>
 </div>
 
 <script>
-function showItem(name, price, img){
-    document.getElementById("name").innerText = name;
-    document.getElementById("price").innerText = price;
-    document.getElementById("img").src = img;
+
+const menuData = {
+
+beef:[
+    {name:"Bulalo Grupo", price:710},
+    {name:"Bulalo Solo", price:185},
+    {name:"Bistek Tagalog", price:279}
+],
+
+pork:[
+    {name:"Lechon Kawali", price:395},
+    {name:"Pork Sisig", price:315},
+    {name:"Lumpiang Shanghai", price:235}
+],
+
+chicken:[
+    {name:"PapsChicken Platter", price:315},
+    {name:"Chicken Sisig", price:295}
+],
+
+seafood:[
+    {name:"Crispy Bangusarap", price:315},
+    {name:"Calamares", price:305},
+    {name:"Crispy Tawilis", price:285}
+],
+
+veggies:[
+    {name:"Chop Suey", price:235},
+    {name:"Tortang Talong", price:192}
+],
+
+noodles:[
+    {name:"Canton-Bihon", price:278},
+    {name:"Palabok", price:195},
+    {name:"Beef Mami", price:159},
+    {name:"Chicken Mami", price:149}
+],
+
+sides:[
+    {name:"PapShots", price:72},
+    {name:"Spicy Tofu", price:65},
+    {name:"Bola Bola Soup", price:68},
+    {name:"Lumpiang Shanghai (3pcs)", price:49},
+    {name:"Fried Banana (4pcs)", price:35},
+    {name:"Garlic Rice", price:46},
+    {name:"Plain Rice", price:32}
+],
+
+drinks:[
+    {name:"Special Turon", price:95},
+    {name:"Leche Flan", price:82},
+    {name:"Coffee Jelly", price:75},
+    {name:"Softdrinks", price:52},
+    {name:"Softdrinks 1.5L", price:145},
+    {name:"Iced Tea", price:52},
+    {name:"Iced Coffee", price:59},
+    {name:"Hot Choco", price:55},
+    {name:"Bottled Water", price:35}
+],
+
+beers:[
+    {name:"San Mig Light", price:95},
+    {name:"San Miguel Pale Pilsen", price:95},
+    {name:"San Miguel Flavored", price:95},
+    {name:"Red Horse", price:105}
+]
+
+};
+
+function loadMenu(category){
+    const container = document.getElementById("menu");
+    const title = document.getElementById("categoryTitle");
+
+    title.innerText = category.toUpperCase();
+
+    container.innerHTML = "";
+
+    menuData[category].forEach(item => {
+        container.innerHTML += `
+        <div class="card" onclick="selectItem('${item.name}', ${item.price})">
+            <h3>${item.name}</h3>
+            <p>₱${item.price}</p>
+        </div>
+        `;
+    });
 }
+
+function selectItem(name, price){
+    document.getElementById("name").innerText = name;
+    document.getElementById("price").innerText = "₱" + price;
+}
+
 </script>
 
 </body>
