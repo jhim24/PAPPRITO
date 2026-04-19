@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Pappprito Ultimate Screen</title>
+<title>Pappprito Ultimate Fixed</title>
 
 <style>
 body{
@@ -11,95 +11,54 @@ body{
     background:#000;
 }
 
-/* BACKGROUND */
+/* ✅ BACKGROUND FIXED SIZE */
 .bg{
     position:fixed;
     width:100%;
     height:100%;
     object-fit:cover;
-    animation: zoom 12s infinite alternate;
+    animation: zoom 15s infinite alternate;
 }
 
+/* LESS ZOOM (para hindi sobrang laki) */
 @keyframes zoom{
     0%{ transform:scale(1); }
-    100%{ transform:scale(1.15); }
+    100%{ transform:scale(1.05); }
 }
 
-/* DARK OVERLAY */
+/* OVERLAY */
 .overlay{
     position:fixed;
     width:100%;
     height:100%;
-    background:linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+    background:linear-gradient(to top, rgba(0,0,0,0.5), transparent);
 }
 
-/* PRODUCT FLOAT */
+/* ✅ PRODUCT SIZE FIX */
 .product{
     position:absolute;
-    bottom:80px;
+    bottom:40px;
     left:50%;
     transform:translateX(-50%);
-    width:450px;
+    width:350px; /* 👈 binawasan size */
+    max-width:80%;
     animation: float 4s ease-in-out infinite;
+    z-index:3;
 }
 
 @keyframes float{
     0%{ transform:translate(-50%,0); }
-    50%{ transform:translate(-50%,-30px); }
+    50%{ transform:translate(-50%,-20px); }
     100%{ transform:translate(-50%,0); }
-}
-
-/* SMOKE MULTI */
-.smoke{
-    position:absolute;
-    bottom:200px;
-    left:50%;
-    width:120px;
-    height:180px;
-    background:rgba(255,255,255,0.2);
-    filter:blur(25px);
-    border-radius:50%;
-    animation: smoke 5s infinite;
-}
-
-.smoke:nth-child(2){
-    left:45%;
-    animation-delay:1s;
-}
-.smoke:nth-child(3){
-    left:55%;
-    animation-delay:2s;
-}
-
-@keyframes smoke{
-    0%{ transform:translate(-50%,0) scale(1); opacity:0.6; }
-    100%{ transform:translate(-50%,-180px) scale(2); opacity:0; }
-}
-
-/* EGG GLOW */
-.egg{
-    position:absolute;
-    bottom:200px;
-    left:58%;
-    width:90px;
-    height:90px;
-    border-radius:50%;
-    box-shadow:0 0 30px yellow;
-    animation: eggGlow 2s infinite alternate;
-}
-
-@keyframes eggGlow{
-    from{ box-shadow:0 0 20px yellow; }
-    to{ box-shadow:0 0 60px orange; }
 }
 
 /* TEXT */
 .title{
     position:absolute;
-    top:100px;
+    top:80px;
     width:100%;
     text-align:center;
-    font-size:60px;
+    font-size:50px;
     color:#fff;
     font-weight:bold;
     animation: glow 2s infinite alternate;
@@ -107,65 +66,72 @@ body{
 
 @keyframes glow{
     from{ text-shadow:0 0 10px red; }
-    to{ text-shadow:0 0 30px yellow; }
+    to{ text-shadow:0 0 25px yellow; }
 }
 
 /* PRICE */
 .price{
     position:absolute;
-    right:80px;
+    right:40px;
     top:50%;
     transform:translateY(-50%);
     background:red;
-    padding:30px;
+    padding:20px;
     border-radius:50%;
-    font-size:40px;
+    font-size:30px;
     color:#fff;
     font-weight:bold;
-    box-shadow:0 0 40px red;
-    animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse{
-    0%{ transform:translateY(-50%) scale(1); }
-    50%{ transform:translateY(-50%) scale(1.1); }
-    100%{ transform:translateY(-50%) scale(1); }
+    box-shadow:0 0 30px red;
 }
 
 /* BADGE */
 .badge{
     position:absolute;
-    left:50px;
-    top:50px;
+    left:30px;
+    top:30px;
     background:orange;
-    padding:10px 20px;
+    padding:8px 15px;
     border-radius:20px;
     font-weight:bold;
-    animation: blink 1s infinite;
 }
 
-@keyframes blink{
-    50%{ opacity:0.5; }
-}
-
-/* SPARKLES */
-.sparkle{
+/* ✅ STRONG SMOKE (VISIBLE) */
+.smoke{
     position:absolute;
-    width:10px;
-    height:10px;
-    background:white;
+    bottom:180px;
+    left:50%;
+    width:120px;
+    height:180px;
+    background:radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.2) 60%, transparent 100%);
+    filter:blur(25px);
     border-radius:50%;
-    animation: sparkle 2s infinite;
+    animation: smoke 4s infinite;
+    z-index:5;
 }
 
-.sparkle:nth-child(1){ top:30%; left:20%; }
-.sparkle:nth-child(2){ top:60%; left:70%; }
-.sparkle:nth-child(3){ top:40%; left:50%; }
+.smoke:nth-child(2){ left:45%; animation-delay:1s; }
+.smoke:nth-child(3){ left:55%; animation-delay:2s; }
 
-@keyframes sparkle{
-    0%{ opacity:0; transform:scale(0); }
-    50%{ opacity:1; transform:scale(1.5); }
-    100%{ opacity:0; transform:scale(0); }
+@keyframes smoke{
+    0%{ transform:translate(-50%,0) scale(1); opacity:0.8; }
+    100%{ transform:translate(-50%,-180px) scale(2.2); opacity:0; }
+}
+
+/* EGG GLOW */
+.egg{
+    position:absolute;
+    bottom:170px;
+    left:58%;
+    width:70px;
+    height:70px;
+    border-radius:50%;
+    animation: eggGlow 2s infinite alternate;
+    z-index:6;
+}
+
+@keyframes eggGlow{
+    from{ box-shadow:0 0 15px yellow; }
+    to{ box-shadow:0 0 40px orange; }
 }
 </style>
 
@@ -173,69 +139,23 @@ body{
 
 <body>
 
-<!-- BACKGROUND -->
 <img src="rapsilog.jpg" class="bg">
-
 <div class="overlay"></div>
 
-<!-- TEXT -->
-<div class="title" id="title">Rapsilog</div>
-
-<!-- BADGE -->
-<div class="badge" id="badge">NEW</div>
-
-<!-- PRICE -->
-<div class="price" id="price">₱85</div>
+<div class="title">sa Rapsilog</div>
+<div class="badge">NEW</div>
+<div class="price">₱85</div>
 
 <!-- SMOKE -->
 <div class="smoke"></div>
 <div class="smoke"></div>
 <div class="smoke"></div>
 
-<!-- EGG GLOW -->
+<!-- EGG LIGHT -->
 <div class="egg"></div>
 
 <!-- PRODUCT -->
-<img src="rapsilog.jpg" class="product" id="product">
-
-<!-- SPARKLES -->
-<div class="sparkle"></div>
-<div class="sparkle"></div>
-<div class="sparkle"></div>
-
-<script>
-
-/* 🔁 AUTO SLIDESHOW */
-const items = [
-    {
-        title: "Rapsilog",
-        price: "₱85",
-        img: "rapsilog.jpg"
-    },
-    {
-        title: "Chicken Meal",
-        price: "₱99",
-        img: "rapsilog.jpg"
-    },
-    {
-        title: "Burger Combo",
-        price: "₱79",
-        img: "rapsilog.jpg"
-    }
-];
-
-let i = 0;
-
-setInterval(() => {
-    i = (i + 1) % items.length;
-
-    document.getElementById("title").innerText = items[i].title;
-    document.getElementById("price").innerText = items[i].price;
-    document.getElementById("product").src = items[i].img;
-
-}, 4000);
-
-</script>
+<img src="rapsilog.jpg" class="product">
 
 </body>
 </html>
