@@ -108,6 +108,37 @@ body{
     border-radius:10px;
     margin-top:20px;
 }
+    /* 🔥 PREVIEW GLOW FRAME */
+.preview-wrapper{
+    position:relative;
+    border-radius:12px;
+    overflow:hidden;
+}
+
+/* RUNNING LIGHT BORDER */
+.preview-wrapper::before{
+    content:"";
+    position:absolute;
+    inset:-3px;
+    background:linear-gradient(90deg, red, yellow, red);
+    border-radius:15px;
+    animation: runLight 3s linear infinite;
+    z-index:1;
+}
+
+/* IMAGE */
+.preview-wrapper img{
+    position:relative;
+    z-index:2;
+    width:100%;
+    border-radius:12px;
+}
+
+/* ANIMATION */
+@keyframes runLight{
+    0%{ transform:rotate(0deg); }
+    100%{ transform:rotate(360deg); }
+}
 </style>
 
 </head>
@@ -136,7 +167,9 @@ body{
 
 <!-- RIGHT PANEL -->
 <div class="details">
+   <div class="preview-wrapper">
     <img id="img" src="rapsilog.jpg">
+</div>
     <h2 id="name">Select Item</h2>
     <p class="price" id="price">₱0</p>
     <button class="btn">Add to Cart</button>
