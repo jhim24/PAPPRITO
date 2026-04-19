@@ -1,55 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Pappprito Ultimate Fixed</title>
+<title>TikTok Promo Reel</title>
 
 <style>
 body{
     margin:0;
     overflow:hidden;
-    font-family: Arial;
-    background:#000;
+    font-family:Arial;
 }
 
-/* ✅ BACKGROUND FIXED SIZE */
+/* 🔥 BACKGROUND BLUR */
 .bg{
     position:fixed;
     width:100%;
     height:100%;
     object-fit:cover;
-    animation: zoom 15s infinite alternate;
+    filter:blur(25px) brightness(0.6);
+    transform:scale(1.2);
+    transition:opacity 1s;
 }
 
-/* LESS ZOOM (para hindi sobrang laki) */
-@keyframes zoom{
-    0%{ transform:scale(1); }
-    100%{ transform:scale(1.05); }
-}
-
-/* OVERLAY */
-.overlay{
-    position:fixed;
-    width:100%;
-    height:100%;
-    background:linear-gradient(to top, rgba(0,0,0,0.5), transparent);
-}
-
-/* ✅ PRODUCT SIZE FIX */
-.product{
+/* CENTER POSTER */
+.center{
     position:absolute;
-    bottom:40px;
+    top:50%;
     left:50%;
-    transform:translateX(-50%);
-    width:350px; /* 👈 binawasan size */
-    max-width:80%;
+    transform:translate(-50%, -50%);
+    width:300px;
+    border-radius:20px;
+    box-shadow:0 20px 60px rgba(0,0,0,0.5);
     animation: float 4s ease-in-out infinite;
-    z-index:3;
+    transition:opacity 1s;
 }
 
 @keyframes float{
-    0%{ transform:translate(-50%,0); }
-    50%{ transform:translate(-50%,-20px); }
-    100%{ transform:translate(-50%,0); }
+    0%{ transform:translate(-50%, -50%); }
+    50%{ transform:translate(-50%, -60%); }
+    100%{ transform:translate(-50%, -50%); }
 }
 
 /* TEXT */
@@ -58,80 +46,39 @@ body{
     top:80px;
     width:100%;
     text-align:center;
-    font-size:50px;
     color:#fff;
+    font-size:40px;
     font-weight:bold;
-    animation: glow 2s infinite alternate;
-}
-
-@keyframes glow{
-    from{ text-shadow:0 0 10px red; }
-    to{ text-shadow:0 0 25px yellow; }
 }
 
 /* PRICE */
 .price{
     position:absolute;
-    right:40px;
+    right:30px;
     top:50%;
     transform:translateY(-50%);
     background:red;
     padding:20px;
     border-radius:50%;
-    font-size:30px;
     color:#fff;
+    font-size:25px;
     font-weight:bold;
-    box-shadow:0 0 30px red;
 }
 
 /* BADGE */
 .badge{
     position:absolute;
-    left:30px;
-    top:30px;
+    left:20px;
+    top:20px;
     background:orange;
-    padding:8px 15px;
+    padding:10px 15px;
     border-radius:20px;
     font-weight:bold;
 }
 
-/* ✅ STRONG SMOKE (VISIBLE) */
-.smoke{
-    position:absolute;
-    bottom:180px;
-    left:50%;
-    width:120px;
-    height:180px;
-    background:radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.2) 60%, transparent 100%);
-    filter:blur(25px);
-    border-radius:50%;
-    animation: smoke 4s infinite;
-    z-index:5;
-}
-
-.smoke:nth-child(2){ left:45%; animation-delay:1s; }
-.smoke:nth-child(3){ left:55%; animation-delay:2s; }
-
-@keyframes smoke{
-    0%{ transform:translate(-50%,0) scale(1); opacity:0.8; }
-    100%{ transform:translate(-50%,-180px) scale(2.2); opacity:0; }
-}
-
-/* EGG GLOW */
-.egg{
-    position:absolute;
-    bottom:170px;
-    left:58%;
-    width:70px;
-    height:70px;
-    border-radius:50%;
-    animation: eggGlow 2s infinite alternate;
-    z-index:6;
-}
-
-@keyframes eggGlow{
-    from{ box-shadow:0 0 15px yellow; }
-    to{ box-shadow:0 0 40px orange; }
+/* FADE EFFECT */
+.fade{
+    opacity:0;
 }
 </style>
 
@@ -139,23 +86,57 @@ body{
 
 <body>
 
-<img src="rapsilog.jpg" class="bg">
-<div class="overlay"></div>
+<img id="bg" src="rapsilog.jpg" class="bg">
+<img id="center" src="rapsilog.jpg" class="center">
 
-<div class="title">sa Rapsilog</div>
+<div class="title" id="title">Rapsilog</div>
+<div class="price" id="price">₱85</div>
 <div class="badge">NEW</div>
-<div class="price">₱85</div>
 
-<!-- SMOKE -->
-<div class="smoke"></div>
-<div class="smoke"></div>
-<div class="smoke"></div>
+<script>
+const items = [
+    {
+        title:"Rapsilog",
+        price:"₱85",
+        img:"rapsilog.jpg"
+    },
+    {
+        title:"Chicken Meal",
+        price:"₱99",
+        img:"rapsilog.jpg"
+    },
+    {
+        title:"Burger Combo",
+        price:"₱79",
+        img:"rapsilog.jpg"
+    }
+];
 
-<!-- EGG LIGHT -->
-<div class="egg"></div>
+let i = 0;
 
-<!-- PRODUCT -->
-<img src="rapsilog.jpg" class="product">
+setInterval(()=>{
+    i = (i + 1) % items.length;
+
+    const bg = document.getElementById("bg");
+    const center = document.getElementById("center");
+
+    // fade out
+    bg.classList.add("fade");
+    center.classList.add("fade");
+
+    setTimeout(()=>{
+        bg.src = items[i].img;
+        center.src = items[i].img;
+        document.getElementById("title").innerText = items[i].title;
+        document.getElementById("price").innerText = items[i].price;
+
+        // fade in
+        bg.classList.remove("fade");
+        center.classList.remove("fade");
+    },500);
+
+},4000);
+</script>
 
 </body>
 </html>
