@@ -1,38 +1,85 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Rapsilog Promo</title>
+<title>Pappprito Animated</title>
 
 <style>
 body{
     margin:0;
     overflow:hidden;
+    background:#000;
 }
 
-/* BACKGROUND IMAGE */
+/* BACKGROUND */
 .bg{
     position:fixed;
     width:100%;
     height:100%;
     object-fit:cover;
-    animation: zoom 8s infinite alternate;
+    animation: zoom 10s infinite alternate;
 }
 
-/* ZOOM EFFECT */
 @keyframes zoom{
     0%{ transform:scale(1); }
     100%{ transform:scale(1.1); }
 }
 
-/* DARK OVERLAY */
-.overlay{
-    position:fixed;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.2);
+/* PLATE FLOAT */
+.plate{
+    position:absolute;
+    bottom:50px;
+    left:50%;
+    transform:translateX(-50%);
+    width:500px;
+    animation: float 3s ease-in-out infinite;
 }
 
-/* TEXT GLOW */
+@keyframes float{
+    0%{ transform:translate(-50%,0); }
+    50%{ transform:translate(-50%,-25px); }
+    100%{ transform:translate(-50%,0); }
+}
+
+/* EGG GLOW */
+.egg{
+    position:absolute;
+    bottom:180px;
+    left:60%;
+    width:80px;
+    border-radius:50%;
+    animation: glowEgg 2s infinite alternate;
+}
+
+@keyframes glowEgg{
+    from{ box-shadow:0 0 10px yellow; }
+    to{ box-shadow:0 0 40px orange; }
+}
+
+/* SMOKE */
+.smoke{
+    position:absolute;
+    bottom:200px;
+    left:50%;
+    width:100px;
+    height:150px;
+    background:rgba(255,255,255,0.2);
+    filter:blur(20px);
+    border-radius:50%;
+    animation: smoke 4s infinite;
+}
+
+@keyframes smoke{
+    0%{
+        transform:translate(-50%,0) scale(1);
+        opacity:0.5;
+    }
+    100%{
+        transform:translate(-50%,-150px) scale(2);
+        opacity:0;
+    }
+}
+
+/* TEXT */
 .text{
     position:absolute;
     top:100px;
@@ -54,11 +101,20 @@ body{
 
 <body>
 
+<!-- BACKGROUND -->
 <img src="rapsilog.jpg" class="bg">
 
-<div class="overlay"></div>
+<!-- TEXT -->
+<div class="text">sa Rapsilog</div>
 
-<div class="text">Pappprito Promo</div>
+<!-- SMOKE EFFECT -->
+<div class="smoke"></div>
+
+<!-- PLATE (kung may hiwalay ka) -->
+<!-- <img src="plate.png" class="plate"> -->
+
+<!-- EGG GLOW (fake highlight) -->
+<div class="egg"></div>
 
 </body>
 </html>
