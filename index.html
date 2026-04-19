@@ -1,27 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pappprito Style Website</title>
+<title>Rapsilog Promo</title>
 
 <style>
-*{
+body{
     margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family: Arial, sans-serif;
+    overflow:hidden;
 }
 
-/* 🎥 VIDEO BACKGROUND */
-.video-bg{
+/* BACKGROUND IMAGE */
+.bg{
     position:fixed;
-    top:0;
-    left:0;
     width:100%;
     height:100%;
     object-fit:cover;
-    z-index:-1;
+    animation: zoom 8s infinite alternate;
+}
+
+/* ZOOM EFFECT */
+@keyframes zoom{
+    0%{ transform:scale(1); }
+    100%{ transform:scale(1.1); }
 }
 
 /* DARK OVERLAY */
@@ -29,40 +29,18 @@
     position:fixed;
     width:100%;
     height:100%;
-    background:rgba(0,0,0,0.6);
+    background:rgba(0,0,0,0.2);
 }
 
-/* NAVBAR */
-.navbar{
-    position:fixed;
+/* TEXT GLOW */
+.text{
+    position:absolute;
+    top:100px;
     width:100%;
-    padding:20px;
-    display:flex;
-    justify-content:space-between;
-    background:rgba(0,0,0,0.5);
-    color:#fff;
-}
-
-.navbar a{
-    color:#fff;
-    margin:0 15px;
-    text-decoration:none;
-    font-weight:bold;
-}
-
-/* HERO */
-.hero{
-    height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    color:#fff;
     text-align:center;
-}
-
-.hero h1{
+    color:#fff;
     font-size:60px;
+    font-weight:bold;
     animation: glow 2s infinite alternate;
 }
 
@@ -70,113 +48,17 @@
     from{ text-shadow:0 0 10px red; }
     to{ text-shadow:0 0 30px yellow; }
 }
-
-.btn{
-    margin-top:20px;
-    padding:15px 30px;
-    background:red;
-    border:none;
-    color:#fff;
-    font-size:20px;
-    border-radius:30px;
-    cursor:pointer;
-}
-
-/* MENU SECTION */
-.menu{
-    padding:80px;
-    background:#fff;
-}
-
-.menu h2{
-    text-align:center;
-    margin-bottom:40px;
-}
-
-.cards{
-    display:flex;
-    gap:20px;
-    justify-content:center;
-    flex-wrap:wrap;
-}
-
-.card{
-    background:#fff;
-    width:250px;
-    padding:20px;
-    border-radius:15px;
-    box-shadow:0 0 15px rgba(0,0,0,0.2);
-    text-align:center;
-}
-
-.card img{
-    width:100%;
-}
-
-/* FOOTER */
-.footer{
-    background:#111;
-    color:#fff;
-    text-align:center;
-    padding:20px;
-}
 </style>
+
 </head>
 
 <body>
 
-<!-- VIDEO -->
-<video autoplay muted loop class="video-bg">
-    <source src="spaghetti.mp4" type="video/mp4">
-</video>
+<img src="rapsilog.jpg" class="bg">
 
 <div class="overlay"></div>
 
-<!-- NAVBAR -->
-<div class="navbar">
-    <div><b>Pappprito</b></div>
-    <div>
-        <a href="#">Home</a>
-        <a href="#menu">Menu</a>
-        <a href="#">Contact</a>
-    </div>
-</div>
-
-<!-- HERO -->
-<section class="hero">
-    <h1>May hug ang bawat kagat</h1>
-    <button class="btn">Order Now</button>
-</section>
-
-<!-- MENU -->
-<section class="menu" id="menu">
-    <h2>Our Menu</h2>
-
-    <div class="cards">
-        <div class="card">
-            <img src="https://pngimg.com/uploads/spaghetti/spaghetti_PNG104.png">
-            <h3>Spaghetti</h3>
-            <p>₱85</p>
-        </div>
-
-        <div class="card">
-            <img src="https://pngimg.com/uploads/burger/burger_PNG4135.png">
-            <h3>Burger</h3>
-            <p>₱99</p>
-        </div>
-
-        <div class="card">
-            <img src="https://pngimg.com/uploads/french_fries/french_fries_PNG35.png">
-            <h3>Fries</h3>
-            <p>₱49</p>
-        </div>
-    </div>
-</section>
-
-<!-- FOOTER -->
-<div class="footer">
-    © 2026 Pappprito Style Website
-</div>
+<div class="text">Pappprito Promo</div>
 
 </body>
 </html>
