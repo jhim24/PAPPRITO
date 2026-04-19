@@ -16,13 +16,13 @@ body{
 /* SIDEBAR */
 .sidebar{
     width:220px;
-    background:#fff;
-    border-right:1px solid #ddd;
+    background:linear-gradient(180deg,#d62828,#a4161a);
+    color:#fff;
     padding:20px;
 }
 
 .sidebar h2{
-    color:#d62828;
+    color:#fff;
 }
 
 .menu-item{
@@ -33,7 +33,7 @@ body{
 }
 
 .menu-item:hover{
-    background:#ffe5e5;
+    background:rgba(255,255,255,0.2);
 }
 
 /* MAIN */
@@ -71,6 +71,19 @@ body{
     border-radius:10px;
 }
 
+/* 🔥 PRICE HIGHLIGHT (ADDED LANG) */
+.price{
+    display:inline-block;
+    background:#ff0000;
+    color:#fff;
+    padding:5px 12px;
+    border-radius:8px;
+    font-weight:bold;
+    font-size:16px;
+    margin-top:5px;
+    box-shadow:0 0 10px rgba(255,0,0,0.6);
+}
+
 /* RIGHT PANEL */
 .details{
     width:300px;
@@ -83,12 +96,6 @@ body{
     width:100%;
     border-radius:10px;
     margin-bottom:10px;
-}
-
-.price{
-    color:#d62828;
-    font-size:22px;
-    font-weight:bold;
 }
 
 /* BUTTON */
@@ -217,7 +224,7 @@ function loadMenu(category){
         <div class="card" onclick="selectItem('${item.name}', ${item.price}, '${item.img}')">
             <img src="${item.img}">
             <h3>${item.name}</h3>
-            <p>₱${item.price}</p>
+            <p class="price">₱${item.price}</p>
         </div>
         `;
     });
