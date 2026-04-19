@@ -30,6 +30,7 @@ body{
     margin:10px 0;
     border-radius:10px;
     cursor:pointer;
+    transition:0.3s;
 }
 
 .menu-item:hover{
@@ -41,6 +42,14 @@ body{
     flex:1;
     padding:20px;
     background:#f5f5f5;
+}
+
+/* HEADER */
+.main h2{
+    font-size:28px;
+    font-weight:bold;
+    color:#d62828;
+    margin-bottom:15px;
 }
 
 /* GRID */
@@ -59,7 +68,7 @@ body{
     cursor:pointer;
     box-shadow:0 5px 15px rgba(0,0,0,0.1);
 
-    /* 🔥 ADDED BORDER */
+    /* BORDER */
     border:2px solid #ffcc00;
     transition:0.3s;
 }
@@ -76,7 +85,17 @@ body{
     border-radius:10px;
 }
 
-/* 🔥 PRICE HIGHLIGHT */
+/* PRODUCT NAME */
+.card h3{
+    background:#ffcc00;
+    padding:5px 10px;
+    border-radius:6px;
+    display:inline-block;
+    margin-top:10px;
+    font-weight:bold;
+}
+
+/* PRICE */
 .price{
     display:inline-block;
     background:#ff0000;
@@ -89,28 +108,31 @@ body{
     box-shadow:0 0 10px rgba(255,0,0,0.6);
 }
 
-/* 🔥 PRODUCT NAME HIGHLIGHT (ADDED LANG) */
-.card h3{
-    background:#ffcc00;
-    padding:5px 10px;
-    border-radius:6px;
-    display:inline-block;
-    margin-top:10px;
-    font-weight:bold;
-}
-
 /* RIGHT PANEL */
 .details{
     width:300px;
-    background:#fff;
+    background:linear-gradient(180deg,#ffffff,#ffe5e5);
     padding:20px;
     border-left:1px solid #ddd;
+    box-shadow:-5px 0 20px rgba(0,0,0,0.1);
 }
 
 .details img{
     width:100%;
     border-radius:10px;
     margin-bottom:10px;
+    transition:0.3s;
+}
+
+.details img:hover{
+    transform:scale(1.05);
+}
+
+/* PREVIEW PRICE */
+.details .price{
+    padding:8px 15px;
+    font-size:20px;
+    box-shadow:0 0 15px rgba(255,0,0,0.8);
 }
 
 /* BUTTON */
@@ -122,6 +144,7 @@ body{
     color:#fff;
     border-radius:10px;
     margin-top:20px;
+    cursor:pointer;
 }
 </style>
 
