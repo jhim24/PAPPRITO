@@ -21,10 +21,6 @@ body{
     padding:20px;
 }
 
-.sidebar h2{
-    color:#fff;
-}
-
 .menu-item{
     padding:12px;
     margin:10px 0;
@@ -43,14 +39,13 @@ body{
     background:#f5f5f5;
 }
 
-/* GRID */
+/* CARDS */
 .cards{
     display:grid;
     grid-template-columns:repeat(auto-fill, minmax(180px,1fr));
     gap:20px;
 }
 
-/* CARD */
 .card{
     background:#fff;
     padding:15px;
@@ -71,7 +66,7 @@ body{
     border-radius:10px;
 }
 
-/* 🔥 PRICE HIGHLIGHT */
+/* PRICE */
 .price{
     display:inline-block;
     background:#ff0000;
@@ -79,9 +74,7 @@ body{
     padding:5px 12px;
     border-radius:8px;
     font-weight:bold;
-    font-size:16px;
     margin-top:5px;
-    box-shadow:0 0 10px rgba(255,0,0,0.6);
 }
 
 /* RIGHT PANEL */
@@ -92,53 +85,27 @@ body{
     border-left:1px solid #ddd;
 }
 
-/* 🔥 PREVIEW WRAPPER */
+/* 🔥 REAL RUNNING LIGHT */
 .preview-wrapper{
     position:relative;
     border-radius:12px;
-    overflow:hidden;
-}
-
-/* RUNNING LIGHT (NASA HARAP NA) */
-.preview-wrapper::before{
-    content:"";
-    position:absolute;
-    top:-4px;
-    left:-4px;
-    right:-4px;
-    bottom:-4px;
-    border-radius:15px;
+    padding:4px;
     background:linear-gradient(90deg, red, orange, yellow, red);
-    animation: runLight 3s linear infinite;
-    z-index:1;
-    filter:blur(4px);
+    background-size:300% 300%;
+    animation: moveLight 3s linear infinite;
 }
 
-/* INNER COVER (para border lang makita) */
-.preview-wrapper::after{
-    content:"";
-    position:absolute;
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
-    background:#fff;
-    border-radius:12px;
-    z-index:2;
-}
-
-/* IMAGE */
+/* INNER IMAGE */
 .preview-wrapper img{
-    position:relative;
-    z-index:3;
     width:100%;
-    border-radius:12px;
+    border-radius:10px;
+    display:block;
 }
 
-/* ANIMATION */
-@keyframes runLight{
-    0%{ transform:rotate(0deg); }
-    100%{ transform:rotate(360deg); }
+/* 🔥 ANIMATION (VISIBLE) */
+@keyframes moveLight{
+    0%{ background-position:0% 50%; }
+    100%{ background-position:100% 50%; }
 }
 
 /* BUTTON */
@@ -193,71 +160,20 @@ body{
 <script>
 
 const menuData = {
-
 beef:[
     {name:"Bulalo Grupo", price:710, img:"bulalogroup.jpg"},
     {name:"Bulalo Solo", price:185, img:"solobulalo.jpg"},
     {name:"Bistek Tagalog", price:279, img:"bistek.jpg"}
 ],
-
 pork:[
     {name:"Lechon Kawali", price:395, img:"rapsilog.jpg"},
     {name:"Pork Sisig", price:315, img:"rapsilog.jpg"},
     {name:"Lumpiang Shanghai", price:235, img:"rapsilog.jpg"}
 ],
-
 chicken:[
     {name:"PapsChicken Platter", price:315, img:"rapsilog.jpg"},
     {name:"Chicken Sisig", price:295, img:"rapsilog.jpg"}
-],
-
-seafood:[
-    {name:"Crispy Bangusarap", price:315, img:"rapsilog.jpg"},
-    {name:"Calamares", price:305, img:"rapsilog.jpg"},
-    {name:"Crispy Tawilis", price:285, img:"rapsilog.jpg"}
-],
-
-veggies:[
-    {name:"Chop Suey", price:235, img:"rapsilog.jpg"},
-    {name:"Tortang Talong", price:192, img:"rapsilog.jpg"}
-],
-
-noodles:[
-    {name:"Canton-Bihon", price:278, img:"rapsilog.jpg"},
-    {name:"Palabok", price:195, img:"rapsilog.jpg"},
-    {name:"Beef Mami", price:159, img:"rapsilog.jpg"},
-    {name:"Chicken Mami", price:149, img:"rapsilog.jpg"}
-],
-
-sides:[
-    {name:"PapShots", price:72, img:"rapsilog.jpg"},
-    {name:"Spicy Tofu", price:65, img:"rapsilog.jpg"},
-    {name:"Bola Bola Soup", price:68, img:"rapsilog.jpg"},
-    {name:"Lumpiang Shanghai (3pcs)", price:49, img:"rapsilog.jpg"},
-    {name:"Fried Banana (4pcs)", price:35, img:"rapsilog.jpg"},
-    {name:"Garlic Rice", price:46, img:"rapsilog.jpg"},
-    {name:"Plain Rice", price:32, img:"rapsilog.jpg"}
-],
-
-drinks:[
-    {name:"Special Turon", price:95, img:"rapsilog.jpg"},
-    {name:"Leche Flan", price:82, img:"rapsilog.jpg"},
-    {name:"Coffee Jelly", price:75, img:"rapsilog.jpg"},
-    {name:"Softdrinks", price:52, img:"rapsilog.jpg"},
-    {name:"Softdrinks 1.5L", price:145, img:"rapsilog.jpg"},
-    {name:"Iced Tea", price:52, img:"rapsilog.jpg"},
-    {name:"Iced Coffee", price:59, img:"rapsilog.jpg"},
-    {name:"Hot Choco", price:55, img:"rapsilog.jpg"},
-    {name:"Bottled Water", price:35, img:"rapsilog.jpg"}
-],
-
-beers:[
-    {name:"San Mig Light", price:95, img:"rapsilog.jpg"},
-    {name:"San Miguel Pale Pilsen", price:95, img:"rapsilog.jpg"},
-    {name:"San Miguel Flavored", price:95, img:"rapsilog.jpg"},
-    {name:"Red Horse", price:105, img:"rapsilog.jpg"}
 ]
-
 };
 
 function loadMenu(category){
