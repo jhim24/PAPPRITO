@@ -21,10 +21,6 @@ body{
     padding:20px;
 }
 
-.sidebar h2{
-    margin-bottom:20px;
-}
-
 .menu-item{
     padding:12px;
     margin:8px 0;
@@ -33,8 +29,7 @@ body{
     font-weight:bold;
 }
 
-.menu-item:hover,
-.active{
+.menu-item:hover,.active{
     background:#d62828;
     color:#fff;
 }
@@ -45,10 +40,6 @@ body{
     padding:20px;
 }
 
-.main h2{
-    color:#d62828;
-}
-
 /* GRID */
 .cards{
     display:grid;
@@ -56,73 +47,31 @@ body{
     gap:20px;
 }
 
-/* 🔥 CARD DESIGN */
+/* CARD */
 .card{
-    background:linear-gradient(135deg, #fff, #fff5cc);
-    padding:20px;
+    background:#fff;
+    padding:15px;
     border-radius:20px;
     text-align:center;
     cursor:pointer;
     box-shadow:0 8px 20px rgba(0,0,0,0.15);
     transition:0.3s;
-    position:relative;
-    overflow:hidden;
 }
 
-/* GLOW BORDER */
-.card::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    border-radius:20px;
-    padding:2px;
-    background:linear-gradient(45deg,#ffcc00,#ff0000);
-    -webkit-mask:
-        linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-            mask-composite: exclude;
-}
-
-/* SHINE EFFECT */
-.card::after{
-    content:"";
-    position:absolute;
-    top:-100%;
-    left:-100%;
-    width:200%;
-    height:200%;
-    background:linear-gradient(120deg, transparent, rgba(255,255,255,0.5), transparent);
-    transform:rotate(25deg);
-    transition:0.5s;
-}
-
-.card:hover::after{
-    top:100%;
-    left:100%;
-}
-
-/* HOVER */
 .card:hover{
-    transform:translateY(-8px) scale(1.05);
-    box-shadow:0 15px 35px rgba(0,0,0,0.3);
+    transform:scale(1.05);
 }
 
-/* TITLE */
-.card h3{
-    margin:10px 0;
+.food-img{
+    width:100%;
+    height:120px;
+    object-fit:cover;
+    border-radius:12px;
 }
 
-/* PRICE BADGE */
+/* PRICE */
 .card p{
-    position:absolute;
-    top:10px;
-    right:10px;
-    background:#d62828;
-    color:#fff;
-    padding:5px 12px;
-    border-radius:20px;
-    font-size:14px;
+    color:#d62828;
     font-weight:bold;
 }
 
@@ -134,14 +83,14 @@ body{
     border-left:2px solid #eee;
 }
 
-.details h2{
-    color:#d62828;
+.details img{
+    width:100%;
+    border-radius:10px;
 }
 
 .price{
     font-size:22px;
     font-weight:bold;
-    margin:10px 0;
 }
 
 /* BUTTON */
@@ -152,12 +101,6 @@ body{
     border:none;
     color:#fff;
     border-radius:10px;
-    font-size:16px;
-    cursor:pointer;
-}
-
-.btn:hover{
-    background:#a61c1c;
 }
 </style>
 
@@ -167,16 +110,10 @@ body{
 
 <!-- SIDEBAR -->
 <div class="sidebar">
-    <h2>🍽 Menu</h2>
     <div class="menu-item active" onclick="loadMenu('beef', this)">Beef</div>
     <div class="menu-item" onclick="loadMenu('pork', this)">Pork</div>
     <div class="menu-item" onclick="loadMenu('chicken', this)">Chicken</div>
     <div class="menu-item" onclick="loadMenu('seafood', this)">Seafood</div>
-    <div class="menu-item" onclick="loadMenu('veggies', this)">Veggies</div>
-    <div class="menu-item" onclick="loadMenu('noodles', this)">Noodles</div>
-    <div class="menu-item" onclick="loadMenu('sides', this)">Sides</div>
-    <div class="menu-item" onclick="loadMenu('drinks', this)">Drinks</div>
-    <div class="menu-item" onclick="loadMenu('beers', this)">Beers</div>
 </div>
 
 <!-- MAIN -->
@@ -187,6 +124,7 @@ body{
 
 <!-- RIGHT PANEL -->
 <div class="details">
+    <img id="preview" src="https://source.unsplash.com/300x200/?bulalo">
     <h2 id="name">Select Item</h2>
     <p class="price" id="price">₱0</p>
     <button class="btn">Add to Cart</button>
@@ -197,67 +135,26 @@ body{
 const menuData = {
 
 beef:[
-    {name:"Bulalo Grupo", price:710},
-    {name:"Bulalo Solo", price:185},
-    {name:"Bistek Tagalog", price:279}
+    {name:"Bulalo Grupo", price:710, img:"https://source.unsplash.com/300x200/?bulalo"},
+    {name:"Bulalo Solo", price:185, img:"https://source.unsplash.com/300x200/?beef-soup"},
+    {name:"Bistek Tagalog", price:279, img:"https://source.unsplash.com/300x200/?beef-steak"}
 ],
 
 pork:[
-    {name:"Lechon Kawali", price:395},
-    {name:"Pork Sisig", price:315},
-    {name:"Lumpiang Shanghai", price:235}
+    {name:"Lechon Kawali", price:395, img:"https://source.unsplash.com/300x200/?crispy-pork"},
+    {name:"Pork Sisig", price:315, img:"https://source.unsplash.com/300x200/?sisig"},
+    {name:"Lumpiang Shanghai", price:235, img:"https://source.unsplash.com/300x200/?spring-rolls"}
 ],
 
 chicken:[
-    {name:"PapsChicken Platter", price:315},
-    {name:"Chicken Sisig", price:295}
+    {name:"PapsChicken Platter", price:315, img:"https://source.unsplash.com/300x200/?fried-chicken"},
+    {name:"Chicken Sisig", price:295, img:"https://source.unsplash.com/300x200/?chicken-dish"}
 ],
 
 seafood:[
-    {name:"Crispy Bangusarap", price:315},
-    {name:"Calamares", price:305},
-    {name:"Crispy Tawilis", price:285}
-],
-
-veggies:[
-    {name:"Chop Suey", price:235},
-    {name:"Tortang Talong", price:192}
-],
-
-noodles:[
-    {name:"Canton-Bihon", price:278},
-    {name:"Palabok", price:195},
-    {name:"Beef Mami", price:159},
-    {name:"Chicken Mami", price:149}
-],
-
-sides:[
-    {name:"PapShots", price:72},
-    {name:"Spicy Tofu", price:65},
-    {name:"Bola Bola Soup", price:68},
-    {name:"Lumpiang Shanghai (3pcs)", price:49},
-    {name:"Fried Banana (4pcs)", price:35},
-    {name:"Garlic Rice", price:46},
-    {name:"Plain Rice", price:32}
-],
-
-drinks:[
-    {name:"Special Turon", price:95},
-    {name:"Leche Flan", price:82},
-    {name:"Coffee Jelly", price:75},
-    {name:"Softdrinks", price:52},
-    {name:"Softdrinks 1.5L", price:145},
-    {name:"Iced Tea", price:52},
-    {name:"Iced Coffee", price:59},
-    {name:"Hot Choco", price:55},
-    {name:"Bottled Water", price:35}
-],
-
-beers:[
-    {name:"San Mig Light", price:95},
-    {name:"San Miguel Pale Pilsen", price:95},
-    {name:"San Miguel Flavored", price:95},
-    {name:"Red Horse", price:105}
+    {name:"Crispy Bangusarap", price:315, img:"https://source.unsplash.com/300x200/?fried-fish"},
+    {name:"Calamares", price:305, img:"https://source.unsplash.com/300x200/?calamari"},
+    {name:"Crispy Tawilis", price:285, img:"https://source.unsplash.com/300x200/?fish"}
 ]
 
 };
@@ -273,19 +170,21 @@ function loadMenu(category, el){
 
     menuData[category].forEach(item=>{
         container.innerHTML += `
-        <div class="card" onclick="selectItem('${item.name}', ${item.price})">
+        <div class="card" onclick="selectItem('${item.name}', ${item.price}, '${item.img}')">
+            <img src="${item.img}" class="food-img">
             <h3>${item.name}</h3>
             <p>₱${item.price}</p>
         </div>`;
     });
 }
 
-function selectItem(name, price){
+function selectItem(name, price, img){
     document.getElementById("name").innerText = name;
     document.getElementById("price").innerText = "₱" + price;
+    document.getElementById("preview").src = img;
 }
 
-/* DEFAULT LOAD */
+/* LOAD DEFAULT */
 loadMenu('beef', document.querySelector('.menu-item'));
 
 </script>
