@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Pappprito Menu</title>
+<title>Pappprito POS UI</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -9,56 +9,98 @@
 body{
     margin:0;
     font-family:Arial;
-    background:#ffcc00;
-}
-
-/* HEADER */
-.header{
-    background:#d62828;
-    color:#fff;
-    text-align:center;
-    padding:20px;
-    font-size:30px;
-    font-weight:bold;
-}
-
-/* CONTAINER */
-.container{
-    padding:20px;
-}
-
-/* CATEGORY */
-.category{
-    margin-bottom:30px;
-}
-
-.category h2{
-    background:#fff;
-    padding:10px;
-    border-radius:10px;
-}
-
-/* ITEMS */
-.item{
     display:flex;
-    justify-content:space-between;
+    height:100vh;
+}
+
+/* SIDEBAR */
+.sidebar{
+    width:200px;
     background:#fff;
-    margin:8px 0;
-    padding:12px;
-    border-radius:10px;
-    box-shadow:0 3px 10px rgba(0,0,0,0.2);
+    border-right:1px solid #ddd;
+    padding:20px;
 }
 
-/* HOVER EFFECT */
-.item:hover{
-    transform:scale(1.02);
-    background:#ffe066;
-}
-
-/* PRICE */
-.price{
-    font-weight:bold;
+.sidebar h2{
     color:#d62828;
+}
+
+.menu-item{
+    padding:10px;
+    margin:10px 0;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.menu-item:hover{
+    background:#ffe5e5;
+}
+
+/* MAIN */
+.main{
+    flex:1;
+    padding:20px;
+    background:#f5f5f5;
+}
+
+/* CARDS */
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(200px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:#fff;
+    padding:15px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    text-align:center;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:scale(1.05);
+}
+
+.card img{
+    width:100%;
+    height:120px;
+    object-fit:cover;
+    border-radius:10px;
+}
+
+/* RIGHT PANEL */
+.details{
+    width:300px;
+    background:#fff;
+    padding:20px;
+    border-left:1px solid #ddd;
+}
+
+.details img{
+    width:100%;
+    border-radius:10px;
+}
+
+.price{
+    color:#d62828;
+    font-size:20px;
+    font-weight:bold;
+}
+
+/* BUTTON */
+.btn{
+    width:100%;
+    padding:15px;
+    background:#ff9f1c;
+    border:none;
+    color:#fff;
+    font-size:16px;
+    border-radius:10px;
+    margin-top:20px;
+    cursor:pointer;
 }
 </style>
 
@@ -66,93 +108,61 @@ body{
 
 <body>
 
-<div class="header">Pappprito Menu</div>
-
-<div class="container">
-
-<!-- BEEF -->
-<div class="category">
-<h2>🥩 Beef</h2>
-<div class="item"><span>Bulalo Grupo</span><span class="price">₱710</span></div>
-<div class="item"><span>Bulalo Solo</span><span class="price">₱185</span></div>
-<div class="item"><span>Bistek Tagalog</span><span class="price">₱279</span></div>
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <h2>🍽 Menu</h2>
+    <div class="menu-item">Beef</div>
+    <div class="menu-item">Pork</div>
+    <div class="menu-item">Chicken</div>
+    <div class="menu-item">Seafood</div>
+    <div class="menu-item">Drinks</div>
 </div>
 
-<!-- PORK -->
-<div class="category">
-<h2>🐖 Pork</h2>
-<div class="item"><span>Lechon Kawali</span><span class="price">₱395</span></div>
-<div class="item"><span>Pork Sisig</span><span class="price">₱315</span></div>
-<div class="item"><span>Lumpiang Shanghai</span><span class="price">₱235</span></div>
-</div>
+<!-- MAIN -->
+<div class="main">
 
-<!-- CHICKEN -->
-<div class="category">
-<h2>🍗 Chicken</h2>
-<div class="item"><span>PapsChicken Platter</span><span class="price">₱315</span></div>
-<div class="item"><span>Chicken Sisig</span><span class="price">₱295</span></div>
-</div>
+    <h2>Popular Items</h2>
 
-<!-- SEAFOOD -->
-<div class="category">
-<h2>🐟 Seafood</h2>
-<div class="item"><span>Crispy Bangusarap</span><span class="price">₱315</span></div>
-<div class="item"><span>Calamares</span><span class="price">₱305</span></div>
-<div class="item"><span>Crispy Tawilis</span><span class="price">₱285</span></div>
-</div>
+    <div class="cards">
 
-<!-- VEGGIES -->
-<div class="category">
-<h2>🥬 Veggies</h2>
-<div class="item"><span>Chop Suey</span><span class="price">₱235</span></div>
-<div class="item"><span>Tortang Talong</span><span class="price">₱192</span></div>
-</div>
+        <div class="card" onclick="showItem('Rapsilog','₱85','rapsilog.jpg')">
+            <img src="rapsilog.jpg">
+            <h3>Rapsilog</h3>
+            <p>₱85</p>
+        </div>
 
-<!-- NOODLES -->
-<div class="category">
-<h2>🍜 Noodles</h2>
-<div class="item"><span>Canton-Bihon</span><span class="price">₱278</span></div>
-<div class="item"><span>Palabok</span><span class="price">₱195</span></div>
-<div class="item"><span>Beef Mami</span><span class="price">₱159</span></div>
-<div class="item"><span>Chicken Mami</span><span class="price">₱149</span></div>
-</div>
+        <div class="card" onclick="showItem('Chicken Meal','₱99','rapsilog.jpg')">
+            <img src="rapsilog.jpg">
+            <h3>Chicken Meal</h3>
+            <p>₱99</p>
+        </div>
 
-<!-- SIDES -->
-<div class="category">
-<h2>🍟 Sides</h2>
-<div class="item"><span>PapShots</span><span class="price">₱72</span></div>
-<div class="item"><span>Spicy Tofu</span><span class="price">₱65</span></div>
-<div class="item"><span>Bola-Bola Soup</span><span class="price">₱68</span></div>
-<div class="item"><span>Lumpiang Shanghai (3pcs)</span><span class="price">₱49</span></div>
-<div class="item"><span>Fried Banana (4pcs)</span><span class="price">₱35</span></div>
-<div class="item"><span>Garlic Rice</span><span class="price">₱46</span></div>
-<div class="item"><span>Plain Rice</span><span class="price">₱32</span></div>
-</div>
+        <div class="card" onclick="showItem('Burger','₱79','rapsilog.jpg')">
+            <img src="rapsilog.jpg">
+            <h3>Burger</h3>
+            <p>₱79</p>
+        </div>
 
-<!-- DRINKS -->
-<div class="category">
-<h2>🍰 Drinks & Sweets</h2>
-<div class="item"><span>Special Turon</span><span class="price">₱95</span></div>
-<div class="item"><span>Leche Flan</span><span class="price">₱82</span></div>
-<div class="item"><span>Coffee Jelly</span><span class="price">₱75</span></div>
-<div class="item"><span>Softdrinks</span><span class="price">₱52</span></div>
-<div class="item"><span>Softdrinks 1.5L</span><span class="price">₱145</span></div>
-<div class="item"><span>Iced Tea</span><span class="price">₱52</span></div>
-<div class="item"><span>Iced Coffee</span><span class="price">₱59</span></div>
-<div class="item"><span>Hot Choco</span><span class="price">₱55</span></div>
-<div class="item"><span>Bottled Water</span><span class="price">₱35</span></div>
-</div>
-
-<!-- BEERS -->
-<div class="category">
-<h2>🍺 Beers</h2>
-<div class="item"><span>San Mig Light</span><span class="price">₱95</span></div>
-<div class="item"><span>San Miguel Pale Pilsen</span><span class="price">₱95</span></div>
-<div class="item"><span>San Miguel Flavored</span><span class="price">₱95</span></div>
-<div class="item"><span>Red Horse</span><span class="price">₱105</span></div>
-</div>
+    </div>
 
 </div>
+
+<!-- RIGHT PANEL -->
+<div class="details">
+    <img id="img" src="rapsilog.jpg">
+    <h2 id="name">Rapsilog</h2>
+    <p class="price" id="price">₱85</p>
+
+    <button class="btn">Add to Cart</button>
+</div>
+
+<script>
+function showItem(name, price, img){
+    document.getElementById("name").innerText = name;
+    document.getElementById("price").innerText = price;
+    document.getElementById("img").src = img;
+}
+</script>
 
 </body>
 </html>
