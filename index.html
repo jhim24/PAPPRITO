@@ -11,33 +11,36 @@ body{
     font-family:Arial;
     display:flex;
     height:100vh;
-    background:#f5f5f5;
 }
 
 /* SIDEBAR */
 .sidebar{
     width:220px;
-    background:linear-gradient(to bottom, #ffcc00, #ff9900);
+    background:#fff;
+    border-right:1px solid #ddd;
     padding:20px;
+}
+
+.sidebar h2{
+    color:#d62828;
 }
 
 .menu-item{
     padding:12px;
-    margin:8px 0;
+    margin:10px 0;
     border-radius:10px;
     cursor:pointer;
-    font-weight:bold;
 }
 
-.menu-item:hover,.active{
-    background:#d62828;
-    color:#fff;
+.menu-item:hover{
+    background:#ffe5e5;
 }
 
 /* MAIN */
 .main{
     flex:1;
     padding:20px;
+    background:#f5f5f5;
 }
 
 /* GRID */
@@ -51,44 +54,39 @@ body{
 .card{
     background:#fff;
     padding:15px;
-    border-radius:20px;
+    border-radius:15px;
     text-align:center;
     cursor:pointer;
-    box-shadow:0 8px 20px rgba(0,0,0,0.15);
-    transition:0.3s;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
 }
 
 .card:hover{
     transform:scale(1.05);
 }
 
-.food-img{
+.card img{
     width:100%;
     height:120px;
     object-fit:cover;
-    border-radius:12px;
-}
-
-/* PRICE */
-.card p{
-    color:#d62828;
-    font-weight:bold;
+    border-radius:10px;
 }
 
 /* RIGHT PANEL */
 .details{
-    width:280px;
+    width:300px;
     background:#fff;
     padding:20px;
-    border-left:2px solid #eee;
+    border-left:1px solid #ddd;
 }
 
 .details img{
     width:100%;
     border-radius:10px;
+    margin-bottom:10px;
 }
 
 .price{
+    color:#d62828;
     font-size:22px;
     font-weight:bold;
 }
@@ -97,10 +95,11 @@ body{
 .btn{
     width:100%;
     padding:15px;
-    background:#d62828;
+    background:#ff9f1c;
     border:none;
     color:#fff;
     border-radius:10px;
+    margin-top:20px;
 }
 </style>
 
@@ -110,21 +109,27 @@ body{
 
 <!-- SIDEBAR -->
 <div class="sidebar">
-    <div class="menu-item active" onclick="loadMenu('beef', this)">Beef</div>
-    <div class="menu-item" onclick="loadMenu('pork', this)">Pork</div>
-    <div class="menu-item" onclick="loadMenu('chicken', this)">Chicken</div>
-    <div class="menu-item" onclick="loadMenu('seafood', this)">Seafood</div>
+    <h2>🍽 Menu</h2>
+    <div class="menu-item" onclick="loadMenu('beef')">Beef</div>
+    <div class="menu-item" onclick="loadMenu('pork')">Pork</div>
+    <div class="menu-item" onclick="loadMenu('chicken')">Chicken</div>
+    <div class="menu-item" onclick="loadMenu('seafood')">Seafood</div>
+    <div class="menu-item" onclick="loadMenu('veggies')">Veggies</div>
+    <div class="menu-item" onclick="loadMenu('noodles')">Noodles</div>
+    <div class="menu-item" onclick="loadMenu('sides')">Sides</div>
+    <div class="menu-item" onclick="loadMenu('drinks')">Drinks</div>
+    <div class="menu-item" onclick="loadMenu('beers')">Beers</div>
 </div>
 
 <!-- MAIN -->
 <div class="main">
-    <h2 id="categoryTitle">BEEF</h2>
+    <h2 id="categoryTitle">Menu</h2>
     <div class="cards" id="menu"></div>
 </div>
 
 <!-- RIGHT PANEL -->
 <div class="details">
-    <img id="preview" src="https://source.unsplash.com/300x200/?bulalo">
+    <img id="img" src="rapsilog.jpg">
     <h2 id="name">Select Item</h2>
     <p class="price" id="price">₱0</p>
     <button class="btn">Add to Cart</button>
@@ -135,57 +140,94 @@ body{
 const menuData = {
 
 beef:[
-    {name:"Bulalo Grupo", price:710, img:"https://source.unsplash.com/300x200/?bulalo"},
-    {name:"Bulalo Solo", price:185, img:"https://source.unsplash.com/300x200/?beef-soup"},
-    {name:"Bistek Tagalog", price:279, img:"https://source.unsplash.com/300x200/?beef-steak"}
+    {name:"Bulalo Grupo", price:710, img:"bulalogroup.jpg"},
+    {name:"Bulalo Solo", price:185, img:"solobulalo.jpg"},
+    {name:"Bistek Tagalog", price:279, img:"bistek.jpg"}
 ],
 
 pork:[
-    {name:"Lechon Kawali", price:395, img:"https://source.unsplash.com/300x200/?crispy-pork"},
-    {name:"Pork Sisig", price:315, img:"https://source.unsplash.com/300x200/?sisig"},
-    {name:"Lumpiang Shanghai", price:235, img:"https://source.unsplash.com/300x200/?spring-rolls"}
+    {name:"Lechon Kawali", price:395, img:"rapsilog.jpg"},
+    {name:"Pork Sisig", price:315, img:"rapsilog.jpg"},
+    {name:"Lumpiang Shanghai", price:235, img:"rapsilog.jpg"}
 ],
 
 chicken:[
-    {name:"PapsChicken Platter", price:315, img:"https://source.unsplash.com/300x200/?fried-chicken"},
-    {name:"Chicken Sisig", price:295, img:"https://source.unsplash.com/300x200/?chicken-dish"}
+    {name:"PapsChicken Platter", price:315, img:"rapsilog.jpg"},
+    {name:"Chicken Sisig", price:295, img:"rapsilog.jpg"}
 ],
 
 seafood:[
-    {name:"Crispy Bangusarap", price:315, img:"https://source.unsplash.com/300x200/?fried-fish"},
-    {name:"Calamares", price:305, img:"https://source.unsplash.com/300x200/?calamari"},
-    {name:"Crispy Tawilis", price:285, img:"https://source.unsplash.com/300x200/?fish"}
+    {name:"Crispy Bangusarap", price:315, img:"rapsilog.jpg"},
+    {name:"Calamares", price:305, img:"rapsilog.jpg"},
+    {name:"Crispy Tawilis", price:285, img:"rapsilog.jpg"}
+],
+
+veggies:[
+    {name:"Chop Suey", price:235, img:"rapsilog.jpg"},
+    {name:"Tortang Talong", price:192, img:"rapsilog.jpg"}
+],
+
+noodles:[
+    {name:"Canton-Bihon", price:278, img:"rapsilog.jpg"},
+    {name:"Palabok", price:195, img:"rapsilog.jpg"},
+    {name:"Beef Mami", price:159, img:"rapsilog.jpg"},
+    {name:"Chicken Mami", price:149, img:"rapsilog.jpg"}
+],
+
+sides:[
+    {name:"PapShots", price:72, img:"rapsilog.jpg"},
+    {name:"Spicy Tofu", price:65, img:"rapsilog.jpg"},
+    {name:"Bola Bola Soup", price:68, img:"rapsilog.jpg"},
+    {name:"Lumpiang Shanghai (3pcs)", price:49, img:"rapsilog.jpg"},
+    {name:"Fried Banana (4pcs)", price:35, img:"rapsilog.jpg"},
+    {name:"Garlic Rice", price:46, img:"rapsilog.jpg"},
+    {name:"Plain Rice", price:32, img:"rapsilog.jpg"}
+],
+
+drinks:[
+    {name:"Special Turon", price:95, img:"rapsilog.jpg"},
+    {name:"Leche Flan", price:82, img:"rapsilog.jpg"},
+    {name:"Coffee Jelly", price:75, img:"rapsilog.jpg"},
+    {name:"Softdrinks", price:52, img:"rapsilog.jpg"},
+    {name:"Softdrinks 1.5L", price:145, img:"rapsilog.jpg"},
+    {name:"Iced Tea", price:52, img:"rapsilog.jpg"},
+    {name:"Iced Coffee", price:59, img:"rapsilog.jpg"},
+    {name:"Hot Choco", price:55, img:"rapsilog.jpg"},
+    {name:"Bottled Water", price:35, img:"rapsilog.jpg"}
+],
+
+beers:[
+    {name:"San Mig Light", price:95, img:"rapsilog.jpg"},
+    {name:"San Miguel Pale Pilsen", price:95, img:"rapsilog.jpg"},
+    {name:"San Miguel Flavored", price:95, img:"rapsilog.jpg"},
+    {name:"Red Horse", price:105, img:"rapsilog.jpg"}
 ]
 
 };
 
-function loadMenu(category, el){
-    document.querySelectorAll(".menu-item").forEach(i=>i.classList.remove("active"));
-    el.classList.add("active");
-
-    document.getElementById("categoryTitle").innerText = category.toUpperCase();
-
+function loadMenu(category){
     const container = document.getElementById("menu");
+    const title = document.getElementById("categoryTitle");
+
+    title.innerText = category.toUpperCase();
     container.innerHTML = "";
 
-    menuData[category].forEach(item=>{
+    menuData[category].forEach(item => {
         container.innerHTML += `
         <div class="card" onclick="selectItem('${item.name}', ${item.price}, '${item.img}')">
-            <img src="${item.img}" class="food-img">
+            <img src="${item.img}">
             <h3>${item.name}</h3>
             <p>₱${item.price}</p>
-        </div>`;
+        </div>
+        `;
     });
 }
 
 function selectItem(name, price, img){
     document.getElementById("name").innerText = name;
     document.getElementById("price").innerText = "₱" + price;
-    document.getElementById("preview").src = img;
+    document.getElementById("img").src = img;
 }
-
-/* LOAD DEFAULT */
-loadMenu('beef', document.querySelector('.menu-item'));
 
 </script>
 
