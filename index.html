@@ -694,6 +694,57 @@ body{
 .event-card p{
     color:#ddd;
 }
+    /* SLIDER */
+.promo-slider{
+    background:#d71920;
+    color:white;
+    text-align:center;
+    padding:15px;
+    font-weight:bold;
+    overflow:hidden;
+}
+
+.slide{
+    display:none;
+}
+
+.slide.active{
+    display:block;
+    animation:fade 1s;
+}
+
+@keyframes fade{
+    from{opacity:0;}
+    to{opacity:1;}
+}
+    /* POPUP */
+.promo-popup{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.7);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+}
+
+.popup-content{
+    background:white;
+    color:black;
+    padding:30px;
+    border-radius:10px;
+    text-align:center;
+    position:relative;
+    width:300px;
+}
+
+.close-popup{
+    position:absolute;
+    top:10px;
+    right:10px;
+    cursor:pointer;
+    color:red;
+}
 </style>
 </head>
 
@@ -813,6 +864,26 @@ body{
         <div class="event-card">
             <h3>🍻 Happy Hour</h3>
             <p>Buy 1 Take 1 on selected drinks • 5PM–7PM</p>
+        </div>
+
+    </div>
+
+</div>
+    <!-- PROMO SLIDER -->
+<div class="promo-slider">
+
+    <div class="slides">
+
+        <div class="slide active">
+            🎉 10% OFF THIS WEEKEND!
+        </div>
+
+        <div class="slide">
+            🍻 HAPPY HOUR 5PM–7PM
+        </div>
+
+        <div class="slide">
+            🎶 LIVE ACOUSTIC NIGHT EVERY FRIDAY
         </div>
 
     </div>
@@ -992,6 +1063,38 @@ function closeImageModal(){
         closeImageModal();
     }
 });
+    let slides = document.querySelectorAll(".slide");
+let index = 0;
+
+setInterval(()=>{
+    slides[index].classList.remove("active");
+    index = (index + 1) % slides.length;
+    slides[index].classList.add("active");
+},3000);
+    // AUTO OPEN
+window.onload = ()=>{
+    setTimeout(()=>{
+        document.getElementById("promoPopup").style.display="flex";
+    },1000);
+};
+
+function closePromo(){
+    document.getElementById("promoPopup").style.display="none";
+}
+    // COUNTDOWN
+let endTime = new Date().getTime() + (2 * 60 * 60 * 1000); // 2 hours
+
+setInterval(()=>{
+    let now = new Date().getTime();
+    let distance = endTime - now;
+
+    let hours = Math.floor(distance / (1000*60*60));
+    let minutes = Math.floor((distance % (1000*60*60))/(1000*60));
+    let seconds = Math.floor((distance % (1000*60))/1000);
+
+    document.getElementById("countdown").innerHTML =
+    `⏳ Ends in ${hours}h ${minutes}m ${seconds}s`;
+},1000);
 </script>
 <!-- MENU POPUP -->
 <div id="menuModal" class="menu-modal">
@@ -1033,6 +1136,20 @@ function closeImageModal(){
 <div id="imageModal" class="image-modal">
    <span class="close-image" onclick="closeImageModal()">✖</span>
     <img id="modalImg">
+</div>
+    <!-- POPUP PROMO -->
+<div id="promoPopup" class="promo-popup">
+
+    <div class="popup-content">
+        <span class="close-popup" onclick="closePromo()">✖</span>
+
+        <h2>🔥 PROMO!</h2>
+        <p>Get 10% OFF today!</p>
+
+        <div id="countdown"></div>
+
+    </div>
+
 </div>
 </body>
 </html>
