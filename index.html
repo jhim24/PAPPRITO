@@ -51,7 +51,6 @@ body{
 .logo-container span{
     font-size:20px;
     font-weight:bold;
-    color:white;
 }
 
 /* LINKS */
@@ -82,7 +81,6 @@ body{
     position:absolute;
     inset:0;
     background:rgba(0,0,0,0.5);
-    pointer-events:none;
 }
 
 .hero-content{
@@ -91,12 +89,6 @@ body{
 
 .hero-content h1{
     font-size:60px;
-    letter-spacing:4px;
-}
-
-.hero-content p{
-    margin-top:10px;
-    font-size:18px;
 }
 
 .address{
@@ -160,7 +152,7 @@ body{
 /* CONTACT */
 .contact-box{
     max-width:500px;
-    margin:0 auto;
+    margin:auto;
     text-align:center;
     background:#1a1a1a;
     padding:20px;
@@ -175,12 +167,6 @@ body{
     color:black;
     text-decoration:none;
     border-radius:5px;
-    font-weight:bold;
-}
-
-.map-btn:hover{
-    background:#ff3b3b;
-    color:white;
 }
 
 /* FOOTER */
@@ -199,7 +185,6 @@ body{
     background:rgba(0,0,0,0.8);
     justify-content:center;
     align-items:center;
-    z-index:999;
 }
 
 .modal-content{
@@ -222,6 +207,12 @@ body{
     border:none;
     padding:5px 10px;
     cursor:pointer;
+}
+
+/* FIX TEXT FORMAT */
+#modalContent{
+    white-space:pre-line;
+    line-height:1.6;
 }
 </style>
 </head>
@@ -252,15 +243,13 @@ body{
         <h1>PAPPRITO RESTAURANT</h1>
         <p>Main Dining • Roof Deck • Conference Room</p>
 
-        <a href="https://www.google.com/maps?q=Grandview+Complex+Tagaytay"
-           target="_blank"
-           class="address">
+        <a href="https://www.google.com/maps?q=Grandview+Complex+Tagaytay" target="_blank" class="address">
            📍 Grandview Complex, Tagaytay City
         </a>
     </div>
 </div>
 
-<!-- OUR SPACES -->
+<!-- MENU -->
 <div class="section" id="spaces">
     <h2>Our Dining Spaces</h2>
 
@@ -296,25 +285,20 @@ body{
     <h2>Contact Us</h2>
 
     <div class="contact-box">
-        <p><strong>📍 Address:</strong> Grandview Complex, Tagaytay City</p>
+        <p><strong>📍 Address:</strong> Grandview Complex</p>
         <p><strong>📞 Phone:</strong> +63 912 345 6789</p>
-        <p><strong>📧 Email:</strong> papprito@gmail.com</p>
-        <p><strong>🕒 Hours:</strong> 10:00 AM – 10:00 PM</p>
 
-        <a href="https://www.google.com/maps?q=Grandview+Complex+Tagaytay"
-           target="_blank"
-           class="map-btn">
+        <a href="https://www.google.com/maps?q=Grandview+Complex+Tagaytay" target="_blank" class="map-btn">
            📍 View on Map
         </a>
     </div>
 </div>
 
-<!-- FOOTER -->
 <div class="footer">
-    <p>© 2026 PAPPRITO Restaurant • All Rights Reserved</p>
+    <p>© 2026 PAPPRITO Restaurant</p>
 </div>
 
-<!-- 🔥 MODAL -->
+<!-- MODAL -->
 <div id="modal" class="modal">
     <div class="modal-content">
         <button class="close-btn" onclick="closeModal()">X</button>
@@ -333,33 +317,31 @@ function openModal(type){
 
     if(type==="core"){
         title.innerText="CORE VALUES";
-        content.innerText="CUSTOMER FOCUS
-We provide great taste, excellent service, and superior value to all our customers.
+        content.innerText=`CUSTOMER FOCUS
+We provide great taste and excellent service.
+
 INTEGRITY
-We do only the right thing and what is ought to be done regardless of the situation.
-LISTENING WITH HUMILITY
-We value feedback, acknowledge and learn from our mistakes.
-SPIRIT OF BUSINESS ENTERPRISE
-We imbue our employees with entrepreneurial spirit and sense of ownership.
-PROFESSIONALISM
-We are professional in mind, in word and in deed.
-SPIRIT OF FAMILY AND FUN
-We foster teamwork, and the strong force keeps us unified and allows us to treat each other brothers and sisters alike.";
+We do the right thing.
+
+TEAMWORK
+We work together as one.`;
     }
+
     if(type==="vision"){
         title.innerText="VISION";
-        content.innerText="To be the go-to restaurant for hearty Filipino food, delivering superior value through our delicious and affordable meals..";
+        content.innerText=`To become a leading Filipino restaurant.`;
     }
+
     if(type==="mission"){
         title.innerText="MISSION";
-        content.innerText="To serve fresh and delicious food, promoting delightful eating to everyone.";
+        content.innerText=`To serve delicious and affordable food.`;
     }
+
     if(type==="about"){
         title.innerText="ABOUT PAPPRITO";
-        content.innerText=Papa Prito entered the bustling and cut-throat gourmet scene in Tagaytay City on 30th of October 2011 with the promise of food and ambiance both rich in taste but light on the pocket – not the easiest combination. Since then, it has become Tagaytay's social equalizer, cutting across social classes, and growing a local following – rare in a town where food business relies heavily on tourists and weekenders for survival.
-Serving Filipino favorites that are rich in taste but within reach of the ordinary people, satisfying not just hunger but a taste for the extraordinary.
-Slogan
-“Lasap Ang Pinoy Sarap";
+        content.innerText=`Serving Filipino favorites with passion and quality.
+
+"Lasap Ang Pinoy Sarap"`;
     }
 }
 
