@@ -942,26 +942,47 @@ function openModal(type){
 
     modal.style.display = "flex";
 
-    if(type==="core"){
-        title.innerText="CORE VALUES";
-        content.innerText=`CUSTOMER FOCUS
-We provide great taste...`;
-    }
+   if(type==="core"){
+    title.innerText="CORE VALUES";
+    content.innerText=`CUSTOMER FOCUS
+We provide great taste, excellent service, and superior value to all our customers.
 
-    if(type==="vision"){
-        title.innerText="VISION";
-        content.innerText=`To be the go-to restaurant...`;
-    }
+INTEGRITY
+We do only the right thing and what ought to be done regardless of the situation.
 
-    if(type==="mission"){
-        title.innerText="MISSION";
-        content.innerText=`To serve fresh and delicious food...`;
-    }
+LISTENING WITH HUMILITY
+We value feedback, acknowledge and learn from our mistakes.
 
-    if(type==="about"){
-        title.innerText="ABOUT PAPPRITO";
-        content.innerText=`Papa Prito entered...`;
-    }
+SPIRIT OF BUSINESS ENTERPRISE
+We imbue our employees with entrepreneurial spirit and sense of ownership.
+
+PROFESSIONALISM
+We are professional in mind, in word and in deed.
+
+SPIRIT OF FAMILY AND FUN
+We foster teamwork, unity, and treat each other like family.`;
+}
+
+if(type==="vision"){
+    title.innerText="VISION";
+    content.innerText=`To be the go-to restaurant for hearty Filipino food, delivering superior value through our delicious and affordable meals.`;
+}
+
+if(type==="mission"){
+    title.innerText="MISSION";
+    content.innerText=`To serve fresh and delicious food, promoting delightful eating to everyone.`;
+}
+
+if(type==="about"){
+    title.innerText="ABOUT PAPPRITO";
+    content.innerText=`Papa Prito entered the bustling and competitive food scene in Tagaytay City on October 30, 2011 with a promise of food and ambiance rich in taste yet light on the pocket.
+
+Since then, it has become a social equalizer, welcoming customers from all walks of life and building a strong local following.
+
+Serving Filipino favorites that are rich in flavor yet affordable, Papa Prito satisfies not only hunger but also delivers a memorable dining experience.
+
+Slogan:
+"Lasap Ang Pinoy Sarap"`;
 }
 function closeModal(){
     document.getElementById("modal").style.display="none";
