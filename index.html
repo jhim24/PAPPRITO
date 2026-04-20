@@ -1,309 +1,221 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>PAPAPRITO POS</title>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Foodie Red Dashboard</title>
 
 <style>
-body{
-    margin:0;
-    font-family:Arial;
-    display:flex;
-    flex-direction:column;
-    height:100vh;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
 }
 
-/* HEADER */
-.header{
-    background:#d62828;
-    color:#fff;
-    text-align:center;
-    font-size:30px;
-    padding:15px;
-}
-
-/* ADMIN */
-.admin-btn{
-    position:absolute;
-    top:10px;
-    right:10px;
-}
-
-/* LAYOUT */
-.container{
-    display:flex;
-    flex:1;
+body {
+    display: flex;
+    background: #0f0f0f;
+    color: #fff;
 }
 
 /* SIDEBAR */
-.sidebar{
-    width:150px;
-    background:#111;
-    color:#fff;
-    padding:10px;
+.sidebar {
+    width: 220px;
+    height: 100vh;
+    background: #111;
+    padding: 20px;
 }
 
-.menu-item{
-    padding:10px;
-    margin:5px 0;
-    cursor:pointer;
+.sidebar h2 {
+    color: #ff3b3b;
+    margin-bottom: 30px;
 }
 
-.menu-item:hover{
-    background:#ffcc00;
-    color:#000;
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar ul li {
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.sidebar ul li:hover,
+.active {
+    background: linear-gradient(45deg, #ff0000, #ffcc00);
+    color: black;
 }
 
 /* MAIN */
-.main{
-    flex:1;
-    padding:15px;
-    background:#f5f5f5;
+.main {
+    flex: 1;
+    padding: 20px;
 }
 
-.cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
-    gap:15px;
+/* HEADER */
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
 }
 
-/* 🔥 CARD FULL IMAGE STYLE */
-.card{
-    background:#fff;
-    border-radius:12px;
-    overflow:hidden;
-    border:2px solid #ffcc00;
-    cursor:pointer;
+.search {
+    padding: 8px;
+    border-radius: 20px;
+    border: none;
+    width: 200px;
 }
 
-.card:hover{
-    border-color:red;
-    transform:scale(1.03);
+/* CARDS */
+.cards {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
 }
 
-/* IMAGE */
-.card img{
-    width:100%;
-    height:130px;
-    object-fit:cover;
+.card {
+    flex: 1;
+    padding: 15px;
+    border-radius: 15px;
+    color: #000;
+    font-weight: bold;
 }
 
-/* CONTENT */
-.card-content{
-    padding:10px;
-    text-align:center;
+.red { background: #ff3b3b; }
+.yellow { background: #ffcc00; }
+.orange { background: #ff6b00; }
+.light { background: #ffd966; }
+
+/* CHART */
+.chart {
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+    height: 200px;
+    margin-bottom: 30px;
 }
 
-/* NAME */
-.card h3{
-    background:#ffcc00;
-    padding:5px;
-    border-radius:6px;
-    font-size:14px;
+.bar {
+    width: 30px;
+    background: #444;
+    border-radius: 5px;
 }
 
-/* PRICE */
-.price{
-    background:red;
-    color:#fff;
-    padding:5px;
-    border-radius:6px;
-    display:inline-block;
-    margin-top:5px;
+.bar.active {
+    background: #ffcc00;
 }
 
-/* UPLOAD */
-.upload{
-    display:none;
-    margin-top:5px;
+/* FOOD CARDS */
+.food-section {
+    margin-top: 20px;
 }
 
-.admin-mode .upload{
-    display:block;
+.food-container {
+    display: flex;
+    gap: 15px;
 }
 
-/* 🔥 PREVIEW BIGGER */
-.details{
-    width:320px;
-    padding:15px;
-    background:linear-gradient(#fff,#ffe5e5);
-    box-shadow:-5px 0 20px rgba(255,0,0,0.2);
+.food-card {
+    background: #1a1a1a;
+    padding: 10px;
+    border-radius: 15px;
+    width: 200px;
 }
 
-.details img{
-    width:100%;
-    height:200px;
-    object-fit:cover;
-    border-radius:10px;
+.food-card img {
+    width: 100%;
+    border-radius: 10px;
 }
 
-.details .price{
-    box-shadow:0 0 15px red;
-    font-size:20px;
+.food-title {
+    margin-top: 10px;
+    font-weight: bold;
 }
+
+.price {
+    color: #ffcc00;
+}
+
+/* GLOW EFFECT */
+.card, .food-card {
+    box-shadow: 0 0 10px rgba(255,0,0,0.3);
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="header">PAPAPRITO</div>
-<button class="admin-btn" onclick="toggleAdmin()">ADMIN</button>
-
-<div class="container">
-
 <!-- SIDEBAR -->
 <div class="sidebar">
-    <div onclick="loadMenu('beef')" class="menu-item">Beef</div>
-    <div onclick="loadMenu('pork')" class="menu-item">Pork</div>
-    <div onclick="loadMenu('chicken')" class="menu-item">Chicken</div>
-    <div onclick="loadMenu('seafood')" class="menu-item">Seafood</div>
-    <div onclick="loadMenu('veggies')" class="menu-item">Veggies</div>
-    <div onclick="loadMenu('noodles')" class="menu-item">Noodles</div>
-    <div onclick="loadMenu('sides')" class="menu-item">Sides</div>
-    <div onclick="loadMenu('drinks')" class="menu-item">Drinks</div>
-    <div onclick="loadMenu('beers')" class="menu-item">Beers</div>
+    <h2>🔥 Foodie</h2>
+    <ul>
+        <li class="active">Dashboard</li>
+        <li>Menu</li>
+        <li>Orders</li>
+        <li>Analytics</li>
+        <li>Settings</li>
+    </ul>
 </div>
 
 <!-- MAIN -->
-<div class="main" id="main">
-    <div class="cards" id="menu"></div>
-</div>
+<div class="main">
 
-<!-- PREVIEW -->
-<div class="details">
-    <img id="img">
-    <h2 id="name">Select Item</h2>
-    <p class="price" id="price">₱0</p>
-</div>
+    <!-- HEADER -->
+    <div class="header">
+        <h2>Welcome, Chef 👨‍🍳</h2>
+        <input class="search" placeholder="Search...">
+    </div>
 
-</div>
+    <!-- CARDS -->
+    <div class="cards">
+        <div class="card red">$11,256<br>Revenue</div>
+        <div class="card yellow">245<br>Orders</div>
+        <div class="card orange">$6,556<br>Expenses</div>
+        <div class="card light">$4,227<br>Profit</div>
+    </div>
 
-<script>
+    <!-- CHART -->
+    <div class="chart">
+        <div class="bar" style="height:120px;"></div>
+        <div class="bar" style="height:160px;"></div>
+        <div class="bar" style="height:140px;"></div>
+        <div class="bar active" style="height:180px;"></div>
+        <div class="bar" style="height:150px;"></div>
+        <div class="bar" style="height:130px;"></div>
+    </div>
 
-let isAdmin=false;
-let currentCategory="";
+    <!-- FOOD -->
+    <div class="food-section">
+        <h3>🔥 Trending Orders</h3>
 
-let saved = localStorage.getItem("menuData");
+        <div class="food-container">
 
-let menuData = saved ? JSON.parse(saved) : {
-
-beef:[
-{name:"Bulalo Grupo",price:710,img:""},
-{name:"Bulalo Solo",price:185,img:""},
-{name:"Bistek Tagalog",price:279,img:""}
-],
-
-pork:[
-{name:"Lechon Kawali",price:395,img:""},
-{name:"Pork Sisig",price:315,img:""}
-],
-
-chicken:[
-{name:"Chicken Meal",price:295,img:""}
-],
-
-seafood:[
-{name:"Bangus",price:315,img:""}
-],
-
-veggies:[
-{name:"Chop Suey",price:235,img:""}
-],
-
-noodles:[
-{name:"Palabok",price:195,img:""}
-],
-
-sides:[
-{name:"Garlic Rice",price:46,img:""}
-],
-
-drinks:[
-{name:"Softdrinks",price:52,img:""}
-],
-
-beers:[
-{name:"Red Horse",price:105,img:""}
-]
-
-};
-
-function saveData(){
-    localStorage.setItem("menuData",JSON.stringify(menuData));
-}
-
-function loadMenu(category){
-    currentCategory=category;
-    let container=document.getElementById("menu");
-    container.innerHTML="";
-
-    menuData[category].forEach((item,i)=>{
-
-        let image = item.img || "https://via.placeholder.com/150";
-
-        let card=document.createElement("div");
-        card.className="card";
-
-        card.innerHTML=`
-            <img src="${image}">
-            <div class="card-content">
-                <h3>${item.name}</h3>
-                <p class="price">₱${item.price}</p>
-                <input type="file" class="upload">
+            <div class="food-card">
+                <img src="https://images.unsplash.com/photo-1604908176997-431c4ed5b8c0">
+                <div class="food-title">Chicken Meal</div>
+                <div class="price">$5.99</div>
             </div>
-        `;
 
-        /* CLICK */
-        card.onclick=()=>{
-            selectItem(item.name,item.price,item.img);
-        };
+            <div class="food-card">
+                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c">
+                <div class="food-title">Healthy Bowl</div>
+                <div class="price">$6.50</div>
+            </div>
 
-        /* UPLOAD */
-        card.querySelector(".upload").onchange=(e)=>{
-            uploadImage(e,i);
-        };
+            <div class="food-card">
+                <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1">
+                <div class="food-title">Rice Combo</div>
+                <div class="price">$5.25</div>
+            </div>
 
-        container.appendChild(card);
-    });
+        </div>
+    </div>
 
-    applyAdminUI();
-}
-
-function selectItem(name,price,img){
-    document.getElementById("name").innerText=name;
-    document.getElementById("price").innerText="₱"+price;
-    document.getElementById("img").src=img || "https://via.placeholder.com/300";
-}
-
-function toggleAdmin(){
-    isAdmin=!isAdmin;
-    applyAdminUI();
-}
-
-function applyAdminUI(){
-    const main=document.getElementById("main");
-    if(isAdmin){
-        main.classList.add("admin-mode");
-    }else{
-        main.classList.remove("admin-mode");
-    }
-}
-
-function uploadImage(event,index){
-    let file = event.target.files[0];
-    if(!file) return;
-
-    let reader = new FileReader();
-
-    reader.onload = function(e){
-        menuData[currentCategory][index].img = e.target.result;
-        saveData();
-    };
-
-    reader.readAsDataURL(file);
-}
-
-</script>
+</div>
 
 </body>
 </html>
