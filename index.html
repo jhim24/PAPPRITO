@@ -258,7 +258,9 @@ setActive(el);
 
 let html=`<div class="menu-layout">
 
-<div class="category-bar">`;
+<div class="category-bar" id="catBar">`;
+
+let firstCategory = Object.keys(menu)[0];
 
 for(let cat in menu){
 html+=`<div class="category" onclick="showProducts('${cat}')">${cat}</div>`;
@@ -280,8 +282,10 @@ html+=`</div>
 </div>`;
 
 document.getElementById("main").innerHTML=html;
-}
 
+/* AUTO LOAD FIRST CATEGORY */
+showProducts(firstCategory);
+}
 /* PRODUCTS */
 function showProducts(cat){
 let box=document.getElementById("products");
