@@ -3,54 +3,77 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Restaurant Menu</title>
+<title>Restaurant System</title>
 
 <style>
 body {
+    display: flex;
+    font-family: Arial;
     background: #0f0f0f;
     color: white;
-    font-family: Arial;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 200px;
+    height: 100vh;
+    background: #111;
     padding: 20px;
 }
 
-/* CATEGORY BOX */
-.category {
-    background: #111;
-    border: 3px solid #ffcc00;
-    border-radius: 15px;
-    margin-bottom: 20px;
-    padding: 15px;
-    box-shadow: 0 0 15px red;
-}
-
-.category h2 {
+.sidebar h2 {
     color: #ff3b3b;
-    margin-bottom: 10px;
 }
 
-/* ITEM */
-.item {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px;
-    border-radius: 8px;
+.sidebar ul {
+    list-style: none;
+    margin-top: 20px;
+}
+
+.sidebar li {
+    padding: 10px;
     cursor: pointer;
+    border-radius: 8px;
 }
 
-.item:hover {
-    background: rgba(255,255,255,0.1);
+.sidebar li:hover,
+.active {
+    background: linear-gradient(45deg, red, yellow);
+    color: black;
 }
 
-.price {
-    color: #ffcc00;
+/* MAIN */
+.main {
+    flex: 1;
+    padding: 20px;
+}
+
+/* GRID */
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.box {
+    background: #111;
+    border: 2px solid #ffcc00;
+    padding: 20px;
+    border-radius: 15px;
+    cursor: pointer;
+    width: 180px;
+    text-align: center;
+    box-shadow: 0 0 10px red;
+}
+
+.box:hover {
+    transform: scale(1.05);
 }
 
 /* MODAL */
 .modal {
     display: none;
     position: fixed;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
     background: rgba(0,0,0,0.8);
@@ -61,50 +84,50 @@ body {
 .modal-box {
     background: #111;
     padding: 20px;
-    border-radius: 20px;
+    border-radius: 15px;
     text-align: center;
-    width: 300px;
     box-shadow: 0 0 20px red;
 }
 
 .close {
     color: red;
-    float: right;
     cursor: pointer;
-    font-size: 20px;
-}
-
-.modal-title {
-    font-size: 20px;
-    margin-top: 10px;
-}
-
-.modal-price {
-    color: #ffcc00;
-    font-size: 18px;
+    float: right;
 }
 </style>
 </head>
 
 <body>
 
-<h1 style="color:#ffcc00;">🔥 Restaurant Menu</h1>
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <h2>🔥 Foodie</h2>
+    <ul>
+        <li onclick="showMenu()">Menu</li>
+        <li>Orders</li>
+        <li>Analytics</li>
+    </ul>
+</div>
 
-<div id="menu"></div>
+<!-- MAIN -->
+<div class="main">
+    <h2 id="title">Select Menu</h2>
+    <div id="content" class="grid"></div>
+</div>
 
 <!-- MODAL -->
 <div class="modal" id="modal">
     <div class="modal-box">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <div class="modal-title" id="title"></div>
-        <div class="modal-price" id="price"></div>
+        <span class="close" onclick="closeModal()">×</span>
+        <h3 id="modalName"></h3>
+        <p id="modalPrice"></p>
     </div>
 </div>
 
 <script>
 
-/* MENU DATA */
-const menuData = {
+/* DATA */
+const menu = {
     "BEEF": [
         ["Bulalo Grupo", 710],
         ["Bulalo Solo", 185],
@@ -136,65 +159,52 @@ const menuData = {
     ],
     "SIDES": [
         ["PapShots", 72],
-        ["Spicy Tofu", 65],
-        ["Bola Bola Soup", 68],
-        ["Lumpiang Shanghai (3pcs)", 49],
-        ["Fried Banana (4pcs)", 35],
-        ["Garlic Rice", 46],
-        ["Plain Rice", 32]
+        ["Spicy Tofu", 65]
     ],
-    "SWEETS & DRINKS": [
-        ["Special Turon", 95],
-        ["Leche Flan", 82],
-        ["Coffee Jelly", 75],
-        ["Softdrinks", 52],
-        ["Softdrinks 1.5L", 145],
+    "DRINKS": [
         ["Iced Tea", 52],
-        ["Black Gulaman", 52],
-        ["Pineapple Juice", 62],
-        ["Calamansi Juice", 62],
-        ["Iced Coffee", 59],
-        ["Iced Mocha", 69],
-        ["Coffee", 59],
-        ["Hot Choco", 55],
-        ["Water", 35]
-    ],
-    "BEERS": [
-        ["San Mig Light", 95],
-        ["San Miguel Pale Pilsen", 95],
-        ["San Miguel Flavored", 95],
-        ["Red Horse", 105]
+        ["Coffee", 59]
     ]
 };
 
-/* RENDER MENU */
-const menuContainer = document.getElementById("menu");
+/* SHOW CATEGORIES */
+function showMenu() {
+    document.getElementById("title").innerText = "Menu Categories";
+    const content = document.getElementById("content");
+    content.innerHTML = "";
 
-for (let category in menuData) {
-    let box = document.createElement("div");
-    box.className = "category";
-
-    let title = document.createElement("h2");
-    title.innerText = category;
-    box.appendChild(title);
-
-    menuData[category].forEach(item => {
+    for (let category in menu) {
         let div = document.createElement("div");
-        div.className = "item";
-        div.innerHTML = `<span>${item[0]}</span><span class="price">₱${item[1]}</span>`;
-        
+        div.className = "box";
+        div.innerText = category;
+
+        div.onclick = () => showProducts(category);
+
+        content.appendChild(div);
+    }
+}
+
+/* SHOW PRODUCTS */
+function showProducts(category) {
+    document.getElementById("title").innerText = category;
+    const content = document.getElementById("content");
+    content.innerHTML = "";
+
+    menu[category].forEach(item => {
+        let div = document.createElement("div");
+        div.className = "box";
+        div.innerHTML = `${item[0]}<br>₱${item[1]}`;
+
         div.onclick = () => openModal(item[0], item[1]);
 
-        box.appendChild(div);
+        content.appendChild(div);
     });
-
-    menuContainer.appendChild(box);
 }
 
 /* MODAL */
 function openModal(name, price) {
-    document.getElementById("title").innerText = name;
-    document.getElementById("price").innerText = "₱" + price;
+    document.getElementById("modalName").innerText = name;
+    document.getElementById("modalPrice").innerText = "₱" + price;
     document.getElementById("modal").style.display = "flex";
 }
 
