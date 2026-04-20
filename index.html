@@ -270,24 +270,33 @@ function applyAdminUI(){
 
 /* 🔥 FIX: AUTO UPDATE PREVIEW */
 function uploadImage(event,index){
-    let file=event.target.files[0];
-    let reader=new FileReader();
+    let file = event.target.files[0];
 
-    reader.onload=function(e){
-        menuData[currentCategory][index].img=e.target.result;
+    if(!file){
+        return;
+    }
+
+    let reader = new FileReader();
+
+    reader.onload = function(e){
+
+        // SAVE IMAGE
+        menuData[currentCategory][index].img = e.target.result;
         saveData();
 
-        /* 🔥 AUTO REFRESH PREVIEW */
-        if(index===currentIndex){
-            document.getElementById("img").src=e.target.result;
-        }
+        // 🔥 AUTO SELECT ITEM
+        currentIndex = index;
+
+        let item = menuData[currentCategory][index];
+
+        // 🔥 AUTO UPDATE PREVIEW
+        document.getElementById("name").innerText = item.name;
+        document.getElementById("price").innerText = "₱" + item.price;
+        document.getElementById("img").src = e.target.result;
     };
 
-    if(file){
-        reader.readAsDataURL(file);
-    }
+    reader.readAsDataURL(file);
 }
-
 </script>
 
 </body>
