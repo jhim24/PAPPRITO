@@ -13,7 +13,7 @@ body{
     flex-direction:column;
 }
 
-/* 🔥 HEADER */
+/* HEADER */
 .header{
     background:#d62828;
     color:#fff;
@@ -21,7 +21,18 @@ body{
     font-size:32px;
     font-weight:bold;
     padding:15px;
-    letter-spacing:2px;
+}
+
+/* ADMIN BUTTON */
+.admin-btn{
+    position:absolute;
+    top:10px;
+    right:10px;
+    padding:8px;
+    background:#000;
+    color:#fff;
+    border:none;
+    border-radius:6px;
 }
 
 /* LAYOUT */
@@ -30,7 +41,7 @@ body{
     display:flex;
 }
 
-/* 🔥 SIDEBAR */
+/* SIDEBAR */
 .sidebar{
     width:150px;
     background:#111;
@@ -43,7 +54,6 @@ body{
     margin:8px 0;
     border-radius:8px;
     cursor:pointer;
-    font-size:14px;
 }
 
 .menu-item:hover{
@@ -65,15 +75,14 @@ body{
     gap:15px;
 }
 
-/* 🔥 CARD */
+/* CARD */
 .card{
     background:#fff;
-    padding:10px;
+    padding:15px;
     border-radius:12px;
     text-align:center;
     cursor:pointer;
     border:2px solid #ffcc00;
-    transition:0.3s;
 }
 
 .card:hover{
@@ -81,38 +90,28 @@ body{
     border-color:red;
 }
 
-.card img{
-    width:100%;
-    height:100px;
-    object-fit:cover;
-    border-radius:8px;
-}
-
-/* 🟡 PRODUCT NAME */
+/* NAME */
 .card h3{
     background:#ffcc00;
-    padding:5px;
+    padding:6px;
     border-radius:6px;
-    font-size:14px;
-    margin-top:8px;
 }
 
-/* 🔴 PRICE */
+/* PRICE */
 .price{
     background:red;
     color:#fff;
-    padding:4px 10px;
+    padding:5px 10px;
     border-radius:6px;
     display:inline-block;
-    margin-top:5px;
-    font-weight:bold;
+    margin-top:8px;
 }
 
-/* 🔥 RIGHT PANEL */
+/* RIGHT PANEL */
 .details{
     width:260px;
     padding:15px;
-    background:linear-gradient(180deg,#fff,#ffe5e5);
+    background:linear-gradient(#fff,#ffe5e5);
     box-shadow:-5px 0 20px rgba(255,0,0,0.2);
 }
 
@@ -121,13 +120,12 @@ body{
     border-radius:10px;
 }
 
-/* 🔥 GLOW EFFECT */
+/* GLOW */
 .details .price{
     box-shadow:0 0 15px red;
     font-size:20px;
 }
 
-/* BUTTON */
 .btn{
     width:100%;
     padding:12px;
@@ -136,47 +134,53 @@ body{
     color:#fff;
     border-radius:8px;
     margin-top:15px;
-    cursor:pointer;
+}
+
+/* UPLOAD (hidden by default) */
+#upload{
+    display:none;
+    margin-top:10px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- 🔥 HEADER -->
 <div class="header">PAPAPRITO</div>
+
+<button class="admin-btn" onclick="toggleAdmin()">ADMIN</button>
 
 <div class="container">
 
-<!-- 🔥 SIDEBAR -->
+<!-- SIDEBAR -->
 <div class="sidebar">
     <div class="menu-item" onclick="loadMenu('beef')">Beef</div>
     <div class="menu-item" onclick="loadMenu('pork')">Pork</div>
     <div class="menu-item" onclick="loadMenu('chicken')">Chicken</div>
-    <div class="menu-item" onclick="loadMenu('seafood')">Seafood</div>
-    <div class="menu-item" onclick="loadMenu('veggies')">Veggies</div>
-    <div class="menu-item" onclick="loadMenu('noodles')">Noodles</div>
-    <div class="menu-item" onclick="loadMenu('sides')">Sides</div>
-    <div class="menu-item" onclick="loadMenu('drinks')">Drinks</div>
-    <div class="menu-item" onclick="loadMenu('beers')">Beers</div>
 </div>
 
-<!-- 🔥 MAIN -->
+<!-- MAIN -->
 <div class="main">
     <div class="cards" id="menu"></div>
 </div>
 
-<!-- 🔥 RIGHT PANEL -->
+<!-- RIGHT PANEL -->
 <div class="details">
     <img id="img" src="rapsilog.jpg">
     <h2 id="name">Select Item</h2>
     <p class="price" id="price">₱0</p>
+
+    <!-- 📸 ADMIN UPLOAD -->
+    <input type="file" id="upload" onchange="uploadImage(event)">
+
     <button class="btn">Add to Cart</button>
 </div>
 
 </div>
 
 <script>
+
+let isAdmin = false;
 
 const menuData = {
 
@@ -188,54 +192,11 @@ beef:[
 
 pork:[
 {name:"Lechon Kawali",price:395,img:"rapsilog.jpg"},
-{name:"Pork Sisig",price:315,img:"rapsilog.jpg"},
-{name:"Lumpiang Shanghai",price:235,img:"rapsilog.jpg"}
+{name:"Pork Sisig",price:315,img:"rapsilog.jpg"}
 ],
 
 chicken:[
-{name:"PapsChicken Platter",price:315,img:"rapsilog.jpg"},
-{name:"Chicken Sisig",price:295,img:"rapsilog.jpg"}
-],
-
-seafood:[
-{name:"Crispy Bangusarap",price:315,img:"rapsilog.jpg"},
-{name:"Calamares",price:305,img:"rapsilog.jpg"},
-{name:"Crispy Tawilis",price:285,img:"rapsilog.jpg"}
-],
-
-veggies:[
-{name:"Chop Suey",price:235,img:"rapsilog.jpg"},
-{name:"Tortang Talong",price:192,img:"rapsilog.jpg"}
-],
-
-noodles:[
-{name:"Canton-Bihon",price:278,img:"rapsilog.jpg"},
-{name:"Palabok",price:195,img:"rapsilog.jpg"},
-{name:"Beef Mami",price:159,img:"rapsilog.jpg"},
-{name:"Chicken Mami",price:149,img:"rapsilog.jpg"}
-],
-
-sides:[
-{name:"PapShots",price:72,img:"rapsilog.jpg"},
-{name:"Spicy Tofu",price:65,img:"rapsilog.jpg"},
-{name:"Bola-Bola Soup",price:68,img:"rapsilog.jpg"},
-{name:"Lumpiang Shanghai (3pcs)",price:49,img:"rapsilog.jpg"},
-{name:"Fried Banana",price:35,img:"rapsilog.jpg"},
-{name:"Garlic Rice",price:46,img:"rapsilog.jpg"},
-{name:"Plain Rice",price:32,img:"rapsilog.jpg"}
-],
-
-drinks:[
-{name:"Special Turon",price:95,img:"rapsilog.jpg"},
-{name:"Leche Flan",price:82,img:"rapsilog.jpg"},
-{name:"Coffee Jelly",price:75,img:"rapsilog.jpg"},
-{name:"Softdrinks",price:52,img:"rapsilog.jpg"},
-{name:"Iced Tea",price:52,img:"rapsilog.jpg"}
-],
-
-beers:[
-{name:"San Mig Light",price:95,img:"rapsilog.jpg"},
-{name:"Red Horse",price:105,img:"rapsilog.jpg"}
+{name:"Chicken Meal",price:295,img:"rapsilog.jpg"}
 ]
 
 };
@@ -247,7 +208,6 @@ function loadMenu(category){
     menuData[category].forEach(item=>{
         container.innerHTML += `
         <div class="card" onclick="selectItem('${item.name}',${item.price},'${item.img}')">
-            <img src="${item.img}">
             <h3>${item.name}</h3>
             <p class="price">₱${item.price}</p>
         </div>
@@ -259,6 +219,32 @@ function selectItem(name,price,img){
     document.getElementById("name").innerText = name;
     document.getElementById("price").innerText = "₱"+price;
     document.getElementById("img").src = img;
+}
+
+function toggleAdmin(){
+    isAdmin = !isAdmin;
+    const upload = document.getElementById("upload");
+
+    if(isAdmin){
+        upload.style.display = "block";
+        alert("ADMIN MODE ON");
+    }else{
+        upload.style.display = "none";
+        alert("CUSTOMER MODE");
+    }
+}
+
+function uploadImage(event){
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = function(e){
+        document.getElementById("img").src = e.target.result;
+    }
+
+    if(file){
+        reader.readAsDataURL(file);
+    }
 }
 
 </script>
