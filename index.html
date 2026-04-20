@@ -7,7 +7,11 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial;}
-body{display:flex;background:#0d0d0d;color:white;}
+body{
+    display:flex;
+    background: linear-gradient(135deg,#1a1a1a,#2b0f0f,#1a1a1a);
+    color:white;
+}
 
 /* SIDEBAR */
 .sidebar{
@@ -16,7 +20,6 @@ body{display:flex;background:#0d0d0d;color:white;}
     height:100vh;
     padding:20px;
 }
-.sidebar h2{color:white;}
 .sidebar ul{list-style:none;margin-top:20px;}
 .sidebar li{
     padding:12px;
@@ -52,7 +55,7 @@ body{display:flex;background:#0d0d0d;color:white;}
 .blue{background:#448aff;}
 .red{background:#ff5252;}
 
-/* PANEL BOX */
+/* PANEL */
 .panel{
     background:#1a1a1a;
     padding:15px;
@@ -61,10 +64,7 @@ body{display:flex;background:#0d0d0d;color:white;}
 }
 
 /* TRENDING */
-.trending{
-    display:flex;
-    gap:15px;
-}
+.trending{display:flex;gap:15px;}
 .trend-card{
     background:#111;
     padding:10px;
@@ -76,10 +76,10 @@ body{display:flex;background:#0d0d0d;color:white;}
     border-radius:10px;
 }
 
-/* MENU LAYOUT */
+/* MENU */
 .menu-layout{display:flex;height:100%;}
 
-/* CATEGORY SIDEBAR */
+/* CATEGORY */
 .category-bar{
     width:180px;
     background:#1a1a1a;
@@ -97,70 +97,17 @@ body{display:flex;background:#0d0d0d;color:white;}
     color:black;
 }
 
-/* PRODUCTS */
+/* PRODUCTS GRID */
 .products{
     flex:1;
-    display:flex;
-    flex-wrap:wrap;
-    gap:15px;
-    padding:10px;
-}
-.product{
-    width:160px;
-    background:#111;
-    border-radius:15px;
-    overflow:hidden;
-    cursor:pointer;
-}
-.product img{
-    width:100%;
-    height:120px;
-    object-fit:cover;
-}
-.name{
-    background:#ffcc00;
-    color:black;
-    text-align:center;
-    padding:5px;
-    font-weight:bold;
-}
-.price{
-    background:#ff3b3b;
-    text-align:center;
-    padding:5px;
-}
-
-/* PREVIEW */
-.preview{
-    width:250px;
-    background:#111;
-    padding:15px;
-}
-.preview img{
-    width:100%;
-    border-radius:10px;
-}
-.preview h3{color:#ffcc00;margin-top:10px;}
-.preview p{color:#ff3b3b;font-size:18px;}
-    /* BACKGROUND */
-body {
-    display:flex;
-    background: linear-gradient(135deg, #1a1a1a, #2b0f0f, #1a1a1a);
-    color:white;
-}
-
-/* PRODUCTS GRID FIX */
-.products {
-    flex:1;
     display:grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
     gap:15px;
     padding:10px;
 }
 
-/* PRODUCT CARD FIX */
-.product {
-    width:100%;
+/* PRODUCT CARD */
+.product{
     height:220px;
     background:#111;
     border-radius:15px;
@@ -169,52 +116,75 @@ body {
     display:flex;
     flex-direction:column;
     justify-content:space-between;
+    transition:.3s;
 }
+.product:hover{transform:scale(1.05);}
 
-.product img {
+.product img{
     width:100%;
     height:130px;
     object-fit:cover;
 }
 
+.name{
+    background:#ffcc00;
+    color:black;
+    text-align:center;
+    padding:6px;
+    font-weight:bold;
+    font-size:13px;
+}
+.price{
+    background:#ff3b3b;
+    text-align:center;
+    padding:6px;
+    font-size:13px;
+}
+
 /* PREVIEW */
-.preview {
-    width:280px;
+.preview{
+    width:260px;
+    padding:15px;
+    background:#111;
     position:relative;
     overflow:hidden;
 }
 
-/* BACKGROUND IMAGE */
-.preview::before {
+.preview::before{
     content:"";
     position:absolute;
     inset:0;
     background-size:cover;
     background-position:center;
-    filter:blur(10px) brightness(0.4);
+    filter:blur(10px) brightness(.4);
     z-index:0;
 }
 
-/* CONTENT */
-.preview-content {
+.preview-content{
     position:relative;
     z-index:1;
     text-align:center;
 }
+
+.preview img{
+    width:100%;
+    border-radius:10px;
+    margin-top:10px;
+}
+.preview h3{color:#ffcc00;margin-top:10px;}
+.preview p{color:#ff3b3b;font-size:18px;}
 </style>
 </head>
 
 <body>
 
 <!-- SIDEBAR -->
-<div class="preview" id="previewBox">
-    <div class="preview-content">
-        <h3>Preview</h3>
-        <img id="pimg">
-        <h3 id="pname">Select product</h3>
-        <p id="pprice"></p>
-    </div>
-</div>
+<div class="sidebar">
+    <h2>🍴 Foodie Kitchen</h2>
+    <ul>
+        <li class="active" onclick="showDashboard(this)">Dashboard</li>
+        <li onclick="showMenu(this)">Menu</li>
+    </ul>
 </div>
 
 <!-- MAIN -->
@@ -224,74 +194,15 @@ body {
 
 /* MENU DATA */
 const menu = {
-"BEEF":[
-["Bulalo Grupo",710,"https://images.unsplash.com/photo-1604908176997-431c4ed5b8c0"],
-["Bulalo Solo",185,"https://images.unsplash.com/photo-1604908176997-431c4ed5b8c0"],
-["Bistek Tagalog",279,"https://images.unsplash.com/photo-1555939594-58d7cb561ad1"]
-],
-
-"PORK":[
-["Lechon Kawali",395,"https://images.unsplash.com/photo-1555939594-58d7cb561ad1"],
-["Pork Sisig",315,"https://images.unsplash.com/photo-1546069901-ba9599a7e63c"],
-["Lumpiang Shanghai",235,"https://images.unsplash.com/photo-1555939594-58d7cb561ad1"]
-],
-
-"CHICKEN":[
-["PapsChicken Platter",315,"https://images.unsplash.com/photo-1604908176997-431c4ed5b8c0"],
-["Chicken Sisig",295,"https://images.unsplash.com/photo-1546069901-ba9599a7e63c"]
-],
-
-"SEAFOOD":[
-["Crispy Bangusarap",315,"https://images.unsplash.com/photo-1555939594-58d7cb561ad1"],
-["Calamares",305,"https://images.unsplash.com/photo-1555939594-58d7cb561ad1"],
-["Crispy Tawilis",285,"https://images.unsplash.com/photo-1555939594-58d7cb561ad1"]
-],
-
-"VEGGIES":[
-["Chop Suey",235,"https://images.unsplash.com/photo-1546069901-ba9599a7e63c"],
-["Tortang Talong",192,"https://images.unsplash.com/photo-1546069901-ba9599a7e63c"]
-],
-
-"NOODLES":[
-["Canton-Bihon (Regular)",278,"https://images.unsplash.com/photo-1555939594-58d7cb561ad1"],
-["Palabok (Regular)",195,"https://images.unsplash.com/photo-1555939594-58d7cb561ad1"],
-["Beef Mami",159,"https://images.unsplash.com/photo-1555939594-58d7cb561ad1"],
-["Chicken Mami",149,"https://images.unsplash.com/photo-1555939594-58d7cb561ad1"]
-],
-
-"SIDES":[
-["PapShots",72,"https://images.unsplash.com/photo-1546069901-ba9599a7e63c"],
-["Spicy Tofu",65,"https://images.unsplash.com/photo-1546069901-ba9599a7e63c"],
-["Bola Bola Soup",68,"https://images.unsplash.com/photo-1546069901-ba9599a7e63c"],
-["3pc Lumpiang Shanghai",49,"https://images.unsplash.com/photo-1555939594-58d7cb561ad1"],
-["4pc Fried Banana",35,"https://images.unsplash.com/photo-1546069901-ba9599a7e63c"],
-["Garlic Rice",46,"https://images.unsplash.com/photo-1546069901-ba9599a7e63c"],
-["Plain Rice",32,"https://images.unsplash.com/photo-1546069901-ba9599a7e63c"]
-],
-
-"SWEETS & DRINKS":[
-["Special Turon",95,"https://images.unsplash.com/photo-1546069901-ba9599a7e63c"],
-["Leche Flan",82,"https://images.unsplash.com/photo-1546069901-ba9599a7e63c"],
-["Coffee Jelly",75,"https://images.unsplash.com/photo-1546069901-ba9599a7e63c"],
-["Coke/Sprite/Royal",52,"https://images.unsplash.com/photo-1546069901-ba9599a7e63c"],
-["Coke 1.5L",145,"https://images.unsplash.com/photo-1546069901-ba9599a7e63c"],
-["Iced Tea",52,"https://images.unsplash.com/photo-1546069901-ba9599a7e63c"],
-["Black Gulaman",52,"https://images.unsplash.com/photo-1546069901-ba9599a7e63c"],
-["Pineapple Juice",62,"https://images.unsplash.com/photo-1546069901-ba9599a7e63c"],
-["Calamansi Juice",62,"https://images.unsplash.com/photo-1546069901-ba9599a7e63c"],
-["Iced Coffee",59,"https://images.unsplash.com/photo-1546069901-ba9599a7e63c"],
-["Iced Mocha",69,"https://images.unsplash.com/photo-1546069901-ba9599a7e63c"],
-["Coffee",59,"https://images.unsplash.com/photo-1546069901-ba9599a7e63c"],
-["Hot Choco",55,"https://images.unsplash.com/photo-1546069901-ba9599a7e63c"],
-["Bottled Water",35,"https://images.unsplash.com/photo-1546069901-ba9599a7e63c"]
-],
-
-"BEERS":[
-["San Mig Light",95,"https://images.unsplash.com/photo-1546069901-ba9599a7e63c"],
-["San Miguel Pale Pilsen",95,"https://images.unsplash.com/photo-1546069901-ba9599a7e63c"],
-["San Miguel Flavored",95,"https://images.unsplash.com/photo-1546069901-ba9599a7e63c"],
-["Red Horse",105,"https://images.unsplash.com/photo-1546069901-ba9599a7e63c"]
-]
+"BEEF":[["Bulalo Grupo",710,"https://images.unsplash.com/photo-1604908176997-431c4ed5b8c0"]],
+"PORK":[["Lechon Kawali",395,"https://images.unsplash.com/photo-1555939594-58d7cb561ad1"]],
+"CHICKEN":[["Chicken Platter",315,"https://images.unsplash.com/photo-1604908176997-431c4ed5b8c0"]],
+"SEAFOOD":[["Calamares",305,"https://images.unsplash.com/photo-1555939594-58d7cb561ad1"]],
+"VEGGIES":[["Chop Suey",235,"https://images.unsplash.com/photo-1546069901-ba9599a7e63c"]],
+"NOODLES":[["Beef Mami",159,"https://images.unsplash.com/photo-1555939594-58d7cb561ad1"]],
+"SIDES":[["PapShots",72,"https://images.unsplash.com/photo-1546069901-ba9599a7e63c"]],
+"SWEETS & DRINKS":[["Iced Tea",52,"https://images.unsplash.com/photo-1546069901-ba9599a7e63c"]],
+"BEERS":[["Red Horse",105,"https://images.unsplash.com/photo-1546069901-ba9599a7e63c"]]
 };
 
 /* DASHBOARD */
@@ -346,11 +257,13 @@ html+=`</div>
 
 <div class="products" id="products"></div>
 
-<div class="preview">
+<div class="preview" id="previewBox">
+<div class="preview-content">
 <h3>Preview</h3>
 <img id="pimg">
 <h3 id="pname">Select product</h3>
 <p id="pprice"></p>
+</div>
 </div>
 
 </div>`;
@@ -378,9 +291,13 @@ function preview(name,price,img){
 document.getElementById("pimg").src=img;
 document.getElementById("pname").innerText=name;
 document.getElementById("pprice").innerText="₱"+price;
+
+let previewBox=document.getElementById("previewBox");
+previewBox.style.setProperty("--bg",`url(${img})`);
+previewBox.style.backgroundImage=`url(${img})`;
 }
 
-/* ACTIVE MENU */
+/* ACTIVE */
 function setActive(el){
 document.querySelectorAll(".sidebar li").forEach(li=>li.classList.remove("active"));
 el.classList.add("active");
