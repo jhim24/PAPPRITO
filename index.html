@@ -929,6 +929,8 @@ body{
     </div>
 
 </div>
+    <!-- PROMO SLIDER -->
+<!-- EVENTS -->
 <script>
 function openModal(type){
     const modal = document.getElementById("modal");
@@ -1098,7 +1100,62 @@ function preview(name,price,img){
 function closeImageModal(){
     document.getElementById("imageModal").style.display="none";
 }
-  
+  // ✅ SAFE LOAD ALL
+window.addEventListener("load", function(){
+
+    // IMAGE MODAL CLICK OUTSIDE
+    const imgModal = document.getElementById("imageModal");
+    if(imgModal){
+        imgModal.addEventListener("click", function(e){
+            if(e.target === this){
+                closeImageModal();
+            }
+        });
+    }
+
+    // SLIDER AUTO
+    let slides = document.querySelectorAll(".slide");
+    let index = 0;
+
+    if(slides.length > 0){
+        setInterval(()=>{
+            slides[index].classList.remove("active");
+            index = (index + 1) % slides.length;
+            slides[index].classList.add("active");
+        },3000);
+    }
+
+    // POPUP AUTO OPEN
+    setTimeout(()=>{
+        const popup = document.getElementById("promoPopup");
+        if(popup){
+            popup.style.display="flex";
+        }
+    },1000);
+
+    // COUNTDOWN
+    let endTime = new Date().getTime() + (2 * 60 * 60 * 1000);
+
+    setInterval(()=>{
+        let now = new Date().getTime();
+        let distance = endTime - now;
+
+        let h = Math.floor(distance / (1000*60*60));
+        let m = Math.floor((distance % (1000*60*60))/(1000*60));
+        let s = Math.floor((distance % (1000*60))/1000);
+
+        const cd = document.getElementById("countdown");
+        if(cd){
+            cd.innerHTML = `⏳ Ends in ${h}h ${m}m ${s}s`;
+        }
+    },1000);
+
+});
+
+// CLOSE POPUP
+function closePromo(){
+    document.getElementById("promoPopup").style.display="none";
+}
 </script>
 <!-- MENU POPUP -->
 <div id="menuModal" class="menu-modal">
