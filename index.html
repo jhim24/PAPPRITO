@@ -745,6 +745,56 @@ body{
     cursor:pointer;
     color:red;
 }
+    /* FOOTER PAYMENT BAR */
+.footer-payment{
+    margin-top:15px;
+    overflow:hidden;
+    background:#111;
+    padding:10px 0;
+}
+
+/* TRACK */
+.footer-track{
+    display:flex;
+    gap:30px;
+    width:max-content;
+    animation:scrollFooter 20s linear infinite;
+    align-items:center;
+}
+
+/* ICON */
+.footer-track img{
+    height:30px;
+    transition:0.3s;
+}
+
+/* GLOW */
+.footer-track img:hover{
+    transform:scale(1.2);
+    filter:drop-shadow(0 0 8px #ffcc00)
+           drop-shadow(0 0 15px #ff0000);
+}
+
+/* PAUSE */
+.footer-payment:hover .footer-track{
+    animation-play-state:paused;
+}
+
+/* ANIMATION */
+@keyframes scrollFooter{
+    0%{ transform:translateX(0); }
+    100%{ transform:translateX(-50%); }
+}
+
+/* MOBILE */
+@media(max-width:768px){
+    .footer-track img{
+        height:20px;
+    }
+    .footer-track{
+        gap:15px;
+    }
+}
 </style>
 </head>
 
@@ -808,41 +858,31 @@ body{
 
 <div class="footer">
     <p>© 2026 PAPPRITO RESTAURANT AllRightsReserved</p>
-</div>
 
-<!-- MODAL -->
-<div id="modal" class="modal">
-    <div class="modal-content">
-        <button class="close-btn" onclick="closeModal()">X</button>
-        <h2 id="modalTitle"></h2>
-        <p id="modalContent"></p>
+    <!-- 🔥 PAYMENT BAR (DITO TALAGA) -->
+    <div class="footer-payment">
+        <div class="footer-track">
+
+            <img src="gcash.png">
+            <img src="maya.png">
+            <img src="visa.png">
+            <img src="mastercard.png">
+            <img src="grabpay.png">
+            <img src="qrph.png">
+            <img src="bancnet.png">
+
+            <!-- duplicate para smooth -->
+            <img src="gcash.png">
+            <img src="maya.png">
+            <img src="visa.png">
+            <img src="mastercard.png">
+            <img src="grabpay.png">
+            <img src="qrph.png">
+            <img src="bancnet.png">
+
+        </div>
     </div>
-</div>
-    <div class="payment-bar">
-    <div class="payment-track">
 
-        <img src="gcash.png">
-        <img src="maya.png">
-        <img src="visa.png">
-        <img src="mastercard.png">
-        <img src="grabpay.png">
-        <img src="qrph.png">
-        <img src="bancnet.png">
-        <img src="amex.png">
-        <img src="jcb.png">
-
-        <!-- duplicate for smooth loop -->
-        <img src="gcash.png">
-        <img src="maya.png">
-        <img src="visa.png">
-        <img src="mastercard.png">
-        <img src="grabpay.png">
-        <img src="qrph.png">
-        <img src="bancnet.png">
-        <img src="amex.png">
-        <img src="jcb.png">
-
-    </div>
 </div>
     <!-- EVENTS & ANNOUNCEMENTS -->
 <div class="section" id="events">
