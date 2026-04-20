@@ -22,7 +22,7 @@ body{
     padding:15px;
 }
 
-/* ADMIN BUTTON */
+/* ADMIN */
 .admin-btn{
     position:absolute;
     top:10px;
@@ -97,13 +97,12 @@ body{
     margin-top:5px;
 }
 
-/* UPLOAD (CONTROLLED BY CLASS) */
+/* UPLOAD */
 .upload{
     display:none;
     margin-top:5px;
 }
 
-/* ADMIN MODE SHOW */
 .admin-mode .upload{
     display:block;
 }
@@ -134,11 +133,17 @@ body{
 
 <div class="container">
 
-<!-- SIDEBAR -->
+<!-- 🔥 FULL SIDEBAR -->
 <div class="sidebar">
     <div onclick="loadMenu('beef')" class="menu-item">Beef</div>
     <div onclick="loadMenu('pork')" class="menu-item">Pork</div>
     <div onclick="loadMenu('chicken')" class="menu-item">Chicken</div>
+    <div onclick="loadMenu('seafood')" class="menu-item">Seafood</div>
+    <div onclick="loadMenu('veggies')" class="menu-item">Veggies</div>
+    <div onclick="loadMenu('noodles')" class="menu-item">Noodles</div>
+    <div onclick="loadMenu('sides')" class="menu-item">Sides</div>
+    <div onclick="loadMenu('drinks')" class="menu-item">Drinks</div>
+    <div onclick="loadMenu('beers')" class="menu-item">Beers</div>
 </div>
 
 <!-- MAIN -->
@@ -159,8 +164,9 @@ body{
 
 let isAdmin=false;
 let currentCategory="";
+let currentIndex=null;
 
-/* LOAD SAVE */
+/* LOAD SAVED */
 let saved = localStorage.getItem("menuData");
 
 let menuData = saved ? JSON.parse(saved) : {
@@ -178,6 +184,30 @@ pork:[
 
 chicken:[
 {name:"Chicken Meal",price:295,img:""}
+],
+
+seafood:[
+{name:"Bangus",price:315,img:""}
+],
+
+veggies:[
+{name:"Chop Suey",price:235,img:""}
+],
+
+noodles:[
+{name:"Palabok",price:195,img:""}
+],
+
+sides:[
+{name:"Garlic Rice",price:46,img:""}
+],
+
+drinks:[
+{name:"Softdrinks",price:52,img:""}
+],
+
+beers:[
+{name:"Red Horse",price:105,img:""}
 ]
 
 };
@@ -201,8 +231,9 @@ function loadMenu(category){
             <input type="file" class="upload">
         `;
 
-        /* CLICK SELECT */
+        /* CLICK ITEM */
         card.querySelector("h3").onclick=()=>{
+            currentIndex=i;
             selectItem(item.name,item.price,item.img);
         };
 
@@ -237,6 +268,7 @@ function applyAdminUI(){
     }
 }
 
+/* 🔥 FIX: AUTO UPDATE PREVIEW */
 function uploadImage(event,index){
     let file=event.target.files[0];
     let reader=new FileReader();
@@ -244,6 +276,11 @@ function uploadImage(event,index){
     reader.onload=function(e){
         menuData[currentCategory][index].img=e.target.result;
         saveData();
+
+        /* 🔥 AUTO REFRESH PREVIEW */
+        if(index===currentIndex){
+            document.getElementById("img").src=e.target.result;
+        }
     };
 
     if(file){
