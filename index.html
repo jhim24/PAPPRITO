@@ -3,19 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Restaurant System</title>
+<title>Foodie Dashboard</title>
 
 <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial;
+}
+
 body {
     display: flex;
-    font-family: Arial;
-    background: #0f0f0f;
+    background: #0d0d0d;
     color: white;
 }
 
 /* SIDEBAR */
 .sidebar {
-    width: 200px;
+    width: 230px;
     height: 100vh;
     background: #111;
     padding: 20px;
@@ -27,13 +33,14 @@ body {
 
 .sidebar ul {
     list-style: none;
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 .sidebar li {
-    padding: 10px;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 10px;
     cursor: pointer;
-    border-radius: 8px;
 }
 
 .sidebar li:hover,
@@ -48,6 +55,33 @@ body {
     padding: 20px;
 }
 
+/* HEADER */
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+/* CARDS */
+.cards {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.card {
+    flex: 1;
+    padding: 15px;
+    border-radius: 15px;
+    color: black;
+    font-weight: bold;
+}
+
+.red { background: #ff3b3b; }
+.yellow { background: #ffcc00; }
+.orange { background: #ff6b00; }
+.light { background: #ffd966; }
+
 /* GRID */
 .grid {
     display: flex;
@@ -56,14 +90,13 @@ body {
 }
 
 .box {
-    background: #111;
-    border: 2px solid #ffcc00;
-    padding: 20px;
+    width: 200px;
+    background: #1a1a1a;
+    padding: 15px;
     border-radius: 15px;
     cursor: pointer;
-    width: 180px;
     text-align: center;
-    box-shadow: 0 0 10px red;
+    box-shadow: 0 0 10px rgba(255,0,0,0.3);
 }
 
 .box:hover {
@@ -90,9 +123,9 @@ body {
 }
 
 .close {
-    color: red;
-    cursor: pointer;
     float: right;
+    cursor: pointer;
+    color: red;
 }
 </style>
 </head>
@@ -103,6 +136,7 @@ body {
 <div class="sidebar">
     <h2>🔥 Foodie</h2>
     <ul>
+        <li class="active" onclick="showDashboard()">Dashboard</li>
         <li onclick="showMenu()">Menu</li>
         <li>Orders</li>
         <li>Analytics</li>
@@ -111,8 +145,9 @@ body {
 
 <!-- MAIN -->
 <div class="main">
-    <h2 id="title">Select Menu</h2>
-    <div id="content" class="grid"></div>
+
+    <div id="content"></div>
+
 </div>
 
 <!-- MODAL -->
@@ -126,79 +161,67 @@ body {
 
 <script>
 
-/* DATA */
+/* MENU DATA */
 const menu = {
-    "BEEF": [
-        ["Bulalo Grupo", 710],
-        ["Bulalo Solo", 185],
-        ["Bistek Tagalog", 279]
-    ],
-    "PORK": [
-        ["Lechon Kawali", 395],
-        ["Pork Sisig", 315],
-        ["Lumpiang Shanghai", 235]
-    ],
-    "CHICKEN": [
-        ["PapsChicken Platter", 315],
-        ["Chicken Sisig", 295]
-    ],
-    "SEAFOOD": [
-        ["Crispy Bangusarap", 315],
-        ["Calamares", 305],
-        ["Crispy Tawilis", 285]
-    ],
-    "VEGGIES": [
-        ["Chop Suey", 235],
-        ["Tortang Talong", 192]
-    ],
-    "NOODLES": [
-        ["Canton-Bihon", 278],
-        ["Palabok", 195],
-        ["Beef Mami", 159],
-        ["Chicken Mami", 149]
-    ],
-    "SIDES": [
-        ["PapShots", 72],
-        ["Spicy Tofu", 65]
-    ],
-    "DRINKS": [
-        ["Iced Tea", 52],
-        ["Coffee", 59]
-    ]
+    "BEEF": [["Bulalo Grupo",710],["Bulalo Solo",185],["Bistek Tagalog",279]],
+    "PORK": [["Lechon Kawali",395],["Pork Sisig",315],["Lumpiang Shanghai",235]],
+    "CHICKEN": [["PapsChicken Platter",315],["Chicken Sisig",295]],
+    "SEAFOOD": [["Crispy Bangusarap",315],["Calamares",305],["Crispy Tawilis",285]],
+    "VEGGIES": [["Chop Suey",235],["Tortang Talong",192]],
+    "NOODLES": [["Canton-Bihon",278],["Palabok",195],["Beef Mami",159],["Chicken Mami",149]],
+    "SIDES": [["PapShots",72],["Spicy Tofu",65]],
+    "DRINKS": [["Iced Tea",52],["Coffee",59]]
 };
 
-/* SHOW CATEGORIES */
-function showMenu() {
-    document.getElementById("title").innerText = "Menu Categories";
-    const content = document.getElementById("content");
-    content.innerHTML = "";
+/* DASHBOARD VIEW */
+function showDashboard() {
+    document.getElementById("content").innerHTML = `
+        <div class="header">
+            <h2>Welcome, Chef 👨‍🍳</h2>
+        </div>
 
-    for (let category in menu) {
-        let div = document.createElement("div");
-        div.className = "box";
-        div.innerText = category;
+        <div class="cards">
+            <div class="card red">$11,256<br>Revenue</div>
+            <div class="card yellow">245<br>Orders</div>
+            <div class="card orange">$6,556<br>Expenses</div>
+            <div class="card light">$4,227<br>Profit</div>
+        </div>
 
-        div.onclick = () => showProducts(category);
-
-        content.appendChild(div);
-    }
+        <h3>🔥 Trending</h3>
+        <div class="grid">
+            <div class="box">Chicken Meal</div>
+            <div class="box">Healthy Bowl</div>
+            <div class="box">Rice Combo</div>
+        </div>
+    `;
 }
 
-/* SHOW PRODUCTS */
-function showProducts(category) {
-    document.getElementById("title").innerText = category;
-    const content = document.getElementById("content");
-    content.innerHTML = "";
+/* MENU (CATEGORY VIEW) */
+function showMenu() {
+    let html = `<h2>Menu Categories</h2><div class="grid">`;
 
-    menu[category].forEach(item => {
-        let div = document.createElement("div");
-        div.className = "box";
-        div.innerHTML = `${item[0]}<br>₱${item[1]}`;
+    for (let cat in menu) {
+        html += `<div class="box" onclick="showProducts('${cat}')">${cat}</div>`;
+    }
 
-        div.onclick = () => openModal(item[0], item[1]);
+    html += `</div>`;
+    document.getElementById("content").innerHTML = html;
+}
 
-        content.appendChild(div);
+/* PRODUCTS VIEW */
+function showProducts(cat) {
+    let html = `<h2>${cat}</h2><div class="grid">`;
+
+    menu[cat].forEach(item => {
+        html += `
+            <div class="box" onclick="openModal('${item[0]}', ${item[1]})">
+                ${item[0]}<br>₱${item[1]}
+            </div>
+        `;
     });
+
+    html += `</div>`;
+    document.getElementById("content").innerHTML = html;
 }
 
 /* MODAL */
@@ -211,6 +234,9 @@ function openModal(name, price) {
 function closeModal() {
     document.getElementById("modal").style.display = "none";
 }
+
+/* LOAD DEFAULT */
+showDashboard();
 
 </script>
 
