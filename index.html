@@ -63,21 +63,35 @@ body{
 
 .cards{
     display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+    grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
     gap:15px;
 }
 
-/* CARD */
+/* 🔥 CARD FULL IMAGE STYLE */
 .card{
     background:#fff;
-    padding:15px;
-    border-radius:10px;
+    border-radius:12px;
+    overflow:hidden;
     border:2px solid #ffcc00;
-    text-align:center;
+    cursor:pointer;
 }
 
 .card:hover{
     border-color:red;
+    transform:scale(1.03);
+}
+
+/* IMAGE */
+.card img{
+    width:100%;
+    height:130px;
+    object-fit:cover;
+}
+
+/* CONTENT */
+.card-content{
+    padding:10px;
+    text-align:center;
 }
 
 /* NAME */
@@ -85,6 +99,7 @@ body{
     background:#ffcc00;
     padding:5px;
     border-radius:6px;
+    font-size:14px;
 }
 
 /* PRICE */
@@ -107,9 +122,9 @@ body{
     display:block;
 }
 
-/* PREVIEW */
+/* 🔥 PREVIEW BIGGER */
 .details{
-    width:260px;
+    width:320px;
     padding:15px;
     background:linear-gradient(#fff,#ffe5e5);
     box-shadow:-5px 0 20px rgba(255,0,0,0.2);
@@ -117,11 +132,14 @@ body{
 
 .details img{
     width:100%;
+    height:200px;
+    object-fit:cover;
     border-radius:10px;
 }
 
 .details .price{
     box-shadow:0 0 15px red;
+    font-size:20px;
 }
 </style>
 </head>
@@ -164,6 +182,7 @@ body{
 
 let isAdmin=false;
 let currentCategory="";
+
 let saved = localStorage.getItem("menuData");
 
 let menuData = saved ? JSON.parse(saved) : {
@@ -219,22 +238,23 @@ function loadMenu(category){
     container.innerHTML="";
 
     menuData[category].forEach((item,i)=>{
+
+        let image = item.img || "https://via.placeholder.com/150";
+
         let card=document.createElement("div");
         card.className="card";
 
-        let hasImage = item.img 
-        ? `<img src="${item.img}" style="width:40px;height:40px;border-radius:5px;margin-top:5px;">`
-        : "";
-
         card.innerHTML=`
-            <h3>${item.name}</h3>
-            <p class="price">₱${item.price}</p>
-            ${hasImage}
-            <input type="file" class="upload">
+            <img src="${image}">
+            <div class="card-content">
+                <h3>${item.name}</h3>
+                <p class="price">₱${item.price}</p>
+                <input type="file" class="upload">
+            </div>
         `;
 
         /* CLICK */
-        card.querySelector("h3").onclick=()=>{
+        card.onclick=()=>{
             selectItem(item.name,item.price,item.img);
         };
 
@@ -252,7 +272,7 @@ function loadMenu(category){
 function selectItem(name,price,img){
     document.getElementById("name").innerText=name;
     document.getElementById("price").innerText="₱"+price;
-    document.getElementById("img").src=img || "";
+    document.getElementById("img").src=img || "https://via.placeholder.com/300";
 }
 
 function toggleAdmin(){
@@ -269,7 +289,6 @@ function applyAdminUI(){
     }
 }
 
-/* SAVE ONLY */
 function uploadImage(event,index){
     let file = event.target.files[0];
     if(!file) return;
