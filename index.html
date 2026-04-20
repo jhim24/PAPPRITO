@@ -272,27 +272,19 @@ function applyAdminUI(){
 function uploadImage(event,index){
     let file = event.target.files[0];
 
-    if(!file){
-        return;
-    }
+    if(!file) return;
 
     let reader = new FileReader();
 
     reader.onload = function(e){
 
-        // SAVE IMAGE
+        // SAVE IMAGE ONLY
         menuData[currentCategory][index].img = e.target.result;
+
+        // SAVE SA STORAGE
         saveData();
 
-        // 🔥 AUTO SELECT ITEM
-        currentIndex = index;
-
-        let item = menuData[currentCategory][index];
-
-        // 🔥 AUTO UPDATE PREVIEW
-        document.getElementById("name").innerText = item.name;
-        document.getElementById("price").innerText = "₱" + item.price;
-        document.getElementById("img").src = e.target.result;
+        // ❌ NO PREVIEW UPDATE HERE
     };
 
     reader.readAsDataURL(file);
