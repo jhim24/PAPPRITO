@@ -177,7 +177,7 @@ body{
     color:#aaa;
 }
 
-/* 🔥 GLASS POPUP (UPGRADE ONLY) */
+/* 🔥 MODAL */
 .modal{
     display:none;
     position:fixed;
@@ -189,16 +189,28 @@ body{
     z-index:999;
 }
 
+/* GLOW */
 .modal-content{
-    background:rgba(255,255,255,0.1);
+    background:rgba(255,255,255,0.08);
     backdrop-filter:blur(15px);
-    border:1px solid rgba(255,255,255,0.2);
-    color:white;
-    padding:30px;
     border-radius:15px;
+    padding:30px;
     max-width:600px;
     width:90%;
     position:relative;
+
+    box-shadow:
+    0 0 10px rgba(255,0,0,0.4),
+    0 0 20px rgba(255,0,0,0.3),
+    0 0 30px rgba(255,0,0,0.2);
+}
+
+.modal-content::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:15px;
+    box-shadow: inset 0 0 20px rgba(255,0,0,0.2);
 }
 
 .close-btn{
@@ -212,38 +224,9 @@ body{
     cursor:pointer;
 }
 
-/* TEXT FIX */
 #modalContent{
     white-space:pre-line;
     line-height:1.7;
-}
-    .modal-content{
-    position:relative;
-    overflow:hidden;
-}
-
-/* 🔥 SOFT GLOW EFFECT (ELEGANT) */
-.modal-content{
-    position:relative;
-    overflow:hidden;
-
-    background:rgba(255,255,255,0.08);
-    backdrop-filter:blur(15px);
-    border-radius:15px;
-
-    box-shadow:
-    0 0 10px rgba(255, 0, 0, 0.4),
-    0 0 20px rgba(255, 0, 0, 0.3),
-    0 0 30px rgba(255, 0, 0, 0.2);
-}
-
-/* subtle inner glow */
-.modal-content::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    border-radius:15px;
-    box-shadow: inset 0 0 20px rgba(255,0,0,0.2);
 }
 </style>
 </head>
@@ -393,6 +376,20 @@ Slogan:
 function closeModal(){
     document.getElementById("modal").style.display="none";
 }
+
+/* ✅ CLICK OUTSIDE */
+document.getElementById("modal").addEventListener("click", function(e){
+    if(e.target === this){
+        this.style.display = "none";
+    }
+});
+
+/* ✅ ESC KEY */
+document.addEventListener("keydown", function(e){
+    if(e.key === "Escape"){
+        document.getElementById("modal").style.display="none";
+    }
+});
 </script>
 
 </body>
