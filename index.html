@@ -373,31 +373,6 @@ body{
     gap:20px;
 }
 
-/* CARD */
-.menu-card{
-    background:#fff;
-    border-radius:10px;
-    padding:10px;
-    text-align:center;
-    cursor:pointer;
-}
-
-.menu-card img{
-    width:100%;
-    height:120px;
-    object-fit:cover;
-}
-
-/* RIGHT */
-.menu-right{
-    width:250px;
-    padding:20px;
-}
-
-.menu-right img{
-    width:100%;
-}
-
 /* CLOSE */
 .close-menu{
     position:absolute;
@@ -431,23 +406,49 @@ body{
 }
 
 /* 🔥 PRODUCT NAME (YELLOW) */
+.menu-card{
+    background:#fff;
+    border-radius:12px;
+    overflow:hidden;
+    text-align:center;
+    cursor:pointer;
+    transition:0.3s;
+    box-shadow:0 5px 15px rgba(0,0,0,0.2);
+
+    display:flex;
+    flex-direction:column;
+}
+
+/* IMAGE */
+.menu-card img{
+    width:100%;
+    height:140px;
+    object-fit:cover;
+}
+
+/* PRODUCT NAME */
 .menu-card h4{
     background:#ffcc00;
     color:black;
-    padding:8px;
+    padding:10px;
     margin:0;
     font-weight:bold;
+
+    font-size:14px;
+    line-height:1.3;
+    word-wrap:break-word;
 }
 
-/* 🔥 PRICE (RED) */
+/* PRICE */
 .menu-card p{
     background:#d71920;
     color:white;
-    padding:6px;
+    padding:8px;
     margin:0;
     font-weight:bold;
+
+    font-size:13px;
 }
-</style>
 </style>
 </head>
 
