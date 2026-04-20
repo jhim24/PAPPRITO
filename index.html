@@ -607,6 +607,63 @@ body{
 }
 
 }
+    /* 🔥 PAYMENT ICON BAR */
+.payment-bar{
+    width:100%;
+    overflow:hidden;
+    background:#000;
+    padding:10px 0;
+    position:relative;
+    z-index:9;
+}
+
+/* MOVING TRACK */
+.payment-track{
+    display:flex;
+    gap:40px;
+    width:max-content;
+    animation:scrollIcons 20s linear infinite;
+    align-items:center;
+}
+
+/* ICON STYLE */
+.payment-track img{
+    height:35px;
+    filter:brightness(1.2);
+
+    /* 🔥 GLOW EFFECT */
+    transition:0.3s;
+}
+
+.payment-track img:hover{
+    transform:scale(1.2);
+    filter:drop-shadow(0 0 8px #ffcc00)
+           drop-shadow(0 0 15px #ff0000);
+}
+
+/* 🔥 AUTO PAUSE ON HOVER */
+.payment-bar:hover .payment-track{
+    animation-play-state:paused;
+}
+
+/* SCROLL ANIMATION */
+@keyframes scrollIcons{
+    0%{ transform:translateX(0); }
+    100%{ transform:translateX(-50%); }
+}
+
+/* 📱 MOBILE OPTIMIZED */
+@media(max-width:768px){
+
+    .payment-track{
+        gap:20px;
+        animation:scrollIcons 15s linear infinite;
+    }
+
+    .payment-track img{
+        height:25px;
+    }
+}
 </style>
 </head>
 
@@ -678,6 +735,32 @@ body{
         <button class="close-btn" onclick="closeModal()">X</button>
         <h2 id="modalTitle"></h2>
         <p id="modalContent"></p>
+    </div>
+</div>
+    <div class="payment-bar">
+    <div class="payment-track">
+
+        <img src="gcash.png">
+        <img src="maya.png">
+        <img src="visa.png">
+        <img src="mastercard.png">
+        <img src="grabpay.png">
+        <img src="qrph.png">
+        <img src="bancnet.png">
+        <img src="amex.png">
+        <img src="jcb.png">
+
+        <!-- duplicate for smooth loop -->
+        <img src="gcash.png">
+        <img src="maya.png">
+        <img src="visa.png">
+        <img src="mastercard.png">
+        <img src="grabpay.png">
+        <img src="qrph.png">
+        <img src="bancnet.png">
+        <img src="amex.png">
+        <img src="jcb.png">
+
     </div>
 </div>
 <script>
