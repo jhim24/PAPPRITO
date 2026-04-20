@@ -330,6 +330,84 @@ body{
 /* ✅ END */
 
 /* tapos ito */
+    /* MENU POPUP */
+.menu-modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.8);
+    z-index:9999;
+    justify-content:center;
+    align-items:center;
+}
+
+.menu-box{
+    width:90%;
+    height:90%;
+    background:#fff;
+    display:flex;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+/* LEFT */
+.menu-left{
+    width:200px;
+    background:#d71920;
+    color:white;
+    padding:20px;
+}
+
+.menu-left li{
+    list-style:none;
+    padding:10px;
+    cursor:pointer;
+}
+
+/* CENTER */
+.menu-center{
+    flex:1;
+    padding:20px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:20px;
+}
+
+/* CARD */
+.menu-card{
+    background:#fff;
+    border-radius:10px;
+    padding:10px;
+    text-align:center;
+    cursor:pointer;
+}
+
+.menu-card img{
+    width:100%;
+    height:120px;
+    object-fit:cover;
+}
+
+/* RIGHT */
+.menu-right{
+    width:250px;
+    padding:20px;
+}
+
+.menu-right img{
+    width:100%;
+}
+
+/* CLOSE */
+.close-menu{
+    position:absolute;
+    top:20px;
+    right:20px;
+    background:red;
+    color:white;
+    border:none;
+    padding:10px;
+}
 </style>
 </style>
 </head>
@@ -345,7 +423,7 @@ body{
 
     <div class="nav-links">
         <a href="#home">HOME</a>
-        <a href="#spaces">MENU</a>
+       <a href="#" onclick="openMenu(); return false;">MENU</a>
         <a href="#contact">CONTACT</a>
         <a href="#" onclick="openModal('core'); return false;">CORE VALUES</a>
         <a href="#" onclick="openModal('vision'); return false;">VISION</a>
@@ -471,7 +549,74 @@ document.addEventListener("keydown", function(e){
         closeModal();
     }
 });
-</script>
+    function openMenu(){
+    document.getElementById("menuModal").style.display="flex";
+}
 
+function closeMenu(){
+    document.getElementById("menuModal").style.display="none";
+}
+
+const products = {
+    beef:[
+        {name:"Bulalo Grupo",price:"₱710",img:"bulalogroup.jpg"},
+        {name:"Bulalo Solo",price:"₱185",img:"bulalo.jpg"},
+        {name:"Bistek",price:"₱279",img:"bistek.jpg"}
+    ]
+};
+
+function showCategory(cat){
+    const container = document.getElementById("menuProducts");
+    container.innerHTML="";
+
+    products[cat].forEach(item=>{
+        container.innerHTML+=`
+        <div class="menu-card" onclick="preview('${item.name}','${item.price}','${item.img}')">
+            <img src="${item.img}">
+            <h4>${item.name}</h4>
+            <p>${item.price}</p>
+        </div>`;
+    });
+}
+
+function preview(name,price,img){
+    document.getElementById("menuPreview").innerHTML=`
+        <img src="${img}">
+        <h3>${name}</h3>
+        <p>${price}</p>
+    `;
+}
+</script>
+<!-- MENU POPUP -->
+<div id="menuModal" class="menu-modal">
+
+    <div class="menu-box">
+
+        <!-- LEFT -->
+        <div class="menu-left">
+            <h3>🍽 Menu</h3>
+            <ul>
+                <li onclick="showCategory('beef')">Beef</li>
+                <li onclick="showCategory('pork')">Pork</li>
+                <li onclick="showCategory('chicken')">Chicken</li>
+                <li onclick="showCategory('seafood')">Seafood</li>
+            </ul>
+        </div>
+
+        <!-- CENTER -->
+        <div class="menu-center" id="menuProducts"></div>
+
+        <!-- RIGHT -->
+        <div class="menu-right" id="menuPreview">
+            <img src="rapsilog.jpg">
+            <h3>Select Product</h3>
+            <p>₱0</p>
+        </div>
+
+        <button class="close-menu" onclick="closeMenu()">X</button>
+
+    </div>
+
+</div>
 </body>
 </html>
