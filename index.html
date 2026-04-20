@@ -24,7 +24,7 @@ body{
 
 /* NAVBAR */
 .navbar{
-    position:absolute;
+    position:fixed;
     top:0;
     width:100%;
     display:flex;
@@ -964,7 +964,7 @@ We provide great taste...`;
     }
 }
 function closeModal(){
-    .getevent.getElementById("modal").style.display="none";
+    document.getElementById("modal").style.display="none";
 }
 
 window.addEventListener("load", function(){
@@ -1200,6 +1200,13 @@ function closePromo(){
 
     </div>
 
+</div>
+    <div id="modal" class="modal">
+    <div class="modal-content">
+        <button class="close-btn" onclick="closeModal()">X</button>
+        <h2 id="modalTitle"></h2>
+        <p id="modalContent"></p>
+    </div>
 </div>
 </body>
 </html>
