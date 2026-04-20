@@ -14,7 +14,7 @@
 }
 
 html{
-    scroll-behavior:smooth; /* ✅ smooth scroll */
+    scroll-behavior:smooth;
 }
 
 body{
@@ -48,12 +48,6 @@ body{
     border-radius:50%;
 }
 
-.logo-container span{
-    font-size:20px;
-    font-weight:bold;
-    color:white;
-}
-
 /* LINKS */
 .nav-links a{
     color:white;
@@ -76,7 +70,6 @@ body{
     position:relative;
 }
 
-/* FIX CLICK */
 .hero::before{
     content:"";
     position:absolute;
@@ -85,18 +78,12 @@ body{
     pointer-events:none;
 }
 
-.hero-content{
-    position:relative;
-}
-
 .hero-content h1{
     font-size:60px;
-    letter-spacing:4px;
 }
 
 .hero-content p{
     margin-top:10px;
-    font-size:18px;
 }
 
 /* ADDRESS */
@@ -116,7 +103,6 @@ body{
     padding:60px;
 }
 
-/* TITLE */
 .section h2{
     text-align:center;
     margin-bottom:30px;
@@ -135,11 +121,6 @@ body{
     border-radius:10px;
     overflow:hidden;
     text-align:center;
-    transition:0.3s;
-}
-
-.card:hover{
-    transform:translateY(-5px);
 }
 
 .card img{
@@ -149,40 +130,70 @@ body{
 }
 
 .card h3{
-    padding:10px;
     background:#ffcc00;
     color:black;
+    padding:10px;
 }
 
 .card p{
-    padding:10px;
     color:#ff3b3b;
+    padding:10px;
 }
 
 /* CONTACT */
 .contact-box{
-    max-width:500px;
-    margin:0 auto;
-    text-align:center;
+    max-width:600px;
+    margin:auto;
     background:#1a1a1a;
     padding:20px;
     border-radius:10px;
+    text-align:center;
 }
 
 .map-btn{
     display:inline-block;
     margin-top:10px;
-    padding:10px 20px;
+    padding:10px;
     background:#ffcc00;
     color:black;
     text-decoration:none;
-    border-radius:5px;
-    font-weight:bold;
 }
 
-.map-btn:hover{
-    background:#ff3b3b;
-    color:white;
+/* VALUES GALLERY */
+.values-gallery{
+    margin-top:20px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:10px;
+}
+
+.values-gallery img{
+    width:100%;
+    height:120px;
+    object-fit:cover;
+    border-radius:8px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.values-gallery img:hover{
+    transform:scale(1.05);
+}
+
+/* MODAL */
+.img-modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.9);
+    justify-content:center;
+    align-items:center;
+    z-index:999;
+}
+
+.img-modal img{
+    max-width:90%;
+    max-height:90%;
 }
 
 /* FOOTER */
@@ -225,7 +236,7 @@ body{
     </div>
 </div>
 
-<!-- OUR SPACES -->
+<!-- SPACES -->
 <div class="section" id="spaces">
     <h2>Our Dining Spaces</h2>
 
@@ -233,25 +244,25 @@ body{
         <div class="card">
             <img src="main-dining.jpg">
             <h3>Main Dining</h3>
-            <p>Comfortable indoor dining experience</p>
+            <p>Comfortable indoor dining</p>
         </div>
 
         <div class="card">
             <img src="roof-deck.jpg">
             <h3>Roof Deck</h3>
-            <p>Open-air dining with great view</p>
+            <p>Open-air dining</p>
         </div>
 
         <div class="card">
             <img src="basement.jpg">
             <h3>Basement</h3>
-            <p>Cozy and private atmosphere</p>
+            <p>Cozy space</p>
         </div>
 
         <div class="card">
             <img src="conference-room.jpg">
             <h3>Conference Room</h3>
-            <p>Perfect for meetings and events</p>
+            <p>Meetings & events</p>
         </div>
     </div>
 </div>
@@ -261,23 +272,44 @@ body{
     <h2>Contact Us</h2>
 
     <div class="contact-box">
-        <p><strong>📍 Address:</strong> Grandview Complex, Tagaytay City</p>
-        <p><strong>📞 Phone:</strong> +63 912 345 6789</p>
-        <p><strong>📧 Email:</strong> papprito@gmail.com</p>
-        <p><strong>🕒 Hours:</strong> 10:00 AM – 10:00 PM</p>
+        <p>📍 Grandview Complex, Tagaytay City</p>
+        <p>📞 +63 912 345 6789</p>
+        <p>📧 papprito@gmail.com</p>
 
         <a href="https://www.google.com/maps?q=Grandview+Complex+Tagaytay"
            target="_blank"
-           class="map-btn">
-           📍 View on Map
-        </a>
+           class="map-btn">View Map</a>
+
+        <!-- GALLERY -->
+        <div class="values-gallery">
+            <img src="core-values.jpg" onclick="openImage(this.src)">
+            <img src="vision.jpg" onclick="openImage(this.src)">
+            <img src="about.jpg" onclick="openImage(this.src)">
+            <img src="mission.jpg" onclick="openImage(this.src)">
+        </div>
     </div>
+</div>
+
+<!-- MODAL -->
+<div id="imgModal" class="img-modal" onclick="closeImage()">
+    <img id="modalImg">
 </div>
 
 <!-- FOOTER -->
 <div class="footer">
-    <p>© 2026 PAPPRITO Restaurant • All Rights Reserved</p>
+    © 2026 PAPPRITO Restaurant
 </div>
+
+<script>
+function openImage(src){
+    document.getElementById("imgModal").style.display="flex";
+    document.getElementById("modalImg").src = src;
+}
+
+function closeImage(){
+    document.getElementById("imgModal").style.display="none";
+}
+</script>
 
 </body>
 </html>
