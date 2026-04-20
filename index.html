@@ -177,24 +177,27 @@ body{
     color:#aaa;
 }
 
-/* 🔥 MODAL */
+/* 🔥 GLASS POPUP (UPGRADE ONLY) */
 .modal{
     display:none;
     position:fixed;
     inset:0;
-    background:rgba(0,0,0,0.8);
+    background:rgba(0,0,0,0.6);
+    backdrop-filter:blur(6px);
     justify-content:center;
     align-items:center;
+    z-index:999;
 }
 
 .modal-content{
-    background:white;
-    color:black;
+    background:rgba(255,255,255,0.1);
+    backdrop-filter:blur(15px);
+    border:1px solid rgba(255,255,255,0.2);
+    color:white;
     padding:30px;
-    border-radius:10px;
-    max-width:500px;
+    border-radius:15px;
+    max-width:600px;
     width:90%;
-    text-align:center;
     position:relative;
 }
 
@@ -209,10 +212,10 @@ body{
     cursor:pointer;
 }
 
-/* FIX TEXT FORMAT */
+/* TEXT FIX */
 #modalContent{
     white-space:pre-line;
-    line-height:1.6;
+    line-height:1.7;
 }
 </style>
 </head>
@@ -318,29 +321,43 @@ function openModal(type){
     if(type==="core"){
         title.innerText="CORE VALUES";
         content.innerText=`CUSTOMER FOCUS
-We provide great taste and excellent service.
+We provide great taste, excellent service, and superior value to all our customers.
 
 INTEGRITY
-We do the right thing.
+We do only the right thing and what ought to be done regardless of the situation.
 
-TEAMWORK
-We work together as one.`;
+LISTENING WITH HUMILITY
+We value feedback, acknowledge and learn from our mistakes.
+
+SPIRIT OF BUSINESS ENTERPRISE
+We imbue our employees with entrepreneurial spirit and sense of ownership.
+
+PROFESSIONALISM
+We are professional in mind, in word and in deed.
+
+SPIRIT OF FAMILY AND FUN
+We foster teamwork, unity, and treat each other like family.`;
     }
 
     if(type==="vision"){
         title.innerText="VISION";
-        content.innerText=`To become a leading Filipino restaurant.`;
+        content.innerText=`To be the go-to restaurant for hearty Filipino food, delivering superior value through our delicious and affordable meals.`;
     }
 
     if(type==="mission"){
         title.innerText="MISSION";
-        content.innerText=`To serve delicious and affordable food.`;
+        content.innerText=`To serve fresh and delicious food, promoting delightful eating to everyone.`;
     }
 
     if(type==="about"){
         title.innerText="ABOUT PAPPRITO";
-        content.innerText=`Serving Filipino favorites with passion and quality.
+        content.innerText=`Papa Prito entered the bustling and competitive food scene in Tagaytay City on October 30, 2011 with a promise of food and ambiance rich in taste yet light on the pocket.
 
+Since then, it has become a social equalizer, welcoming customers from all walks of life and building a strong local following.
+
+Serving Filipino favorites that are rich in flavor yet affordable, Papa Prito satisfies not only hunger but also delivers a memorable dining experience.
+
+Slogan:
 "Lasap Ang Pinoy Sarap"`;
     }
 }
