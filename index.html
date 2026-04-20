@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Papprito Restaurant</title>
+<title>Foodie Restaurant</title>
 
 <style>
 *{
@@ -11,6 +11,11 @@
     padding:0;
     box-sizing:border-box;
     font-family: 'Segoe UI', sans-serif;
+}
+
+body{
+    background:#111;
+    color:white;
 }
 
 /* NAVBAR */
@@ -28,7 +33,6 @@
 .logo{
     font-size:20px;
     font-weight:bold;
-    color:white;
 }
 
 .nav-links{
@@ -59,7 +63,7 @@
 /* HERO */
 .hero{
     height:100vh;
-    background:url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb') no-repeat center/cover;
+    background:url('restaurant-hero.jpg') no-repeat center/cover;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -75,19 +79,18 @@
     background:rgba(0,0,0,0.5);
 }
 
-/* HERO CONTENT */
+/* HERO TEXT */
 .hero-content{
     position:relative;
-    color:white;
 }
 
 .hero-content h1{
     font-size:60px;
     letter-spacing:5px;
-    margin-bottom:10px;
 }
 
 .hero-content p{
+    margin-top:10px;
     font-size:18px;
     opacity:0.8;
 }
@@ -96,43 +99,37 @@
 .section{
     padding:60px;
     background:#111;
-    color:white;
 }
 
-.section h2{
-    margin-bottom:20px;
-}
-
-/* MENU GRID */
-.menu-grid{
+/* GRID */
+.grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
     gap:20px;
 }
 
-.menu-card{
+.card{
     background:#1a1a1a;
     border-radius:10px;
     overflow:hidden;
 }
 
-.menu-card img{
+.card img{
     width:100%;
-    height:150px;
+    height:200px;
     object-fit:cover;
 }
 
-.menu-card h3{
+.card h3{
     padding:10px;
     background:#ffcc00;
     color:black;
 }
 
-.menu-card p{
+.card p{
     padding:10px;
     color:#ff3b3b;
 }
-
 </style>
 </head>
 
@@ -155,33 +152,39 @@
 <!-- HERO -->
 <div class="hero">
     <div class="hero-content">
-        <h1>PAPPRITO RESTAURANT</h1>
-        <p>Specialities Curbside|In-Store | outdoor | seating Dine-in • TAGAYTAY CITY ROTUNDA</p>
+        <h1>FOODIE RESTAURANT</h1>
+        <p>Main Dining • Roof Deck • Conference Room</p>
     </div>
 </div>
 
-<!-- MENU SECTION -->
+<!-- OUR SPACES -->
 <div class="section">
-    <h2>🔥 Popular Dishes</h2>
+    <h2>Our Dining Spaces</h2>
 
-    <div class="menu-grid">
+    <div class="grid">
 
-        <div class="menu-card">
-            <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1">
-            <h3>Bulalo</h3>
-            <p>₱710</p>
+        <div class="card">
+            <img src="restaurant-hero.jpg">
+            <h3>Main Dining</h3>
+            <p>Comfortable indoor dining experience</p>
         </div>
 
-        <div class="menu-card">
-            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c">
-            <h3>Chicken Sisig</h3>
-            <p>₱295</p>
+        <div class="card">
+            <img src="restaurant-hero.jpg">
+            <h3>Roof Deck</h3>
+            <p>Open-air dining with great view</p>
         </div>
 
-        <div class="menu-card">
-            <img src="https://images.unsplash.com/photo-1604908176997-431c4ed5b8c0">
-            <h3>Lechon Kawali</h3>
-            <p>₱395</p>
+        <div class="card">
+            <img src="restaurant-hero.jpg">
+            <h3>Basement</h3>
+            <p>Cozy and private atmosphere</p>
+        </div>
+
+        <div class="card">
+            <img src="restaurant-hero.jpg">
+            <h3>Conference Room</h3>
+            <p>Perfect for meetings and events</p>
         </div>
 
     </div>
