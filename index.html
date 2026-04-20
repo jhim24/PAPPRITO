@@ -107,6 +107,13 @@ body{
     margin-top:8px;
 }
 
+/* UPLOAD BUTTON */
+.upload-btn{
+    margin-top:5px;
+    font-size:12px;
+    display:none;
+}
+
 /* RIGHT PANEL */
 .details{
     width:260px;
@@ -120,7 +127,6 @@ body{
     border-radius:10px;
 }
 
-/* GLOW */
 .details .price{
     box-shadow:0 0 15px red;
     font-size:20px;
@@ -135,19 +141,12 @@ body{
     border-radius:8px;
     margin-top:15px;
 }
-
-/* UPLOAD (hidden by default) */
-#upload{
-    display:none;
-    margin-top:10px;
-}
 </style>
 </head>
 
 <body>
 
 <div class="header">PAPAPRITO</div>
-
 <button class="admin-btn" onclick="toggleAdmin()">ADMIN</button>
 
 <div class="container">
@@ -157,6 +156,12 @@ body{
     <div class="menu-item" onclick="loadMenu('beef')">Beef</div>
     <div class="menu-item" onclick="loadMenu('pork')">Pork</div>
     <div class="menu-item" onclick="loadMenu('chicken')">Chicken</div>
+    <div class="menu-item" onclick="loadMenu('seafood')">Seafood</div>
+    <div class="menu-item" onclick="loadMenu('veggies')">Veggies</div>
+    <div class="menu-item" onclick="loadMenu('noodles')">Noodles</div>
+    <div class="menu-item" onclick="loadMenu('sides')">Sides</div>
+    <div class="menu-item" onclick="loadMenu('drinks')">Drinks</div>
+    <div class="menu-item" onclick="loadMenu('beers')">Beers</div>
 </div>
 
 <!-- MAIN -->
@@ -164,15 +169,11 @@ body{
     <div class="cards" id="menu"></div>
 </div>
 
-<!-- RIGHT PANEL -->
+<!-- PREVIEW -->
 <div class="details">
     <img id="img" src="rapsilog.jpg">
     <h2 id="name">Select Item</h2>
     <p class="price" id="price">₱0</p>
-
-    <!-- 📸 ADMIN UPLOAD -->
-    <input type="file" id="upload" onchange="uploadImage(event)">
-
     <button class="btn">Add to Cart</button>
 </div>
 
@@ -181,65 +182,80 @@ body{
 <script>
 
 let isAdmin = false;
+let currentCategory = "";
 
+/* MENU DATA */
 const menuData = {
-
 beef:[
-{name:"Bulalo Grupo",price:710,img:"bulalogroup.jpg"},
-{name:"Bulalo Solo",price:185,img:"solobulalo.jpg"},
-{name:"Bistek Tagalog",price:279,img:"bistek.jpg"}
+{name:"Bulalo Grupo",price:710,img:""},
+{name:"Bulalo Solo",price:185,img:""},
+{name:"Bistek Tagalog",price:279,img:""}
 ],
-
 pork:[
-{name:"Lechon Kawali",price:395,img:"rapsilog.jpg"},
-{name:"Pork Sisig",price:315,img:"rapsilog.jpg"}
+{name:"Lechon Kawali",price:395,img:""},
+{name:"Pork Sisig",price:315,img:""}
 ],
-
 chicken:[
-{name:"Chicken Meal",price:295,img:"rapsilog.jpg"}
+{name:"Chicken Meal",price:295,img:""}
+],
+seafood:[
+{name:"Bangus",price:315,img:""}
+],
+veggies:[
+{name:"Chop Suey",price:235,img:""}
+],
+noodles:[
+{name:"Palabok",price:195,img:""}
+],
+sides:[
+{name:"Garlic Rice",price:46,img:""}
+],
+drinks:[
+{name:"Softdrinks",price:52,img:""}
+],
+beers:[
+{name:"Red Horse",price:105,img:""}
 ]
-
 };
 
 function loadMenu(category){
+    currentCategory = category;
     let container = document.getElementById("menu");
     container.innerHTML = "";
 
-    menuData[category].forEach(item=>{
+    menuData[category].forEach((item,index)=>{
         container.innerHTML += `
-        <div class="card" onclick="selectItem('${item.name}',${item.price},'${item.img}')">
-            <h3>${item.name}</h3>
+        <div class="card">
+            <h3 onclick="selectItem('${item.name}',${item.price},'${item.img}')">${item.name}</h3>
             <p class="price">₱${item.price}</p>
+
+            <input type="file" class="upload-btn" onchange="uploadImage(event,${index})">
         </div>
         `;
     });
+
+    toggleAdmin();
 }
 
 function selectItem(name,price,img){
     document.getElementById("name").innerText = name;
     document.getElementById("price").innerText = "₱"+price;
-    document.getElementById("img").src = img;
+    document.getElementById("img").src = img || "rapsilog.jpg";
 }
 
 function toggleAdmin(){
     isAdmin = !isAdmin;
-    const upload = document.getElementById("upload");
-
-    if(isAdmin){
-        upload.style.display = "block";
-        alert("ADMIN MODE ON");
-    }else{
-        upload.style.display = "none";
-        alert("CUSTOMER MODE");
-    }
+    document.querySelectorAll('.upload-btn').forEach(btn=>{
+        btn.style.display = isAdmin ? "block" : "none";
+    });
 }
 
-function uploadImage(event){
+function uploadImage(event,index){
     const file = event.target.files[0];
     const reader = new FileReader();
 
     reader.onload = function(e){
-        document.getElementById("img").src = e.target.result;
+        menuData[currentCategory][index].img = e.target.result;
     }
 
     if(file){
