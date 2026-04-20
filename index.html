@@ -3,132 +3,54 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Foodie Red Dashboard</title>
+<title>Restaurant Menu</title>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
-
 body {
-    display: flex;
     background: #0f0f0f;
-    color: #fff;
+    color: white;
+    font-family: Arial;
+    padding: 20px;
 }
 
-/* SIDEBAR */
-.sidebar {
-    width: 220px;
-    height: 100vh;
+/* CATEGORY BOX */
+.category {
     background: #111;
-    padding: 20px;
+    border: 3px solid #ffcc00;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    padding: 15px;
+    box-shadow: 0 0 15px red;
 }
 
-.sidebar h2 {
+.category h2 {
     color: #ff3b3b;
-    margin-bottom: 30px;
-}
-
-.sidebar ul {
-    list-style: none;
-}
-
-.sidebar ul li {
-    padding: 12px;
     margin-bottom: 10px;
-    border-radius: 10px;
-    cursor: pointer;
 }
 
-.sidebar ul li:hover,
-.active {
-    background: linear-gradient(45deg, #ff0000, #ffcc00);
-    color: black;
-}
-
-/* MAIN */
-.main {
-    flex: 1;
-    padding: 20px;
-}
-
-/* HEADER */
-.header {
+/* ITEM */
+.item {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 20px;
-}
-
-.search {
     padding: 8px;
-    border-radius: 20px;
-    border: none;
-    width: 200px;
-}
-
-/* CARDS */
-.cards {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.card {
-    flex: 1;
-    padding: 15px;
-    border-radius: 15px;
-    color: #000;
-    font-weight: bold;
-}
-
-.red { background: #ff3b3b; }
-.yellow { background: #ffcc00; }
-.orange { background: #ff6b00; }
-.light { background: #ffd966; }
-
-/* FOOD */
-.food-container {
-    display: flex;
-    gap: 15px;
-}
-
-.food-card {
-    background: #1a1a1a;
-    padding: 10px;
-    border-radius: 15px;
-    width: 200px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: 0.3s;
 }
 
-.food-card:hover {
-    transform: scale(1.05);
-}
-
-.food-card img {
-    width: 100%;
-    border-radius: 10px;
-}
-
-.food-title {
-    margin-top: 10px;
-    font-weight: bold;
+.item:hover {
+    background: rgba(255,255,255,0.1);
 }
 
 .price {
     color: #ffcc00;
 }
 
-/* MODAL (PREVIEW) */
+/* MODAL */
 .modal {
     display: none;
     position: fixed;
-    z-index: 999;
-    left: 0;
     top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     background: rgba(0,0,0,0.8);
@@ -136,7 +58,7 @@ body {
     align-items: center;
 }
 
-.modal-content {
+.modal-box {
     background: #111;
     padding: 20px;
     border-radius: 20px;
@@ -145,114 +67,141 @@ body {
     box-shadow: 0 0 20px red;
 }
 
-.modal-content img {
-    width: 100%;
-    border-radius: 10px;
-}
-
 .close {
-    float: right;
-    font-size: 20px;
-    cursor: pointer;
     color: red;
+    float: right;
+    cursor: pointer;
+    font-size: 20px;
 }
 
 .modal-title {
-    margin-top: 10px;
     font-size: 20px;
+    margin-top: 10px;
 }
 
 .modal-price {
     color: #ffcc00;
     font-size: 18px;
 }
-
 </style>
 </head>
 
 <body>
 
-<!-- SIDEBAR -->
-<div class="sidebar">
-    <h2>🔥 Foodie</h2>
-    <ul>
-        <li class="active">Dashboard</li>
-        <li>Menu</li>
-        <li>Orders</li>
-        <li>Analytics</li>
-    </ul>
-</div>
+<h1 style="color:#ffcc00;">🔥 Restaurant Menu</h1>
 
-<!-- MAIN -->
-<div class="main">
-
-    <!-- HEADER -->
-    <div class="header">
-        <h2>Welcome, Chef 👨‍🍳</h2>
-        <input class="search" placeholder="Search...">
-    </div>
-
-    <!-- CARDS -->
-    <div class="cards">
-        <div class="card red">$11,256<br>Revenue</div>
-        <div class="card yellow">245<br>Orders</div>
-        <div class="card orange">$6,556<br>Expenses</div>
-        <div class="card light">$4,227<br>Profit</div>
-    </div>
-
-    <!-- FOOD -->
-    <h3>🔥 Trending Orders</h3>
-
-    <div class="food-container">
-
-        <div class="food-card" onclick="openModal(this)">
-            <img src="https://images.unsplash.com/photo-1604908176997-431c4ed5b8c0">
-            <div class="food-title">Chicken Meal</div>
-            <div class="price">$5.99</div>
-        </div>
-
-        <div class="food-card" onclick="openModal(this)">
-            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c">
-            <div class="food-title">Healthy Bowl</div>
-            <div class="price">$6.50</div>
-        </div>
-
-        <div class="food-card" onclick="openModal(this)">
-            <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1">
-            <div class="food-title">Rice Combo</div>
-            <div class="price">$5.25</div>
-        </div>
-
-    </div>
-
-</div>
+<div id="menu"></div>
 
 <!-- MODAL -->
 <div class="modal" id="modal">
-    <div class="modal-content">
+    <div class="modal-box">
         <span class="close" onclick="closeModal()">&times;</span>
-        <img id="modal-img">
-        <div class="modal-title" id="modal-title"></div>
-        <div class="modal-price" id="modal-price"></div>
+        <div class="modal-title" id="title"></div>
+        <div class="modal-price" id="price"></div>
     </div>
 </div>
 
 <script>
-function openModal(card) {
-    const img = card.querySelector("img").src;
-    const title = card.querySelector(".food-title").innerText;
-    const price = card.querySelector(".price").innerText;
 
-    document.getElementById("modal-img").src = img;
-    document.getElementById("modal-title").innerText = title;
-    document.getElementById("modal-price").innerText = price;
+/* MENU DATA */
+const menuData = {
+    "BEEF": [
+        ["Bulalo Grupo", 710],
+        ["Bulalo Solo", 185],
+        ["Bistek Tagalog", 279]
+    ],
+    "PORK": [
+        ["Lechon Kawali", 395],
+        ["Pork Sisig", 315],
+        ["Lumpiang Shanghai", 235]
+    ],
+    "CHICKEN": [
+        ["PapsChicken Platter", 315],
+        ["Chicken Sisig", 295]
+    ],
+    "SEAFOOD": [
+        ["Crispy Bangusarap", 315],
+        ["Calamares", 305],
+        ["Crispy Tawilis", 285]
+    ],
+    "VEGGIES": [
+        ["Chop Suey", 235],
+        ["Tortang Talong", 192]
+    ],
+    "NOODLES": [
+        ["Canton-Bihon", 278],
+        ["Palabok", 195],
+        ["Beef Mami", 159],
+        ["Chicken Mami", 149]
+    ],
+    "SIDES": [
+        ["PapShots", 72],
+        ["Spicy Tofu", 65],
+        ["Bola Bola Soup", 68],
+        ["Lumpiang Shanghai (3pcs)", 49],
+        ["Fried Banana (4pcs)", 35],
+        ["Garlic Rice", 46],
+        ["Plain Rice", 32]
+    ],
+    "SWEETS & DRINKS": [
+        ["Special Turon", 95],
+        ["Leche Flan", 82],
+        ["Coffee Jelly", 75],
+        ["Softdrinks", 52],
+        ["Softdrinks 1.5L", 145],
+        ["Iced Tea", 52],
+        ["Black Gulaman", 52],
+        ["Pineapple Juice", 62],
+        ["Calamansi Juice", 62],
+        ["Iced Coffee", 59],
+        ["Iced Mocha", 69],
+        ["Coffee", 59],
+        ["Hot Choco", 55],
+        ["Water", 35]
+    ],
+    "BEERS": [
+        ["San Mig Light", 95],
+        ["San Miguel Pale Pilsen", 95],
+        ["San Miguel Flavored", 95],
+        ["Red Horse", 105]
+    ]
+};
 
+/* RENDER MENU */
+const menuContainer = document.getElementById("menu");
+
+for (let category in menuData) {
+    let box = document.createElement("div");
+    box.className = "category";
+
+    let title = document.createElement("h2");
+    title.innerText = category;
+    box.appendChild(title);
+
+    menuData[category].forEach(item => {
+        let div = document.createElement("div");
+        div.className = "item";
+        div.innerHTML = `<span>${item[0]}</span><span class="price">₱${item[1]}</span>`;
+        
+        div.onclick = () => openModal(item[0], item[1]);
+
+        box.appendChild(div);
+    });
+
+    menuContainer.appendChild(box);
+}
+
+/* MODAL */
+function openModal(name, price) {
+    document.getElementById("title").innerText = name;
+    document.getElementById("price").innerText = "₱" + price;
     document.getElementById("modal").style.display = "flex";
 }
 
 function closeModal() {
     document.getElementById("modal").style.display = "none";
 }
+
 </script>
 
 </body>
