@@ -133,7 +133,7 @@ body{
 
 <div class="container">
 
-<!-- 🔥 FULL SIDEBAR -->
+<!-- SIDEBAR -->
 <div class="sidebar">
     <div onclick="loadMenu('beef')" class="menu-item">Beef</div>
     <div onclick="loadMenu('pork')" class="menu-item">Pork</div>
@@ -164,9 +164,6 @@ body{
 
 let isAdmin=false;
 let currentCategory="";
-let currentIndex=null;
-
-/* LOAD SAVED */
 let saved = localStorage.getItem("menuData");
 
 let menuData = saved ? JSON.parse(saved) : {
@@ -225,15 +222,19 @@ function loadMenu(category){
         let card=document.createElement("div");
         card.className="card";
 
+        let hasImage = item.img 
+        ? `<img src="${item.img}" style="width:40px;height:40px;border-radius:5px;margin-top:5px;">`
+        : "";
+
         card.innerHTML=`
             <h3>${item.name}</h3>
             <p class="price">₱${item.price}</p>
+            ${hasImage}
             <input type="file" class="upload">
         `;
 
-        /* CLICK ITEM */
+        /* CLICK */
         card.querySelector("h3").onclick=()=>{
-            currentIndex=i;
             selectItem(item.name,item.price,item.img);
         };
 
@@ -268,27 +269,21 @@ function applyAdminUI(){
     }
 }
 
-/* 🔥 FIX: AUTO UPDATE PREVIEW */
+/* SAVE ONLY */
 function uploadImage(event,index){
     let file = event.target.files[0];
-
     if(!file) return;
 
     let reader = new FileReader();
 
     reader.onload = function(e){
-
-        // SAVE IMAGE ONLY
         menuData[currentCategory][index].img = e.target.result;
-
-        // SAVE SA STORAGE
         saveData();
-
-        // ❌ NO PREVIEW UPDATE HERE
     };
 
     reader.readAsDataURL(file);
 }
+
 </script>
 
 </body>
