@@ -10,11 +10,11 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family: 'Segoe UI', sans-serif;
+    font-family:'Segoe UI', sans-serif;
 }
 
 html{
-    scroll-behavior:smooth; /* ✅ smooth scroll */
+    scroll-behavior:smooth;
 }
 
 body{
@@ -59,6 +59,7 @@ body{
     color:white;
     text-decoration:none;
     margin:0 10px;
+    cursor:pointer;
 }
 
 .nav-links a:hover{
@@ -76,7 +77,6 @@ body{
     position:relative;
 }
 
-/* FIX CLICK */
 .hero::before{
     content:"";
     position:absolute;
@@ -99,7 +99,6 @@ body{
     font-size:18px;
 }
 
-/* ADDRESS */
 .address{
     display:inline-block;
     margin-top:15px;
@@ -116,7 +115,6 @@ body{
     padding:60px;
 }
 
-/* TITLE */
 .section h2{
     text-align:center;
     margin-bottom:30px;
@@ -192,6 +190,39 @@ body{
     background:#000;
     color:#aaa;
 }
+
+/* 🔥 MODAL */
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.8);
+    justify-content:center;
+    align-items:center;
+    z-index:999;
+}
+
+.modal-content{
+    background:white;
+    color:black;
+    padding:30px;
+    border-radius:10px;
+    max-width:500px;
+    width:90%;
+    text-align:center;
+    position:relative;
+}
+
+.close-btn{
+    position:absolute;
+    top:10px;
+    right:10px;
+    background:red;
+    color:white;
+    border:none;
+    padding:5px 10px;
+    cursor:pointer;
+}
 </style>
 </head>
 
@@ -208,10 +239,10 @@ body{
         <a href="#home">HOME</a>
         <a href="#spaces">MENU</a>
         <a href="#contact">CONTACT</a>
-        <a href="#core values">CORE VALUES</a>
-        <a href="#vision">VISION</a>
-        <a href="#mission">MISSION</a>
-        <a href="#about">ABOUT</a>
+        <a onclick="openModal('core')">CORE VALUES</a>
+        <a onclick="openModal('vision')">VISION</a>
+        <a onclick="openModal('mission')">MISSION</a>
+        <a onclick="openModal('about')">ABOUT</a>
     </div>
 </div>
 
@@ -282,6 +313,46 @@ body{
 <div class="footer">
     <p>© 2026 PAPPRITO Restaurant • All Rights Reserved</p>
 </div>
+
+<!-- 🔥 MODAL -->
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <button class="close-btn" onclick="closeModal()">X</button>
+        <h2 id="modalTitle"></h2>
+        <p id="modalContent"></p>
+    </div>
+</div>
+
+<script>
+function openModal(type){
+    const modal = document.getElementById("modal");
+    const title = document.getElementById("modalTitle");
+    const content = document.getElementById("modalContent");
+
+    modal.style.display = "flex";
+
+    if(type==="core"){
+        title.innerText="CORE VALUES";
+        content.innerText="Quality, Customer First, Integrity, Teamwork";
+    }
+    if(type==="vision"){
+        title.innerText="VISION";
+        content.innerText="To become one of the most loved Filipino restaurants.";
+    }
+    if(type==="mission"){
+        title.innerText="MISSION";
+        content.innerText="To serve quality and affordable food with excellent service.";
+    }
+    if(type==="about"){
+        title.innerText="ABOUT PAPPRITO";
+        content.innerText="PAPPRITO is a Filipino restaurant offering delicious and affordable meals.";
+    }
+}
+
+function closeModal(){
+    document.getElementById("modal").style.display="none";
+}
+</script>
 
 </body>
 </html>
