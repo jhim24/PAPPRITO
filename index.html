@@ -13,6 +13,10 @@
     font-family: 'Segoe UI', sans-serif;
 }
 
+html{
+    scroll-behavior:smooth; /* ✅ smooth scroll */
+}
+
 body{
     background:#111;
     color:white;
@@ -147,7 +151,7 @@ body{
 .card h3{
     padding:10px;
     background:#ffcc00;
-    color:#f00518;
+    color:black;
 }
 
 .card p{
@@ -170,7 +174,7 @@ body{
     margin-top:10px;
     padding:10px 20px;
     background:#ffcc00;
-    color:#f00518;
+    color:black;
     text-decoration:none;
     border-radius:5px;
     font-weight:bold;
@@ -179,6 +183,14 @@ body{
 .map-btn:hover{
     background:#ff3b3b;
     color:white;
+}
+
+/* FOOTER */
+.footer{
+    text-align:center;
+    padding:20px;
+    background:#000;
+    color:#aaa;
 }
 </style>
 </head>
@@ -193,15 +205,14 @@ body{
     </div>
 
     <div class="nav-links">
-        <a href="#">HOME</a>
-        <a href="#">MENU</a>
-        <a href="#">ABOUT</a>
-        <a href="#">CONTACT</a>
+        <a href="#home">HOME</a>
+        <a href="#spaces">MENU</a>
+        <a href="#contact">CONTACT</a>
     </div>
 </div>
 
 <!-- HERO -->
-<div class="hero">
+<div class="hero" id="home">
     <div class="hero-content">
         <h1>PAPPRITO RESTAURANT</h1>
         <p>Main Dining • Roof Deck • Conference Room</p>
@@ -215,7 +226,7 @@ body{
 </div>
 
 <!-- OUR SPACES -->
-<div class="section">
+<div class="section" id="spaces">
     <h2>Our Dining Spaces</h2>
 
     <div class="grid">
@@ -261,6 +272,11 @@ body{
            📍 View on Map
         </a>
     </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    <p>© 2026 PAPPRITO Restaurant • All Rights Reserved</p>
 </div>
 
 </body>
