@@ -8,9 +8,9 @@
 body{
     margin:0;
     font-family:Arial;
-    height:100vh;
     display:flex;
     flex-direction:column;
+    height:100vh;
 }
 
 /* HEADER */
@@ -18,8 +18,7 @@ body{
     background:#d62828;
     color:#fff;
     text-align:center;
-    font-size:32px;
-    font-weight:bold;
+    font-size:30px;
     padding:15px;
 }
 
@@ -28,17 +27,12 @@ body{
     position:absolute;
     top:10px;
     right:10px;
-    padding:8px;
-    background:#000;
-    color:#fff;
-    border:none;
-    border-radius:6px;
 }
 
 /* LAYOUT */
 .container{
-    flex:1;
     display:flex;
+    flex:1;
 }
 
 /* SIDEBAR */
@@ -51,8 +45,7 @@ body{
 
 .menu-item{
     padding:10px;
-    margin:8px 0;
-    border-radius:8px;
+    margin:5px 0;
     cursor:pointer;
 }
 
@@ -68,7 +61,6 @@ body{
     background:#f5f5f5;
 }
 
-/* GRID */
 .cards{
     display:grid;
     grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
@@ -79,21 +71,19 @@ body{
 .card{
     background:#fff;
     padding:15px;
-    border-radius:12px;
-    text-align:center;
-    cursor:pointer;
+    border-radius:10px;
     border:2px solid #ffcc00;
+    text-align:center;
 }
 
 .card:hover{
-    transform:scale(1.05);
     border-color:red;
 }
 
 /* NAME */
 .card h3{
     background:#ffcc00;
-    padding:6px;
+    padding:5px;
     border-radius:6px;
 }
 
@@ -101,20 +91,24 @@ body{
 .price{
     background:red;
     color:#fff;
-    padding:5px 10px;
+    padding:5px;
     border-radius:6px;
     display:inline-block;
-    margin-top:8px;
-}
-
-/* UPLOAD BUTTON */
-.upload-btn{
     margin-top:5px;
-    font-size:12px;
-    display:none;
 }
 
-/* RIGHT PANEL */
+/* UPLOAD (CONTROLLED BY CLASS) */
+.upload{
+    display:none;
+    margin-top:5px;
+}
+
+/* ADMIN MODE SHOW */
+.admin-mode .upload{
+    display:block;
+}
+
+/* PREVIEW */
 .details{
     width:260px;
     padding:15px;
@@ -129,17 +123,6 @@ body{
 
 .details .price{
     box-shadow:0 0 15px red;
-    font-size:20px;
-}
-
-.btn{
-    width:100%;
-    padding:12px;
-    background:#ff9f1c;
-    border:none;
-    color:#fff;
-    border-radius:8px;
-    margin-top:15px;
 }
 </style>
 </head>
@@ -153,110 +136,115 @@ body{
 
 <!-- SIDEBAR -->
 <div class="sidebar">
-    <div class="menu-item" onclick="loadMenu('beef')">Beef</div>
-    <div class="menu-item" onclick="loadMenu('pork')">Pork</div>
-    <div class="menu-item" onclick="loadMenu('chicken')">Chicken</div>
-    <div class="menu-item" onclick="loadMenu('seafood')">Seafood</div>
-    <div class="menu-item" onclick="loadMenu('veggies')">Veggies</div>
-    <div class="menu-item" onclick="loadMenu('noodles')">Noodles</div>
-    <div class="menu-item" onclick="loadMenu('sides')">Sides</div>
-    <div class="menu-item" onclick="loadMenu('drinks')">Drinks</div>
-    <div class="menu-item" onclick="loadMenu('beers')">Beers</div>
+    <div onclick="loadMenu('beef')" class="menu-item">Beef</div>
+    <div onclick="loadMenu('pork')" class="menu-item">Pork</div>
+    <div onclick="loadMenu('chicken')" class="menu-item">Chicken</div>
 </div>
 
 <!-- MAIN -->
-<div class="main">
+<div class="main" id="main">
     <div class="cards" id="menu"></div>
 </div>
 
 <!-- PREVIEW -->
 <div class="details">
-    <img id="img" src="rapsilog.jpg">
+    <img id="img">
     <h2 id="name">Select Item</h2>
     <p class="price" id="price">₱0</p>
-    <button class="btn">Add to Cart</button>
 </div>
 
 </div>
 
 <script>
 
-let isAdmin = false;
-let currentCategory = "";
+let isAdmin=false;
+let currentCategory="";
 
-/* MENU DATA */
-const menuData = {
+/* LOAD SAVE */
+let saved = localStorage.getItem("menuData");
+
+let menuData = saved ? JSON.parse(saved) : {
+
 beef:[
 {name:"Bulalo Grupo",price:710,img:""},
 {name:"Bulalo Solo",price:185,img:""},
 {name:"Bistek Tagalog",price:279,img:""}
 ],
+
 pork:[
 {name:"Lechon Kawali",price:395,img:""},
 {name:"Pork Sisig",price:315,img:""}
 ],
+
 chicken:[
 {name:"Chicken Meal",price:295,img:""}
-],
-seafood:[
-{name:"Bangus",price:315,img:""}
-],
-veggies:[
-{name:"Chop Suey",price:235,img:""}
-],
-noodles:[
-{name:"Palabok",price:195,img:""}
-],
-sides:[
-{name:"Garlic Rice",price:46,img:""}
-],
-drinks:[
-{name:"Softdrinks",price:52,img:""}
-],
-beers:[
-{name:"Red Horse",price:105,img:""}
 ]
+
 };
 
+function saveData(){
+    localStorage.setItem("menuData",JSON.stringify(menuData));
+}
+
 function loadMenu(category){
-    currentCategory = category;
-    let container = document.getElementById("menu");
-    container.innerHTML = "";
+    currentCategory=category;
+    let container=document.getElementById("menu");
+    container.innerHTML="";
 
-    menuData[category].forEach((item,index)=>{
-        container.innerHTML += `
-        <div class="card">
-            <h3 onclick="selectItem('${item.name}',${item.price},'${item.img}')">${item.name}</h3>
+    menuData[category].forEach((item,i)=>{
+        let card=document.createElement("div");
+        card.className="card";
+
+        card.innerHTML=`
+            <h3>${item.name}</h3>
             <p class="price">₱${item.price}</p>
-
-            <input type="file" class="upload-btn" onchange="uploadImage(event,${index})">
-        </div>
+            <input type="file" class="upload">
         `;
+
+        /* CLICK SELECT */
+        card.querySelector("h3").onclick=()=>{
+            selectItem(item.name,item.price,item.img);
+        };
+
+        /* UPLOAD */
+        card.querySelector(".upload").onchange=(e)=>{
+            uploadImage(e,i);
+        };
+
+        container.appendChild(card);
     });
 
-    toggleAdmin();
+    applyAdminUI();
 }
 
 function selectItem(name,price,img){
-    document.getElementById("name").innerText = name;
-    document.getElementById("price").innerText = "₱"+price;
-    document.getElementById("img").src = img || "rapsilog.jpg";
+    document.getElementById("name").innerText=name;
+    document.getElementById("price").innerText="₱"+price;
+    document.getElementById("img").src=img || "";
 }
 
 function toggleAdmin(){
-    isAdmin = !isAdmin;
-    document.querySelectorAll('.upload-btn').forEach(btn=>{
-        btn.style.display = isAdmin ? "block" : "none";
-    });
+    isAdmin=!isAdmin;
+    applyAdminUI();
+}
+
+function applyAdminUI(){
+    const main=document.getElementById("main");
+    if(isAdmin){
+        main.classList.add("admin-mode");
+    }else{
+        main.classList.remove("admin-mode");
+    }
 }
 
 function uploadImage(event,index){
-    const file = event.target.files[0];
-    const reader = new FileReader();
+    let file=event.target.files[0];
+    let reader=new FileReader();
 
-    reader.onload = function(e){
-        menuData[currentCategory][index].img = e.target.result;
-    }
+    reader.onload=function(e){
+        menuData[currentCategory][index].img=e.target.result;
+        saveData();
+    };
 
     if(file){
         reader.readAsDataURL(file);
