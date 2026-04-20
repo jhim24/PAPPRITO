@@ -1098,43 +1098,7 @@ function preview(name,price,img){
 function closeImageModal(){
     document.getElementById("imageModal").style.display="none";
 }
-    document.getElementById("imageModal").addEventListener("click", function(e){
-    if(e.target === this){
-        closeImageModal();
-    }
-});
-    let slides = document.querySelectorAll(".slide");
-let index = 0;
-
-setInterval(()=>{
-    slides[index].classList.remove("active");
-    index = (index + 1) % slides.length;
-    slides[index].classList.add("active");
-},3000);
-    // AUTO OPEN
-window.onload = ()=>{
-    setTimeout(()=>{
-        document.getElementById("promoPopup").style.display="flex";
-    },1000);
-};
-
-function closePromo(){
-    document.getElementById("promoPopup").style.display="none";
-}
-    // COUNTDOWN
-let endTime = new Date().getTime() + (2 * 60 * 60 * 1000); // 2 hours
-
-setInterval(()=>{
-    let now = new Date().getTime();
-    let distance = endTime - now;
-
-    let hours = Math.floor(distance / (1000*60*60));
-    let minutes = Math.floor((distance % (1000*60*60))/(1000*60));
-    let seconds = Math.floor((distance % (1000*60))/1000);
-
-    document.getElementById("countdown").innerHTML =
-    `⏳ Ends in ${hours}h ${minutes}m ${seconds}s`;
-},1000);
+  
 </script>
 <!-- MENU POPUP -->
 <div id="menuModal" class="menu-modal">
