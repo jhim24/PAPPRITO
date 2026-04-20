@@ -19,7 +19,6 @@ body{
 }
 
 /* NAVBAR */
-/* NAVBAR RED */
 .navbar{
     position:absolute;
     top:0;
@@ -28,11 +27,11 @@ body{
     justify-content:space-between;
     align-items:center;
     padding:15px 40px;
-    background:#d71920; /* RED */
+    background:#d71920;
     z-index:10;
 }
 
-/* LOGO + TEXT */
+/* LOGO */
 .logo-container{
     display:flex;
     align-items:center;
@@ -82,11 +81,13 @@ body{
     position:relative;
 }
 
+/* 🔥 FIX CLICK ISSUE */
 .hero::before{
     content:"";
     position:absolute;
     inset:0;
     background:rgba(0,0,0,0.5);
+    pointer-events:none; /* IMPORTANT */
 }
 
 .hero-content{
@@ -101,6 +102,19 @@ body{
 .hero-content p{
     margin-top:10px;
     font-size:18px;
+}
+
+/* ✅ ADDRESS STYLE */
+.address{
+    display:inline-block;
+    margin-top:15px;
+    color:white;
+    text-decoration:none;
+    font-size:16px;
+}
+
+.address:hover{
+    color:#ffcc00;
 }
 
 /* SECTION */
@@ -176,7 +190,7 @@ body{
         <a href="#">MENU</a>
         <a href="#">ABOUT</a>
         <a href="#">CONTACT</a>
-         <a href="#">ADDRESS</a>
+        <a href="#">ADDRESS</a>
     </div>
 
     <button class="book-btn">ORDER NOW</button>
@@ -185,13 +199,15 @@ body{
 <!-- HERO -->
 <div class="hero">
     <div class="hero-content">
-        <h1>PAPRITO RESTAURANT</h1>
+        <h1>PAPPRITO RESTAURANT</h1>
         <p>Main Dining • Roof Deck • Conference Room</p>
+
         <a href="https://www.google.com/maps?q=Grandview+Complex+Tagaytay"
-   target="_blank"
-   class="address">
-   📍 Grandview Complex, Tagaytay City
-</a>
+           target="_blank"
+           class="address">
+           📍 Grandview Complex, Tagaytay City
+        </a>
+
     </div>
 </div>
 
