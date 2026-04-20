@@ -19,6 +19,7 @@ body{
 }
 
 /* NAVBAR */
+/* NAVBAR RED */
 .navbar{
     position:absolute;
     top:0;
@@ -26,35 +27,47 @@ body{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding:20px 50px;
+    padding:15px 40px;
+    background:#d71920; /* RED */
     z-index:10;
 }
 
-.logo{
+/* LOGO + TEXT */
+.logo-container{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.logo-container img{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+}
+
+.logo-container span{
     font-size:20px;
     font-weight:bold;
+    color:white;
 }
 
-.nav-links{
-    display:flex;
-    gap:30px;
-}
-
+/* LINKS */
 .nav-links a{
     color:white;
     text-decoration:none;
-    font-size:14px;
 }
 
 .nav-links a:hover{
     color:#ffcc00;
 }
 
+/* BUTTON */
 .book-btn{
     background:#ffcc00;
     color:black;
-    padding:10px 20px;
+    padding:8px 15px;
     border:none;
+    font-weight:bold;
     cursor:pointer;
 }
 
@@ -152,7 +165,11 @@ body{
 
 <!-- NAVBAR -->
 <div class="navbar">
-    <div class="logo">🍴 Foodie</div>
+
+    <div class="logo-container">
+        <img src="logo.jpg" alt="logo">
+        <span>PAPAPRITO</span>
+    </div>
 
     <div class="nav-links">
         <a href="#">HOME</a>
