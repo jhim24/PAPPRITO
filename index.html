@@ -500,6 +500,31 @@ body{
     font-size:12px;
     padding:5px;
 }
+    /* IMAGE POPUP */
+.image-modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.9);
+    justify-content:center;
+    align-items:center;
+    z-index:99999;
+}
+
+.image-modal img{
+    max-width:90%;
+    max-height:80%;
+    border-radius:10px;
+}
+
+.close-image{
+    position:absolute;
+    top:20px;
+    right:30px;
+    color:white;
+    font-size:25px;
+    cursor:pointer;
+}
 </style>
 </head>
 
@@ -573,7 +598,14 @@ body{
         <p id="modalContent"></p>
     </div>
 </div>
+function openImageModal(img){
+    document.getElementById("imageModal").style.display="flex";
+    document.getElementById("modalImg").src = img;
+}
 
+function closeImageModal(){
+    document.getElementById("imageModal").style.display="none";
+}
 <script>
 function openModal(type){
     const modal = document.getElementById("modal");
@@ -730,7 +762,7 @@ function showCategory(cat){
 
 function preview(name,price,img){
     document.getElementById("menuPreview").innerHTML=`
-        <img src="${img}">
+        <img src="${img}" onclick="openImageModal('${img}')" style="cursor:zoom-in;">
         <h3>${name}</h3>
         <p>${price}</p>
     `;
@@ -771,6 +803,11 @@ function preview(name,price,img){
 
     </div>
 
+</div>
+<!-- IMAGE PREVIEW MODAL -->
+<div id="imageModal" class="image-modal" onclick="closeImageModal()">
+    <span class="close-image">✖</span>
+    <img id="modalImg">
 </div>
 </body>
 </html>
