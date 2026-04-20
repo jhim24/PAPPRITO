@@ -3,229 +3,265 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Foodie POS</title>
+<title>Foodie Kitchen</title>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial;}
+body{display:flex;background:#0d0d0d;color:white;}
 
-body {
-    display: flex;
-    background: #0d0d0d;
-    color: white;
+/* SIDEBAR */
+.sidebar{
+    width:230px;
+    background:#111;
+    height:100vh;
+    padding:20px;
 }
-
-/* SIDEBAR MAIN */
-.sidebar {
-    width: 220px;
-    background: #111;
-    height: 100vh;
-    padding: 20px;
+.sidebar h2{color:white;}
+.sidebar ul{list-style:none;margin-top:20px;}
+.sidebar li{
+    padding:12px;
+    border-radius:10px;
+    cursor:pointer;
+    margin-bottom:10px;
 }
-
-.sidebar li {
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 8px;
-    margin-bottom: 10px;
-}
-
-.sidebar li:hover {
-    background: linear-gradient(45deg, red, yellow);
-    color: black;
+.sidebar li:hover,.active{
+    background:linear-gradient(45deg,#ffcc00,#ff3b3b);
+    color:black;
 }
 
 /* MAIN */
-.main {
-    flex: 1;
-    display: flex;
+.main{flex:1;padding:20px;}
+
+/* HEADER */
+.header{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:20px;
 }
+
+/* CARDS */
+.cards{display:flex;gap:15px;margin-bottom:20px;}
+.card{
+    flex:1;
+    padding:15px;
+    border-radius:15px;
+    color:black;
+}
+.green{background:#00c853;}
+.purple{background:#b388ff;}
+.blue{background:#448aff;}
+.red{background:#ff5252;}
+
+/* PANEL BOX */
+.panel{
+    background:#1a1a1a;
+    padding:15px;
+    border-radius:15px;
+    margin-bottom:20px;
+}
+
+/* TRENDING */
+.trending{
+    display:flex;
+    gap:15px;
+}
+.trend-card{
+    background:#111;
+    padding:10px;
+    border-radius:15px;
+    width:200px;
+}
+.trend-card img{
+    width:100%;
+    border-radius:10px;
+}
+
+/* MENU LAYOUT */
+.menu-layout{display:flex;height:100%;}
 
 /* CATEGORY SIDEBAR */
-.category-bar {
-    width: 180px;
-    background: #1a1a1a;
-    padding: 10px;
+.category-bar{
+    width:180px;
+    background:#1a1a1a;
+    padding:10px;
 }
-
-.category {
-    padding: 10px;
-    margin-bottom: 8px;
-    background: #111;
-    border-radius: 8px;
-    cursor: pointer;
+.category{
+    padding:10px;
+    margin-bottom:8px;
+    background:#111;
+    border-radius:8px;
+    cursor:pointer;
 }
-
-.category:hover {
-    background: linear-gradient(45deg, red, yellow);
-    color: black;
+.category:hover{
+    background:linear-gradient(45deg,red,yellow);
+    color:black;
 }
 
 /* PRODUCTS */
-.products {
-    flex: 1;
-    padding: 15px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
+.products{
+    flex:1;
+    display:flex;
+    flex-wrap:wrap;
+    gap:15px;
+    padding:10px;
+}
+.product{
+    width:160px;
+    background:#111;
+    border-radius:15px;
+    overflow:hidden;
+    cursor:pointer;
+}
+.product img{
+    width:100%;
+    height:120px;
+    object-fit:cover;
+}
+.name{
+    background:#ffcc00;
+    color:black;
+    text-align:center;
+    padding:5px;
+    font-weight:bold;
+}
+.price{
+    background:#ff3b3b;
+    text-align:center;
+    padding:5px;
 }
 
-/* PRODUCT CARD */
-.card {
-    width: 160px;
-    background: #111;
-    border-radius: 15px;
-    overflow: hidden;
-    cursor: pointer;
-    box-shadow: 0 0 10px rgba(255,0,0,0.3);
+/* PREVIEW */
+.preview{
+    width:250px;
+    background:#111;
+    padding:15px;
 }
-
-.card img {
-    width: 100%;
-    height: 120px;
-    object-fit: cover;
+.preview img{
+    width:100%;
+    border-radius:10px;
 }
-
-.name {
-    background: #ffcc00;
-    color: black;
-    text-align: center;
-    padding: 5px;
-    font-weight: bold;
-}
-
-.price {
-    background: #ff3b3b;
-    text-align: center;
-    padding: 5px;
-}
-
-/* PREVIEW PANEL */
-.preview {
-    width: 250px;
-    background: #111;
-    padding: 15px;
-    border-left: 2px solid #ffcc00;
-}
-
-.preview img {
-    width: 100%;
-    border-radius: 10px;
-}
-
-.preview h3 {
-    margin-top: 10px;
-    color: #ffcc00;
-}
-
-.preview p {
-    color: #ff3b3b;
-    font-size: 18px;
-}
-
+.preview h3{color:#ffcc00;margin-top:10px;}
+.preview p{color:#ff3b3b;font-size:18px;}
 </style>
 </head>
 
 <body>
 
-<!-- MAIN SIDEBAR -->
+<!-- SIDEBAR -->
 <div class="sidebar">
-    <h2 style="color:red;">🔥 Foodie</h2>
+    <h2>🍴 Foodie Kitchen</h2>
     <ul>
-        <li onclick="loadMenu()">Menu</li>
+        <li class="active" onclick="showDashboard(this)">Dashboard</li>
+        <li onclick="showMenu(this)">Menu</li>
     </ul>
 </div>
 
-<!-- MAIN CONTENT -->
-<div class="main">
-
-    <!-- CATEGORY -->
-    <div class="category-bar" id="categories"></div>
-
-    <!-- PRODUCTS -->
-    <div class="products" id="products"></div>
-
-    <!-- PREVIEW -->
-    <div class="preview">
-        <h3>Preview</h3>
-        <img id="pimg" src="">
-        <h3 id="pname">Select product</h3>
-        <p id="pprice"></p>
-    </div>
-
-</div>
+<!-- MAIN -->
+<div class="main" id="main"></div>
 
 <script>
 
-/* MENU DATA WITH IMAGE */
+/* MENU DATA */
 const menu = {
-    "BEEF": [
-        ["Bulalo Grupo",710,"https://images.unsplash.com/photo-1604908176997-431c4ed5b8c0"],
-        ["Bulalo Solo",185,"https://images.unsplash.com/photo-1604908176997-431c4ed5b8c0"],
-        ["Bistek Tagalog",279,"https://images.unsplash.com/photo-1555939594-58d7cb561ad1"]
-    ],
-    "PORK": [
-        ["Lechon Kawali",395,"https://images.unsplash.com/photo-1555939594-58d7cb561ad1"],
-        ["Pork Sisig",315,"https://images.unsplash.com/photo-1546069901-ba9599a7e63c"]
-    ],
-    "CHICKEN": [
-        ["Chicken Platter",315,"https://images.unsplash.com/photo-1604908176997-431c4ed5b8c0"]
-    ],
-    "SEAFOOD": [
-        ["Calamares",305,"https://images.unsplash.com/photo-1555939594-58d7cb561ad1"]
-    ]
+"BEEF":[["Bulalo Grupo",710,"https://images.unsplash.com/photo-1604908176997-431c4ed5b8c0"]],
+"PORK":[["Lechon Kawali",395,"https://images.unsplash.com/photo-1555939594-58d7cb561ad1"]],
+"CHICKEN":[["Chicken Platter",315,"https://images.unsplash.com/photo-1604908176997-431c4ed5b8c0"]]
 };
 
-/* LOAD MENU */
-function loadMenu() {
-    const catDiv = document.getElementById("categories");
-    catDiv.innerHTML = "";
+/* DASHBOARD */
+function showDashboard(el){
+setActive(el);
+document.getElementById("main").innerHTML=`
+<div class="header">
+<h2>Welcome, Sajib 👋</h2>
+</div>
 
-    for (let cat in menu) {
-        let div = document.createElement("div");
-        div.className = "category";
-        div.innerText = cat;
+<div class="cards">
+<div class="card green">$11,256<br>Revenue</div>
+<div class="card purple">245<br>Orders</div>
+<div class="card blue">$6,556<br>Expense</div>
+<div class="card red">$4,227<br>Revenue</div>
+</div>
 
-        div.onclick = () => showProducts(cat);
+<div class="panel">
+<h3>Sales Details</h3>
+<p style="margin-top:10px;">(Chart placeholder)</p>
+</div>
 
-        catDiv.appendChild(div);
-    }
+<div class="panel">
+<h3>Trending Orders</h3>
+<div class="trending">
+<div class="trend-card">
+<img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1">
+<p>Chicken Pot Pie</p>
+</div>
+<div class="trend-card">
+<img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c">
+<p>Mixed Salad</p>
+</div>
+</div>
+</div>
+`;
 }
 
-/* SHOW PRODUCTS */
-function showProducts(cat) {
-    const prodDiv = document.getElementById("products");
-    prodDiv.innerHTML = "";
+/* MENU */
+function showMenu(el){
+setActive(el);
 
-    menu[cat].forEach(item => {
-        let card = document.createElement("div");
-        card.className = "card";
+let html=`<div class="menu-layout">
 
-        card.innerHTML = `
-            <img src="${item[2]}">
-            <div class="name">${item[0]}</div>
-            <div class="price">₱${item[1]}</div>
-        `;
+<div class="category-bar">`;
 
-        card.onclick = () => preview(item);
+for(let cat in menu){
+html+=`<div class="category" onclick="showProducts('${cat}')">${cat}</div>`;
+}
 
-        prodDiv.appendChild(card);
-    });
+html+=`</div>
+
+<div class="products" id="products"></div>
+
+<div class="preview">
+<h3>Preview</h3>
+<img id="pimg">
+<h3 id="pname">Select product</h3>
+<p id="pprice"></p>
+</div>
+
+</div>`;
+
+document.getElementById("main").innerHTML=html;
+}
+
+/* PRODUCTS */
+function showProducts(cat){
+let box=document.getElementById("products");
+box.innerHTML="";
+
+menu[cat].forEach(item=>{
+box.innerHTML+=`
+<div class="product" onclick="preview('${item[0]}','${item[1]}','${item[2]}')">
+<img src="${item[2]}">
+<div class="name">${item[0]}</div>
+<div class="price">₱${item[1]}</div>
+</div>`;
+});
 }
 
 /* PREVIEW */
-function preview(item) {
-    document.getElementById("pimg").src = item[2];
-    document.getElementById("pname").innerText = item[0];
-    document.getElementById("pprice").innerText = "₱" + item[1];
+function preview(name,price,img){
+document.getElementById("pimg").src=img;
+document.getElementById("pname").innerText=name;
+document.getElementById("pprice").innerText="₱"+price;
+}
+
+/* ACTIVE MENU */
+function setActive(el){
+document.querySelectorAll(".sidebar li").forEach(li=>li.classList.remove("active"));
+el.classList.add("active");
 }
 
 /* INIT */
-loadMenu();
+showDashboard(document.querySelector(".sidebar li"));
 
 </script>
 
