@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Foodie Dashboard</title>
+<title>Foodie POS</title>
 
 <style>
 * {
@@ -19,32 +19,22 @@ body {
     color: white;
 }
 
-/* SIDEBAR */
+/* SIDEBAR MAIN */
 .sidebar {
-    width: 230px;
-    height: 100vh;
+    width: 220px;
     background: #111;
+    height: 100vh;
     padding: 20px;
 }
 
-.sidebar h2 {
-    color: #ff3b3b;
-}
-
-.sidebar ul {
-    list-style: none;
-    margin-top: 30px;
-}
-
 .sidebar li {
-    padding: 12px;
-    margin-bottom: 10px;
-    border-radius: 10px;
+    padding: 10px;
     cursor: pointer;
+    border-radius: 8px;
+    margin-bottom: 10px;
 }
 
-.sidebar li:hover,
-.active {
+.sidebar li:hover {
     background: linear-gradient(45deg, red, yellow);
     color: black;
 }
@@ -52,191 +42,190 @@ body {
 /* MAIN */
 .main {
     flex: 1;
-    padding: 20px;
-}
-
-/* HEADER */
-.header {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
 }
 
-/* CARDS */
-.cards {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 20px;
+/* CATEGORY SIDEBAR */
+.category-bar {
+    width: 180px;
+    background: #1a1a1a;
+    padding: 10px;
 }
 
-.card {
+.category {
+    padding: 10px;
+    margin-bottom: 8px;
+    background: #111;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.category:hover {
+    background: linear-gradient(45deg, red, yellow);
+    color: black;
+}
+
+/* PRODUCTS */
+.products {
     flex: 1;
     padding: 15px;
-    border-radius: 15px;
-    color: black;
-    font-weight: bold;
-}
-
-.red { background: #ff3b3b; }
-.yellow { background: #ffcc00; }
-.orange { background: #ff6b00; }
-.light { background: #ffd966; }
-
-/* GRID */
-.grid {
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
 }
 
-.box {
-    width: 200px;
-    background: #1a1a1a;
-    padding: 15px;
+/* PRODUCT CARD */
+.card {
+    width: 160px;
+    background: #111;
     border-radius: 15px;
+    overflow: hidden;
     cursor: pointer;
-    text-align: center;
     box-shadow: 0 0 10px rgba(255,0,0,0.3);
 }
 
-.box:hover {
-    transform: scale(1.05);
-}
-
-/* MODAL */
-.modal {
-    display: none;
-    position: fixed;
+.card img {
     width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.8);
-    justify-content: center;
-    align-items: center;
+    height: 120px;
+    object-fit: cover;
 }
 
-.modal-box {
-    background: #111;
-    padding: 20px;
-    border-radius: 15px;
+.name {
+    background: #ffcc00;
+    color: black;
     text-align: center;
-    box-shadow: 0 0 20px red;
+    padding: 5px;
+    font-weight: bold;
 }
 
-.close {
-    float: right;
-    cursor: pointer;
-    color: red;
+.price {
+    background: #ff3b3b;
+    text-align: center;
+    padding: 5px;
 }
+
+/* PREVIEW PANEL */
+.preview {
+    width: 250px;
+    background: #111;
+    padding: 15px;
+    border-left: 2px solid #ffcc00;
+}
+
+.preview img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.preview h3 {
+    margin-top: 10px;
+    color: #ffcc00;
+}
+
+.preview p {
+    color: #ff3b3b;
+    font-size: 18px;
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- SIDEBAR -->
+<!-- MAIN SIDEBAR -->
 <div class="sidebar">
-    <h2>🔥 Foodie</h2>
+    <h2 style="color:red;">🔥 Foodie</h2>
     <ul>
-        <li class="active" onclick="showDashboard()">Dashboard</li>
-        <li onclick="showMenu()">Menu</li>
-        <li>Orders</li>
-        <li>Analytics</li>
+        <li onclick="loadMenu()">Menu</li>
     </ul>
 </div>
 
-<!-- MAIN -->
+<!-- MAIN CONTENT -->
 <div class="main">
 
-    <div id="content"></div>
+    <!-- CATEGORY -->
+    <div class="category-bar" id="categories"></div>
 
-</div>
+    <!-- PRODUCTS -->
+    <div class="products" id="products"></div>
 
-<!-- MODAL -->
-<div class="modal" id="modal">
-    <div class="modal-box">
-        <span class="close" onclick="closeModal()">×</span>
-        <h3 id="modalName"></h3>
-        <p id="modalPrice"></p>
+    <!-- PREVIEW -->
+    <div class="preview">
+        <h3>Preview</h3>
+        <img id="pimg" src="">
+        <h3 id="pname">Select product</h3>
+        <p id="pprice"></p>
     </div>
+
 </div>
 
 <script>
 
-/* MENU DATA */
+/* MENU DATA WITH IMAGE */
 const menu = {
-    "BEEF": [["Bulalo Grupo",710],["Bulalo Solo",185],["Bistek Tagalog",279]],
-    "PORK": [["Lechon Kawali",395],["Pork Sisig",315],["Lumpiang Shanghai",235]],
-    "CHICKEN": [["PapsChicken Platter",315],["Chicken Sisig",295]],
-    "SEAFOOD": [["Crispy Bangusarap",315],["Calamares",305],["Crispy Tawilis",285]],
-    "VEGGIES": [["Chop Suey",235],["Tortang Talong",192]],
-    "NOODLES": [["Canton-Bihon",278],["Palabok",195],["Beef Mami",159],["Chicken Mami",149]],
-    "SIDES": [["PapShots",72],["Spicy Tofu",65]],
-    "DRINKS": [["Iced Tea",52],["Coffee",59]]
+    "BEEF": [
+        ["Bulalo Grupo",710,"https://images.unsplash.com/photo-1604908176997-431c4ed5b8c0"],
+        ["Bulalo Solo",185,"https://images.unsplash.com/photo-1604908176997-431c4ed5b8c0"],
+        ["Bistek Tagalog",279,"https://images.unsplash.com/photo-1555939594-58d7cb561ad1"]
+    ],
+    "PORK": [
+        ["Lechon Kawali",395,"https://images.unsplash.com/photo-1555939594-58d7cb561ad1"],
+        ["Pork Sisig",315,"https://images.unsplash.com/photo-1546069901-ba9599a7e63c"]
+    ],
+    "CHICKEN": [
+        ["Chicken Platter",315,"https://images.unsplash.com/photo-1604908176997-431c4ed5b8c0"]
+    ],
+    "SEAFOOD": [
+        ["Calamares",305,"https://images.unsplash.com/photo-1555939594-58d7cb561ad1"]
+    ]
 };
 
-/* DASHBOARD VIEW */
-function showDashboard() {
-    document.getElementById("content").innerHTML = `
-        <div class="header">
-            <h2>Welcome, Chef 👨‍🍳</h2>
-        </div>
-
-        <div class="cards">
-            <div class="card red">$11,256<br>Revenue</div>
-            <div class="card yellow">245<br>Orders</div>
-            <div class="card orange">$6,556<br>Expenses</div>
-            <div class="card light">$4,227<br>Profit</div>
-        </div>
-
-        <h3>🔥 Trending</h3>
-        <div class="grid">
-            <div class="box">Chicken Meal</div>
-            <div class="box">Healthy Bowl</div>
-            <div class="box">Rice Combo</div>
-        </div>
-    `;
-}
-
-/* MENU (CATEGORY VIEW) */
-function showMenu() {
-    let html = `<h2>Menu Categories</h2><div class="grid">`;
+/* LOAD MENU */
+function loadMenu() {
+    const catDiv = document.getElementById("categories");
+    catDiv.innerHTML = "";
 
     for (let cat in menu) {
-        html += `<div class="box" onclick="showProducts('${cat}')">${cat}</div>`;
-    }
+        let div = document.createElement("div");
+        div.className = "category";
+        div.innerText = cat;
 
-    html += `</div>`;
-    document.getElementById("content").innerHTML = html;
+        div.onclick = () => showProducts(cat);
+
+        catDiv.appendChild(div);
+    }
 }
 
-/* PRODUCTS VIEW */
+/* SHOW PRODUCTS */
 function showProducts(cat) {
-    let html = `<h2>${cat}</h2><div class="grid">`;
+    const prodDiv = document.getElementById("products");
+    prodDiv.innerHTML = "";
 
     menu[cat].forEach(item => {
-        html += `
-            <div class="box" onclick="openModal('${item[0]}', ${item[1]})">
-                ${item[0]}<br>₱${item[1]}
-            </div>
+        let card = document.createElement("div");
+        card.className = "card";
+
+        card.innerHTML = `
+            <img src="${item[2]}">
+            <div class="name">${item[0]}</div>
+            <div class="price">₱${item[1]}</div>
         `;
+
+        card.onclick = () => preview(item);
+
+        prodDiv.appendChild(card);
     });
-
-    html += `</div>`;
-    document.getElementById("content").innerHTML = html;
 }
 
-/* MODAL */
-function openModal(name, price) {
-    document.getElementById("modalName").innerText = name;
-    document.getElementById("modalPrice").innerText = "₱" + price;
-    document.getElementById("modal").style.display = "flex";
+/* PREVIEW */
+function preview(item) {
+    document.getElementById("pimg").src = item[2];
+    document.getElementById("pname").innerText = item[0];
+    document.getElementById("pprice").innerText = "₱" + item[1];
 }
 
-function closeModal() {
-    document.getElementById("modal").style.display = "none";
-}
-
-/* LOAD DEFAULT */
-showDashboard();
+/* INIT */
+loadMenu();
 
 </script>
 
