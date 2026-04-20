@@ -3,326 +3,189 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Foodie Kitchen</title>
+<title>Foodie Restaurant</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial;}
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
 
-body{
+/* NAVBAR */
+.navbar{
+    position:absolute;
+    top:0;
+    width:100%;
     display:flex;
-    background: linear-gradient(135deg,#1a1a1a,#2b0f0f,#1a1a1a);
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 50px;
+    z-index:10;
+}
+
+.logo{
+    font-size:20px;
+    font-weight:bold;
     color:white;
 }
 
-/* SIDEBAR */
-.sidebar{
-    width:230px;
-    background:#111;
-    height:100vh;
-    padding:20px;
-}
-.sidebar ul{list-style:none;margin-top:20px;}
-.sidebar li{
-    padding:12px;
-    border-radius:10px;
-    cursor:pointer;
-    margin-bottom:10px;
-}
-.sidebar li:hover,.active{
-    background:linear-gradient(45deg,#ffcc00,#ff3b3b);
-    color:black;
-}
-
-/* MAIN */
-.main{flex:1;padding:20px;}
-
-/* DASHBOARD */
-.header{
+.nav-links{
     display:flex;
-    justify-content:space-between;
-    margin-bottom:20px;
+    gap:30px;
 }
 
-.cards{display:flex;gap:15px;margin-bottom:20px;}
-.card{
-    flex:1;
-    padding:15px;
-    border-radius:15px;
-    color:black;
-}
-.green{background:#00c853;}
-.purple{background:#b388ff;}
-.blue{background:#448aff;}
-.red{background:#ff5252;}
-
-.panel{
-    background:#1a1a1a;
-    padding:15px;
-    border-radius:15px;
-    margin-bottom:20px;
+.nav-links a{
+    color:white;
+    text-decoration:none;
+    font-size:14px;
+    letter-spacing:1px;
 }
 
-.trending{display:flex;gap:15px;}
-.trend-card{
-    background:#111;
-    padding:10px;
-    border-radius:15px;
-    width:200px;
-}
-.trend-card img{
-    width:100%;
-    border-radius:10px;
+.nav-links a:hover{
+    color:#ffcc00;
 }
 
-/* MENU */
-.menu-layout{display:flex;height:100%;}
-
-/* CATEGORY */
-.category-bar{
-    width:180px;
-    background:#1a1a1a;
-    padding:10px;
-}
-.category{
-    padding:10px;
-    margin-bottom:8px;
-    background:#111;
-    border-radius:8px;
-    cursor:pointer;
-}
-.category:hover{
-    background:linear-gradient(45deg,red,yellow);
-    color:black;
-}
-
-/* PRODUCTS GRID */
-.products{
-    flex:1;
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
-    gap:15px;
-    padding:10px;
-}
-
-/* PRODUCT CARD */
-.product{
-    height:220px;
-    background:#111;
-    border-radius:15px;
-    overflow:hidden;
-    cursor:pointer;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-    transition:.3s;
-}
-.product:hover{transform:scale(1.05);}
-
-.product img{
-    width:100%;
-    height:130px;
-    object-fit:cover;
-}
-
-.name{
+.book-btn{
     background:#ffcc00;
     color:black;
-    text-align:center;
-    padding:6px;
+    padding:10px 20px;
+    border:none;
+    cursor:pointer;
     font-weight:bold;
-    font-size:13px;
 }
-.price{
-    background:#ff3b3b;
+
+/* HERO */
+.hero{
+    height:100vh;
+    background:url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb') no-repeat center/cover;
+    display:flex;
+    align-items:center;
+    justify-content:center;
     text-align:center;
-    padding:6px;
-    font-size:13px;
-}
-
-/* PREVIEW PANEL */
-.preview{
-    width:260px;
-    padding:15px;
-    background:#111;
     position:relative;
-    overflow:hidden;
 }
 
-/* BLUR BACKGROUND */
-.preview::before{
+/* DARK OVERLAY */
+.hero::before{
     content:"";
     position:absolute;
     inset:0;
-    background-size:cover;
-    background-position:center;
-    filter:blur(10px) brightness(.4);
-    z-index:0;
+    background:rgba(0,0,0,0.5);
 }
 
-/* CONTENT */
-.preview-content{
+/* HERO CONTENT */
+.hero-content{
     position:relative;
-    z-index:1;
-    text-align:center;
+    color:white;
 }
 
-/* HALF IMAGE */
-.preview img{
-    width:100%;
-    height:140px;
-    object-fit:cover;
-    border-radius:10px;
-    margin-top:10px;
+.hero-content h1{
+    font-size:60px;
+    letter-spacing:5px;
+    margin-bottom:10px;
 }
 
-.preview h3{
-    color:#ffcc00;
-    margin-top:10px;
-}
-
-.preview p{
-    color:#ff3b3b;
+.hero-content p{
     font-size:18px;
+    opacity:0.8;
 }
+
+/* SECTION */
+.section{
+    padding:60px;
+    background:#111;
+    color:white;
+}
+
+.section h2{
+    margin-bottom:20px;
+}
+
+/* MENU GRID */
+.menu-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:20px;
+}
+
+.menu-card{
+    background:#1a1a1a;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.menu-card img{
+    width:100%;
+    height:150px;
+    object-fit:cover;
+}
+
+.menu-card h3{
+    padding:10px;
+    background:#ffcc00;
+    color:black;
+}
+
+.menu-card p{
+    padding:10px;
+    color:#ff3b3b;
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- SIDEBAR -->
-<div class="sidebar">
-    <h2>🍴 Foodie Kitchen</h2>
-    <ul>
-        <li class="active" onclick="showDashboard(this)">Dashboard</li>
-        <li onclick="showMenu(this)">Menu</li>
-    </ul>
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="logo">🍴 Foodie</div>
+
+    <div class="nav-links">
+        <a href="#">HOME</a>
+        <a href="#">MENU</a>
+        <a href="#">ABOUT</a>
+        <a href="#">CONTACT</a>
+    </div>
+
+    <button class="book-btn">ORDER NOW</button>
 </div>
 
-<!-- MAIN -->
-<div class="main" id="main"></div>
-
-<script>
-
-/* MENU DATA */
-const menu = {
-"BEEF":[["Bulalo Grupo",710,"https://images.unsplash.com/photo-1604908176997-431c4ed5b8c0"]],
-"PORK":[["Lechon Kawali",395,"https://images.unsplash.com/photo-1555939594-58d7cb561ad1"]],
-"CHICKEN":[["Chicken Platter",315,"https://images.unsplash.com/photo-1604908176997-431c4ed5b8c0"]],
-"SEAFOOD":[["Calamares",305,"https://images.unsplash.com/photo-1555939594-58d7cb561ad1"]],
-"VEGGIES":[["Chop Suey",235,"https://images.unsplash.com/photo-1546069901-ba9599a7e63c"]],
-"NOODLES":[["Beef Mami",159,"https://images.unsplash.com/photo-1555939594-58d7cb561ad1"]],
-"SIDES":[["PapShots",72,"https://images.unsplash.com/photo-1546069901-ba9599a7e63c"]],
-"SWEETS & DRINKS":[["Iced Tea",52,"https://images.unsplash.com/photo-1546069901-ba9599a7e63c"]],
-"BEERS":[["Red Horse",105,"https://images.unsplash.com/photo-1546069901-ba9599a7e63c"]]
-};
-
-/* DASHBOARD */
-function showDashboard(el){
-setActive(el);
-document.getElementById("main").innerHTML=`
-<div class="header">
-<h2>Welcome, Sajib 👋</h2>
+<!-- HERO -->
+<div class="hero">
+    <div class="hero-content">
+        <h1>FOODIE RESTAURANT</h1>
+        <p>Delicious Meals • Doha Qatar</p>
+    </div>
 </div>
 
-<div class="cards">
-<div class="card green">$11,256<br>Revenue</div>
-<div class="card purple">245<br>Orders</div>
-<div class="card blue">$6,556<br>Expense</div>
-<div class="card red">$4,227<br>Revenue</div>
+<!-- MENU SECTION -->
+<div class="section">
+    <h2>🔥 Popular Dishes</h2>
+
+    <div class="menu-grid">
+
+        <div class="menu-card">
+            <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1">
+            <h3>Bulalo</h3>
+            <p>₱710</p>
+        </div>
+
+        <div class="menu-card">
+            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c">
+            <h3>Chicken Sisig</h3>
+            <p>₱295</p>
+        </div>
+
+        <div class="menu-card">
+            <img src="https://images.unsplash.com/photo-1604908176997-431c4ed5b8c0">
+            <h3>Lechon Kawali</h3>
+            <p>₱395</p>
+        </div>
+
+    </div>
 </div>
-
-<div class="panel">
-<h3>Sales Details</h3>
-<p style="margin-top:10px;">(Chart placeholder)</p>
-</div>
-
-<div class="panel">
-<h3>Trending Orders</h3>
-<div class="trending">
-<div class="trend-card">
-<img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1">
-<p>Chicken Pot Pie</p>
-</div>
-<div class="trend-card">
-<img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c">
-<p>Mixed Salad</p>
-</div>
-</div>
-</div>
-`;
-}
-
-/* MENU */
-function showMenu(el){
-setActive(el);
-
-let html=`<div class="menu-layout">
-
-<div class="category-bar" id="catBar">`;
-
-let firstCategory = Object.keys(menu)[0];
-
-for(let cat in menu){
-html+=`<div class="category" onclick="showProducts('${cat}')">${cat}</div>`;
-}
-
-html+=`</div>
-
-<div class="products" id="products"></div>
-
-<div class="preview" id="previewBox">
-<div class="preview-content">
-<h3>Preview</h3>
-<img id="pimg">
-<h3 id="pname">Select product</h3>
-<p id="pprice"></p>
-</div>
-</div>
-
-</div>`;
-
-document.getElementById("main").innerHTML=html;
-
-/* AUTO LOAD FIRST CATEGORY */
-showProducts(firstCategory);
-}
-/* PRODUCTS */
-function showProducts(cat){
-let box=document.getElementById("products");
-box.innerHTML="";
-
-menu[cat].forEach(item=>{
-box.innerHTML+=`
-<div class="product" onclick="preview('${item[0]}','${item[1]}','${item[2]}')">
-<img src="${item[2]}">
-<div class="name">${item[0]}</div>
-<div class="price">₱${item[1]}</div>
-</div>`;
-});
-}
-
-/* PREVIEW */
-function preview(name,price,img){
-document.getElementById("pimg").src=img;
-document.getElementById("pname").innerText=name;
-document.getElementById("pprice").innerText="₱"+price;
-
-let previewBox=document.getElementById("previewBox");
-previewBox.style.backgroundImage=`url(${img})`;
-previewBox.style.backgroundSize="cover";
-previewBox.style.backgroundPosition="center";
-}
-
-/* ACTIVE */
-function setActive(el){
-document.querySelectorAll(".sidebar li").forEach(li=>li.classList.remove("active"));
-el.classList.add("active");
-}
-
-/* INIT */
-showDashboard(document.querySelector(".sidebar li"));
-
-</script>
 
 </body>
 </html>
