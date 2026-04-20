@@ -142,18 +142,79 @@ body{display:flex;background:#0d0d0d;color:white;}
 }
 .preview h3{color:#ffcc00;margin-top:10px;}
 .preview p{color:#ff3b3b;font-size:18px;}
+    /* BACKGROUND */
+body {
+    display:flex;
+    background: linear-gradient(135deg, #1a1a1a, #2b0f0f, #1a1a1a);
+    color:white;
+}
+
+/* PRODUCTS GRID FIX */
+.products {
+    flex:1;
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap:15px;
+    padding:10px;
+}
+
+/* PRODUCT CARD FIX */
+.product {
+    width:100%;
+    height:220px;
+    background:#111;
+    border-radius:15px;
+    overflow:hidden;
+    cursor:pointer;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+}
+
+.product img {
+    width:100%;
+    height:130px;
+    object-fit:cover;
+}
+
+/* PREVIEW */
+.preview {
+    width:280px;
+    position:relative;
+    overflow:hidden;
+}
+
+/* BACKGROUND IMAGE */
+.preview::before {
+    content:"";
+    position:absolute;
+    inset:0;
+    background-size:cover;
+    background-position:center;
+    filter:blur(10px) brightness(0.4);
+    z-index:0;
+}
+
+/* CONTENT */
+.preview-content {
+    position:relative;
+    z-index:1;
+    text-align:center;
+}
 </style>
 </head>
 
 <body>
 
 <!-- SIDEBAR -->
-<div class="sidebar">
-    <h2>🍴 Foodie Kitchen</h2>
-    <ul>
-        <li class="active" onclick="showDashboard(this)">Dashboard</li>
-        <li onclick="showMenu(this)">Menu</li>
-    </ul>
+<div class="preview" id="previewBox">
+    <div class="preview-content">
+        <h3>Preview</h3>
+        <img id="pimg">
+        <h3 id="pname">Select product</h3>
+        <p id="pprice"></p>
+    </div>
+</div>
 </div>
 
 <!-- MAIN -->
