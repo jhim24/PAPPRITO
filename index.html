@@ -598,10 +598,6 @@ body{
         <p id="modalContent"></p>
     </div>
 </div>
-
-function closeImageModal(){
-    document.getElementById("imageModal").style.display="none";
-}
 <script>
 function openModal(type){
     const modal = document.getElementById("modal");
@@ -815,7 +811,7 @@ function closeImageModal(){
 </div>
 <!-- IMAGE PREVIEW MODAL -->
 <div id="imageModal" class="image-modal">
-    <span class="close-image">✖</span>
+   <span class="close-image" onclick="closeImageModal()">✖</span>
     <img id="modalImg">
 </div>
 </body>
