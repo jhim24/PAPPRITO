@@ -832,7 +832,7 @@ body{
     <div class="nav-links">
         <a href="#home">HOME</a>
        <a href="#" onclick="openMenu(); return false;">MENU</a>
-        <a href="#contact">CONTACT</a>
+       <a href="#" onclick="openContact(); return false;">CONTACT</a>
         <a href="#" onclick="openModal('core'); return false;">CORE VALUES</a>
         <a href="#" onclick="openModal('vision'); return false;">VISION</a>
         <a href="#" onclick="openModal('mission'); return false;">MISSION</a>
@@ -860,11 +860,6 @@ body{
         <div class="card"><img src="conference-room.jpg"><h3>Conference Room</h3><p>Perfect for meetings and events</p></div>
     </div>
 </div>
-
-<!-- CONTACT -->
-<div class="section" id="contact">
-    <h2>Contact Us</h2>
-
     <div class="contact-box">
         <p><strong>📍 Address:</strong> Grandview Complex Tagaytay Rotunda Brgy San Jose Tagaytay City Philippines 41250</p>
         <p><strong>📞 Phone:</strong> +63 912 345 6789</p>
@@ -1165,6 +1160,22 @@ function closePromo(){
     function closePromo(){
     document.getElementById("promoPopup").style.display = "none";
 }
+    function openContact(){
+    document.getElementById("contactModal").style.display = "flex";
+}
+
+function closeContact(){
+    document.getElementById("contactModal").style.display = "none";
+}
+    const contactModal = document.getElementById("contactModal");
+
+if(contactModal){
+    contactModal.addEventListener("click", function(e){
+        if(e.target === this){
+            closeContact();
+        }
+    });
+}
 </script>
 <!-- MENU POPUP -->
 <div id="menuModal" class="menu-modal">
@@ -1256,6 +1267,27 @@ function closePromo(){
         © 2026 PAPPRITO RESTAURANT AllRightsReserved
     </div>
 
+</div>
+    <!-- CONTACT MODAL -->
+<div id="contactModal" class="modal">
+    <div class="modal-content">
+
+        <button class="close-btn" onclick="closeContact()">X</button>
+
+        <h2>Contact Us</h2>
+
+        <p><strong>📍 Address:</strong> Grandview Complex Tagaytay</p>
+        <p><strong>📞 Phone:</strong> +63 912 345 6789</p>
+        <p><strong>📧 Email:</strong> papprito@gmail.com</p>
+        <p><strong>🕒 Hours:</strong> 10AM – 10PM</p>
+
+        <a href="https://www.google.com/maps?q=Grandview+Complex+Tagaytay"
+           target="_blank"
+           class="map-btn">
+           📍 View on Map
+        </a>
+
+    </div>
 </div>
 </body>
 </html>
