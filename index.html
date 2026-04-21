@@ -129,6 +129,10 @@ body{
     overflow:hidden;
     text-align:center;
     transition:0.3s;
+
+    display:flex;
+    flex-direction:column;
+    height:100%; /* 🔥 important */
 }
 
 .card:hover{
@@ -137,10 +141,9 @@ body{
 
 .card img{
     width:100%;
-    height:auto;
-    object-fit:contain;
+    height:200px; /* 🔥 same height lahat */
+    object-fit:cover; /* para pantay */
 }
-
 .card h3{
     padding:10px;
     background:#ffcc00;
@@ -150,8 +153,9 @@ body{
 .card p{
     padding:10px;
     color:#ff3b3b;
-}
 
+    margin-top:auto; /* 🔥 MAGIC */
+}
 /* CONTACT */
 .contact-box{
     max-width:500px;
