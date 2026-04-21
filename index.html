@@ -863,12 +863,11 @@ body{
 
     <div class="grid">
 
-        <div class="card">
-            <img src="spaghetti.jpg">
-            <h3>Classic Spaghetti</h3>
-            <p>₱85</p>
-        </div>
-
+        <div class="card" onclick="openProduct('Classic Spaghetti','₱85','spaghetti.jpg')">
+    <img src="spaghetti.jpg">
+    <h3>Classic Spaghetti</h3>
+    <p>₱85</p>
+</div>
         <div class="card">
             <img src="burger.jpg">
             <h3>Beef Burger</h3>
@@ -1205,6 +1204,16 @@ if(contactModal){
         }
     });
 }
+    function openProduct(name, price, img){
+    document.getElementById("productPreview").style.display = "flex";
+    document.getElementById("productImg").src = img;
+    document.getElementById("productName").innerText = name;
+    document.getElementById("productPrice").innerText = price;
+}
+
+function closeProduct(){
+    document.getElementById("productPreview").style.display = "none";
+}
 </script>
 <!-- MENU POPUP -->
 <div id="menuModal" class="menu-modal">
@@ -1317,6 +1326,18 @@ if(contactModal){
         </a>
 
     </div>
+</div>
+    <!-- PRODUCT PREVIEW POPUP -->
+<div id="productPreview" class="image-modal">
+
+    <span class="close-image" onclick="closeProduct()">✖</span>
+
+    <div style="text-align:center;">
+        <img id="productImg">
+        <h2 id="productName"></h2>
+        <p id="productPrice"></p>
+    </div>
+
 </div>
 </body>
 </html>
