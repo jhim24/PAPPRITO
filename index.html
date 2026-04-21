@@ -20,6 +20,7 @@ html{
 body{
     background:#111;
     color:white;
+    padding-bottom:60px; /* para hindi matakpan */
 }
 
 /* NAVBAR */
@@ -747,12 +748,15 @@ body{
 }
     /* FOOTER PAYMENT BAR */
 .footer-payment{
-    margin-top:15px;
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
     overflow:hidden;
     background:#111;
     padding:10px 0;
+    z-index:9999;
 }
-
 /* TRACK */
 .footer-track{
     display:flex;
@@ -859,31 +863,6 @@ body{
 <div class="footer">
     <p>© 2026 PAPPRITO RESTAURANT AllRightsReserved</p>
 
-    <!-- 🔥 PAYMENT BAR (DITO TALAGA) -->
-    <div class="footer-payment">
-        <div class="footer-track">
-
-            <img src="gcash.png">
-            <img src="maya.png">
-            <img src="visa.png">
-            <img src="mastercard.png">
-            <img src="grabpay.png">
-            <img src="qrph.png">
-            <img src="bancnet.png">
-
-            <!-- duplicate para smooth -->
-            <img src="gcash.png">
-            <img src="maya.png">
-            <img src="visa.png">
-            <img src="mastercard.png">
-            <img src="grabpay.png">
-            <img src="qrph.png">
-            <img src="bancnet.png">
-
-        </div>
-    </div>
-
-</div>
     <!-- EVENTS & ANNOUNCEMENTS -->
 <div class="section" id="events">
 
@@ -1232,6 +1211,28 @@ function closePromo(){
         <button class="close-btn" onclick="closeModal()">X</button>
         <h2 id="modalTitle"></h2>
         <p id="modalContent"></p>
+    </div>
+</div>
+    <div class="footer-payment">
+    <div class="footer-track">
+
+        <img src="gcash.png">
+        <img src="maya.png">
+        <img src="visa.png">
+        <img src="mastercard.png">
+        <img src="grabpay.png">
+        <img src="qrph.png">
+        <img src="bancnet.png">
+
+        <!-- duplicate -->
+        <img src="gcash.png">
+        <img src="maya.png">
+        <img src="visa.png">
+        <img src="mastercard.png">
+        <img src="grabpay.png">
+        <img src="qrph.png">
+        <img src="bancnet.png">
+
     </div>
 </div>
 </body>
