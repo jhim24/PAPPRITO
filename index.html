@@ -781,12 +781,13 @@ body{
 /* TRACK */
 .footer-track{
     display:flex;
-    gap:30px;
-    width:max-content;
-    animation:scrollFooter 20s linear infinite;
-    align-items:center;
+    gap:20px; /* bawasan space */
+    width:200%; /* para sakto ang loop */
+    animation:scrollFooter 15s linear infinite;
 }
-
+.footer-track img{
+    height:28px; /* adjust mo dito */
+}
 /* ICON */
 .footer-track img{
     height:22px; /* dati 30px */
@@ -809,7 +810,6 @@ body{
     0%{ transform:translateX(0); }
     100%{ transform:translateX(-50%); }
 }
-
 /* MOBILE */
 @media(max-width:768px){
     .footer-track img{
@@ -1230,10 +1230,11 @@ function closePromo(){
         <p id="modalContent"></p>
     </div>
 </div>
-  <div class="footer-payment">
+<div class="footer-payment">
 
     <div class="footer-track">
 
+        <!-- ORIGINAL -->
         <img src="gcash.png">
         <img src="maya.png">
         <img src="visa.png">
@@ -1242,7 +1243,7 @@ function closePromo(){
         <img src="qrph.png">
         <img src="bancnet.png">
 
-        <!-- duplicate -->
+        <!-- DUPLICATE (IMPORTANT) -->
         <img src="gcash.png">
         <img src="maya.png">
         <img src="visa.png">
@@ -1253,7 +1254,6 @@ function closePromo(){
 
     </div>
 
-    <!-- ✅ DITO ANG COPYRIGHT -->
     <div class="footer-bottom">
         © 2026 PAPPRITO RESTAURANT AllRightsReserved
     </div>
