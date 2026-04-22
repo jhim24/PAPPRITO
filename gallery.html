@@ -3,35 +3,40 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>PAPPRITO Gallery</title>
+<title>Gallery - PAPPRITO</title>
 
 <style>
 body{
-    margin:0;
     background:#111;
     color:white;
-    font-family:sans-serif;
+    font-family:Arial;
+    margin:0;
 }
 
-/* TITLE */
-h1{
+/* HEADER */
+.header{
+    background:#d71920;
+    padding:15px;
     text-align:center;
-    padding:20px;
 }
 
-/* GALLERY GRID */
+.header a{
+    color:white;
+    text-decoration:none;
+    margin:0 10px;
+}
+
+/* GALLERY */
 .gallery{
+    padding:40px;
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:15px;
-    padding:20px;
+    gap:20px;
 }
 
-/* IMAGE */
 .gallery img{
     width:100%;
-    height:250px;
+    height:200px;
     object-fit:cover;
     border-radius:10px;
     cursor:pointer;
@@ -41,62 +46,26 @@ h1{
 .gallery img:hover{
     transform:scale(1.05);
 }
-
-/* MODAL */
-.modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,0.9);
-    justify-content:center;
-    align-items:center;
-}
-
-.modal img{
-    max-width:90%;
-    max-height:80%;
-}
-
-.close{
-    position:absolute;
-    top:20px;
-    right:30px;
-    color:white;
-    font-size:30px;
-    cursor:pointer;
-}
 </style>
 </head>
 
 <body>
 
-<h1>📸 PAPPRITO GALLERY</h1>
+<div class="header">
+    <a href="index.html">⬅ Back to Home</a>
+    <h2>Gallery</h2>
+</div>
 
 <div class="gallery">
-<img src="https://source.unsplash.com/600x400/?filipino-food" onclick="openImg(this.src)">
-<img src="https://source.unsplash.com/600x400/?spaghetti" onclick="openImg(this.src)">
-<img src="https://source.unsplash.com/600x400/?sisig" onclick="openImg(this.src)">
-<img src="https://source.unsplash.com/600x400/?restaurant-interior" onclick="openImg(this.src)">
-<img src="https://source.unsplash.com/600x400/?milk-tea" onclick="openImg(this.src)">
-<img src="https://source.unsplash.com/600x400/?filipino-food-platter" onclick="openImg(this.src)">
+
+    <img src="spaghetti.jpg">
+    <img src="bulalo.jpg">
+    <img src="sisig.jpg">
+    <img src="lechon.jpg">
+    <img src="restaurant.jpg">
+    <img src="customers.jpg">
+
 </div>
-
-<!-- MODAL -->
-<div id="modal" class="modal" onclick="closeImg()">
-    <span class="close">✖</span>
-    <img id="modalImg">
-</div>
-
-<script>
-function openImg(src){
-    document.getElementById("modal").style.display="flex";
-    document.getElementById("modalImg").src = src;
-}
-
-function closeImg(){
-    document.getElementById("modal").style.display="none";
-}
-</script>
 
 </body>
 </html>
