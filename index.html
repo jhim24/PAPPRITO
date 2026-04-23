@@ -871,6 +871,95 @@ body{
     font-weight:bold !important;
     border-radius:0 !important;
 }
+    /* ================= MOBILE FINAL EXACT FIX ================= */
+@media (max-width:768px){
+
+    /* 🔥 FULL SCREEN MENU */
+    .menu-box{
+        display:flex !important;
+        flex-direction:column !important;
+        height:100vh !important;
+        width:100% !important;
+    }
+
+    /* 🔥 CATEGORY BAR (SCROLL TOP) */
+    .menu-left{
+        width:100% !important;
+        overflow-x:auto !important;
+        padding:10px !important;
+    }
+
+    .menu-left ul{
+        display:flex !important;
+        gap:10px !important;
+    }
+
+    .menu-left li{
+        white-space:nowrap !important;
+    }
+
+    /* 🔥 PRODUCTS GRID */
+    .menu-center{
+        flex:1 !important;
+        display:grid !important;
+        grid-template-columns:repeat(2,1fr) !important;
+        gap:10px !important;
+        padding:10px !important;
+        overflow-y:auto !important;
+    }
+
+    /* 🔥 CARD SIZE */
+    .menu-card{
+        height:auto !important;
+    }
+
+    .menu-card img{
+        height:120px !important;
+    }
+
+    /* 🔥 PREVIEW = FULL WIDTH (PINAKA IMPORTANTE) */
+    .menu-right{
+        width:100% !important;
+        max-width:100% !important;
+        margin-top:10px !important;
+        border-radius:12px !important;
+        overflow:hidden !important;
+    }
+
+    .menu-right img{
+        width:100% !important;
+        height:220px !important;
+        object-fit:cover !important;
+        display:block !important;
+    }
+
+    /* 🔥 DIKIT-DIKIT (NO GAP) */
+    .menu-right h3{
+        margin:0 !important;
+        padding:6px !important;
+        background:#f4c542 !important;
+    }
+
+    .menu-right p{
+        margin:0 !important;
+        padding:6px !important;
+        background:#d71920 !important;
+        color:#fff !important;
+    }
+
+    /* 🔥 CLOSE BUTTON FIX */
+    .close-menu{
+        top:10px !important;
+        right:10px !important;
+    }
+}
+
+/* 🔥 EXTRA SMALL PHONE */
+@media (max-width:480px){
+    .menu-center{
+        grid-template-columns:1fr !important;
+    }
+}
 </style>
 </head>
 
