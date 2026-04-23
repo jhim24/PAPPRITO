@@ -960,6 +960,60 @@ body{
         grid-template-columns:1fr !important;
     }
 }
+    /* 🔥 MOBILE: SINGLE + STICKY CATEGORY */
+@media (max-width:768px){
+
+    /* 🔥 layout vertical */
+    .menu-box{
+        display:flex !important;
+        flex-direction:column !important;
+        height:100vh !important;
+    }
+
+    /* 🔥 CATEGORY = STICKY TOP */
+    .menu-left{
+        width:100% !important;
+        position:sticky !important;
+        top:0 !important;
+        z-index:999 !important;
+
+        background:#d71920 !important;
+        overflow-x:auto !important;
+        padding:10px !important;
+    }
+
+    .menu-left ul{
+        display:flex !important;
+        gap:10px !important;
+    }
+
+    .menu-left li{
+        white-space:nowrap !important;
+    }
+
+    /* 🔥 PRODUCTS = SCROLL AREA */
+    .menu-center{
+        flex:1 !important;
+        overflow-y:auto !important;
+
+        grid-template-columns:1fr !important;
+        gap:10px !important;
+        padding:10px !important;
+    }
+
+    /* 🔥 BIG IMAGE (gallery feel) */
+    .menu-card img{
+        height:200px !important;
+        object-fit:cover !important;
+    }
+
+    /* 🔥 preview full width sa baba */
+    .menu-right{
+        width:100% !important;
+        max-width:100% !important;
+        margin-top:10px !important;
+    }
+}
 </style>
 </head>
 
