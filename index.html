@@ -481,29 +481,46 @@ body{
 }
 
 /* PREVIEW → SA BABA */
+/* ================= PREVIEW ================= */
 .menu-right{
-    width:320px;
-    max-width:320px;
+    width:300px;
+    max-width:300px;
     background:#fff;
-    padding:10px; /* 🔥 space sa paligid */
+    padding:0;
     overflow:hidden;
     border-radius:16px;
     box-shadow:0 4px 12px rgba(0,0,0,0.15);
 
     display:flex;
     flex-direction:column;
-    justify-content:flex-start;
 }
 
 .menu-right img{
     width:100%;
-    height:220px; /* 🔥 MAS MALAKI */
+    height:200px; /* 🔥 adjust mo dito */
     object-fit:cover;
     display:block;
-    border-radius:12px;
-    margin-bottom:5px; /* konting space sa baba */
 }
 
+/* 🔥 NO GAP STACK */
+.menu-right h3{
+    margin:0;
+    padding:6px;
+    background:#f4c542;
+    text-align:center;
+    font-size:15px;
+    font-weight:bold;
+}
+
+.menu-right p{
+    margin:0;
+    padding:6px;
+    background:#d71920;
+    color:white;
+    text-align:center;
+    font-size:14px;
+    font-weight:bold;
+}
 /* CLOSE BUTTON */
 .close-menu{
     top:10px;
@@ -1127,11 +1144,9 @@ function showCategory(cat){
 
 function preview(name,price,img){
     document.getElementById("menuPreview").innerHTML=`
-        <img src="${img}" onclick="openImageModal('${img}')" style="cursor:zoom-in;">
-        <div class="menu-info">
-            <h3>${name}</h3>
-            <p>${price}</p>
-        </div>
+        <img src="${img}" onclick="openImageModal('${img}')">
+        <h3>${name}</h3>
+        <p>${price}</p>
     `;
 }
     function openImageModal(img){
