@@ -422,19 +422,20 @@ body{
     height:230px;
 }
 
-/* IMAGE (TOP) */
+/* IMAGE (NO SPACE) */
 .menu-card img{
     width:100%;
     height:150px;
     object-fit:cover;
+    display:block; /* 🔥 important para walang gap */
 }
 
-/* 🔥 TEXT CONTAINER SA BABA */
+/* PRODUCT NAME (DIRECTLY UNDER IMAGE) */
 .menu-card h4{
-    margin-top:auto; /* 🔥 ito nagpapababa */
+    margin:0;
+    padding:5px 5px 2px 5px; /* maliit lang */
     background:#ffcc00;
     color:black;
-    padding:5px;
     font-size:13px;
     text-align:center;
     line-height:1.2;
@@ -442,10 +443,10 @@ body{
 
 /* PRICE (DIKIT SA NAME) */
 .menu-card p{
+    margin:0;
+    padding:2px 5px 5px 5px;
     background:#d71920;
     color:white;
-    margin:0;
-    padding:3px;
     font-size:12px;
     text-align:center;
 }
