@@ -742,34 +742,7 @@ body{
     from{opacity:0;}
     to{opacity:1;}
 }
-    /* POPUP */
-.promo-popup{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,0.7);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    z-index:9999;
-}
 
-.popup-content{
-    background:white;
-    color:black;
-    padding:30px;
-    border-radius:10px;
-    text-align:center;
-    position:relative;
-    width:300px;
-}
-
-.close-popup{
-    position:absolute;
-    top:10px;
-    right:10px;
-    cursor:pointer;
-    color:red;
-}
     /* FOOTER PAYMENT BAR */
 .footer-payment{
     position:fixed;
@@ -1209,14 +1182,6 @@ window.addEventListener("load", function(){
         },3000);
     }
 
-    // POPUP AUTO OPEN
-    setTimeout(()=>{
-        const popup = document.getElementById("promoPopup");
-        if(popup){
-            popup.style.display="flex";
-        }
-    },1000);
-
     // COUNTDOWN
     let endTime = new Date().getTime() + (2 * 60 * 60 * 1000);
 
@@ -1236,11 +1201,6 @@ window.addEventListener("load", function(){
 
 });
 
-// CLOSE POPUP
-function closePromo(){
-    document.getElementById("promoPopup").style.display="none";
-}
-    
     function openContact(){
     document.getElementById("contactModal").style.display = "flex";
 }
@@ -1309,20 +1269,7 @@ function closeProduct(){
    <span class="close-image" onclick="closeImageModal()">✖</span>
     <img id="modalImg">
 </div>
-    <!-- POPUP PROMO -->
-<div id="promoPopup" class="promo-popup">
-
-    <div class="popup-content">
-        <span class="close-popup" onclick="closePromo()">✖</span>
-
-        <h2>🔥 HI WELCOME!</h2>
-        <p>HAVE A NICE DAY</p>
-
-        <div id="countdown"></div>
-
-    </div>
-
-</div>
+ 
     <div id="modal" class="modal">
     <div class="modal-content">
         <button class="close-btn" onclick="closeModal()">X</button>
