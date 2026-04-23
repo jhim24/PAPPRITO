@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+</head>
+<body style="font-family:sans-serif; padding:20px;">
+
+<h2>🔒 Admin Login</h2>
+
+<div id="loginBox">
+    <input type="password" id="pass" placeholder="Enter password">
+    <button onclick="login()">Login</button>
+</div>
+
+<div id="adminPanel" style="display:none;">
+
+    <h2>🍽 Add Product</h2>
+
+    <input id="name" placeholder="Product name"><br><br>
+    <input id="price" placeholder="Price"><br><br>
+    <input id="image" placeholder="Image filename (e.g. bulalo.jpg)"><br><br>
+    <input id="category" placeholder="Category (beef, pork, beers...)"><br><br>
+
+    <button onclick="addProduct()">Add Product</button>
+
+    <h3>📋 Products</h3>
+    <div id="list"></div>
+
+</div>
+
+<script>
+
+// 🔑 LOGIN
+function login(){
+    if(document.getElementById("pass").value === "papprito123"){
+        document.getElementById("loginBox").style.display="none";
+        document.getElementById("adminPanel").style.display="block";
+        loadProducts();
+    } else {
+        alert("Wrong password");
+    }
+}
+
+// 📦 LOAD PRODUCTS
+function loadProducts(){
+    const data = JSON.parse(localStorage.getItem("menuData")) || {};
+    let html = "";
+
+    for(let cat in data){
+        html += `<h4>${cat}</h4>`;
+        data[cat].forEach((item,index)=>{
+            html += `
+            ${item.name} - ${item.price}
+            <button onclick="deleteItem('${cat}',${index})">❌</button>
+            <br>`;
+        });
+    }
+
+    document.getElementById("list").innerHTML = html;
+}
+
+// ➕ ADD PRODUCT
+function addProduct(){
+    const name = document.getElementById("name").value;
+    const price = document.getElementById("price").value;
+    const image = document.getElementById("image").value;
+    const category = document.getElementById("category").value;
+
+    let data = JSON.parse(localStorage.getItem("menuData")) || {};
+
+    if(!data[category]){
+        data[category] = [];
+    }
+
+    data[category].push({name, price, img:image});
+
+    localStorage.setItem("menuData", JSON.stringify(data));
+
+    alert("Added!");
+    loadProducts();
+}
+
+// ❌ DELETE
+function deleteItem(cat,index){
+    let data = JSON.parse(localStorage.getItem("menuData"));
+    data[cat].splice(index,1);
+    localStorage.setItem("menuData", JSON.stringify(data));
+    loadProducts();
+}
+
+</script>
+
+</body>
+</html>
