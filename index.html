@@ -1061,8 +1061,7 @@ document.addEventListener("keydown", function(e){
     function closeMenu(){
     document.getElementById("menuModal").style.display = "none";
 }
-    let products = JSON.parse(localStorage.getItem("menuData")) || {};
-let products = {
+  let products = JSON.parse(localStorage.getItem("menuData")) || {
 
     beef:[
         {name:"Bulalo Grupo",price:"₱710",img:"bulalogroup.jpg"},
