@@ -408,7 +408,7 @@ body{
     border:none;
     padding:10px;
 }
-    /* PRODUCT CARD DESIGN */
+   /* MENU CARD */
 .menu-card{
     background:#fff;
     border-radius:12px;
@@ -419,21 +419,21 @@ body{
     display:flex;
     flex-direction:column;
 
-    height:230px;
+    height:240px; /* equal height */
 }
 
-/* IMAGE (NO SPACE) */
+/* IMAGE (MENU) */
 .menu-card img{
     width:100%;
-    height:150px;
+    height:160px; /* 🔥 same feel as preview */
     object-fit:cover;
-    display:block; /* 🔥 important para walang gap */
+    display:block;
 }
 
-/* PRODUCT NAME (DIRECTLY UNDER IMAGE) */
+/* NAME */
 .menu-card h4{
     margin:0;
-    padding:5px 5px 2px 5px; /* maliit lang */
+    padding:4px;
     background:#ffcc00;
     color:black;
     font-size:13px;
@@ -441,33 +441,37 @@ body{
     line-height:1.2;
 }
 
-/* PRICE (DIKIT SA NAME) */
+/* PRICE */
 .menu-card p{
     margin:0;
-    padding:2px 5px 5px 5px;
+    padding:4px;
     background:#d71920;
     color:white;
     font-size:12px;
     text-align:center;
 }
-    /* FIX RIGHT SIDE PREVIEW */
-.menu-right{
-    width:300px;
-    max-width:300px;
-    padding:20px;
-    background:#f5f5f5;
-    color:black;
-    overflow:hidden;
-}
 
+/* 🔥 PREVIEW IMAGE (RIGHT SIDE) */
 .menu-right img{
     width:100%;
-    height:200px;
+    height:160px; /* 🔥 SAME SIZE */
     object-fit:cover;
     border-radius:10px;
-    margin-bottom:10px;
+    margin:0; /* REMOVE GAP */
 }
 
+/* 🔥 PREVIEW TEXT */
+.menu-right h3{
+    margin:0;
+    padding:5px;
+    text-align:center;
+}
+
+.menu-right p{
+    margin:0;
+    padding:5px;
+    text-align:center;
+}
 /* FIX CENTER GRID */
 .menu-center{
     flex:1;
