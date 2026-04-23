@@ -246,224 +246,7 @@ body{
     white-space:pre-line;
     line-height:1.7;
 }
-    /* 📱 MOBILE RESPONSIVE */
-@media (max-width:768px){
-
-/* NAVBAR STACK */
-.navbar{
-    flex-direction:column;
-    gap:10px;
-    padding:10px;
-    text-align:center;
-}
-
-/* NAV LINKS */
-.nav-links{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-}
-
-/* HERO TEXT */
-.hero-content h1{
-    font-size:30px;
-}
-
-.hero-content p{
-    font-size:14px;
-}
-
-/* ADDRESS */
-.address{
-    font-size:14px;
-}
-
-/* SECTION */
-.section{
-    padding:30px 15px;
-}
-
-/* GRID → 1 COLUMN */
-.grid{
-    grid-template-columns:1fr;
-}
-
-/* CARD IMAGE */
-.card img{
-    height:180px;
-}
-
-/* MODAL */
-.modal-content{
-    padding:20px;
-    font-size:14px;
-}
-}
-    /* FOOTER */
-.footer-bottom{
-    width:100%;
-    text-align:center;
-    color:#aaa;
-    font-size:12px;
-    margin-top:5px;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
-
-/* ✅ PASTE MO DITO 👇 */
-@media (max-width:768px){
-
-    .hero{
-        height:60vh;
-    }
-
-    .hero-content h1{
-        font-size:28px;
-    }
-
-    .hero-content p{
-        font-size:14px;
-    }
-
-    .navbar{
-        flex-direction:column;
-        gap:10px;
-        padding:10px;
-    }
-
-    .nav-links{
-        display:flex;
-        flex-wrap:wrap;
-        justify-content:center;
-        gap:10px;
-    }
-
-    .nav-links a{
-        font-size:12px;
-    }
-
-    .card img{
-        height:150px;
-    }
-
-    .values-gallery img{
-        height:90px;
-    }
-}
-/* ✅ END */
-
-/* tapos ito */
-    /* MENU POPUP */
-.menu-modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,0.8);
-    z-index:9999;
-    justify-content:center;
-    align-items:center;
-}
-
-.menu-box{
-    width:90%;
-    height:90%;
-    background:#fff;
-    display:flex;
-    border-radius:10px;
-    overflow:hidden;
-}
-
-/* LEFT */
-.menu-left{
-    width:200px;
-    background:#d71920;
-    color:white;
-    padding:20px;
-}
-
-.menu-left li{
-    list-style:none;
-    padding:10px;
-    cursor:pointer;
-}
-
-/* CENTER */
-.menu-center{
-    flex:1;
-    padding:20px;
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-    gap:20px;
-}
-
-/* CLOSE */
-.close-menu{
-    position:absolute;
-    top:20px;
-    right:20px;
-    background:red;
-    color:white;
-    border:none;
-    padding:10px;
-}
-    /* IMAGE POPUP */
-.image-modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,0.9);
-    justify-content:center;
-    align-items:center;
-    z-index:99999;
-}
-
-.image-modal img{
-    max-width:90%;
-    max-height:80%;
-    border-radius:10px;
-}
-
-.close-image{
-    position:absolute;
-    top:20px;
-    right:30px;
-    color:white;
-    font-size:25px;
-    cursor:pointer;
-}
-    /* 📱 MOBILE MENU SYSTEM */
-@media (max-width:768px){
-
-/* MENU FULL SCREEN */
-.menu-box{
-    flex-direction:column;
-    height:100%;
-}
-
-/* CATEGORY TOP BAR */
-.menu-left{
-    width:100%;
-    display:flex;
-    overflow-x:auto;
-    gap:10px;
-    padding:10px;
-}
-
-.menu-left ul{
-    display:flex;
-    gap:10px;
-}
-
-.menu-left li{
-    background:#ffcc00;
-    color:black;
-    padding:8px 12px;
-    border-radius:20px;
-    white-space:nowrap;
-}
-
+    
 /* PRODUCTS GRID */
 .menu-center{
     grid-template-columns:repeat(2,1fr);
@@ -870,148 +653,65 @@ body{
     color:white !important;
     font-weight:bold !important;
     border-radius:0 !important;
+
 }
-    /* ================= MOBILE FINAL EXACT FIX ================= */
+    /* ================= FINAL MOBILE CLEAN FIX ================= */
 @media (max-width:768px){
 
-    /* 🔥 FULL SCREEN MENU */
+    /* 🔥 layout */
     .menu-box{
-        display:flex !important;
-        flex-direction:column !important;
-        height:100vh !important;
-        width:100% !important;
+        display:flex;
+        flex-direction:column;
+        height:100vh;
     }
 
-    /* 🔥 CATEGORY BAR (SCROLL TOP) */
+    /* 🔥 sticky category */
     .menu-left{
-        width:100% !important;
-        overflow-x:auto !important;
-        padding:10px !important;
+        position:sticky;
+        top:0;
+        z-index:999;
+        background:#d71920;
+
+        width:100%;
+        overflow-x:auto;
+        padding:10px;
     }
 
     .menu-left ul{
-        display:flex !important;
-        gap:10px !important;
+        display:flex;
+        gap:10px;
     }
 
     .menu-left li{
-        white-space:nowrap !important;
+        white-space:nowrap;
     }
 
-    /* 🔥 PRODUCTS GRID */
+    /* 🔥 SINGLE COLUMN (gallery style) */
     .menu-center{
-        flex:1 !important;
-        display:grid !important;
-        grid-template-columns:repeat(2,1fr) !important;
-        gap:10px !important;
-        padding:10px !important;
-        overflow-y:auto !important;
+        flex:1;
+        overflow-y:auto;
+
+        display:grid;
+        grid-template-columns:1fr;
+        gap:10px;
+        padding:10px;
     }
 
-    /* 🔥 CARD SIZE */
-    .menu-card{
-        height:auto !important;
-    }
-
+    /* 🔥 BIG IMAGE */
     .menu-card img{
-        height:120px !important;
+        height:200px;
+        object-fit:cover;
     }
 
-    /* 🔥 PREVIEW = FULL WIDTH (PINAKA IMPORTANTE) */
+    /* 🔥 preview full width */
     .menu-right{
-        width:100% !important;
-        max-width:100% !important;
-        margin-top:10px !important;
-        border-radius:12px !important;
-        overflow:hidden !important;
+        width:100%;
+        max-width:100%;
+        margin-top:10px;
     }
 
     .menu-right img{
-        width:100% !important;
-        height:220px !important;
-        object-fit:cover !important;
-        display:block !important;
-    }
-
-    /* 🔥 DIKIT-DIKIT (NO GAP) */
-    .menu-right h3{
-        margin:0 !important;
-        padding:6px !important;
-        background:#f4c542 !important;
-    }
-
-    .menu-right p{
-        margin:0 !important;
-        padding:6px !important;
-        background:#d71920 !important;
-        color:#fff !important;
-    }
-
-    /* 🔥 CLOSE BUTTON FIX */
-    .close-menu{
-        top:10px !important;
-        right:10px !important;
-    }
-}
-
-/* 🔥 EXTRA SMALL PHONE */
-@media (max-width:480px){
-    .menu-center{
-        grid-template-columns:1fr !important;
-    }
-}
-    /* 🔥 MOBILE: SINGLE + STICKY CATEGORY */
-@media (max-width:768px){
-
-    /* 🔥 layout vertical */
-    .menu-box{
-        display:flex !important;
-        flex-direction:column !important;
-        height:100vh !important;
-    }
-
-    /* 🔥 CATEGORY = STICKY TOP */
-    .menu-left{
-        width:100% !important;
-        position:sticky !important;
-        top:0 !important;
-        z-index:999 !important;
-
-        background:#d71920 !important;
-        overflow-x:auto !important;
-        padding:10px !important;
-    }
-
-    .menu-left ul{
-        display:flex !important;
-        gap:10px !important;
-    }
-
-    .menu-left li{
-        white-space:nowrap !important;
-    }
-
-    /* 🔥 PRODUCTS = SCROLL AREA */
-    .menu-center{
-        flex:1 !important;
-        overflow-y:auto !important;
-
-        grid-template-columns:1fr !important;
-        gap:10px !important;
-        padding:10px !important;
-    }
-
-    /* 🔥 BIG IMAGE (gallery feel) */
-    .menu-card img{
-        height:200px !important;
-        object-fit:cover !important;
-    }
-
-    /* 🔥 preview full width sa baba */
-    .menu-right{
-        width:100% !important;
-        max-width:100% !important;
-        margin-top:10px !important;
+        height:220px;
     }
 }
 </style>
