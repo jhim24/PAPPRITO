@@ -840,6 +840,45 @@ body{
     flex-direction:column;
     justify-content:space-between;
 }
+    /* SOCIAL BUTTONS */
+.social-buttons{
+    position:fixed;
+    bottom:80px;
+    right:20px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    z-index:99999;
+}
+
+.social-buttons a{
+    width:50px;
+    height:50px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    color:white;
+    font-size:20px;
+    text-decoration:none;
+    box-shadow:0 5px 15px rgba(0,0,0,0.3);
+    transition:0.3s;
+}
+
+/* FACEBOOK */
+.social-buttons .fb{
+    background:#1877F2;
+}
+
+/* INSTAGRAM */
+.social-buttons .ig{
+    background:linear-gradient(45deg,#feda75,#d62976,#962fbf,#4f5bd5);
+}
+
+/* HOVER */
+.social-buttons a:hover{
+    transform:scale(1.1);
+}
 </style>
 </head>
 
@@ -1350,6 +1389,18 @@ function closeProduct(){
         <h2 id="productName"></h2>
         <p id="productPrice"></p>
     </div>
+
+</div>
+<!-- SOCIAL MEDIA BUTTONS -->
+<div class="social-buttons">
+
+    <a href="https://www.facebook.com/papprito" target="_blank" class="fb">
+        f
+    </a>
+
+    <a href="https://instagram.com/papaprito" target="_blank" class="ig">
+        📸
+    </a>
 
 </div>
 </body>
