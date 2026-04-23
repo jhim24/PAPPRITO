@@ -1,89 +1,198 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Admin Panel</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel - PAPPRITO</title>
+
+<style>
+body{
+    font-family:Arial;
+    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    color:white;
+    padding:20px;
+}
+
+.container{
+    max-width:500px;
+    margin:auto;
+    background:#ffffff10;
+    padding:20px;
+    border-radius:10px;
+}
+
+h1{
+    text-align:center;
+}
+
+input, select{
+    width:100%;
+    padding:10px;
+    margin:5px 0;
+    border:none;
+    border-radius:5px;
+}
+
+button{
+    width:100%;
+    padding:10px;
+    background:#ffcc00;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+img{
+    margin-top:10px;
+    border-radius:5px;
+}
+
+.product{
+    background:#00000050;
+    margin-top:10px;
+    padding:10px;
+    border-radius:5px;
+}
+</style>
 </head>
-<body style="font-family:sans-serif; padding:20px;">
 
-<h2>🔒 Admin Login</h2>
+<body>
 
-<div id="loginBox">
-    <input type="password" id="pass" placeholder="Enter password">
-    <button onclick="login()">Login</button>
-</div>
+<div class="container">
 
-<div id="adminPanel" style="display:none;">
+<h1>🔐 Admin Panel</h1>
 
-    <h2>🍽 Add Product</h2>
+<h3>Add Product</h3>
 
-    <input id="name" placeholder="Product name"><br><br>
-    <input id="price" placeholder="Price"><br><br>
-    <input id="image" placeholder="Image filename (ex: bulalo.jpg)"><br><br>
-    <input id="category" placeholder="Category (beef, pork, etc)"><br><br>
+<input id="name" placeholder="Product name">
+<input id="price" placeholder="Price">
 
-    <button onclick="addProduct()">Add Product</button>
+<select id="category">
+    <option value="beef">Beef</option>
+    <option value="pork">Pork</option>
+    <option value="chicken">Chicken</option>
+    <option value="seafood">Seafood</option>
+    <option value="veggies">Veggies</option>
+    <option value="noodles">Noodles</option>
+    <option value="sides">Sides</option>
+    <option value="drinks">Drinks</option>
+    <option value="beers">Beers</option>
+</select>
 
-    <h3>📋 Products</h3>
-    <div id="list"></div>
+<input type="file" id="imageFile">
+<img id="preview" style="width:100px; display:none;">
+
+<button onclick="addProduct()">Add Product</button>
+
+<h3>📦 Products</h3>
+<div id="list"></div>
 
 </div>
 
 <script>
+let uploadedImage = "";
 
-function login(){
-    if(document.getElementById("pass").value === "papprito123"){
-        document.getElementById("loginBox").style.display="none";
-        document.getElementById("adminPanel").style.display="block";
-        loadProducts();
-    } else {
-        alert("Wrong password");
+// LOAD IMAGE PREVIEW
+document.getElementById("imageFile").addEventListener("change", function(e){
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = function(){
+        uploadedImage = reader.result;
+        document.getElementById("preview").src = uploadedImage;
+        document.getElementById("preview").style.display = "block";
+    };
+
+    if(file){
+        reader.readAsDataURL(file);
     }
-}
+});
 
-function loadProducts(){
-    const data = JSON.parse(localStorage.getItem("menuData")) || {};
-    let html = "";
-
-    for(let cat in data){
-        html += `<h4>${cat}</h4>`;
-        data[cat].forEach((item,index)=>{
-            html += `
-            ${item.name} - ${item.price}
-            <button onclick="deleteItem('${cat}',${index})">❌</button>
-            <br>`;
-        });
-    }
-
-    document.getElementById("list").innerHTML = html;
-}
-
+// ADD PRODUCT
 function addProduct(){
-    const name = document.getElementById("name").value;
-    const price = document.getElementById("price").value;
-    const image = document.getElementById("image").value;
-    const category = document.getElementById("category").value;
+    let name = document.getElementById("name").value;
+    let price = document.getElementById("price").value;
+    let category = document.getElementById("category").value;
+
+    if(!name || !price || !uploadedImage){
+        alert("Fill all fields!");
+        return;
+    }
 
     let data = JSON.parse(localStorage.getItem("menuData")) || {};
 
-    if(!data[category]){
-        data[category] = [];
-    }
+    if(!data[category]) data[category] = [];
 
-    data[category].push({name, price, img:image});
+    data[category].push({
+        name:name,
+        price:price,
+        img:uploadedImage
+    });
 
     localStorage.setItem("menuData", JSON.stringify(data));
 
-    alert("Added!");
+    alert("Product added!");
+
+    document.getElementById("name").value="";
+    document.getElementById("price").value="";
+    document.getElementById("preview").style.display="none";
+
     loadProducts();
 }
 
-function deleteItem(cat,index){
+// LOAD PRODUCTS
+function loadProducts(){
+    let data = JSON.parse(localStorage.getItem("menuData")) || {};
+    let container = document.getElementById("list");
+    container.innerHTML="";
+
+    for(let cat in data){
+        data[cat].forEach((item,index)=>{
+            container.innerHTML += `
+            <div class="product">
+                <b>${item.name}</b><br>
+                ₱${item.price}<br>
+                <img src="${item.img}" width="80"><br>
+
+                <button onclick="editProduct('${cat}',${index})">Edit</button>
+                <button onclick="deleteProduct('${cat}',${index})">Delete</button>
+            </div>
+            `;
+        });
+    }
+}
+
+// DELETE
+function deleteProduct(cat,index){
     let data = JSON.parse(localStorage.getItem("menuData"));
+
+    data[cat].splice(index,1);
+
+    localStorage.setItem("menuData", JSON.stringify(data));
+    loadProducts();
+}
+
+// EDIT
+function editProduct(cat,index){
+    let data = JSON.parse(localStorage.getItem("menuData"));
+    let item = data[cat][index];
+
+    document.getElementById("name").value = item.name;
+    document.getElementById("price").value = item.price;
+
+    uploadedImage = item.img;
+    document.getElementById("preview").src = item.img;
+    document.getElementById("preview").style.display="block";
+
     data[cat].splice(index,1);
     localStorage.setItem("menuData", JSON.stringify(data));
+
     loadProducts();
 }
 
+// INITIAL LOAD
+loadProducts();
 </script>
 
 </body>
