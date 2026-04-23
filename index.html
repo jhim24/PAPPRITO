@@ -1089,7 +1089,7 @@ document.addEventListener("keydown", function(e){
     document.getElementById("menuModal").style.display = "none";
 }
 
-const products = {
+let products = JSON.parse(localStorage.getItem("menuData")) || {};
 
     beef:[
         {name:"Bulalo Grupo",price:"₱710",img:"bulalogroup.jpg"},
