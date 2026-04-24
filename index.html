@@ -33,17 +33,24 @@ align-items:center;
 gap:8px;
 flex-shrink:0; /* 🔥 hindi sisiksik */
 }
+    .logo-container img{
+width:35px;
+height:35px;
+object-fit:contain;
+}
 
 .logo-container span{
-font-size:16px; /* 🔥 mas maliit */
-white-space:nowrap; /* 🔥 iwas wrap */
+font-size:16px;
+white-space:nowrap;
+margin-left:5px; /* 🔥 para hindi dikit */
 }
 .nav-links{
 display:flex;
 gap:10px;
 flex-wrap:wrap;
-justify-content:flex-end; /* 🔥 ilayo sa logo */
-flex:1; /* 🔥 hati space */
+justify-content:flex-end;
+flex:1;
+max-width:70%; /* 🔥 importante */
 }
 .hero{
 height:60vh;background:url('restaurant-hero.jpg') center/cover;
@@ -190,12 +197,12 @@ animation:scrollFooter 15s linear infinite;
 /* 🔥 NAVBAR FIX */
 .navbar{
     flex-direction:column;
-    align-items:flex-start;
+    align-items:center;
 }
 
 .logo-container{
     width:100%;
-    justify-content:flex-start;
+    justify-content:center;
     margin-bottom:5px;
 }
 
@@ -204,7 +211,7 @@ animation:scrollFooter 15s linear infinite;
     display:flex;
     flex-wrap:wrap;
     gap:6px;
-    justify-content:flex-start;
+    justify-content:center;
 }
 
 .nav-links a{
