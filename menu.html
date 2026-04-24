@@ -46,7 +46,7 @@ body{
 
 /* SIDEBAR */
 .sidebar{
-    width:90px; /* 🔥 FIXED SIZE */
+    width:90px;
     background:#d71920;
     color:white;
     padding:10px;
@@ -88,11 +88,12 @@ body{
     flex-direction:column;
 }
 
-/* IMAGE (PORTRAIT FIX) */
+/* IMAGE (🔥 UPDATED ONLY HERE) */
 .card img{
     width:100%;
-    height:200px; /* 🔥 portrait */
-    object-fit:cover;
+    height:220px;
+    object-fit:contain; /* 🔥 FULL IMAGE, walang crop */
+    background:#fff;
 }
 
 /* NAME */
@@ -125,7 +126,8 @@ body{
     }
 
     .card img{
-        height:180px;
+        height:200px;
+        object-fit:contain; /* 🔥 SAME FIX SA MOBILE */
     }
 }
 </style>
