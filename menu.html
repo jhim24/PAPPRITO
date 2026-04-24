@@ -13,7 +13,7 @@
     font-family:'Segoe UI',sans-serif;
 }
 
-/* 🔥 HEADER */
+/* HEADER */
 .header{
     background:#d71920;
     color:white;
@@ -31,13 +31,13 @@
     font-weight:bold;
 }
 
-/* 🔥 LAYOUT */
+/* LAYOUT */
 .container{
     display:flex;
     height:calc(100vh - 50px);
 }
 
-/* 🔥 SIDEBAR (MAS MALIIT) */
+/* SIDEBAR */
 .sidebar{
     width:140px;
     background:#d71920;
@@ -66,7 +66,7 @@
     color:black;
 }
 
-/* 🔥 PRODUCTS */
+/* PRODUCTS */
 .products{
     flex:1;
     padding:10px;
@@ -77,7 +77,7 @@
     gap:10px;
 }
 
-/* 🔥 CARD */
+/* CARD */
 .card{
     background:#fff;
     border-radius:12px;
@@ -85,11 +85,12 @@
     box-shadow:0 3px 10px rgba(0,0,0,0.2);
 }
 
-/* 🔥 PORTRAIT IMAGE */
+/* IMAGE (FULL VIEW NO CROP) */
 .card img{
     width:100%;
-    height:220px;
-    object-fit:cover;
+    height:240px;
+    object-fit:contain;
+    background:#000;
     cursor:pointer;
 }
 
@@ -112,7 +113,7 @@
     font-size:12px;
 }
 
-/* 🔥 ZOOM */
+/* ZOOM */
 .zoom-modal{
     display:none;
     position:fixed;
@@ -137,7 +138,7 @@
     color:white;
 }
 
-/* 📱 MOBILE */
+/* MOBILE */
 @media(max-width:768px){
 
     .container{
@@ -218,32 +219,54 @@ pork:[
 ],
 
 chicken:[
-{name:"PapsChicken",price:"₱315",img:"chicken.jpg"},
+{name:"PapsChicken Platter",price:"₱315",img:"chicken.jpg"},
 {name:"Chicken Sisig",price:"₱295",img:"chicken-sisig.jpg"}
 ],
 
 seafood:[
-{name:"Bangus",price:"₱315",img:"bangus.jpg"},
-{name:"Calamares",price:"₱305",img:"calamares.jpg"}
+{name:"Crispy Bangusarap",price:"₱315",img:"bangus.jpg"},
+{name:"Calamares",price:"₱305",img:"calamares.jpg"},
+{name:"Crispy Tawilis",price:"₱285",img:"tawilis.jpg"}
 ],
 
 veggies:[
-{name:"Chop Suey",price:"₱235",img:"chopsuey.jpg"}
+{name:"Chop Suey",price:"₱235",img:"chopsuey.jpg"},
+{name:"Tortang Talong",price:"₱192",img:"talong.jpg"}
 ],
 
 noodles:[
-{name:"Palabok",price:"₱195",img:"palabok.jpg"}
+{name:"Canton-Bihon",price:"₱278",img:"canton.jpg"},
+{name:"Palabok",price:"₱195",img:"palabok.jpg"},
+{name:"Beef Mami",price:"₱159",img:"mami.jpg"},
+{name:"Chicken Mami",price:"₱149",img:"mami2.jpg"}
 ],
 
 sides:[
-{name:"Tofu",price:"₱65",img:"tofu.jpg"}
+{name:"PapShots",price:"₱72",img:"restaurant-hero.jpg"},
+{name:"Spicy Tofu",price:"₱65",img:"tofu.jpg"},
+{name:"Bola Bola Soup",price:"₱68",img:"soup.jpg"},
+{name:"Lumpiang Shanghai",price:"₱49",img:"lumpia.jpg"},
+{name:"Fried Banana",price:"₱35",img:"banana.jpg"},
+{name:"Garlic Rice",price:"₱46",img:"rice.jpg"},
+{name:"Plain Rice",price:"₱32",img:"rice.jpg"}
 ],
 
 drinks:[
-{name:"Iced Tea",price:"₱52",img:"icedtea.jpg"}
+{name:"Softdrinks",price:"₱52",img:"drinks.jpg"},
+{name:"1.5L Softdrinks",price:"₱145",img:"drinks.jpg"},
+{name:"Iced Tea",price:"₱52",img:"icedtea.jpg"},
+{name:"Black Gulaman",price:"₱52",img:"gulaman.jpg"},
+{name:"Pineapple Juice",price:"₱62",img:"juice.jpg"},
+{name:"Calamansi Juice",price:"₱62",img:"juice.jpg"},
+{name:"Iced Coffee",price:"₱59",img:"coffee.jpg"},
+{name:"Hot Choco",price:"₱55",img:"choco.jpg"},
+{name:"Water",price:"₱35",img:"water.jpg"}
 ],
 
 beers:[
+{name:"San Mig Light",price:"₱95",img:"sanmig-light.jpg"},
+{name:"San Miguel Pale",price:"₱95",img:"sanmig-pale.jpg"},
+{name:"San Miguel Flavored",price:"₱95",img:"sanmig-flavored.jpg"},
 {name:"Red Horse",price:"₱105",img:"redhorse.jpg"}
 ]
 
@@ -273,7 +296,7 @@ function closeZoom(){
     document.getElementById("zoomModal").style.display="none";
 }
 
-/* DEFAULT */
+/* DEFAULT LOAD */
 show('beef');
 </script>
 
