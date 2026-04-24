@@ -10,7 +10,6 @@ body{
     margin:0;
     font-family:sans-serif;
     background:#111;
-    color:black;
 }
 
 /* HEADER */
@@ -20,12 +19,29 @@ body{
     padding:15px;
     text-align:center;
     font-weight:bold;
+    position:sticky;
+    top:0;
+}
+
+/* BACK BUTTON */
+.back-btn{
+    position:fixed;
+    top:15px;
+    left:10px;
+    background:#ffcc00;
+    color:black;
+    border:none;
+    padding:8px 12px;
+    font-weight:bold;
+    cursor:pointer;
+    border-radius:5px;
+    z-index:9999;
 }
 
 /* LAYOUT */
 .container{
     display:flex;
-    height:100vh;
+    height:calc(100vh - 50px);
 }
 
 /* SIDEBAR */
@@ -49,34 +65,69 @@ body{
 /* CONTENT */
 .content{
     flex:1;
-    padding:15px;
+    padding:10px;
     overflow-y:auto;
 }
 
-/* MENU BOX */
-.box{
+/* GRID */
+.grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+}
+
+/* CARD */
+.card{
     background:white;
-    border-radius:15px;
-    padding:15px;
-    margin-bottom:15px;
-    border:3px solid #ffcc00;
+    border-radius:12px;
+    overflow:hidden;
+    border:2px solid #ffcc00;
 }
 
-.box h3{
-    margin-top:0;
+/* IMAGE */
+.card img{
+    width:100%;
+    height:140px;
+    object-fit:cover;
 }
 
-/* ITEM */
-.item{
-    display:flex;
-    justify-content:space-between;
-    padding:5px 0;
-    border-bottom:1px dashed #ccc;
+/* NAME */
+.name{
+    background:#ffcc00;
+    text-align:center;
+    font-weight:bold;
+    padding:5px;
+}
+
+/* PRICE */
+.price{
+    background:#d71920;
+    color:white;
+    text-align:center;
+    padding:5px;
+    font-weight:bold;
+}
+
+/* 📱 MOBILE */
+@media(max-width:768px){
+    .grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .sidebar{
+        width:90px;
+    }
+
+    .card img{
+        height:120px;
+    }
 }
 </style>
 </head>
 
 <body>
+
+<button class="back-btn" onclick="history.back()">← Back</button>
 
 <div class="header">PAPPRITO MENU</div>
 
@@ -96,7 +147,9 @@ body{
     </div>
 
     <!-- CONTENT -->
-    <div class="content" id="content"></div>
+    <div class="content">
+        <div class="grid" id="content"></div>
+    </div>
 
 </div>
 
@@ -104,82 +157,83 @@ body{
 let menu = {
 
 beef:[
-["Bulalo Grupo","₱710"],
-["Bulalo Solo","₱185"],
-["Bistek Tagalog","₱279"]
+["Bulalo Grupo","₱710","bulalogroup.jpg"],
+["Bulalo Solo","₱185","bulalo.jpg"],
+["Bistek Tagalog","₱279","bistek.jpg"]
 ],
 
 pork:[
-["Lechon Kawali","₱395"],
-["Pork Sisig","₱315"],
-["Lumpiang Shanghai","₱235"]
+["Lechon Kawali","₱395","lechon.jpg"],
+["Pork Sisig","₱315","sisig.jpg"],
+["Lumpiang Shanghai","₱235","lumpia.jpg"]
 ],
 
 chicken:[
-["PapsChicken Platter","₱315"],
-["Chicken Sisig","₱295"]
+["PapsChicken","₱315","chicken.jpg"],
+["Chicken Sisig","₱295","chicken-sisig.jpg"]
 ],
 
 seafood:[
-["Crispy Bangusarap","₱315"],
-["Calamares","₱305"],
-["Crispy Tawilis","₱285"]
+["Crispy Bangus","₱315","bangus.jpg"],
+["Calamares","₱305","calamares.jpg"],
+["Crispy Tawilis","₱285","tawilis.jpg"]
 ],
 
 veggies:[
-["Chop Suey","₱235"],
-["Tortang Talong","₱192"]
+["Chop Suey","₱235","chopsuey.jpg"],
+["Tortang Talong","₱192","talong.jpg"]
 ],
 
 noodles:[
-["Canton-Bihon","₱278"],
-["Palabok","₱195"],
-["Beef Mami","₱159"],
-["Chicken Mami","₱149"]
+["Canton-Bihon","₱278","canton.jpg"],
+["Palabok","₱195","palabok.jpg"],
+["Beef Mami","₱159","mami.jpg"],
+["Chicken Mami","₱149","mami2.jpg"]
 ],
 
 sides:[
-["PapShots","₱72"],
-["Spicy Tofu","₱65"],
-["Bola Bola Soup","₱68"],
-["Lumpiang Shanghai","₱49"],
-["Fried Banana","₱35"],
-["Garlic Rice","₱46"],
-["Plain Rice","₱32"]
+["PapShots","₱72","restaurant-hero.jpg"],
+["Spicy Tofu","₱65","tofu.jpg"],
+["Bola Soup","₱68","soup.jpg"],
+["Shanghai","₱49","lumpia.jpg"],
+["Banana","₱35","banana.jpg"],
+["Garlic Rice","₱46","rice.jpg"],
+["Plain Rice","₱32","rice.jpg"]
 ],
 
 drinks:[
-["Softdrinks","₱52"],
-["1.5L Softdrinks","₱145"],
-["Iced Tea","₱52"],
-["Black Gulaman","₱52"],
-["Pineapple Juice","₱62"],
-["Calamansi Juice","₱62"],
-["Iced Coffee","₱59"],
-["Hot Choco","₱55"],
-["Water","₱35"]
+["Softdrinks","₱52","drinks.jpg"],
+["1.5L Soda","₱145","drinks.jpg"],
+["Iced Tea","₱52","icedtea.jpg"],
+["Gulaman","₱52","gulaman.jpg"],
+["Pineapple","₱62","juice.jpg"],
+["Calamansi","₱62","juice.jpg"],
+["Coffee","₱59","coffee.jpg"],
+["Hot Choco","₱55","choco.jpg"],
+["Water","₱35","water.jpg"]
 ],
 
 beers:[
-["San Mig Light","₱95"],
-["San Miguel Pale","₱95"],
-["San Miguel Flavored","₱95"],
-["Red Horse","₱105"]
+["San Mig Light","₱95","sanmig-light.jpg"],
+["San Miguel","₱95","sanmig-pale.jpg"],
+["Flavored","₱95","sanmig-flavored.jpg"],
+["Red Horse","₱105","redhorse.jpg"]
 ]
 
 };
 
 function show(cat){
-    let html = `<div class="box"><h3>${cat.toUpperCase()}</h3>`;
+    let html = "";
     
     menu[cat].forEach(item=>{
-        html += `<div class="item">
-                    <span>${item[0]}</span>
-                    <span>${item[1]}</span>
-                 </div>`;
+        html += `
+        <div class="card">
+            <img src="${item[2]}">
+            <div class="name">${item[0]}</div>
+            <div class="price">${item[1]}</div>
+        </div>`;
     });
 
-    html += `</div>`;
     document.getElementById("content").innerHTML = html;
 }
 
