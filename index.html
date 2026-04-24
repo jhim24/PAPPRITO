@@ -651,28 +651,31 @@ body{
     z-index:9999;
 }
 
-.menu-box{
-    display:flex;
-    flex-direction:column; /* 🔥 portrait layout */
-    width:95%;
-    height:auto;
+.menu-left{
+    position:sticky;
+    top:100px;
+    z-index:1000;
+
+    width:100%;
+    background:#d71920;
+
+    overflow-x:auto;
+    padding:10px;
 }
 /* LEFT CATEGORY */
 .menu-left{
-    width:200px;
     background:#d71920;
     color:white;
     padding:20px;
 }
 
 .menu-left ul{
-    list-style:none;
-    padding:0;
+    display:flex;
+    gap:10px;
 }
 
 .menu-left li{
-    padding:10px;
-    cursor:pointer;
+    white-space:nowrap;
 }
 
 .menu-left li:hover{
@@ -682,12 +685,10 @@ body{
 
 /* CENTER PRODUCTS */
 .menu-center{
-    flex:1;
     display:grid;
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:1fr; /* 🔥 portrait */
     gap:15px;
     padding:20px;
-    overflow-y:auto;
 }
 
 /* RIGHT PREVIEW */
