@@ -216,18 +216,17 @@ color:white !important;
 text-decoration:none !important;
 font-size:13px;
 }
-    .hero{
+    ..hero{
     position:relative;
     width:100%;
-    height:auto;
+    height:60vh; /* 🔥 important */
+    overflow:hidden;
 }
-
 .hero-img{
     width:100%;
-    height:auto;
-    display:block;
+    height:100%;
+    object-fit:cover; /* 🔥 para full screen */
 }
-
 .hero-text{
     position:absolute;
     top:50%;
