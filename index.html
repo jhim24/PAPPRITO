@@ -322,33 +322,30 @@ animation:scrollFooter 15s linear infinite;
 </div>
 <!-- FOOTER RUNNING ICON -->
 <div class="footer-payment">
-<div class="footer-track">
-<img src="gcash.png">
-<img src="maya.png">
-<img src="visa.png">
-<img src="mastercard.png">
-<img src="gcash.png">
-<img src="maya.png">
-<img src="visa.png">
-<img src="mastercard.png">
-    <img src="gcash.png">
-<img src="maya.png">
-<img src="visa.png">
-<img src="mastercard.png">
-<img src="gcash.png">
-<img src="maya.png">
-<img src="visa.png">
-<img src="mastercard.png">
-</div>
-    <img src="gcash.png">
-<img src="maya.png">
-<img src="visa.png">
-<img src="mastercard.png">
-<img src="gcash.png">
-<img src="maya.png">
-<img src="visa.png">
-<img src="mastercard.png">
-<div class="footer-bottom">© 2026 PAPPRITO All Rights Reserved</div>
+
+    <div class="footer-track">
+
+        <img src="gcash.png">
+        <img src="maya.png">
+        <img src="visa.png">
+        <img src="mastercard.png">
+
+        <img src="gcash.png">
+        <img src="maya.png">
+        <img src="visa.png">
+        <img src="mastercard.png">
+
+        <img src="gcash.png">
+        <img src="maya.png">
+        <img src="visa.png">
+        <img src="mastercard.png">
+
+    </div>
+
+    <div class="footer-bottom">
+        © 2026 PAPPRITO All Rights Reserved
+    </div>
+
 </div>
 
 <script>
@@ -418,7 +415,6 @@ index=(index+1)%slides.length;
 slides[index].classList.add("active");
 },3000);
 }
-});
 
 document.getElementById("contactModal").addEventListener("click", function(e){
     if(e.target === this){
@@ -429,6 +425,11 @@ document.getElementById("contactModal").addEventListener("click", function(e){
     if(e.key === "Escape"){
         closeInfo();
         closeContact();
+    }
+});
+    document.getElementById("infoModal").addEventListener("click", function(e){
+    if(e.target === this){
+        closeInfo();
     }
 });
 </script>
