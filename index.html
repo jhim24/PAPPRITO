@@ -149,11 +149,28 @@ animation:scrollFooter 15s linear infinite;
 
     position:relative;
 }
+    .close-btn{
+    position:absolute;
+    top:10px;
+    right:10px;
+    background:#ff3b3b;
+    color:white;
+    border:none;
+    padding:6px 10px;
+    cursor:pointer;
+    border-radius:6px;
+    font-size:14px;
+}
 
 /* MOBILE */
 @media(max-width:768px){
 .hero{height:45vh;}
 .new-products,.spaces-grid{grid-template-columns:repeat(2,1fr);}
+}
+    #modalText{
+    white-space:pre-line;
+    line-height:1.6;
+    font-size:14px;
 }
 </style>
 </head>
@@ -344,6 +361,24 @@ slides[index].classList.remove("active");
 index=(index+1)%slides.length;
 slides[index].classList.add("active");
 },3000);
+    // CLICK OUTSIDE CLOSE
+document.getElementById("infoModal").addEventListener("click", function(e){
+    if(e.target === this){
+        closeInfo();
+    }
+});
+
+document.getElementById("contactModal").addEventListener("click", function(e){
+    if(e.target === this){
+        closeContact();
+    }
+});
+    document.addEventListener("keydown", function(e){
+    if(e.key === "Escape"){
+        closeInfo();
+        closeContact();
+    }
+});
 </script>
 
 </body>
