@@ -37,9 +37,9 @@
     height:calc(100vh - 50px);
 }
 
-/* SIDEBAR */
+/* SIDEBAR (SMALLER) */
 .sidebar{
-    width:140px;
+    width:130px;
     background:#d71920;
     color:white;
     padding:10px;
@@ -47,7 +47,7 @@
 }
 
 .sidebar h3{
-    font-size:14px;
+    font-size:13px;
     margin-bottom:10px;
 }
 
@@ -58,7 +58,7 @@
 .sidebar li{
     padding:8px;
     cursor:pointer;
-    font-size:13px;
+    font-size:12px;
 }
 
 .sidebar li:hover{
@@ -69,48 +69,56 @@
 /* PRODUCTS */
 .products{
     flex:1;
-    padding:10px;
+    padding:12px;
     overflow-y:auto;
 
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:10px;
+    gap:15px;
 }
 
-/* CARD */
+/* CARD (POSTER STYLE) */
 .card{
     background:#fff;
-    border-radius:12px;
+    border-radius:16px;
     overflow:hidden;
-    box-shadow:0 3px 10px rgba(0,0,0,0.2);
+    box-shadow:0 6px 18px rgba(0,0,0,0.25);
+    border:2px solid #f4c542;
+    transition:0.3s;
 }
 
-/* IMAGE (FULL VIEW NO CROP) */
+.card:hover{
+    transform:scale(1.03);
+}
+
+/* IMAGE (POSTER LOOK) */
 .card img{
     width:100%;
-    height:240px;
-    object-fit:contain;
-    background:#000;
+    height:280px;
+    object-fit:cover;
+    display:block;
     cursor:pointer;
 }
 
 /* NAME */
 .card h4{
     margin:0;
-    padding:6px;
+    padding:8px;
     background:#ffcc00;
     text-align:center;
-    font-size:13px;
+    font-size:14px;
+    font-weight:bold;
 }
 
 /* PRICE */
 .card p{
     margin:0;
-    padding:6px;
+    padding:8px;
     background:#d71920;
     color:white;
     text-align:center;
-    font-size:12px;
+    font-size:13px;
+    font-weight:bold;
 }
 
 /* ZOOM */
@@ -161,7 +169,7 @@
     }
 
     .card img{
-        height:200px;
+        height:220px;
     }
 }
 </style>
@@ -296,7 +304,7 @@ function closeZoom(){
     document.getElementById("zoomModal").style.display="none";
 }
 
-/* DEFAULT LOAD */
+/* DEFAULT */
 show('beef');
 </script>
 
