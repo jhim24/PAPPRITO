@@ -553,39 +553,6 @@ body{
     font-weight:bold;
 }
 
-    /* 🔥 FORCE FIX - DO NOT EDIT ABOVE */
-
-.menu-right{
-    display:flex !important;
-    flex-direction:column !important;
-    padding:0 !important;
-}
-
-.menu-right img{
-    width:100% !important;
-    height:220px !important; /* 🔥 mas malaki preview */
-    object-fit:cover !important;
-    display:block !important;
-}
-
-/* 🔥 NO SPACE STACK */
-.menu-right h3{
-    margin:0 !important;
-    padding:6px !important;
-    background:#f4c542 !important;
-    font-weight:bold !important;
-    border-radius:0 !important;
-}
-
-.menu-right p{
-    margin:0 !important;
-    padding:6px !important;
-    background:#d71920 !important;
-    color:white !important;
-    font-weight:bold !important;
-    border-radius:0 !important;
-
-}
     /* ================= FINAL MOBILE CLEAN FIX ================= */
 @media (max-width:768px){
 
@@ -597,17 +564,18 @@ body{
     }
 
     /* 🔥 sticky category */
-    .menu-left{
-        position:sticky;
-        top:70px;
-        z-index:999;
-        background:#d71920;
+   .menu-left{
+    position:sticky;
+    top:80px; /* 🔥 dagdag space sa header */
+    z-index:1000;
+    background:#d71920;
 
-        width:100%;
-        overflow-x:auto;
-        padding:10px;
-    }
+    width:100%;
+    overflow-x:auto;
+    padding:10px;
 
+    border-bottom:2px solid #ffcc00; /* optional design */
+}
     .menu-left ul{
         display:flex;
         gap:10px;
@@ -676,7 +644,7 @@ body{
     inset:0;
     background:rgba(0,0,0,0.8);
 
-    padding-top:80px; /* 🔥 SPACE FROM HEADER */
+    padding-top:100px; /* 🔥 SPACE FROM HEADER */
 
     justify-content:center;
     align-items:flex-start; /* 🔥 important */
@@ -685,9 +653,9 @@ body{
 
 .menu-box{
     display:flex;
+    flex-direction:column; /* 🔥 portrait layout */
     width:95%;
-    height:auto; /* 🔥 wag fixed height */
-    max-height:85vh; /* 🔥 scrollable */
+    height:auto;
 }
 /* LEFT CATEGORY */
 .menu-left{
