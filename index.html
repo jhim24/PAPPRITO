@@ -552,43 +552,7 @@ body{
     text-align:center;
     font-weight:bold;
 }
-/* ================= PREVIEW ================= */
-.menu-right{
-    width:300px;
-    max-width:300px;
-    background:#fff;
-    padding:0;
-    overflow:hidden;
-    border-radius:16px;
-    box-shadow:0 4px 12px rgba(0,0,0,0.15);
-}
 
-.menu-right img{
-    width:100%;
-    height:170px;
-    object-fit:cover;
-    display:block;
-}
-
-.menu-right h3{
-    margin:0;
-    padding:6px;
-    background:#f4c542;
-    text-align:center;
-    font-size:15px;
-    font-weight:bold;
-    border-radius:6px 6px 0 0;
-}
-.menu-right p{
-    margin:0;
-    padding:6px;
-    background:#d71920;
-    color:white;
-    text-align:center;
-    font-size:14px;
-    font-weight:bold;
-    border-radius:0 0 6px 6px;
-}
     /* 🔥 FORCE FIX - DO NOT EDIT ABOVE */
 
 .menu-right{
@@ -635,7 +599,7 @@ body{
     /* 🔥 sticky category */
     .menu-left{
         position:sticky;
-        top:0;
+        top:70px;
         z-index:999;
         background:#d71920;
 
@@ -654,16 +618,14 @@ body{
     }
 
     /* 🔥 SINGLE COLUMN (gallery style) */
-    .menu-center{
-        flex:1;
-        overflow-y:auto;
-
-        display:grid;
-        grid-template-columns:1fr;
-        gap:10px;
-        padding:10px;
-    }
-
+   .menu-center{
+    flex:1;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+    gap:10px;
+    padding:10px;
+    overflow-y:auto;
+}
     /* 🔥 BIG IMAGE */
     .menu-card img{
         height:200px;
@@ -1206,13 +1168,6 @@ function closeProduct(){
 
         <!-- CENTER -->
         <div class="menu-center" id="menuProducts"></div>
-
-        <!-- RIGHT -->
-        <div class="menu-right" id="menuPreview">
-            <img src="rapsilog.jpg">
-            <h3>Select Product</h3>
-            <p>₱0</p>
-        </div>
 
     </div>
 </div>
