@@ -1,472 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-796ESD1BG4"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-796ESD1BG4');
-</script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>PAPPRITO Restaurant Tagaytay</title>
 
-<meta name="description" content="PAPPRITO Restaurant in Tagaytay. Enjoy Filipino favorites, bulalo, sisig, and more. Affordable and delicious meals.">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<meta name="keywords" content="Papprito, Tagaytay Restaurant, Bulalo, Filipino Food, Sisig, Affordable Restaurant">
-
-<meta name="author" content="PAPPRITO Restaurant">
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Segoe UI', sans-serif;
-}
 
-html{
-    scroll-behavior:smooth;
-}
+/* ================= RESET ================= */
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+body{background:#111;color:white;padding-top:70px;padding-bottom:75px;}
 
-body{
-    background:#111;
-    color:white;
-    padding-top:70px; /* 🔥 FIX HEADER OVERLAP */
-    padding-bottom:75px;
-}
+/* ================= NAVBAR ================= */
 .navbar{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:10px 20px;
-    background:#d71920;
-    z-index:10000; /* 🔥 pinaka ibabaw */
+    position:fixed;top:0;width:100%;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:10px 20px;background:#d71920;z-index:10000;
 }
-/* LOGO */
-.logo-container{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
+.logo-container{display:flex;align-items:center;gap:10px;}
+.logo-container img{width:45px;height:45px;}
+.logo-container span{font-weight:bold;font-size:20px;}
+.nav-links{display:flex;gap:15px;flex-wrap:wrap;}
+.nav-links a{color:white;text-decoration:none;font-size:14px;}
 
-.logo-container img{
-    width:45px;
-    height:45px;
-}
-.logo-container span{
-    font-size:20px;
-    font-weight:bold;
-}
-
-/* LINKS */
-.nav-links{
-    display:flex;
-    gap:15px;
-    align-items:center;
-}
-.nav-links a{
-    font-size:14px;
-    text-decoration:none;
-    color:white;
-    padding:5px 8px;
-    white-space:nowrap;
-    transition:0.3s;
-}
-
-.nav-links a:hover{
-    color:#ffcc00;
-}
-/* HERO */
+/* ================= HERO ================= */
 .hero{
-    height:100vh;
-    background:url('restaurant-hero.jpg') no-repeat center/cover;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    position:relative;
+    height:60vh;
+    background:url('restaurant-hero.jpg') center/cover;
+    display:flex;align-items:center;justify-content:center;text-align:center;
 }
+.hero h1{font-size:45px;}
 
-/* ✅ FIX OVERLAY CLICK */
-.hero::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:rgba(0,0,0,0.5);
-    pointer-events:none;
-}
+/* ================= SECTION ================= */
+.section{padding:40px 20px;}
+.section h2{text-align:center;margin-bottom:20px;}
 
-.hero-content{
-    position:relative;
-}
-
-.hero-content h1{
-    font-size:60px;
-}
-
-.address{
-    display:inline-block;
-    margin-top:15px;
-    color:white;
-    text-decoration:none;
-}
-
-.address:hover{
-    color:#ffcc00;
-}
-
-/* SECTION */
-.section{
-    padding:60px;
-}
-
-.section h2{
-    text-align:center;
-    margin-bottom:30px;
-}
-
-/* GRID */
+/* ================= GRID ================= */
 .grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:20px;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
 }
 
-/* CARD */
+/* ================= CARD ================= */
 .card{
-    background:#1a1a1a;
-    border-radius:10px;
-    overflow:hidden;
-    text-align:center;
-    transition:0.3s;
-
-    display:flex;
-    flex-direction:column;
-    height:100%; /* 🔥 important */
+    background:#1a1a1a;border-radius:10px;overflow:hidden;text-align:center;
 }
+.card img{width:100%;height:200px;object-fit:cover;}
+.card h3{background:#ffcc00;color:black;padding:10px;}
+.card p{background:#d71920;padding:10px;color:white;}
 
-.card:hover{
-    transform:translateY(-5px);
-}
-
-.card img{
-    width:100%;
-    height:200px; /* 🔥 same height lahat */
-    object-fit:cover; /* para pantay */
-}
-.card h3{
-    padding:10px;
-    background:#ffcc00;
-    color:black;
-}
-
-.card p{
-    padding:10px;
-    color:#ff3b3b;
-
-    margin-top:auto; /* 🔥 MAGIC */
-}
-/* CONTACT */
-.contact-box{
-    max-width:500px;
-    margin:auto;
-    text-align:center;
-    background:#1a1a1a;
-    padding:20px;
-    border-radius:10px;
-}
-
-.map-btn{
-    display:inline-block;
-    margin-top:10px;
-    padding:10px 20px;
-    background:#ffcc00;
-    color:black;
-    text-decoration:none;
-    border-radius:5px;
-}
-
-.map-btn:hover{
-    background:#ff3b3b;
-    color:white;
-}
-
-/* FOOTER */
-.footer{
-    text-align:center;
-    padding:20px;
-    background:#000;
-    color:#aaa;
-}
-
-/* MODAL */
-.modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,0.6);
-    backdrop-filter:blur(6px);
-    justify-content:center;
-    align-items:center;
-    z-index:9999; /* FIX */
-}
-
-.modal-content{
-    background:rgba(255,255,255,0.08);
-    backdrop-filter:blur(15px);
-    border-radius:15px;
-    padding:30px;
-    max-width:600px;
-    width:90%;
-    position:relative;
-
-    box-shadow:
-    0 0 10px rgba(255,0,0,0.4),
-    0 0 20px rgba(255,0,0,0.3),
-    0 0 30px rgba(255,0,0,0.2);
-    max-height:80vh;
-    overflow-y:auto;
-}
-
-.close-btn{
-    position:absolute;
-    top:10px;
-    right:10px;
-    background:red;
-    color:white;
-    border:none;
-    padding:5px 10px;
-    cursor:pointer;
-}
-
-#modalContent{
-    white-space:pre-line;
-    line-height:1.6;
-    font-size:14px;
-}
-/* CARDS SMALLER */
-.menu-card{
-    height:auto;
-}
-
-/* 📱 EXTRA SMALL PHONES */
-@media (max-width:480px){
-
-.menu-card img{
-    height:120px;
-}
-
-.hero-content h1{
-    font-size:24px;
-}
-
-}
-    /* 🔥 PAYMENT ICON BAR */
-.payment-bar{
-    width:100%;
-    overflow:hidden;
-    background:#000;
-    padding:10px 0;
-    position:relative;
-    z-index:9;
-}
-
-/* MOVING TRACK */
-.payment-track{
-    display:flex;
-    gap:40px;
-    width:max-content;
-    animation:scrollIcons 20s linear infinite;
-    align-items:center;
-}
-
-/* ICON STYLE */
-.payment-track img{
-    height:35px;
-    filter:brightness(1.2);
-
-    /* 🔥 GLOW EFFECT */
-    transition:0.3s;
-}
-
-.payment-track img:hover{
-    transform:scale(1.2);
-    filter:drop-shadow(0 0 8px #ffcc00)
-           drop-shadow(0 0 15px #ff0000);
-}
-
-/* 🔥 AUTO PAUSE ON HOVER */
-.payment-bar:hover .payment-track{
-    animation-play-state:paused;
-}
-
-/* SCROLL ANIMATION */
-@keyframes scrollIcons{
-    0%{ transform:translateX(0); }
-    100%{ transform:translateX(-50%); }
-}
-
-/* 📱 MOBILE OPTIMIZED */
-@media(max-width:768px){
-
-    .payment-track{
-        gap:20px;
-        animation:scrollIcons 15s linear infinite;
-    }
-
-    .payment-track img{
-        height:25px;
-    }
-}
-    /* EVENTS */
+/* ================= EVENTS ================= */
 .events-container{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
     gap:20px;
 }
-
 .event-card{
-    background:#1a1a1a;
-    padding:20px;
-    border-radius:10px;
-    text-align:center;
-    transition:0.3s;
-    border:2px solid transparent;
+    background:#1a1a1a;padding:20px;border-radius:10px;text-align:center;
 }
 
-.event-card:hover{
-    transform:translateY(-5px);
-    border-color:#ffcc00;
-    box-shadow:0 0 15px rgba(255,204,0,0.3);
-}
+/* ================= SLIDER ================= */
+.slide{display:none;}
+.slide.active{display:block;}
 
-.event-card h3{
-    color:#ffcc00;
-    margin-bottom:10px;
-}
-
-.event-card p{
-    color:#ddd;
-}
-    /* SLIDER */
-.promo-slider{
-    background:#d71920;
-    color:white;
-    text-align:center;
-    padding:15px;
-    font-weight:bold;
-    overflow:hidden;
-}
-
-.slide{
+/* ================= MENU ================= */
+.menu-modal{
     display:none;
+    position:fixed;inset:0;
+    background:rgba(0,0,0,0.85);
+    padding-top:100px;
+    z-index:9999;
 }
 
-.slide.active{
-    display:block;
-    animation:fade 1s;
+.menu-left{
+    background:#d71920;
+    padding:10px;
+    display:flex;
+    gap:10px;
+    overflow-x:auto;
 }
 
-@keyframes fade{
-    from{opacity:0;}
-    to{opacity:1;}
+.menu-left li{
+    list-style:none;
+    padding:6px 12px;
+    background:white;
+    color:black;
+    border-radius:5px;
+    cursor:pointer;
 }
 
-    /* FOOTER PAYMENT BAR */
-.footer-payment{
+.menu-center{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+    gap:10px;
+    padding:15px;
+}
+
+.menu-card{
+    background:#fff;border-radius:10px;overflow:hidden;
+}
+.menu-card img{width:100%;height:180px;object-fit:cover;}
+.menu-info h4{background:#f4c542;padding:5px;color:black;}
+.menu-info p{background:#d71920;padding:5px;color:white;}
+
+.close-menu{
     position:fixed;
-    bottom:0;
-    left:0;
-    width:100%;
-
-    background:#d40d13;
-    padding:6px 0;
-
-    z-index:99999;
-
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-
-    margin:0;
-}
-    .footer-bottom{
-    width:100%;
-    text-align:center;
-    color:#aaa;
-    font-size:12px;
-
-    margin:0;
-    padding:2px 0;
-}
-/* TRACK */
-.footer-track{
-    display:flex;
-    gap:20px;
-    width:max-content;
-    animation:scrollFooter 15s linear infinite;
+    top:110px;right:20px;
+    background:red;color:white;
+    padding:10px 15px;
+    border:none;border-radius:8px;
 }
 
-.footer-track img{
-    height:28px;
-}
-/* ICON */
-    
-/* GLOW */
-.footer-track img:hover{
-    transform:scale(1.2);
-    filter:drop-shadow(0 0 8px #ffcc00)
-           drop-shadow(0 0 15px #ff0000);
-}
-
-/* PAUSE */
-.footer-payment:hover .footer-track{
-    animation-play-state:paused;
-}
-
-/* ANIMATION */
-@keyframes scrollFooter{
-    0%{ transform:translateX(0); }
-    100%{ transform:translateX(-50%); }
-}
-/* MOBILE */
-@media (max-width:768px){
-
-    .navbar{
-        padding:10px;
-        gap:10px;
-    }
-
-    .logo-container span{
-        font-size:16px;
-    }
-
-    .nav-links{
-    display:flex;
-    flex-wrap:wrap; /* 🔥 gawin rows */
+/* ================= IMAGE ================= */
+.image-modal{
+    display:none;
+    position:fixed;inset:0;
+    background:rgba(0,0,0,0.9);
     justify-content:center;
-    gap:8px;
+    align-items:center;
 }
-   .nav-links a{
-    font-size:11px;
-    padding:5px 8px;
+.image-modal img{max-width:90%;max-height:80%;}
+.close-image{
+    position:absolute;top:20px;right:20px;font-size:25px;
 }
 
-}
- .card{
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-}
-    /* SOCIAL BUTTONS */
+/* ================= SOCIAL ================= */
 .social-buttons{
     position:fixed;
     bottom:80px;
@@ -474,268 +137,41 @@ body{
     display:flex;
     flex-direction:column;
     gap:10px;
-    z-index:99999;
 }
-
 .social-buttons a{
-    width:50px;
-    height:50px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:50%;
-    color:white;
-    font-size:20px;
-    text-decoration:none;
-    box-shadow:0 5px 15px rgba(0,0,0,0.3);
-    transition:0.3s;
+    width:50px;height:50px;
+    display:flex;align-items:center;justify-content:center;
+    border-radius:50%;color:white;font-size:20px;
 }
+.fb{background:#1877F2;}
+.ig{background:linear-gradient(45deg,#feda75,#d62976,#962fbf,#4f5bd5);}
 
-/* FACEBOOK */
-.social-buttons .fb{
-    background:#1877F2;
-}
-
-/* INSTAGRAM */
-.social-buttons .ig{
-    background:linear-gradient(45deg,#feda75,#d62976,#962fbf,#4f5bd5);
-}
-
-/* HOVER */
-.social-buttons a:hover{
-    transform:scale(1.1);
-}
-    /* ================= MENU CARD ================= */
-.menu-card{
-    background:#fff;
-    border-radius:16px;
-    overflow:hidden;
-    cursor:pointer;
-    box-shadow:0 4px 12px rgba(0,0,0,0.15);
-    border:2px solid #f4c542;
-
-    display:flex;
-    flex-direction:column;
-
-    height:260px;
-}
-
-.menu-card img{
-    width:100%;
-    height:160px;
-    object-fit:cover;
-}
-
-.menu-info{
-    display:flex;
-    flex-direction:column;
-    margin:0;
-}
-
-.menu-info h4{
-    margin:0;
-    padding:5px;
-    background:#f4c542;
-    color:#000;
-    font-size:14px;
+/* ================= FOOTER ================= */
+.footer-payment{
+    position:fixed;
+    bottom:0;width:100%;
+    background:#d40d13;
     text-align:center;
-    font-weight:bold;
-}
-
-.menu-info p{
-    margin:0;
     padding:5px;
-    background:#d71920;
-    color:#fff;
-    font-size:13px;
-    text-align:center;
-    font-weight:bold;
 }
 
-    /* ================= FINAL MOBILE CLEAN FIX ================= */
+/* ================= MOBILE ================= */
 @media (max-width:768px){
 
-    /* 🔥 layout */
-    .menu-box{
-        display:flex;
-        flex-direction:column;
-        height:100vh;
-    }
+.hero{height:45vh;}
 
-    /* 🔥 sticky category */
-   .menu-left{
-    position:sticky;
-    top:80px; /* 🔥 dagdag space sa header */
-    z-index:1000;
-    background:#d71920;
-
-    width:100%;
-    overflow-x:auto;
-    padding:10px;
-
-    border-bottom:2px solid #ffcc00; /* optional design */
-}
-    .menu-left ul{
-        display:flex;
-        gap:10px;
-    }
-
-    .menu-left li{
-        white-space:nowrap;
-    }
-
-    /* 🔥 SINGLE COLUMN (gallery style) */
-   .menu-center{
-    flex:1;
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
-    gap:10px;
-    padding:10px;
-    overflow-y:auto;
-}
-    /* 🔥 BIG IMAGE */
-    .menu-card img{
-        height:200px;
-        object-fit:cover;
-    }
-
-    /* 🔥 preview full width */
-    .menu-right{
-        width:100%;
-        max-width:100%;
-        margin-top:10px;
-    }
-
-    .menu-right img{
-        height:220px;
-    }
-}
-   
-  @media (max-width:768px){
-
-    .navbar{
-        flex-direction:column;
-        align-items:flex-start;
-        padding:10px;
-        gap:10px;
-    }
-
-    .logo-container span{
-        font-size:16px;
-    }
-
-    .nav-links{
-        display:flex;
-        flex-wrap:wrap; /* 🔥 row layout */
-        width:100%;
-        gap:8px;
-    }
-
-    .nav-links a{
-        font-size:11px;
-        padding:5px 8px;
-    }
-
-}
- 
-/* 🔥 MENU MODAL BASE FIX */
-.menu-modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,0.8);
-
-    padding-top:100px; /* 🔥 SPACE FROM HEADER */
-
-    justify-content:center;
-    align-items:flex-start; /* 🔥 important */
-    z-index:9999;
-}
-
-.menu-left{
-    position:sticky;
-    top:100px;
-    z-index:1000;
-
-    width:100%;
-    background:#d71920;
-
-    overflow-x:auto;
-    padding:10px;
-}
-/* LEFT CATEGORY */
-.menu-left{
-    background:#d71920;
-    color:white;
-    padding:20px;
-}
-
-.menu-left ul{
-    display:flex;
+.grid{
+    grid-template-columns:repeat(2,1fr);
     gap:10px;
 }
 
-.menu-left li{
-    white-space:nowrap;
+.navbar{
+    flex-direction:column;
+    align-items:flex-start;
 }
 
-.menu-left li:hover{
-    background:#ffcc00;
-    color:black;
 }
 
-/* CENTER PRODUCTS */
-.menu-center{
-    display:grid;
-    grid-template-columns:1fr; /* 🔥 portrait */
-    gap:15px;
-    padding:20px;
-}
-
-/* RIGHT PREVIEW */
-.menu-right{
-    width:250px;
-    background:#fff;
-    padding:10px;
-    border-left:1px solid #ddd;
-}     
-      .close-menu{
-    position:fixed;
-    top:120px; /* 🔥 ilayo sa navbar */
-    right:20px;
-    background:red;
-    color:white;
-    border:none;
-    padding:10px 15px;
-    font-size:22px;
-    cursor:pointer;
-    z-index:20000; /* 🔥 mas mataas pa */
-    border-radius:8px;
-}
-    /* IMAGE MODAL FIX */
-.image-modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,0.9);
-    justify-content:center;
-    align-items:center;
-    z-index:10000;
-}
-
-.image-modal img{
-    max-width:90%;
-    max-height:80%;
-}
-
-.close-image{
-    position:absolute;
-    top:20px;
-    right:20px;
-    color:white;
-    font-size:25px;
-    cursor:pointer;
-}
 </style>
 </head>
 
@@ -750,492 +186,127 @@ body{
 
     <div class="nav-links">
         <a href="#home">HOME</a>
-       <a href="menu.html">MENU</a>
-       <a href="#" onclick="openContact(); return false;">CONTACT</a>
-        <a href="#" onclick="openModal('core'); return false;">CORE VALUES</a>
-        <a href="#" onclick="openModal('vision'); return false;">VISION</a>
-        <a href="#" onclick="openModal('mission'); return false;">MISSION</a>
-        <a href="#" onclick="openModal('about'); return false;">ABOUT</a>
+        <a href="#" onclick="openMenu()">MENU</a>
+        <a href="#" onclick="openContact()">CONTACT</a>
+        <a href="#" onclick="openModal('core')">CORE VALUES</a>
+        <a href="#" onclick="openModal('vision')">VISION</a>
+        <a href="#" onclick="openModal('mission')">MISSION</a>
+        <a href="#" onclick="openModal('about')">ABOUT</a>
         <a href="gallery.html">GALLERY</a>
     </div>
 </div>
 
 <!-- HERO -->
 <div class="hero" id="home">
-    <div class="hero-content">
-        <h1>PAPPRITO RESTAURANT</h1>
-        <p>Main Dining • Roof Deck • Conference Room</p>
-        
-    </div>
+    <h1>PAPPRITO RESTAURANT</h1>
 </div>
-    <!-- NEW PRODUCT -->
+
+<!-- NEW PRODUCTS -->
 <div class="section">
-    <h2>🔥 New Products</h2>
-
-    <div class="grid">
-
-        <div class="card" onclick="openProduct('Classic Spaghetti','₱85','spaghetti.jpg')">
-            <img src="spaghetti.jpg">
-            <h3>Classic Spaghetti</h3>
-            <p>₱85</p>
-        </div>
-
-        <div class="card" onclick="openProduct('noavailable','₱00','noavailable.jpg')">
-            <img src="noavailable.jpg">
-            <h3>Not available</h3>
-            <p>₱00</p>
-        </div>
-
-        <div class="card" onclick="openProduct('Noavailable','₱00','noavailable.jpg')">
-            <img src="noavailable.jpg">
-            <h3>Not available</h3>
-            <p>₱00</p>
-        </div>
-
-        <div class="card" onclick="openProduct('Noavailable','₱00','noavailable.jpg')">
-            <img src="noavailable.jpg">
-            <h3>Not available</h3>
-            <p>₱00</p>
-        </div>
-
-    </div>
+<h2>🔥 New Products</h2>
+<div class="grid">
+<div class="card" onclick="openProduct('Spaghetti','₱85','spaghetti.jpg')">
+<img src="spaghetti.jpg">
+<h3>Spaghetti</h3>
+<p>₱85</p>
 </div>
-<!-- SPACES -->
-<div class="section" id="spaces">
-    <h2>OUR DINING SPACES</h2>
-
-    <div class="grid">
-        <div class="card"><img src="main-dining.jpg"><h3>Main Dining</h3><p>Comfortable indoor dining experience</p></div>
-        <div class="card"><img src="roof-deck.jpg"><h3>Roof Deck</h3><p>Open-air dining with great view</p></div>
-        <div class="card"><img src="basement.jpg"><h3>Basement</h3><p>Cozy and private atmosphere</p></div>
-        <div class="card"><img src="conference-room.jpg"><h3>Conference Room</h3><p>Perfect for meetings and events</p></div>
-    </div>
 </div>
-  
-    <!-- EVENTS & ANNOUNCEMENTS -->
-<div class="section" id="events">
-
-    <h2>🔥 Events & Announcements</h2>
-
-    <div class="events-container">
-
-        <div class="event-card">
-            <h3>🎉 Grand Promo</h3>
-            <p>STAY TUNE!</p>
-        </div>
-
-        <div class="event-card">
-            <h3>PHILLIPPINE HOLIDAYS</h3>
-            <p>NO HOLIDAYS</p>
-        </div>
-
-        <div class="event-card">
-            <h3>🍻 Happy Hour</h3>
-            <p> 8AM TO 10PM</p>
-        </div>
-
-    </div>
-
 </div>
-    <!-- PROMO SLIDER -->
-<div class="promo-slider">
 
-    <div class="slides">
-
-        <div class="slide active">
-            🎉 10% OFF THIS WEEKEND!
-        </div>
-
-        <div class="slide">
-            🍻 HAPPY HOUR 5PM–7PM
-        </div>
-
-        <div class="slide">
-            🎶 LIVE ACOUSTIC NIGHT EVERY FRIDAY
-        </div>
-
-    </div>
-
+<!-- DINING -->
+<div class="section">
+<h2>OUR DINING SPACES</h2>
+<div class="grid">
+<div class="card"><img src="main-dining.jpg"><h3>Main Dining</h3></div>
+<div class="card"><img src="roof-deck.jpg"><h3>Roof Deck</h3></div>
 </div>
-    <!-- PROMO SLIDER -->
+</div>
+
 <!-- EVENTS -->
-    
-<script>
-function openModal(type){
+<div class="section">
+<h2>Events & Announcement</h2>
+<div class="events-container">
+<div class="event-card">Promo</div>
+<div class="event-card">Holiday</div>
+</div>
+</div>
 
-    const modal = document.getElementById("modal");
-    const title = document.getElementById("modalTitle");
-    const content = document.getElementById("modalContent");
-
-    if(!modal || !title || !content) return;
-
-    modal.style.display = "flex";
-
-   if(type==="core"){
-    title.innerText="CORE VALUES";
-    content.innerText=`CUSTOMER FOCUS
-We provide great taste, excellent service, and superior value to all our customers.
-
-INTEGRITY
-We do only the right thing and what ought to be done regardless of the situation.
-
-LISTENING WITH HUMILITY
-We value feedback, acknowledge and learn from our mistakes.
-
-SPIRIT OF BUSINESS ENTERPRISE
-We imbue our employees with entrepreneurial spirit and sense of ownership.
-
-PROFESSIONALISM
-We are professional in mind, in word and in deed.
-
-SPIRIT OF FAMILY AND FUN
-We foster teamwork, unity, and treat each other like family.`;
-}
-
-if(type==="vision"){
-    title.innerText="VISION";
-    content.innerText=`To be the go-to restaurant for hearty Filipino food, delivering superior value through our delicious and affordable meals.`;
-}
-
-if(type==="mission"){
-    title.innerText="MISSION";
-    content.innerText=`To serve fresh and delicious food, promoting delightful eating to everyone.`;
-}
-
-if(type==="about"){
-    title.innerText="ABOUT PAPPRITO";
-    content.innerText=`Papa Prito entered the bustling and competitive food scene in Tagaytay City on October 30, 2011 with a promise of food and ambiance rich in taste yet light on the pocket.
-
-Since then, it has become a social equalizer, welcoming customers from all walks of life and building a strong local following.
-
-Serving Filipino favorites that are rich in flavor yet affordable, Papa Prito satisfies not only hunger but also delivers a memorable dining experience.
-
-Slogan:
-"Lasap Ang Pinoy Sarap"`;
-}
-    }
-function closeModal(){
-    document.getElementById("modal").style.display="none";
-}
-
-window.addEventListener("load", function(){
-
-    // MODAL CLICK OUTSIDE
-    const modal = document.getElementById("modal");
-    if(modal){
-        modal.addEventListener("click", function(e){
-            if(e.target === this){
-                closeModal();
-            }
-        });
-    }
-
-});
-
-document.addEventListener("keydown", function(e){
-    if(e.key === "Escape"){
-        closeModal();
-    }
-});
-    function openMenu(){
-    document.getElementById("menuModal").style.display="flex";
-    showCategory('beef'); // auto load
-}
-    function closeMenu(){
-    document.getElementById("menuModal").style.display = "none";
-}
-  let products = JSON.parse(localStorage.getItem("menuData")) || {
-
-    beef:[
-        {name:"Bulalo Grupo",price:"₱710",img:"bulalogroup.jpg"},
-        {name:"Bulalo Solo",price:"₱185",img:"bulalo.jpg"},
-        {name:"Bistek Tagalog",price:"₱279",img:"bistek.jpg"}
-    ],
-
-    pork:[
-        {name:"Lechon Kawali",price:"₱395",img:"lechon.jpg"},
-        {name:"Pork Sisig",price:"₱315",img:"sisig.jpg"},
-        {name:"Lumpiang Shanghai",price:"₱235",img:"lumpia.jpg"}
-    ],
-
-    chicken:[
-        {name:"PapsChicken Platter",price:"₱315",img:"chicken.jpg"},
-        {name:"Chicken Sisig",price:"₱295",img:"chicken-sisig.jpg"}
-    ],
-
-    seafood:[
-        {name:"Crispy Bangusarap",price:"₱315",img:"bangus.jpg"},
-        {name:"Calamares",price:"₱305",img:"calamares.jpg"},
-        {name:"Crispy Tawilis",price:"₱285",img:"tawilis.jpg"}
-    ],
-
-    veggies:[
-        {name:"Chop Suey",price:"₱235",img:"chopsuey.jpg"},
-        {name:"Tortang Talong",price:"₱192",img:"talong.jpg"}
-    ],
-
-    noodles:[
-        {name:"Canton-Bihon",price:"₱278",img:"canton.jpg"},
-        {name:"Palabok",price:"₱195",img:"palabok.jpg"},
-        {name:"Beef Mami",price:"₱159",img:"mami.jpg"},
-        {name:"Chicken Mami",price:"₱149",img:"mami2.jpg"}
-    ],
-
-    sides:[
-        {name:"PapShots",price:"₱72",img:"restaurant-hero.jpg"},
-        {name:"Spicy Tofu",price:"₱65",img:"tofu.jpg"},
-        {name:"Bola Bola Soup",price:"₱68",img:"soup.jpg"},
-        {name:"Lumpiang Shanghai",price:"₱49",img:"lumpia.jpg"},
-        {name:"Fried Banana",price:"₱35",img:"banana.jpg"},
-        {name:"Garlic Rice",price:"₱46",img:"rice.jpg"},
-        {name:"Plain Rice",price:"₱32",img:"rice.jpg"}
-    ],
-
-    drinks:[
-        {name:"Softdrinks",price:"₱52",img:"drinks.jpg"},
-        {name:"1.5L Softdrinks",price:"₱145",img:"drinks.jpg"},
-        {name:"Iced Tea",price:"₱52",img:"icedtea.jpg"},
-        {name:"Black Gulaman",price:"₱52",img:"gulaman.jpg"},
-        {name:"Pineapple Juice",price:"₱62",img:"juice.jpg"},
-        {name:"Calamansi Juice",price:"₱62",img:"juice.jpg"},
-        {name:"Iced Coffee",price:"₱59",img:"coffee.jpg"},
-        {name:"Hot Choco",price:"₱55",img:"choco.jpg"},
-        {name:"Water",price:"₱35",img:"water.jpg"}
-    ],
-
-    beers:[
-        {name:"San Mig Light",price:"₱95",img:"sanmig-light.jpg"},
-        {name:"San Miguel Pale",price:"₱95",img:"sanmig-pale.jpg"},
-        {name:"San Miguel Flavored",price:"₱95",img:"sanmig-flavored.jpg"},
-        {name:"Red Horse",price:"₱105",img:"redhorse.jpg"}
-    ]
-
-};
-function showCategory(cat){
-    const container = document.getElementById("menuProducts");
-    container.innerHTML="";
-
-    products[cat].forEach(item=>{
-        container.innerHTML+=`
-        <div class="menu-card" onclick="preview('${item.name}','${item.price}','${item.img}')">
-            <img src="${item.img}">
-            <div class="menu-info">
-                <h4>${item.name}</h4>
-                <p>${item.price}</p>
-            </div>
-        </div>`;
-    });
-}
-
-function preview(name,price,img){
-    document.getElementById("menuPreview").innerHTML=`
-        <img src="${img}" onclick="openImageModal('${img}')">
-        <h3>${name}</h3>
-        <p>${price}</p>
-    `;
-}
-    function openImageModal(img){
-    document.getElementById("imageModal").style.display="flex";
-    document.getElementById("modalImg").src = img;
-}
-
-function closeImageModal(){
-    document.getElementById("imageModal").style.display="none";
-}
-  // ✅ SAFE LOAD ALL
-window.addEventListener("load", function(){
-
-    // IMAGE MODAL CLICK OUTSIDE
-    const imgModal = document.getElementById("imageModal");
-    if(imgModal){
-        imgModal.addEventListener("click", function(e){
-            if(e.target === this){
-                closeImageModal();
-            }
-        });
-    }
-
-    // SLIDER AUTO
-    let slides = document.querySelectorAll(".slide");
-    let index = 0;
-
-    if(slides.length > 0){
-        setInterval(()=>{
-            slides[index].classList.remove("active");
-            index = (index + 1) % slides.length;
-            slides[index].classList.add("active");
-        },3000);
-    }
-
-    // COUNTDOWN
-    let endTime = new Date().getTime() + (2 * 60 * 60 * 1000);
-
-    setInterval(()=>{
-        let now = new Date().getTime();
-        let distance = endTime - now;
-
-        let h = Math.floor(distance / (1000*60*60));
-        let m = Math.floor((distance % (1000*60*60))/(1000*60));
-        let s = Math.floor((distance % (1000*60))/1000);
-
-        const cd = document.getElementById("countdown");
-        if(cd){
-            cd.innerHTML = `⏳ Ends in ${h}h ${m}m ${s}s`;
-        }
-    },1000);
-
-});
-
-    function openContact(){
-    document.getElementById("contactModal").style.display = "flex";
-}
-
-function closeContact(){
-    document.getElementById("contactModal").style.display = "none";
-}
-    const contactModal = document.getElementById("contactModal");
-
-if(contactModal){
-    contactModal.addEventListener("click", function(e){
-        if(e.target === this){
-            closeContact();
-        }
-    });
-}
-    function openProduct(name, price, img){
-    document.getElementById("productPreview").style.display = "flex";
-    document.getElementById("productImg").src = img;
-    document.getElementById("productName").innerText = name;
-    document.getElementById("productPrice").innerText = price;
-}
-
-function closeProduct(){
-    document.getElementById("productPreview").style.display = "none";
-}
-</script>
+<!-- MENU -->
 <div id="menuModal" class="menu-modal">
-
-    <!-- CLOSE BUTTON -->
-    <button class="close-menu" onclick="closeMenu()">✖</button>
-
-    <div class="menu-box">
-
-        <!-- LEFT -->
-        <div class="menu-left">
-            <h3>Menu</h3>
-            <ul>
-                <li onclick="showCategory('beef')">Beef</li>
-                <li onclick="showCategory('pork')">Pork</li>
-                <li onclick="showCategory('chicken')">Chicken</li>
-                <li onclick="showCategory('seafood')">Seafood</li>
-                <li onclick="showCategory('veggies')">Veggies</li>
-                <li onclick="showCategory('noodles')">Noodles</li>
-                <li onclick="showCategory('sides')">Sides</li>
-                <li onclick="showCategory('drinks')">Drinks</li>
-                <li onclick="showCategory('beers')">Beers</li>
-            </ul>
-        </div>
-
-        <!-- CENTER -->
-        <div class="menu-center" id="menuProducts"></div>
-
-    </div>
+<button class="close-menu" onclick="closeMenu()">✖</button>
+<ul class="menu-left">
+<li onclick="showCategory('beef')">Beef</li>
+<li onclick="showCategory('pork')">Pork</li>
+</ul>
+<div id="menuProducts" class="menu-center"></div>
 </div>
-<!-- IMAGE PREVIEW MODAL -->
+
+<!-- IMAGE -->
 <div id="imageModal" class="image-modal">
-   <span class="close-image" onclick="closeImageModal()">✖</span>
-    <img id="modalImg">
+<span class="close-image" onclick="closeImageModal()">✖</span>
+<img id="modalImg">
 </div>
- 
-    <div id="modal" class="modal">
-    <div class="modal-content">
-        <button class="close-btn" onclick="closeModal()">X</button>
-        <h2 id="modalTitle"></h2>
-        <p id="modalContent"></p>
-    </div>
-</div>
-<div class="footer-payment">
 
-    <div class="footer-track">
-
-        <!-- ORIGINAL -->
-        <img src="gcash.png">
-        <img src="maya.png">
-        <img src="visa.png">
-        <img src="mastercard.png">
-        <img src="grabpay.png">
-        <img src="qrph.png">
-        <img src="bancnet.png">
-
-        <!-- DUPLICATE (IMPORTANT) -->
-        <img src="gcash.png">
-        <img src="maya.png">
-        <img src="visa.png">
-        <img src="mastercard.png">
-        <img src="grabpay.png">
-        <img src="qrph.png">
-        <img src="bancnet.png">
-        
-         <!-- DUPLICATE (IMPORTANT) -->
-        <img src="gcash.png">
-        <img src="maya.png">
-        <img src="visa.png">
-        <img src="mastercard.png">
-        <img src="grabpay.png">
-        <img src="qrph.png">
-        <img src="bancnet.png">
-
-    </div>
-
-    <div class="footer-bottom">
-        © 2026 PAPPRITO RESTAURANT AllRightsReserved
-    </div>
-
-</div>
-    <!-- CONTACT MODAL -->
-<div id="contactModal" class="modal">
-    <div class="modal-content">
-
-        <button class="close-btn" onclick="closeContact()">X</button>
-
-        <h2>Contact Us</h2>
-
-        <p><strong>📍 Address:</strong> Grandview Complex Tagaytay</p>
-        <p><strong>📞 Phone:</strong> +63 912 345 6789</p>
-        <p><strong>📧 Email:</strong> papprito@gmail.com</p>
-        <p><strong>🕒 Hours:</strong> 10AM – 10PM</p>
-
-        <a href="https://www.google.com/maps?q=Grandview+Complex+Tagaytay"
-           target="_blank"
-           class="map-btn">
-           📍 View on Map
-        </a>
-
-    </div>
-</div>
-    <!-- PRODUCT PREVIEW POPUP -->
-<div id="productPreview" class="image-modal">
-
-    <span class="close-image" onclick="closeProduct()">✖</span>
-
-    <div style="text-align:center;">
-        <img id="productImg">
-        <h2 id="productName"></h2>
-        <p id="productPrice"></p>
-    </div>
-
-</div>
-<!-- SOCIAL MEDIA BUTTONS -->
+<!-- SOCIAL -->
 <div class="social-buttons">
-
-   <a href="https://www.facebook.com/papprito" target="_blank" class="fb">
-    <i class="fab fa-facebook-f"></i>
-</a>
-
-<a href="https://instagram.com/papaprito" target="_blank" class="ig">
-    <i class="fab fa-instagram"></i>
-</a>
-
+<a href="#" class="fb"><i class="fab fa-facebook-f"></i></a>
+<a href="#" class="ig"><i class="fab fa-instagram"></i></a>
 </div>
+
+<!-- FOOTER -->
+<div class="footer-payment">
+© 2026 PAPPRITO All Rights Reserved
+</div>
+
+<script>
+
+/* MENU */
+let products={
+beef:[{name:"Bulalo",price:"₱185",img:"bulalo.jpg"}],
+pork:[{name:"Sisig",price:"₱315",img:"sisig.jpg"}]
+};
+
+function openMenu(){
+document.getElementById("menuModal").style.display="block";
+showCategory('beef');
+}
+function closeMenu(){
+document.getElementById("menuModal").style.display="none";
+}
+function showCategory(cat){
+let c=document.getElementById("menuProducts");
+c.innerHTML="";
+products[cat].forEach(p=>{
+c.innerHTML+=`
+<div class="menu-card" onclick="openImageModal('${p.img}')">
+<img src="${p.img}">
+<div class="menu-info">
+<h4>${p.name}</h4>
+<p>${p.price}</p>
+</div>
+</div>`;
+});
+}
+
+/* IMAGE */
+function openImageModal(img){
+document.getElementById("imageModal").style.display="flex";
+document.getElementById("modalImg").src=img;
+}
+function closeImageModal(){
+document.getElementById("imageModal").style.display="none";
+}
+
+/* PRODUCT */
+function openProduct(name,price,img){
+openImageModal(img);
+}
+
+/* MODALS */
+function openModal(type){alert(type);}
+function openContact(){alert("contact");}
+
+</script>
+
 </body>
 </html>
