@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PAPPRITO Menu</title>
+
+<style>
+body{
+    margin:0;
+    font-family:sans-serif;
+    background:#111;
+    color:white;
+}
+
+/* HEADER */
+.header{
+    position:fixed;
+    top:0;
+    width:100%;
+    background:#d71920;
+    padding:15px;
+    text-align:center;
+    font-weight:bold;
+    z-index:1000;
+}
+
+/* CATEGORY BAR */
+.categories{
+    margin-top:70px;
+    background:#d71920;
+    padding:10px;
+    display:flex;
+    gap:10px;
+    overflow-x:auto;
+}
+
+.categories div{
+    padding:8px 12px;
+    background:#ffcc00;
+    color:black;
+    border-radius:5px;
+    cursor:pointer;
+    white-space:nowrap;
+}
+
+/* PRODUCTS */
+.products{
+    padding:20px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:15px;
+}
+
+.card{
+    background:white;
+    color:black;
+    border-radius:12px;
+    overflow:hidden;
+    text-align:center;
+}
+
+.card img{
+    width:100%;
+    height:180px;
+    object-fit:cover;
+}
+
+.card h3{
+    margin:5px;
+}
+
+.card p{
+    color:red;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">PAPPRITO MENU</div>
+
+<div class="categories">
+    <div onclick="show('beef')">Beef</div>
+    <div onclick="show('pork')">Pork</div>
+    <div onclick="show('chicken')">Chicken</div>
+    <div onclick="show('seafood')">Seafood</div>
+</div>
+
+<div class="products" id="products"></div>
+
+<script>
+let data = {
+    beef:[
+        {name:"Bulalo Grupo",price:"₱710",img:"bulalogroup.jpg"},
+        {name:"Bulalo Solo",price:"₱185",img:"bulalo.jpg"}
+    ],
+    pork:[
+        {name:"Lechon Kawali",price:"₱395",img:"lechon.jpg"}
+    ],
+    chicken:[
+        {name:"PapsChicken",price:"₱315",img:"chicken.jpg"}
+    ],
+    seafood:[
+        {name:"Bangus",price:"₱315",img:"bangus.jpg"}
+    ]
+};
+
+function show(cat){
+    let container = document.getElementById("products");
+    container.innerHTML="";
+
+    data[cat].forEach(item=>{
+        container.innerHTML+=`
+        <div class="card">
+            <img src="${item.img}">
+            <h3>${item.name}</h3>
+            <p>${item.price}</p>
+        </div>`;
+    });
+}
+
+show('beef');
+</script>
+
+</body>
+</html>
