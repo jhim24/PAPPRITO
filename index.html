@@ -394,16 +394,14 @@ function closeInfo(){document.getElementById("infoModal").style.display="none";}
 // SLIDER
 let slides=document.querySelectorAll(".slide");
 let index=0;
+
+if(slides.length > 0){
 setInterval(()=>{
 slides[index].classList.remove("active");
 index=(index+1)%slides.length;
 slides[index].classList.add("active");
 },3000);
-    // CLICK OUTSIDE CLOSE
-document.getElementById("infoModal").addEventListener("click", function(e){
-    if(e.target === this){
-        closeInfo();
-    }
+}
 });
 
 document.getElementById("contactModal").addEventListener("click", function(e){
