@@ -10,69 +10,68 @@ body{
     margin:0;
     font-family:sans-serif;
     background:#111;
-    color:white;
+    color:black;
 }
 
 /* HEADER */
 .header{
-    position:fixed;
-    top:0;
-    width:100%;
     background:#d71920;
+    color:white;
     padding:15px;
     text-align:center;
     font-weight:bold;
-    z-index:1000;
 }
 
-/* CATEGORY BAR */
-.categories{
-    margin-top:70px;
-    background:#d71920;
-    padding:10px;
+/* LAYOUT */
+.container{
     display:flex;
-    gap:10px;
-    overflow-x:auto;
+    height:100vh;
 }
 
-.categories div{
-    padding:8px 12px;
+/* SIDEBAR */
+.sidebar{
+    width:120px;
+    background:#d71920;
+    color:white;
+    padding:10px;
+}
+
+.sidebar div{
+    padding:10px;
+    cursor:pointer;
+}
+
+.sidebar div:hover{
     background:#ffcc00;
     color:black;
-    border-radius:5px;
-    cursor:pointer;
-    white-space:nowrap;
 }
 
-/* PRODUCTS */
-.products{
-    padding:20px;
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:15px;
+/* CONTENT */
+.content{
+    flex:1;
+    padding:15px;
+    overflow-y:auto;
 }
 
-.card{
+/* MENU BOX */
+.box{
     background:white;
-    color:black;
-    border-radius:12px;
-    overflow:hidden;
-    text-align:center;
+    border-radius:15px;
+    padding:15px;
+    margin-bottom:15px;
+    border:3px solid #ffcc00;
 }
 
-.card img{
-    width:100%;
-    height:180px;
-    object-fit:cover;
+.box h3{
+    margin-top:0;
 }
 
-.card h3{
-    margin:5px;
-}
-
-.card p{
-    color:red;
-    font-weight:bold;
+/* ITEM */
+.item{
+    display:flex;
+    justify-content:space-between;
+    padding:5px 0;
+    border-bottom:1px dashed #ccc;
 }
 </style>
 </head>
@@ -81,44 +80,107 @@ body{
 
 <div class="header">PAPPRITO MENU</div>
 
-<div class="categories">
-    <div onclick="show('beef')">Beef</div>
-    <div onclick="show('pork')">Pork</div>
-    <div onclick="show('chicken')">Chicken</div>
-    <div onclick="show('seafood')">Seafood</div>
+<div class="container">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <div onclick="show('beef')">Beef</div>
+        <div onclick="show('pork')">Pork</div>
+        <div onclick="show('chicken')">Chicken</div>
+        <div onclick="show('seafood')">Seafood</div>
+        <div onclick="show('veggies')">Veggies</div>
+        <div onclick="show('noodles')">Noodles</div>
+        <div onclick="show('sides')">Sides</div>
+        <div onclick="show('drinks')">Drinks</div>
+        <div onclick="show('beers')">Beers</div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="content" id="content"></div>
+
 </div>
 
-<div class="products" id="products"></div>
-
 <script>
-let data = {
-    beef:[
-        {name:"Bulalo Grupo",price:"₱710",img:"bulalogroup.jpg"},
-        {name:"Bulalo Solo",price:"₱185",img:"bulalo.jpg"}
-    ],
-    pork:[
-        {name:"Lechon Kawali",price:"₱395",img:"lechon.jpg"}
-    ],
-    chicken:[
-        {name:"PapsChicken",price:"₱315",img:"chicken.jpg"}
-    ],
-    seafood:[
-        {name:"Bangus",price:"₱315",img:"bangus.jpg"}
-    ]
+let menu = {
+
+beef:[
+["Bulalo Grupo","₱710"],
+["Bulalo Solo","₱185"],
+["Bistek Tagalog","₱279"]
+],
+
+pork:[
+["Lechon Kawali","₱395"],
+["Pork Sisig","₱315"],
+["Lumpiang Shanghai","₱235"]
+],
+
+chicken:[
+["PapsChicken Platter","₱315"],
+["Chicken Sisig","₱295"]
+],
+
+seafood:[
+["Crispy Bangusarap","₱315"],
+["Calamares","₱305"],
+["Crispy Tawilis","₱285"]
+],
+
+veggies:[
+["Chop Suey","₱235"],
+["Tortang Talong","₱192"]
+],
+
+noodles:[
+["Canton-Bihon","₱278"],
+["Palabok","₱195"],
+["Beef Mami","₱159"],
+["Chicken Mami","₱149"]
+],
+
+sides:[
+["PapShots","₱72"],
+["Spicy Tofu","₱65"],
+["Bola Bola Soup","₱68"],
+["Lumpiang Shanghai","₱49"],
+["Fried Banana","₱35"],
+["Garlic Rice","₱46"],
+["Plain Rice","₱32"]
+],
+
+drinks:[
+["Softdrinks","₱52"],
+["1.5L Softdrinks","₱145"],
+["Iced Tea","₱52"],
+["Black Gulaman","₱52"],
+["Pineapple Juice","₱62"],
+["Calamansi Juice","₱62"],
+["Iced Coffee","₱59"],
+["Hot Choco","₱55"],
+["Water","₱35"]
+],
+
+beers:[
+["San Mig Light","₱95"],
+["San Miguel Pale","₱95"],
+["San Miguel Flavored","₱95"],
+["Red Horse","₱105"]
+]
+
 };
 
 function show(cat){
-    let container = document.getElementById("products");
-    container.innerHTML="";
-
-    data[cat].forEach(item=>{
-        container.innerHTML+=`
-        <div class="card">
-            <img src="${item.img}">
-            <h3>${item.name}</h3>
-            <p>${item.price}</p>
-        </div>`;
+    let html = `<div class="box"><h3>${cat.toUpperCase()}</h3>`;
+    
+    menu[cat].forEach(item=>{
+        html += `<div class="item">
+                    <span>${item[0]}</span>
+                    <span>${item[1]}</span>
+                 </div>`;
     });
+
+    html += `</div>`;
+    document.getElementById("content").innerHTML = html;
 }
 
 show('beef');
