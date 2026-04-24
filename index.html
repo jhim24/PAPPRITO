@@ -30,17 +30,21 @@ gap:10px; /* 🔥 spacing */
 .logo-container{
 display:flex;
 align-items:center;
-gap:8px; /* 🔥 hindi dikit */
+gap:8px;
+flex-shrink:0; /* 🔥 hindi sisiksik */
 }
 
 .logo-container span{
 font-size:16px; /* 🔥 mas maliit */
 white-space:nowrap; /* 🔥 iwas wrap */
 }
-.nav-links{display:flex;gap:10px;flex-wrap:wrap;}
-.nav-links a{color:white;text-decoration:none;font-size:13px;}
-
-/* HERO */
+.nav-links{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+justify-content:flex-end; /* 🔥 ilayo sa logo */
+flex:1; /* 🔥 hati space */
+}
 .hero{
 height:60vh;background:url('restaurant-hero.jpg') center/cover;
 display:flex;align-items:center;justify-content:center;text-align:center;
@@ -179,38 +183,34 @@ animation:scrollFooter 15s linear infinite;
 
 /* MOBILE */
 @media(max-width:768px){
+
 .hero{height:45vh;}
 .new-products,.spaces-grid{grid-template-columns:repeat(2,1fr);}
+
+/* 🔥 NAVBAR FIX */
+.navbar{
+    flex-direction:column;
+    align-items:flex-start;
 }
-    #modalText{
-    white-space:pre-line;
-    line-height:1.6;
-    font-size:14px;
+
+.logo-container{
+    width:100%;
+    justify-content:flex-start;
+    margin-bottom:5px;
 }
-    @media(max-width:768px){
 
-    .navbar{
-        flex-direction:column;
-        align-items:flex-start;
-    }
+.nav-links{
+    width:100%;
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    justify-content:flex-start;
+}
 
-    .logo-container{
-        width:100%;
-        justify-content:flex-start;
-    }
-
-    .nav-links{
-        width:100%;
-        display:flex;
-        flex-wrap:wrap;
-        gap:8px;
-        margin-top:5px;
-    }
-
-    .nav-links a{
-        font-size:11px;
-        padding:4px 6px;
-    }
+.nav-links a{
+    font-size:11px;
+    padding:4px 6px;
+}
 
 }
 </style>
