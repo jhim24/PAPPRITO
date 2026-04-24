@@ -162,90 +162,167 @@ body{
 </div>
 
 <script>
-let menu = {
+<script>
+function openModal(type){
 
-beef:[
-["Bulalo Grupo","₱710","bulalogroup.jpg"],
-["Bulalo Solo","₱185","bulalo.jpg"],
-["Bistek Tagalog","₱279","bistek.jpg"]
-],
+    const modal = document.getElementById("modal");
+    const title = document.getElementById("modalTitle");
+    const content = document.getElementById("modalContent");
 
-pork:[
-["Lechon Kawali","₱395","lechon.jpg"],
-["Pork Sisig","₱315","sisig.jpg"],
-["Lumpiang Shanghai","₱235","lumpia.jpg"]
-],
+    if(!modal || !title || !content) return;
 
-chicken:[
-["PapsChicken","₱315","chicken.jpg"],
-["Chicken Sisig","₱295","chicken-sisig.jpg"]
-],
+    modal.style.display = "flex";
 
-seafood:[
-["Crispy Bangus","₱315","bangus.jpg"],
-["Calamares","₱305","calamares.jpg"],
-["Crispy Tawilis","₱285","tawilis.jpg"]
-],
+   if(type==="core"){
+    title.innerText="CORE VALUES";
+    content.innerText=`CUSTOMER FOCUS
+We provide great taste, excellent service, and superior value to all our customers.
 
-veggies:[
-["Chop Suey","₱235","chopsuey.jpg"],
-["Tortang Talong","₱192","talong.jpg"]
-],
+INTEGRITY
+We do only the right thing and what ought to be done regardless of the situation.
 
-noodles:[
-["Canton-Bihon","₱278","canton.jpg"],
-["Palabok","₱195","palabok.jpg"],
-["Beef Mami","₱159","mami.jpg"],
-["Chicken Mami","₱149","mami2.jpg"]
-],
+LISTENING WITH HUMILITY
+We value feedback, acknowledge and learn from our mistakes.
 
-sides:[
-["PapShots","₱72","restaurant-hero.jpg"],
-["Spicy Tofu","₱65","tofu.jpg"],
-["Bola Soup","₱68","soup.jpg"],
-["Shanghai","₱49","lumpia.jpg"],
-["Banana","₱35","banana.jpg"],
-["Garlic Rice","₱46","rice.jpg"],
-["Plain Rice","₱32","rice.jpg"]
-],
+SPIRIT OF BUSINESS ENTERPRISE
+We imbue our employees with entrepreneurial spirit and sense of ownership.
 
-drinks:[
-["Softdrinks","₱52","drinks.jpg"],
-["1.5L Soda","₱145","drinks.jpg"],
-["Iced Tea","₱52","icedtea.jpg"],
-["Gulaman","₱52","gulaman.jpg"],
-["Pineapple","₱62","juice.jpg"],
-["Calamansi","₱62","juice.jpg"],
-["Coffee","₱59","coffee.jpg"],
-["Hot Choco","₱55","choco.jpg"],
-["Water","₱35","water.jpg"]
-],
+PROFESSIONALISM
+We are professional in mind, in word and in deed.
 
-beers:[
-["San Mig Light","₱95","sanmig-light.jpg"],
-["San Miguel","₱95","sanmig-pale.jpg"],
-["Flavored","₱95","sanmig-flavored.jpg"],
-["Red Horse","₱105","redhorse.jpg"]
-]
-
-};
-
-function show(cat){
-    let html = "";
-    
-    menu[cat].forEach(item=>{
-        html += `
-        <div class="card">
-            <img src="${item[2]}">
-            <div class="name">${item[0]}</div>
-            <div class="price">${item[1]}</div>
-        </div>`;
-    });
-
-    document.getElementById("content").innerHTML = html;
+SPIRIT OF FAMILY AND FUN
+We foster teamwork, unity, and treat each other like family.`;
 }
 
-show('beef');
+if(type==="vision"){
+    title.innerText="VISION";
+    content.innerText=`To be the go-to restaurant for hearty Filipino food, delivering superior value through our delicious and affordable meals.`;
+}
+
+if(type==="mission"){
+    title.innerText="MISSION";
+    content.innerText=`To serve fresh and delicious food, promoting delightful eating to everyone.`;
+}
+
+if(type==="about"){
+    title.innerText="ABOUT PAPPRITO";
+    content.innerText=`Papa Prito entered the bustling and competitive food scene in Tagaytay City on October 30, 2011...
+
+"Lasap Ang Pinoy Sarap"`;
+}
+}
+
+function closeModal(){
+    document.getElementById("modal").style.display="none";
+}
+
+document.addEventListener("keydown", function(e){
+    if(e.key === "Escape"){
+        closeModal();
+    }
+});
+
+function openMenu(){
+    document.getElementById("menuModal").style.display="flex";
+    showCategory('beef');
+}
+
+function closeMenu(){
+    document.getElementById("menuModal").style.display = "none";
+}
+
+let products = JSON.parse(localStorage.getItem("menuData")) || {
+
+    beef:[
+        {name:"Bulalo Grupo",price:"₱710",img:"bulalogroup.jpg"},
+        {name:"Bulalo Solo",price:"₱185",img:"bulalo.jpg"},
+        {name:"Bistek Tagalog",price:"₱279",img:"bistek.jpg"}
+    ],
+
+    pork:[
+        {name:"Lechon Kawali",price:"₱395",img:"lechon.jpg"},
+        {name:"Pork Sisig",price:"₱315",img:"sisig.jpg"},
+        {name:"Lumpiang Shanghai",price:"₱235",img:"lumpia.jpg"}
+    ],
+
+    chicken:[
+        {name:"PapsChicken Platter",price:"₱315",img:"chicken.jpg"},
+        {name:"Chicken Sisig",price:"₱295",img:"chicken-sisig.jpg"}
+    ],
+
+    seafood:[
+        {name:"Crispy Bangusarap",price:"₱315",img:"bangus.jpg"},
+        {name:"Calamares",price:"₱305",img:"calamares.jpg"},
+        {name:"Crispy Tawilis",price:"₱285",img:"tawilis.jpg"}
+    ],
+
+    veggies:[
+        {name:"Chop Suey",price:"₱235",img:"chopsuey.jpg"},
+        {name:"Tortang Talong",price:"₱192",img:"talong.jpg"}
+    ],
+
+    noodles:[
+        {name:"Canton-Bihon",price:"₱278",img:"canton.jpg"},
+        {name:"Palabok",price:"₱195",img:"palabok.jpg"},
+        {name:"Beef Mami",price:"₱159",img:"mami.jpg"},
+        {name:"Chicken Mami",price:"₱149",img:"mami2.jpg"}
+    ],
+
+    sides:[
+        {name:"PapShots",price:"₱72",img:"restaurant-hero.jpg"},
+        {name:"Spicy Tofu",price:"₱65",img:"tofu.jpg"},
+        {name:"Bola Bola Soup",price:"₱68",img:"soup.jpg"},
+        {name:"Lumpiang Shanghai",price:"₱49",img:"lumpia.jpg"},
+        {name:"Fried Banana",price:"₱35",img:"banana.jpg"},
+        {name:"Garlic Rice",price:"₱46",img:"rice.jpg"},
+        {name:"Plain Rice",price:"₱32",img:"rice.jpg"}
+    ],
+
+    drinks:[
+        {name:"Softdrinks",price:"₱52",img:"drinks.jpg"},
+        {name:"1.5L Softdrinks",price:"₱145",img:"drinks.jpg"},
+        {name:"Iced Tea",price:"₱52",img:"icedtea.jpg"},
+        {name:"Black Gulaman",price:"₱52",img:"gulaman.jpg"},
+        {name:"Pineapple Juice",price:"₱62",img:"juice.jpg"},
+        {name:"Calamansi Juice",price:"₱62",img:"juice.jpg"},
+        {name:"Iced Coffee",price:"₱59",img:"coffee.jpg"},
+        {name:"Hot Choco",price:"₱55",img:"choco.jpg"},
+        {name:"Water",price:"₱35",img:"water.jpg"}
+    ],
+
+    beers:[
+        {name:"San Mig Light",price:"₱95",img:"sanmig-light.jpg"},
+        {name:"San Miguel Pale",price:"₱95",img:"sanmig-pale.jpg"},
+        {name:"San Miguel Flavored",price:"₱95",img:"sanmig-flavored.jpg"},
+        {name:"Red Horse",price:"₱105",img:"redhorse.jpg"}
+    ]
+};
+
+function showCategory(cat){
+    const container = document.getElementById("menuProducts");
+    container.innerHTML="";
+
+    products[cat].forEach(item=>{
+        container.innerHTML+=`
+        <div class="menu-card">
+            <img src="${item.img}" onclick="openZoom('${item.img}')">
+            <div class="menu-info">
+                <h4>${item.name}</h4>
+                <p>${item.price}</p>
+            </div>
+        </div>`;
+    });
+}
+
+/* 🔥 PREMIUM ZOOM */
+function openZoom(img){
+    document.getElementById("zoomModal").style.display = "flex";
+    document.getElementById("zoomImg").src = img;
+}
+
+function closeZoom(){
+    document.getElementById("zoomModal").style.display = "none";
+}
 </script>
 
 </body>
