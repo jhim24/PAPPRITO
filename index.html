@@ -242,8 +242,7 @@ body{
     right:10px;
     background:red;
     color:white;
-    border:#modalContent{
-none;
+    border:none;
     padding:5px 10px;
     cursor:pointer;
 }
@@ -696,10 +695,24 @@ none;
         white-space:nowrap;
     }
 
+   @media (max-width:768px){
+
+    .navbar{
+        flex-direction:row;
+        padding:10px;
+    }
+
+    .nav-links{
+        overflow-x:auto;
+        white-space:nowrap;
+    }
+
     .nav-links a{
         font-size:11px;
         flex-shrink:0;
-        /* 🔥 DITO MO ILALAGAY */
+    }
+
+    /* 🔥 MODAL FIX (DITO TALAGA) */
     .modal-content{
         max-height:70vh;
         padding:20px;
