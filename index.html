@@ -16,12 +16,27 @@ body{background:#111;color:white;padding-top:70px;padding-bottom:80px;}
 
 /* NAVBAR */
 .navbar{
-position:fixed;top:0;width:100%;
-background:#d71920;display:flex;justify-content:space-between;
-align-items:center;padding:10px 20px;z-index:10000;
+position:fixed;
+top:0;
+width:100%;
+background:#d71920;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:10px 15px;
+z-index:10000;
+gap:10px; /* 🔥 spacing */
 }
-.logo-container{display:flex;align-items:center;gap:10px;}
-.logo-container img{width:40px;}
+.logo-container{
+display:flex;
+align-items:center;
+gap:8px; /* 🔥 hindi dikit */
+}
+
+.logo-container span{
+font-size:16px; /* 🔥 mas maliit */
+white-space:nowrap; /* 🔥 iwas wrap */
+}
 .nav-links{display:flex;gap:10px;flex-wrap:wrap;}
 .nav-links a{color:white;text-decoration:none;font-size:13px;}
 
@@ -171,6 +186,32 @@ animation:scrollFooter 15s linear infinite;
     white-space:pre-line;
     line-height:1.6;
     font-size:14px;
+}
+    @media(max-width:768px){
+
+    .navbar{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .logo-container{
+        width:100%;
+        justify-content:flex-start;
+    }
+
+    .nav-links{
+        width:100%;
+        display:flex;
+        flex-wrap:wrap;
+        gap:8px;
+        margin-top:5px;
+    }
+
+    .nav-links a{
+        font-size:11px;
+        padding:4px 6px;
+    }
+
 }
 </style>
 </head>
