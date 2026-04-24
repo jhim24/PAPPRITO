@@ -247,13 +247,6 @@ body{
     line-height:1.7;
 }
     
-/* PRODUCTS GRID */
-.menu-center{
-    grid-template-columns:repeat(2,1fr);
-    gap:10px;
-    padding:10px;
-}
-
 /* CARDS SMALLER */
 .menu-card{
     height:auto;
@@ -263,49 +256,8 @@ body{
     height:100px;
 }
 
-/* PREVIEW → SA BABA */
-/* ================= PREVIEW ================= */
-.menu-right{
-    width:300px;
-    max-width:300px;
-    background:#fff;
-    padding:0;
-    overflow:hidden;
-    border-radius:16px;
-    box-shadow:0 4px 12px rgba(0,0,0,0.15);
-
-    display:flex;
-    flex-direction:column;
-}
-
-.menu-right img{
-    width:100%;
-    height:200px; /* 🔥 mas balanced */
-    object-fit:cover;
-    display:block;
-}
-
-/* 🔥 NO GAP STACK */
-.menu-right h3{
-    border-radius:0;
-}
-.menu-right p{
-    border-radius:0;
-}
-/* CLOSE BUTTON */
-.close-menu{
-    top:10px;
-    right:10px;
-}
-
-}
-
 /* 📱 EXTRA SMALL PHONES */
 @media (max-width:480px){
-
-.menu-center{
-    grid-template-columns:1fr;
-}
 
 .menu-card img{
     height:120px;
