@@ -55,14 +55,6 @@ justify-content:flex-end;
 flex:1;
 max-width:70%; /* 🔥 importante */
 }
-<!-- HERO -->
-<div class="hero" id="home">
-<div>
-<h1>PAPPRITO RESTAURANT</h1>
-<p>Main Dining • Roof Deck • Conference Room</p>
-</div>
-</div>
-
 /* SECTION */
 .section{padding:30px 15px;}
 .section h2{text-align:center;margin-bottom:20px;}
@@ -270,12 +262,13 @@ font-size:13px;
 
 <!-- HERO -->
 <div class="hero" id="home">
-<div>
-<h1>PAPPRITO RESTAURANT</h1>
-<p>Main Dining • Roof Deck • Conference Room</p>
-</div>
-</div>
+    <img src="restaurant-hero.jpg" class="hero-img">
 
+    <div class="hero-text">
+        <h1>PAPPRITO RESTAURANT</h1>
+        <p>Main Dining • Roof Deck • Conference Room</p>
+    </div>
+</div>
 <!-- NEW PRODUCTS -->
 <div class="section">
 <h2>🔥 New Products</h2>
