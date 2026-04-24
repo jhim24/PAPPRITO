@@ -232,6 +232,8 @@ body{
     0 0 10px rgba(255,0,0,0.4),
     0 0 20px rgba(255,0,0,0.3),
     0 0 30px rgba(255,0,0,0.2);
+    max-height:80vh;
+    overflow-y:auto;
 }
 
 .close-btn{
@@ -240,16 +242,17 @@ body{
     right:10px;
     background:red;
     color:white;
-    border:none;
+    border:#modalContent{
+none;
     padding:5px 10px;
     cursor:pointer;
 }
 
 #modalContent{
     white-space:pre-line;
-    line-height:1.7;
+    line-height:1.6;
+    font-size:14px;
 }
-    
 /* CARDS SMALLER */
 .menu-card{
     height:auto;
@@ -696,6 +699,10 @@ body{
     .nav-links a{
         font-size:11px;
         flex-shrink:0;
+        /* 🔥 DITO MO ILALAGAY */
+    .modal-content{
+        max-height:70vh;
+        padding:20px;
     }
 
 }
