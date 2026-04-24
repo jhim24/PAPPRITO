@@ -55,11 +55,14 @@ justify-content:flex-end;
 flex:1;
 max-width:70%; /* 🔥 importante */
 }
-.hero{
-height:60vh;
-background:url('restaurant-hero-nocrop.jpg') center/cover no-repeat;
-}
-.hero h1{font-size:40px;}
+<div class="hero" id="home">
+    <img src="restaurant-hero.jpg" class="hero-img">
+
+    <div class="hero-text">
+        <h1>PAPPRITO RESTAURANT</h1>
+        <p>Main Dining • Roof Deck • Conference Room</p>
+    </div>
+</div>
 
 /* SECTION */
 .section{padding:30px 15px;}
@@ -221,6 +224,26 @@ animation:scrollFooter 15s linear infinite;
 color:white !important;
 text-decoration:none !important;
 font-size:13px;
+}
+    .hero{
+    position:relative;
+    width:100%;
+    height:auto;
+}
+
+.hero-img{
+    width:100%;
+    height:auto;
+    display:block;
+}
+
+.hero-text{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    text-align:center;
+    color:white;
 }
 </style>
 </head>
