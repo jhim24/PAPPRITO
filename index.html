@@ -405,31 +405,37 @@ document.getElementById("infoModal").style.display="flex";
 function closeInfo(){document.getElementById("infoModal").style.display="none";}
 
 // SLIDER
+// SLIDER
 let slides=document.querySelectorAll(".slide");
 let index=0;
 
 if(slides.length > 0){
-setInterval(()=>{
-slides[index].classList.remove("active");
-index=(index+1)%slides.length;
-slides[index].classList.add("active");
-},3000);
+    setInterval(()=>{
+        slides[index].classList.remove("active");
+        index=(index+1)%slides.length;
+        slides[index].classList.add("active");
+    },3000);
 }
 
+// CLICK OUTSIDE CLOSE (CONTACT)
 document.getElementById("contactModal").addEventListener("click", function(e){
     if(e.target === this){
         closeContact();
     }
-    
-    document.addEventListener("keydown", function(e){
+});
+
+// CLICK OUTSIDE CLOSE (INFO)
+document.getElementById("infoModal").addEventListener("click", function(e){
+    if(e.target === this){
+        closeInfo();
+    }
+});
+
+// ESC KEY CLOSE
+document.addEventListener("keydown", function(e){
     if(e.key === "Escape"){
         closeInfo();
         closeContact();
-    }
-});
-    document.getElementById("infoModal").addEventListener("click", function(e){
-    if(e.target === this){
-        closeInfo();
     }
 });
 </script>
