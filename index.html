@@ -343,10 +343,48 @@ function closeContact(){document.getElementById("contactModal").style.display="n
 // INFO MODAL
 function openModal(type){
 let title="",text="";
-if(type==="core"){title="CORE VALUES";text="Customer Focus, Integrity";}
-if(type==="vision"){title="VISION";text="Top Filipino Restaurant";}
-if(type==="mission"){title="MISSION";text="Serve great food";}
-if(type==="about"){title="ABOUT";text="Founded 2011";}
+
+if(type==="core"){
+title="CORE VALUES";
+text=`CUSTOMER FOCUS
+We provide great taste, excellent service, and superior value to all our customers.
+
+INTEGRITY
+We do only the right thing and what is ought to be done regardless of the situation.
+
+LISTENING WITH HUMILITY
+We value feedback, acknowledge and learn from our mistakes.
+
+SPIRIT OF BUSINESS ENTERPRISE
+We imbue our employees with entrepreneurial spirit and sense of ownership.
+
+PROFESSIONALISM
+We are professional in mind, in word and in deed.
+
+SPIRIT OF FAMILY AND FUN
+We foster teamwork, and the strong force keeps us unified and allows us to treat each other brothers and sisters alike.`;
+}
+
+if(type==="vision"){
+title="OUR VISION";
+text=`To be the go-to restaurant for hearty Filipino food, delivering superior value through our delicious and affordable meals.`;
+}
+
+if(type==="mission"){
+title="OUR MISSION";
+text=`To serve fresh and delicious food, promoting delightful eating to everyone.`;
+}
+
+if(type==="about"){
+title="ABOUT US";
+text=`Papa Prito entered the bustling and cut-throat gourmet scene in Tagaytay City on 30th of October 2011 with the promise of food and ambiance both rich in taste but light on the pocket - not the easiest combination. Since then, it has become Tagaytay's social equalizer, cutting across social classes, and growing a local following - rare in a town where food business relies heavily on tourists and weekenders for survival.
+
+Serving Filipino favorites that are rich in taste but within reach of the ordinary people, satisfying not just hunger but a taste for the extraordinary.
+
+Slogan:
+"Lasap Ang Pinoy Sarap!"`;
+}
+
 document.getElementById("modalTitle").innerText=title;
 document.getElementById("modalText").innerText=text;
 document.getElementById("infoModal").style.display="flex";
