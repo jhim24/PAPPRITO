@@ -82,15 +82,45 @@ animation:scrollFooter 15s linear infinite;
 
 /* SOCIAL */
 .social-buttons{
-position:fixed;bottom:90px;right:15px;
-display:flex;flex-direction:column;gap:10px;
+    position:fixed;
+    bottom:100px; /* 🔥 hindi matatabunan */
+    right:20px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    z-index:99999;
 }
+
 .social-buttons a{
-width:45px;height:45px;border-radius:50%;
-display:flex;align-items:center;justify-content:center;color:white;
+    width:50px;
+    height:50px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    color:white;
+    font-size:20px;
+    text-decoration:none;
+
+    box-shadow:0 5px 15px rgba(0,0,0,0.3);
+    transition:0.3s;
 }
-.fb{background:#1877F2;}
-.ig{background:#d62976;}
+
+/* FACEBOOK */
+.fb{
+    background:#1877F2;
+}
+
+/* INSTAGRAM (gradient 🔥) */
+.ig{
+    background:linear-gradient(45deg,#feda75,#d62976,#962fbf,#4f5bd5);
+}
+
+/* HOVER EFFECT */
+.social-buttons a:hover{
+    transform:scale(1.15);
+    box-shadow:0 0 10px #ffcc00, 0 0 20px #ff0000;
+}
 
 /* MODAL */
 .modal{
