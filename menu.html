@@ -3,131 +3,164 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PAPPRITO Menu</title>
+<title>PAPPRITO MENU</title>
 
 <style>
-body{
+*{
     margin:0;
-    font-family:sans-serif;
-    background:#111;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
 }
 
-/* HEADER */
+/* 🔥 HEADER */
 .header{
     background:#d71920;
     color:white;
-    padding:15px;
-    text-align:center;
-    font-weight:bold;
-    position:sticky;
-    top:0;
+    padding:12px;
+    display:flex;
+    align-items:center;
+    gap:10px;
 }
 
-/* BACK BUTTON */
 .back-btn{
-    position:fixed;
-    top:15px;
-    left:10px;
     background:#ffcc00;
-    color:black;
     border:none;
-    padding:8px 12px;
-    font-weight:bold;
+    padding:6px 12px;
     cursor:pointer;
-    border-radius:5px;
-    z-index:9999;
+    font-weight:bold;
 }
 
-/* LAYOUT */
+/* 🔥 LAYOUT */
 .container{
     display:flex;
     height:calc(100vh - 50px);
 }
 
-/* SIDEBAR */
+/* 🔥 SIDEBAR (MAS MALIIT) */
 .sidebar{
-    width:90px;
+    width:140px;
     background:#d71920;
     color:white;
-    padding:10px;
-    font-size:12px;
-}
-
-.sidebar div{
-    padding:8px;
-    cursor:pointer;
-    text-align:center;
-}
-
-.sidebar div:hover{
-    background:#ffcc00;
-    color:black;
-}
-
-/* CONTENT */
-.content{
-    flex:1;
     padding:10px;
     overflow-y:auto;
 }
 
-/* GRID */
-.grid{
+.sidebar h3{
+    font-size:14px;
+    margin-bottom:10px;
+}
+
+.sidebar ul{
+    list-style:none;
+}
+
+.sidebar li{
+    padding:8px;
+    cursor:pointer;
+    font-size:13px;
+}
+
+.sidebar li:hover{
+    background:#ffcc00;
+    color:black;
+}
+
+/* 🔥 PRODUCTS */
+.products{
+    flex:1;
+    padding:10px;
+    overflow-y:auto;
+
     display:grid;
     grid-template-columns:repeat(4,1fr);
     gap:10px;
 }
 
-/* CARD */
+/* 🔥 CARD */
 .card{
-    background:white;
+    background:#fff;
     border-radius:12px;
     overflow:hidden;
-    border:2px solid #ffcc00;
-    display:flex;
-    flex-direction:column;
+    box-shadow:0 3px 10px rgba(0,0,0,0.2);
 }
 
-/* IMAGE (🔥 UPDATED ONLY HERE) */
+/* 🔥 PORTRAIT IMAGE */
 .card img{
     width:100%;
     height:220px;
-    object-fit:contain; /* 🔥 FULL IMAGE, walang crop */
-    background:#fff;
+    object-fit:cover;
+    cursor:pointer;
 }
 
 /* NAME */
-.name{
+.card h4{
+    margin:0;
+    padding:6px;
     background:#ffcc00;
     text-align:center;
-    font-weight:bold;
-    padding:5px;
+    font-size:13px;
 }
 
 /* PRICE */
-.price{
+.card p{
+    margin:0;
+    padding:6px;
     background:#d71920;
     color:white;
     text-align:center;
-    padding:5px;
-    font-weight:bold;
+    font-size:12px;
+}
+
+/* 🔥 ZOOM */
+.zoom-modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.95);
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+}
+
+.zoom-modal img{
+    max-width:95%;
+    max-height:90%;
+    border-radius:10px;
+}
+
+.zoom-close{
+    position:absolute;
+    top:20px;
+    right:20px;
+    font-size:28px;
+    color:white;
 }
 
 /* 📱 MOBILE */
 @media(max-width:768px){
 
-    .grid{
-        grid-template-columns:repeat(2,1fr);
+    .container{
+        flex-direction:column;
     }
 
     .sidebar{
-        width:80px;
-        font-size:11px;
+        width:100%;
+        display:flex;
+        overflow-x:auto;
+    }
+
+    .sidebar ul{
+        display:flex;
+        gap:10px;
+    }
+
+    .products{
+        grid-template-columns:repeat(2,1fr);
     }
 
     .card img{
         height:200px;
-        object-fit:contain; /* 🔥 SAME FIX SA MOBILE */
     }
 }
 </style>
@@ -135,194 +168,113 @@ body{
 
 <body>
 
-<button class="back-btn" onclick="history.back()">← Back</button>
-
-<div class="header">PAPPRITO MENU</div>
+<div class="header">
+    <button class="back-btn" onclick="history.back()">← Back</button>
+    <h2>MENU</h2>
+</div>
 
 <div class="container">
 
     <!-- SIDEBAR -->
     <div class="sidebar">
-        <div onclick="show('beef')">Beef</div>
-        <div onclick="show('pork')">Pork</div>
-        <div onclick="show('chicken')">Chicken</div>
-        <div onclick="show('seafood')">Seafood</div>
-        <div onclick="show('veggies')">Veggies</div>
-        <div onclick="show('noodles')">Noodles</div>
-        <div onclick="show('sides')">Sides</div>
-        <div onclick="show('drinks')">Drinks</div>
-        <div onclick="show('beers')">Beers</div>
+        <h3>Category</h3>
+        <ul>
+            <li onclick="show('beef')">Beef</li>
+            <li onclick="show('pork')">Pork</li>
+            <li onclick="show('chicken')">Chicken</li>
+            <li onclick="show('seafood')">Seafood</li>
+            <li onclick="show('veggies')">Veggies</li>
+            <li onclick="show('noodles')">Noodles</li>
+            <li onclick="show('sides')">Sides</li>
+            <li onclick="show('drinks')">Drinks</li>
+            <li onclick="show('beers')">Beers</li>
+        </ul>
     </div>
 
-    <!-- CONTENT -->
-    <div class="content">
-        <div class="grid" id="content"></div>
-    </div>
+    <!-- PRODUCTS -->
+    <div class="products" id="products"></div>
 
 </div>
 
+<!-- ZOOM -->
+<div id="zoomModal" class="zoom-modal" onclick="closeZoom()">
+    <span class="zoom-close">✖</span>
+    <img id="zoomImg">
+</div>
+
 <script>
-<script>
-function openModal(type){
+const data = {
 
-    const modal = document.getElementById("modal");
-    const title = document.getElementById("modalTitle");
-    const content = document.getElementById("modalContent");
+beef:[
+{name:"Bulalo Grupo",price:"₱710",img:"bulalogroup.jpg"},
+{name:"Bulalo Solo",price:"₱185",img:"bulalo.jpg"},
+{name:"Bistek Tagalog",price:"₱279",img:"bistek.jpg"}
+],
 
-    if(!modal || !title || !content) return;
+pork:[
+{name:"Lechon Kawali",price:"₱395",img:"lechon.jpg"},
+{name:"Pork Sisig",price:"₱315",img:"sisig.jpg"},
+{name:"Lumpiang Shanghai",price:"₱235",img:"lumpia.jpg"}
+],
 
-    modal.style.display = "flex";
+chicken:[
+{name:"PapsChicken",price:"₱315",img:"chicken.jpg"},
+{name:"Chicken Sisig",price:"₱295",img:"chicken-sisig.jpg"}
+],
 
-   if(type==="core"){
-    title.innerText="CORE VALUES";
-    content.innerText=`CUSTOMER FOCUS
-We provide great taste, excellent service, and superior value to all our customers.
+seafood:[
+{name:"Bangus",price:"₱315",img:"bangus.jpg"},
+{name:"Calamares",price:"₱305",img:"calamares.jpg"}
+],
 
-INTEGRITY
-We do only the right thing and what ought to be done regardless of the situation.
+veggies:[
+{name:"Chop Suey",price:"₱235",img:"chopsuey.jpg"}
+],
 
-LISTENING WITH HUMILITY
-We value feedback, acknowledge and learn from our mistakes.
+noodles:[
+{name:"Palabok",price:"₱195",img:"palabok.jpg"}
+],
 
-SPIRIT OF BUSINESS ENTERPRISE
-We imbue our employees with entrepreneurial spirit and sense of ownership.
+sides:[
+{name:"Tofu",price:"₱65",img:"tofu.jpg"}
+],
 
-PROFESSIONALISM
-We are professional in mind, in word and in deed.
+drinks:[
+{name:"Iced Tea",price:"₱52",img:"icedtea.jpg"}
+],
 
-SPIRIT OF FAMILY AND FUN
-We foster teamwork, unity, and treat each other like family.`;
-}
+beers:[
+{name:"Red Horse",price:"₱105",img:"redhorse.jpg"}
+]
 
-if(type==="vision"){
-    title.innerText="VISION";
-    content.innerText=`To be the go-to restaurant for hearty Filipino food, delivering superior value through our delicious and affordable meals.`;
-}
-
-if(type==="mission"){
-    title.innerText="MISSION";
-    content.innerText=`To serve fresh and delicious food, promoting delightful eating to everyone.`;
-}
-
-if(type==="about"){
-    title.innerText="ABOUT PAPPRITO";
-    content.innerText=`Papa Prito entered the bustling and competitive food scene in Tagaytay City on October 30, 2011...
-
-"Lasap Ang Pinoy Sarap"`;
-}
-}
-
-function closeModal(){
-    document.getElementById("modal").style.display="none";
-}
-
-document.addEventListener("keydown", function(e){
-    if(e.key === "Escape"){
-        closeModal();
-    }
-});
-
-function openMenu(){
-    document.getElementById("menuModal").style.display="flex";
-    showCategory('beef');
-}
-
-function closeMenu(){
-    document.getElementById("menuModal").style.display = "none";
-}
-
-let products = JSON.parse(localStorage.getItem("menuData")) || {
-
-    beef:[
-        {name:"Bulalo Grupo",price:"₱710",img:"bulalogroup.jpg"},
-        {name:"Bulalo Solo",price:"₱185",img:"bulalo.jpg"},
-        {name:"Bistek Tagalog",price:"₱279",img:"bistek.jpg"}
-    ],
-
-    pork:[
-        {name:"Lechon Kawali",price:"₱395",img:"lechon.jpg"},
-        {name:"Pork Sisig",price:"₱315",img:"sisig.jpg"},
-        {name:"Lumpiang Shanghai",price:"₱235",img:"lumpia.jpg"}
-    ],
-
-    chicken:[
-        {name:"PapsChicken Platter",price:"₱315",img:"chicken.jpg"},
-        {name:"Chicken Sisig",price:"₱295",img:"chicken-sisig.jpg"}
-    ],
-
-    seafood:[
-        {name:"Crispy Bangusarap",price:"₱315",img:"bangus.jpg"},
-        {name:"Calamares",price:"₱305",img:"calamares.jpg"},
-        {name:"Crispy Tawilis",price:"₱285",img:"tawilis.jpg"}
-    ],
-
-    veggies:[
-        {name:"Chop Suey",price:"₱235",img:"chopsuey.jpg"},
-        {name:"Tortang Talong",price:"₱192",img:"talong.jpg"}
-    ],
-
-    noodles:[
-        {name:"Canton-Bihon",price:"₱278",img:"canton.jpg"},
-        {name:"Palabok",price:"₱195",img:"palabok.jpg"},
-        {name:"Beef Mami",price:"₱159",img:"mami.jpg"},
-        {name:"Chicken Mami",price:"₱149",img:"mami2.jpg"}
-    ],
-
-    sides:[
-        {name:"PapShots",price:"₱72",img:"restaurant-hero.jpg"},
-        {name:"Spicy Tofu",price:"₱65",img:"tofu.jpg"},
-        {name:"Bola Bola Soup",price:"₱68",img:"soup.jpg"},
-        {name:"Lumpiang Shanghai",price:"₱49",img:"lumpia.jpg"},
-        {name:"Fried Banana",price:"₱35",img:"banana.jpg"},
-        {name:"Garlic Rice",price:"₱46",img:"rice.jpg"},
-        {name:"Plain Rice",price:"₱32",img:"rice.jpg"}
-    ],
-
-    drinks:[
-        {name:"Softdrinks",price:"₱52",img:"drinks.jpg"},
-        {name:"1.5L Softdrinks",price:"₱145",img:"drinks.jpg"},
-        {name:"Iced Tea",price:"₱52",img:"icedtea.jpg"},
-        {name:"Black Gulaman",price:"₱52",img:"gulaman.jpg"},
-        {name:"Pineapple Juice",price:"₱62",img:"juice.jpg"},
-        {name:"Calamansi Juice",price:"₱62",img:"juice.jpg"},
-        {name:"Iced Coffee",price:"₱59",img:"coffee.jpg"},
-        {name:"Hot Choco",price:"₱55",img:"choco.jpg"},
-        {name:"Water",price:"₱35",img:"water.jpg"}
-    ],
-
-    beers:[
-        {name:"San Mig Light",price:"₱95",img:"sanmig-light.jpg"},
-        {name:"San Miguel Pale",price:"₱95",img:"sanmig-pale.jpg"},
-        {name:"San Miguel Flavored",price:"₱95",img:"sanmig-flavored.jpg"},
-        {name:"Red Horse",price:"₱105",img:"redhorse.jpg"}
-    ]
 };
 
-function showCategory(cat){
-    const container = document.getElementById("menuProducts");
+function show(cat){
+    const container = document.getElementById("products");
     container.innerHTML="";
 
-    products[cat].forEach(item=>{
-        container.innerHTML+=`
-        <div class="menu-card">
+    data[cat].forEach(item=>{
+        container.innerHTML += `
+        <div class="card">
             <img src="${item.img}" onclick="openZoom('${item.img}')">
-            <div class="menu-info">
-                <h4>${item.name}</h4>
-                <p>${item.price}</p>
-            </div>
+            <h4>${item.name}</h4>
+            <p>${item.price}</p>
         </div>`;
     });
 }
 
-/* 🔥 PREMIUM ZOOM */
+/* ZOOM */
 function openZoom(img){
-    document.getElementById("zoomModal").style.display = "flex";
+    document.getElementById("zoomModal").style.display="flex";
     document.getElementById("zoomImg").src = img;
 }
 
 function closeZoom(){
-    document.getElementById("zoomModal").style.display = "none";
+    document.getElementById("zoomModal").style.display="none";
 }
+
+/* DEFAULT */
+show('beef');
 </script>
 
 </body>
