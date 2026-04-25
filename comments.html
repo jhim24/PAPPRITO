@@ -5,120 +5,60 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Comments & Suggestions</title>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 <style>
-body{
-    margin:0;
-    font-family:'Segoe UI',sans-serif;
-    background:#111;
-    color:white;
-}
+body{margin:0;font-family:'Segoe UI';background:#111;color:white}
 
 /* HEADER */
-.header{
-    position:relative;
-    background:#d71920;
-    padding:15px;
-    text-align:center;
-    font-size:20px;
-    font-weight:bold;
-}
-
-/* BACK BUTTON */
-.back-btn{
-    position:absolute;
-    left:10px;
-    top:10px;
-    background:#ffcc00;
-    padding:6px 12px;
-    border-radius:6px;
-    text-decoration:none;
-    color:black;
-    font-weight:bold;
-}
-
-/* MOBILE FIX */
-@media(max-width:768px){
-.back-btn{
-    position:static;
-    display:inline-block;
-    margin-bottom:10px;
-}
-.header{
-    text-align:left;
-    font-size:16px;
-}
-}
+.header{background:#d71920;padding:15px;text-align:center;font-weight:bold}
+.back-btn{position:absolute;left:10px;top:10px;background:#ffcc00;padding:6px 10px;color:black;border-radius:6px;text-decoration:none}
 
 /* CONTAINER */
-.container{
-    padding:20px;
-    max-width:600px;
-    margin:auto;
-}
+.container{max-width:600px;margin:auto;padding:20px}
 
 /* FORM */
-.form{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-}
+.form{display:flex;flex-direction:column;gap:10px}
+.form input,.form textarea{padding:10px;border-radius:6px;border:none}
+.form button{padding:10px;background:#d71920;color:white;border:none;border-radius:6px}
 
-.form input,
-.form textarea{
-    padding:10px;
-    border:none;
-    border-radius:6px;
-}
+/* STAR */
+.stars{display:flex;gap:5px;font-size:22px;cursor:pointer;color:gray}
+.stars span.active{color:gold}
 
-.form button{
-    padding:10px;
-    background:#d71920;
-    color:white;
-    border:none;
-    border-radius:6px;
-    cursor:pointer;
-}
-
-/* COMMENTS */
-.comment{
-    background:#1a1a1a;
-    padding:12px;
-    border-radius:10px;
-    margin-top:15px;
-    line-height:1.5;
-}
-
-.comment strong{
-    color:#ffcc00;
-}
+/* COMMENT CARD */
+.comment{background:#1a1a1a;padding:12px;border-radius:10px;margin-top:15px}
+.comment strong{color:#ffcc00}
+.meta{font-size:12px;color:#aaa}
+.delete-btn{float:right;background:red;border:none;color:white;padding:5px;border-radius:5px;cursor:pointer}
 </style>
 </head>
 
 <body>
 
 <div class="header">
-    <a href="index.html" class="back-btn">← Back</a>
-    COMMENTS & SUGGESTIONS
+<a href="index.html" class="back-btn">←</a>
+COMMENTS & SUGGESTIONS
 </div>
 
 <div class="container">
 
 <div class="form">
-    <input type="text" id="name" placeholder="Your Name">
-    <textarea id="message" placeholder="Write your comment..."></textarea>
-    <button onclick="addComment()">Submit</button>
+<input type="text" id="name" placeholder="Your Name">
+<textarea id="message" placeholder="Write your comment..."></textarea>
+
+<div class="stars" id="stars">
+<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+</div>
+
+<button onclick="addComment()">Submit</button>
 </div>
 
 <div id="comments"></div>
 
 </div>
 
-<!-- 🔥 FIREBASE ONLINE COMMENTS -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
-import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-database.js";
+import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAjtecedG6UbaJqcMiy-AVKzRzbUbAC8HM",
@@ -133,46 +73,86 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-// ADD COMMENT
+// ⭐ STAR RATING
+let rating = 0;
+const stars = document.querySelectorAll("#stars span");
+
+stars.forEach((star, index)=>{
+    star.addEventListener("click", ()=>{
+        rating = index + 1;
+        stars.forEach((s,i)=>{
+            s.classList.toggle("active", i < rating);
+        });
+    });
+});
+
+// ➕ ADD COMMENT
 window.addComment = function(){
-    let name = document.getElementById("name").value;
-    let message = document.getElementById("message").value;
+    let name = document.getElementById("name").value.trim();
+    let message = document.getElementById("message").value.trim();
 
     if(name === "" || message === ""){
-        alert("Please fill all fields");
+        alert("Fill all fields");
+        return;
+    }
+
+    if(message.length > 200){
+        alert("Too long message!");
         return;
     }
 
     push(ref(db, "comments"), {
-        name: name,
-        message: message
+        name,
+        message,
+        rating,
+        time: new Date().toLocaleString()
     });
 
     document.getElementById("name").value="";
     document.getElementById("message").value="";
+    rating = 0;
+    stars.forEach(s=>s.classList.remove("active"));
 }
 
-// DISPLAY COMMENTS
+// 📥 DISPLAY
 function displayComments(){
     const commentsRef = ref(db, "comments");
 
-    onValue(commentsRef, (snapshot) => {
+    onValue(commentsRef, (snapshot)=>{
         let container = document.getElementById("comments");
-        container.innerHTML = "";
+        container.innerHTML="";
 
-        snapshot.forEach(child => {
+        snapshot.forEach(child=>{
             let data = child.val();
+            let id = child.key;
+
+            let starsHTML = "★".repeat(data.rating || 0);
 
             container.innerHTML += `
             <div class="comment">
+                <button class="delete-btn" onclick="deleteComment('${id}')">X</button>
                 <strong>${data.name}</strong>
+                <div class="meta">${data.time || ""}</div>
+                <div style="color:gold">${starsHTML}</div>
                 <p>${data.message}</p>
-            </div>`;
+            </div>
+            `;
         });
     });
 }
 
 displayComments();
+
+// ❌ DELETE (ADMIN SIMPLE)
+window.deleteComment = function(id){
+    let pass = prompt("Enter admin password:");
+
+    if(pass === "admin123"){
+        remove(ref(db, "comments/"+id));
+    }else{
+        alert("Wrong password");
+    }
+}
 </script>
 
 </body>
