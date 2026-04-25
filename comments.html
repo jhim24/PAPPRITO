@@ -6,29 +6,123 @@
 <title>Comments & Suggestions</title>
 
 <style>
-body{margin:0;font-family:'Segoe UI';background:#111;color:white}
+body{
+    margin:0;
+    font-family:'Segoe UI';
+    background:linear-gradient(135deg,#1f1c2c,#928dab); /* 🔥 new bg */
+    color:white;
+}
 
 /* HEADER */
-.header{background:#d71920;padding:15px;text-align:center;font-weight:bold}
-.back-btn{position:absolute;left:10px;top:10px;background:#ffcc00;padding:6px 10px;color:black;border-radius:6px;text-decoration:none}
+.header{
+    background:#d71920;
+    padding:15px;
+    text-align:center;
+    font-weight:bold;
+    position:relative;
+}
+
+.back-btn{
+    position:absolute;
+    left:10px;
+    top:10px;
+    background:#ffcc00;
+    padding:6px 10px;
+    color:black;
+    border-radius:6px;
+    text-decoration:none;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+.back-btn{
+    position:static;
+    display:inline-block;
+    margin-bottom:10px;
+}
+.header{
+    text-align:left;
+}
+}
 
 /* CONTAINER */
-.container{max-width:600px;margin:auto;padding:20px}
+.container{
+    max-width:600px;
+    margin:auto;
+    padding:20px;
+}
 
 /* FORM */
-.form{display:flex;flex-direction:column;gap:10px}
-.form input,.form textarea{padding:10px;border-radius:6px;border:none}
-.form button{padding:10px;background:#d71920;color:white;border:none;border-radius:6px}
+.form{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    background:rgba(0,0,0,0.3);
+    padding:15px;
+    border-radius:10px;
+}
+
+.form input,
+.form textarea{
+    padding:10px;
+    border-radius:6px;
+    border:none;
+}
+
+/* SMALL BUTTON */
+.form button{
+    padding:6px 10px;
+    width:120px;
+    font-size:13px;
+    background:#d71920;
+    color:white;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+}
 
 /* STAR */
-.stars{display:flex;gap:5px;font-size:22px;cursor:pointer;color:gray}
-.stars span.active{color:gold}
+.stars{
+    display:flex;
+    gap:5px;
+    font-size:22px;
+    cursor:pointer;
+    color:gray;
+}
 
-/* COMMENT CARD */
-.comment{background:#1a1a1a;padding:12px;border-radius:10px;margin-top:15px}
-.comment strong{color:#ffcc00}
-.meta{font-size:12px;color:#aaa}
-.delete-btn{float:right;background:red;border:none;color:white;padding:5px;border-radius:5px;cursor:pointer}
+.stars span.active{
+    color:gold;
+}
+
+/* COMMENT */
+.comment{
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(10px);
+    padding:12px;
+    border-radius:10px;
+    margin-top:15px;
+    line-height:1.5;
+    text-align:left; /* 🔥 left align */
+}
+
+.comment strong{
+    color:#ffcc00;
+}
+
+.meta{
+    font-size:12px;
+    color:#ccc;
+}
+
+.delete-btn{
+    float:right;
+    background:red;
+    border:none;
+    color:white;
+    padding:4px 8px;
+    border-radius:5px;
+    cursor:pointer;
+}
 </style>
 </head>
 
@@ -73,7 +167,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-// ⭐ STAR RATING
+/* ⭐ STAR */
 let rating = 0;
 const stars = document.querySelectorAll("#stars span");
 
@@ -86,18 +180,13 @@ stars.forEach((star, index)=>{
     });
 });
 
-// ➕ ADD COMMENT
+/* ADD */
 window.addComment = function(){
     let name = document.getElementById("name").value.trim();
     let message = document.getElementById("message").value.trim();
 
     if(name === "" || message === ""){
         alert("Fill all fields");
-        return;
-    }
-
-    if(message.length > 200){
-        alert("Too long message!");
         return;
     }
 
@@ -114,7 +203,7 @@ window.addComment = function(){
     stars.forEach(s=>s.classList.remove("active"));
 }
 
-// 📥 DISPLAY
+/* DISPLAY */
 function displayComments(){
     const commentsRef = ref(db, "comments");
 
@@ -143,10 +232,9 @@ function displayComments(){
 
 displayComments();
 
-// ❌ DELETE (ADMIN SIMPLE)
+/* DELETE */
 window.deleteComment = function(id){
     let pass = prompt("Enter admin password:");
-
     if(pass === "admin123"){
         remove(ref(db, "comments/"+id));
     }else{
