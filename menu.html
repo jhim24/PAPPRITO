@@ -223,6 +223,7 @@ pork:[
 {name:"Lechon Kawali",price:"₱395",img:"lechon.jpg"},
 {name:"Pork Sisig",price:"₱315",img:"sisig.jpg"},
 {name:"Lumpiang Shanghai",price:"₱235",img:"lumpia.jpg"}
+{name:"Coming Soon",price:"",img:"no-image.jpg"}
 ],
 
 chicken:[
@@ -287,7 +288,7 @@ function show(cat){
         container.innerHTML += `
         <div class="card">
             <img src="${item.img}" onclick="openZoom('${item.img}')">
-            <h4>${item.name}</h4>
+           <h4>${item.name || "Coming Soon"}</h4>
             <p>${item.price}</p>
         </div>`;
     });
