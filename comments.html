@@ -9,7 +9,7 @@
 body{
     margin:0;
     font-family:'Segoe UI';
-    background:linear-gradient(135deg,#1f1c2c,#928dab); /* 🔥 new bg */
+    background:linear-gradient(135deg,#1f1c2c,#928dab);
     color:white;
 }
 
@@ -33,47 +33,33 @@ body{
     text-decoration:none;
 }
 
-/* MOBILE */
-@media(max-width:768px){
-.back-btn{
-    position:static;
-    display:inline-block;
-    margin-bottom:10px;
-}
-.header{
-    text-align:left;
-}
-}
-
 /* CONTAINER */
 .container{
-    max-width:600px;
+    max-width:700px;
     margin:auto;
     padding:20px;
 }
 
-/* FORM */
+/* FORM (SMALL CENTER) */
 .form{
+    max-width:400px;
+    margin:0 auto 20px;
     display:flex;
     flex-direction:column;
     gap:10px;
-
-    width:100%;
-    max-width:400px;   /* 🔥 liit ng box */
-    margin:0 auto;     /* 🔥 center */
-    
     background:rgba(0,0,0,0.3);
     padding:15px;
     border-radius:10px;
 }
+
 .form input,
 .form textarea{
-    padding:10px;
+    padding:8px;
     border-radius:6px;
     border:none;
+    font-size:13px;
 }
 
-/* SMALL BUTTON */
 .form button{
     padding:6px 10px;
     width:120px;
@@ -89,39 +75,54 @@ body{
 .stars{
     display:flex;
     gap:5px;
-    font-size:22px;
+    font-size:20px;
     cursor:pointer;
     color:gray;
 }
-
 .stars span.active{
     color:gold;
 }
 
-/* COMMENT */
+/* COMMENTS CONTAINER */
+#comments{
+    text-align:center;
+}
+
+/* RECTANGLE COMMENT */
 .comment{
-    display:inline-block;        /* 🔥 para hindi full width */
-    max-width:400px;             /* 🔥 limit width */
-    width:auto;                  /* 🔥 auto fit */
-    
+    display:block;
+    width:100%;
+    max-width:600px;
+    margin:15px auto;
+
     background:rgba(255,255,255,0.05);
     backdrop-filter:blur(10px);
 
-    padding:12px;
-    border-radius:10px;
-    margin-top:15px;
-    line-height:1.5;
+    padding:15px;
+    border-radius:8px;
+
     text-align:left;
 }
+
+/* TEXT FORMAT */
+.comment p{
+    white-space:pre-line;
+    word-wrap:break-word;
+    line-height:1.6;
+}
+
+/* NAME */
 .comment strong{
     color:#ffcc00;
 }
 
+/* META */
 .meta{
     font-size:12px;
     color:#ccc;
 }
 
+/* DELETE */
 .delete-btn{
     float:right;
     background:red;
@@ -143,6 +144,7 @@ COMMENTS & SUGGESTIONS
 
 <div class="container">
 
+<!-- FORM -->
 <div class="form">
 <input type="text" id="name" placeholder="Your Name">
 <textarea id="message" placeholder="Write your comment..."></textarea>
@@ -154,6 +156,7 @@ COMMENTS & SUGGESTIONS
 <button onclick="addComment()">Submit</button>
 </div>
 
+<!-- COMMENTS -->
 <div id="comments"></div>
 
 </div>
@@ -188,7 +191,7 @@ stars.forEach((star, index)=>{
     });
 });
 
-/* ADD */
+/* ADD COMMENT */
 window.addComment = function(){
     let name = document.getElementById("name").value.trim();
     let message = document.getElementById("message").value.trim();
@@ -231,7 +234,7 @@ function displayComments(){
                 <strong>${data.name}</strong>
                 <div class="meta">${data.time || ""}</div>
                 <div style="color:gold">${starsHTML}</div>
-                <p>${data.message}</p>
+                <p>${data.message.replace(/\n/g,"<br>")}</p>
             </div>
             `;
         });
