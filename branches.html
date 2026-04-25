@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PAPPRITO Branches</title>
 
+<!-- FONT AWESOME -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <style>
 body{
     margin:0;
@@ -29,19 +32,17 @@ body{
     left:10px;
     top:10px;
     background:#ffcc00;
-    border:none;
     padding:6px 12px;
-    cursor:pointer;
-    font-weight:bold;
     border-radius:6px;
-    color:black;
     text-decoration:none;
+    color:black;
+    font-weight:bold;
 }
 
 /* GRID */
 .branches{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
     gap:15px;
     padding:20px;
 }
@@ -50,35 +51,62 @@ body{
 .card{
     background:#1a1a1a;
     border-radius:12px;
-    padding:15px;
-    text-align:center;
+    padding:12px;
     border:2px solid #ffcc00;
     transition:0.3s;
 }
 
 .card:hover{
-    transform:scale(1.03);
+    transform:translateY(-5px);
+    box-shadow:0 0 15px rgba(255,204,0,0.5);
+}
+
+/* IMAGE */
+.card img{
+    width:100%;
+    height:150px;
+    object-fit:cover;
+    border-radius:10px;
+    margin-bottom:10px;
 }
 
 /* TEXT */
 .card h3{
-    margin-bottom:10px;
     color:#ffcc00;
+    margin-bottom:5px;
 }
 
 .card p{
-    margin:5px 0;
+    margin:4px 0;
+    font-size:14px;
 }
 
-/* BUTTON */
-.btn{
-    display:inline-block;
+.card i{
+    margin-right:6px;
+    color:#ffcc00;
+}
+
+/* ACTION BUTTONS */
+.actions{
+    display:flex;
+    gap:10px;
     margin-top:10px;
-    padding:6px 12px;
+}
+
+.btn{
+    flex:1;
+    text-align:center;
+    padding:6px;
+    border-radius:6px;
+    text-decoration:none;
+    font-size:13px;
     background:#d71920;
     color:white;
-    text-decoration:none;
-    border-radius:6px;
+}
+
+.btn.call{
+    background:#ffcc00;
+    color:black;
 }
 
 /* MOBILE */
@@ -99,18 +127,42 @@ body{
 
 <div class="branches">
 
+<!-- TAGAYTAY -->
 <div class="card">
-<h3>Papprito Tagaytay</h3>
-<p>Main Branch</p>
-<p><i class="fa-solid fa-phone"></i> 0922-840-4799</p>
-<a href="#" class="btn">View Map</a>
+    <img src="tagaytay.jpg">
+
+    <h3>Papprito Tagaytay</h3>
+    <p>Main Branch</p>
+    <p><i class="fa-solid fa-location-dot"></i> Tagaytay City</p>
+
+    <p>
+        <i class="fa-solid fa-phone"></i>
+        <a href="tel:09228404799">0922-840-4799</a>
+    </p>
+
+    <div class="actions">
+        <a href="https://maps.google.com" target="_blank" class="btn">Map</a>
+        <a href="tel:09228404799" class="btn call">Call</a>
+    </div>
 </div>
 
+<!-- MAHOGANY -->
 <div class="card">
-<h3>Papprito Mahogany</h3>
-<p>Branch</p>
-<p><i class="fa-solid fa-phone"></i> 0922-840-4799</p>
-<a href="#" class="btn">View Map</a>
+    <img src="mahogany.jpg">
+
+    <h3>Papprito Mahogany</h3>
+    <p>Branch</p>
+    <p><i class="fa-solid fa-location-dot"></i> Mahogany Market</p>
+
+    <p>
+        <i class="fa-solid fa-phone"></i>
+        <a href="tel:09228404799">0922-840-4799</a>
+    </p>
+
+    <div class="actions">
+        <a href="https://maps.google.com" target="_blank" class="btn">Map</a>
+        <a href="tel:09228404799" class="btn call">Call</a>
+    </div>
 </div>
 
 </div>
