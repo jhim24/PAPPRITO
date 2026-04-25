@@ -100,15 +100,19 @@ body{
 
 /* COMMENT */
 .comment{
+    display:inline-block;        /* 🔥 para hindi full width */
+    max-width:400px;             /* 🔥 limit width */
+    width:auto;                  /* 🔥 auto fit */
+    
     background:rgba(255,255,255,0.05);
     backdrop-filter:blur(10px);
+
     padding:12px;
     border-radius:10px;
     margin-top:15px;
     line-height:1.5;
-    text-align:left; /* 🔥 left align */
+    text-align:left;
 }
-
 .comment strong{
     color:#ffcc00;
 }
