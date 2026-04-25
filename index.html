@@ -37,15 +37,17 @@ gap:8px;
 flex-shrink:0; /* 🔥 hindi sisiksik */
 }
     .logo-container img{
-width:35px;
-height:35px;
+width:55px;   /* 🔥 laki ng logo */
+height:55px;
 object-fit:contain;
 }
 
 .logo-container span{
-font-size:16px;
+font-size:22px; /* 🔥 laki ng PAPPRITO */
+font-weight:bold;
 white-space:nowrap;
-margin-left:5px; /* 🔥 para hindi dikit */
+margin-left:8px;
+letter-spacing:1px;
 }
 .nav-links{
 display:flex;
@@ -209,10 +211,9 @@ animation:scrollFooter 15s linear infinite;
     align-items:center;
 }
 
-.logo-container{
+..logo-container{
     width:100%;
-    justify-content:center;
-    margin-bottom:5px;
+    justify-content:flex-start; /* 🔥 para left din sa phone */
 }
 
 .nav-links{
