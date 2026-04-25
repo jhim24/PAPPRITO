@@ -86,7 +86,8 @@ body{
     background:#1a1a1a;
     padding:12px;
     border-radius:10px;
-    margin-top:10px;
+    margin-top:15px;
+    line-height:1.5;
 }
 
 .comment strong{
@@ -128,6 +129,7 @@ const firebaseConfig = {
   messagingSenderId: "446857159800",
   appId: "1:446857159800:web:4eac74eeff126c8ca2798d"
 };
+
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
@@ -150,7 +152,7 @@ window.addComment = function(){
     document.getElementById("message").value="";
 }
 
-// DISPLAY COMMENTS (REAL-TIME)
+// DISPLAY COMMENTS
 function displayComments(){
     const commentsRef = ref(db, "comments");
 
