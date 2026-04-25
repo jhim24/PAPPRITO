@@ -38,6 +38,19 @@ body{
     font-weight:bold;
 }
 
+/* MOBILE FIX */
+@media(max-width:768px){
+.back-btn{
+    position:static;
+    display:inline-block;
+    margin-bottom:10px;
+}
+.header{
+    text-align:left;
+    font-size:16px;
+}
+}
+
 /* CONTAINER */
 .container{
     padding:20px;
@@ -57,11 +70,6 @@ body{
     padding:10px;
     border:none;
     border-radius:6px;
-    font-size:14px;
-}
-
-.form textarea{
-    min-height:100px;
 }
 
 .form button{
@@ -71,7 +79,6 @@ body{
     border:none;
     border-radius:6px;
     cursor:pointer;
-    font-weight:bold;
 }
 
 /* COMMENTS */
@@ -84,21 +91,6 @@ body{
 
 .comment strong{
     color:#ffcc00;
-}
-    @media(max-width:768px){
-
-.back-btn{
-    position:static;
-    display:inline-block;
-    margin-bottom:10px;
-}
-
-.header{
-    text-align:left;
-    padding:10px;
-    font-size:16px;
-}
-
 }
 </style>
 </head>
@@ -122,8 +114,26 @@ body{
 
 </div>
 
-<script>
-function addComment(){
+<!-- 🔥 FIREBASE ONLINE COMMENTS -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAjtecedG6UbaJqcMiy-AVKzRzbUbAC8HM",
+  authDomain: "papprito-feedback.firebaseapp.com",
+  databaseURL: "https://papprito-feedback-default-rtdb.firebaseio.com",
+  projectId: "papprito-feedback",
+  storageBucket: "papprito-feedback.firebasestorage.app",
+  messagingSenderId: "446857159800",
+  appId: "1:446857159800:web:4eac74eeff126c8ca2798d"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+// ADD COMMENT
+window.addComment = function(){
     let name = document.getElementById("name").value;
     let message = document.getElementById("message").value;
 
@@ -132,29 +142,32 @@ function addComment(){
         return;
     }
 
-    let comments = JSON.parse(localStorage.getItem("comments")) || [];
+    push(ref(db, "comments"), {
+        name: name,
+        message: message
+    });
 
-    comments.push({name, message});
-    localStorage.setItem("comments", JSON.stringify(comments));
-
-    displayComments();
-
-    document.getElementById("name").value = "";
-    document.getElementById("message").value = "";
+    document.getElementById("name").value="";
+    document.getElementById("message").value="";
 }
 
+// DISPLAY COMMENTS (REAL-TIME)
 function displayComments(){
-    let comments = JSON.parse(localStorage.getItem("comments")) || [];
-    let container = document.getElementById("comments");
+    const commentsRef = ref(db, "comments");
 
-    container.innerHTML = "";
+    onValue(commentsRef, (snapshot) => {
+        let container = document.getElementById("comments");
+        container.innerHTML = "";
 
-    comments.forEach(c => {
-        container.innerHTML += `
-        <div class="comment">
-            <strong>${c.name}</strong>
-            <p>${c.message}</p>
-        </div>`;
+        snapshot.forEach(child => {
+            let data = child.val();
+
+            container.innerHTML += `
+            <div class="comment">
+                <strong>${data.name}</strong>
+                <p>${data.message}</p>
+            </div>`;
+        });
     });
 }
 
