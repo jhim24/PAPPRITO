@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PAPPRITO Branches</title>
 
-<!-- FONT AWESOME -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
@@ -111,8 +110,22 @@ body{
 
 /* MOBILE */
 @media(max-width:768px){
+
+    /* SINGLE COLUMN */
     .branches{
-        grid-template-columns:repeat(2,1fr);
+        grid-template-columns:1fr;
+    }
+
+    /* MAIN BRANCH HIGHLIGHT */
+    .main-branch{
+        order:-1;
+        transform:scale(1.02);
+        border:3px solid #ffcc00;
+        box-shadow:0 0 20px rgba(255,204,0,0.6);
+    }
+
+    .main-branch img{
+        height:200px;
     }
 }
 </style>
@@ -127,8 +140,8 @@ body{
 
 <div class="branches">
 
-<!-- TAGAYTAY -->
-<div class="card">
+<!-- MAIN BRANCH -->
+<div class="card main-branch">
     <img src="tagaytay.jpg">
 
     <h3>Papprito Tagaytay</h3>
@@ -146,7 +159,7 @@ body{
     </div>
 </div>
 
-<!-- MAHOGANY -->
+<!-- OTHER BRANCH -->
 <div class="card">
     <img src="mahogany.jpg">
 
