@@ -291,7 +291,7 @@ font-size:13px;
 
 <!-- HERO -->
 <div class="hero" id="home">
-    <img src="restaurant-hero.jpg" class="hero-img">
+  <img id="heroImage" src="restaurant-hero.jpg" class="hero-img">
 
     </div>
     <div class="section hero-info">
@@ -541,6 +541,20 @@ document.addEventListener("keydown", function(e){
         closeContact();
     }
 });
+    // HERO AUTO CHANGE IMAGE
+const heroImages = [
+    "images restaurant-hero.jpg",
+    "hero2.jpg",
+    "hero3.jpg"
+];
+
+let heroIndex = 0;
+const heroImg = document.getElementById("heroImage");
+
+setInterval(() => {
+    heroIndex = (heroIndex + 1) % heroImages.length;
+    heroImg.src = heroImages[heroIndex];
+}, 4000);
 </script>
 
 </body>
