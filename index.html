@@ -215,22 +215,27 @@ animation:scrollFooter 15s linear infinite;
     justify-content:flex-start; /* 🔥 para left din sa phone */
 }
 /* 🔥 5 PER ROW */
+/* 🔥 5 PER ROW */
 .nav-links{
     width:100%;
     display:grid;
-    grid-template-columns:repeat(5,1fr); /* 5 per row */
+    grid-template-columns:repeat(5,1fr);
     gap:4px;
 }
 
-/* PLAIN TEXT */
+/* 🔥 PLAIN TEXT ONLY */
 .nav-links a{
     text-align:center;
     font-size:10px;
-    padding:4px 0;
+    padding:3px 0;
     color:white !important;
-    white-space:nowrap;
-}
 
+    /* REMOVE EVERYTHING */
+    background:none !important;
+    border:none !important;
+    border-radius:0 !important;
+    box-shadow:none !important;
+}
 .nav-links a{
     display:block;
     text-align:center;
