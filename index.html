@@ -214,13 +214,21 @@ animation:scrollFooter 15s linear infinite;
     width:100%;
     justify-content:flex-start; /* 🔥 para left din sa phone */
 }
+/* 🔥 5 PER ROW */
 .nav-links{
     width:100%;
     display:grid;
-    grid-template-columns:repeat(2,1fr); /* left & right */
-    grid-template-rows:repeat(2,auto);   /* 🔥 2 rows lang */
-    gap:6px;
-    overflow:hidden; /* 🔥 para 2 layer lang */
+    grid-template-columns:repeat(5,1fr); /* 5 per row */
+    gap:4px;
+}
+
+/* PLAIN TEXT */
+.nav-links a{
+    text-align:center;
+    font-size:10px;
+    padding:4px 0;
+    color:white !important;
+    white-space:nowrap;
 }
 
 .nav-links a{
