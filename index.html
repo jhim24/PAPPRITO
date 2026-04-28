@@ -214,13 +214,23 @@ animation:scrollFooter 15s linear infinite;
     width:100%;
     justify-content:flex-start; /* 🔥 para left din sa phone */
 }
-
 .nav-links{
     width:100%;
-    display:flex;
-    flex-wrap:wrap; /* 🔥 balik sa layer */
+    display:grid;
+    grid-template-columns:repeat(2,1fr); /* left & right */
+    grid-template-rows:repeat(2,auto);   /* 🔥 2 rows lang */
     gap:6px;
-    justify-content:center;
+    overflow:hidden; /* 🔥 para 2 layer lang */
+}
+
+.nav-links a{
+    display:block;
+    text-align:center;
+    background:#ffcc00;
+    color:black !important;
+    padding:6px;
+    border-radius:6px;
+    font-size:12px;
 }
 
 .nav-links a{
