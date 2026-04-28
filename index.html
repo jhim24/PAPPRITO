@@ -174,7 +174,7 @@ animation:scrollFooter 15s linear infinite;
 }
 
 /* 🔥 ADJUST POPUP POSITION */
-/* MODAL BACKGROUND */
+/* 🔥 MODAL BACKGROUND (CLEAN) */
 .modal{
     display:none;
     position:fixed;
@@ -182,12 +182,13 @@ animation:scrollFooter 15s linear infinite;
     background:rgba(0,0,0,0.7);
     backdrop-filter:blur(6px);
 
-    display:flex;
     justify-content:center;
-    align-items:center; /* 🔥 center pa rin */
+    align-items:center;
+
+    z-index:9999;
 }
 
-/* POPUP BOX */
+/* 🔥 POPUP BOX (CENTER + LOWER) */
 .modal-content{
     background:#1a1a1a;
     padding:20px;
@@ -201,50 +202,13 @@ animation:scrollFooter 15s linear infinite;
 
     position:relative;
 
-    margin-top:40px; /* 🔥 push down (adjust mo) */
+    margin-top:40px; /* 🔥 adjust height (baba konti) */
 
-    /* 🔥 glow */
+    /* 🔥 GLOW EFFECT */
     box-shadow:
-        0 0 10px rgba(255,204,0,0.5),
-        0 0 20px rgba(255,0,0,0.4),
-        0 0 30px rgba(255,204,0,0.3);
-}
-
-/* POPUP BOX */
-/* MODAL BACKGROUND */
-.modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,0.7);
-    backdrop-filter:blur(6px);
-
-    display:flex;
-    justify-content:center;
-    align-items:center; /* 🔥 center pa rin */
-}
-
-/* POPUP BOX */
-.modal-content{
-    background:#1a1a1a;
-    padding:20px;
-    border-radius:12px;
-
-    width:90%;
-    max-width:500px;
-
-    max-height:75vh;
-    overflow-y:auto;
-
-    position:relative;
-
-    margin-top:40px; /* 🔥 push down (adjust mo) */
-
-    /* 🔥 glow */
-    box-shadow:
-        0 0 10px rgba(255,204,0,0.5),
-        0 0 20px rgba(255,0,0,0.4),
-        0 0 30px rgba(255,204,0,0.3);
+        0 0 10px rgba(255,204,0,0.6),
+        0 0 20px rgba(255,0,0,0.5),
+        0 0 30px rgba(255,204,0,0.4);
 }
  .close-btn{
     position:absolute;
