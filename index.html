@@ -218,9 +218,19 @@ animation:scrollFooter 15s linear infinite;
 .nav-links{
     width:100%;
     display:flex;
-    flex-wrap:wrap;
-    gap:6px;
-    justify-content:center;
+    flex-wrap:nowrap; /* 🔥 important */
+    overflow-x:auto;  /* 🔥 scroll */
+    gap:5px;
+    justify-content:flex-start;
+}
+
+.nav-links::-webkit-scrollbar{
+    display:none;
+}
+
+.nav-links a{
+    font-size:11px;
+    white-space:nowrap;
 }
 
 .nav-links a{
