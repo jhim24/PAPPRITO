@@ -299,6 +299,35 @@ animation:scrollFooter 15s linear infinite;
 }
 
 }
+    /* 🔥 FLOATING DID YOU KNOW */
+.did-you-know{
+    position:fixed;
+    top:120px;
+    left:10px;
+    z-index:99999;
+    cursor:grab;
+}
+
+.did-you-know img{
+    width:110px;
+    height:auto;
+
+    box-shadow:0 0 10px #ffcc00, 0 0 20px #ff0000;
+    border-radius:10px;
+
+    animation:pulseGlow 2s infinite;
+}
+
+.did-you-know img:hover{
+    transform:scale(1.1) rotate(-3deg);
+}
+
+/* GLOW ANIMATION */
+@keyframes pulseGlow{
+    0%{box-shadow:0 0 10px #ffcc00;}
+    50%{box-shadow:0 0 25px #ff0000;}
+    100%{box-shadow:0 0 10px #ffcc00;}
+}
 </style>
 </head>
 
@@ -591,7 +620,31 @@ setInterval(() => {
     heroIndex = (heroIndex + 1) % heroImages.length;
     heroImg.src = heroImages[heroIndex];
 }, 4000);
-</script>
+    // 🔥 DRAG FUNCTION
+const dyk = document.getElementById("dykBox");
 
+let isDragging = false;
+let offsetX, offsetY;
+
+dyk.addEventListener("mousedown", (e) => {
+    isDragging = true;
+    offsetX = e.clientX - dyk.offsetLeft;
+    offsetY = e.clientY - dyk.offsetTop;
+});
+
+document.addEventListener("mousemove", (e) => {
+    if(isDragging){
+        dyk.style.left = (e.clientX - offsetX) + "px";
+        dyk.style.top = (e.clientY - offsetY) + "px";
+    }
+});
+
+document.addEventListener("mouseup", () => {
+    isDragging = false;
+});
+</script>
+<div class="did-you-know" id="dykBox" onclick="openModal('about')">
+    <img src="didyouknow.png" alt="Did You Know">
+</div>
 </body>
 </html>
