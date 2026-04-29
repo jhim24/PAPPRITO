@@ -328,6 +328,54 @@ animation:scrollFooter 15s linear infinite;
     50%{box-shadow:0 0 25px #ff0000;}
     100%{box-shadow:0 0 10px #ffcc00;}
 }
+    /* 🔥 ICON BUTTON */
+.dyk-icon{
+    position:fixed;
+    top:150px;
+    left:10px;
+    z-index:99999;
+
+    background:#ffcc00;
+    color:black;
+    font-size:20px;
+    padding:10px;
+    border-radius:50%;
+    cursor:pointer;
+}
+
+/* 🔥 POPUP */
+.dyk-modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.7);
+
+    justify-content:center;
+    align-items:center;
+
+    z-index:99999;
+}
+
+.dyk-content{
+    position:relative;
+}
+
+.dyk-content img{
+    width:90%;
+    max-width:400px;
+    border-radius:10px;
+}
+
+.dyk-close{
+    position:absolute;
+    top:-10px;
+    right:-10px;
+    background:red;
+    color:white;
+    padding:5px 10px;
+    border-radius:50%;
+    cursor:pointer;
+}
 </style>
 </head>
 
@@ -642,9 +690,28 @@ document.addEventListener("mousemove", (e) => {
 document.addEventListener("mouseup", () => {
     isDragging = false;
 });
+    function openDYK(){
+    document.getElementById("dykModal").style.display = "flex";
+}
+
+function closeDYK(){
+    document.getElementById("dykModal").style.display = "none";
+}
 </script>
 <div class="did-you-know" id="dykBox" onclick="openModal('about')">
     <img src="didyouknow.png" alt="Did You Know">
+</div>
+    <!-- 🔥 FLOATING ICON -->
+<div class="dyk-icon" onclick="openDYK()">
+    💡
+</div>
+
+<!-- 🔥 POPUP IMAGE -->
+<div id="dykModal" class="dyk-modal">
+    <div class="dyk-content">
+        <span class="dyk-close" onclick="closeDYK()">✖</span>
+        <img src="didyouknow.png">
+    </div>
 </div>
 </body>
 </html>
