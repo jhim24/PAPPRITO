@@ -269,7 +269,12 @@ animation:scrollFooter 15s linear infinite;
     border-radius:0 !important;
     box-shadow:none !important;
 }
-
+/* NAVBAR SEPARATOR */
+.nav-links a:not(:last-child)::after{
+content:" | ";
+color:white;
+margin-left:6px;
+}
 /* HERO IMAGE */
 .hero{
     position:relative;
@@ -507,25 +512,27 @@ padding:20px;
 </div>
 
 <div class="nav-links">
-<a href="#home">HOME</a> |
 
-<a href="menu.html">MENU</a> |
+<a href="#home">HOME</a>
 
-<a href="#" onclick="openModal('core'); return false;">CORE VALUES</a> |
+<a href="menu.html">MENU</a>
 
-<a href="#" onclick="openModal('vision'); return false;">VISION</a> |
+<a href="#" onclick="openModal('core'); return false;">CORE VALUES</a>
 
-<a href="#" onclick="openModal('mission'); return false;">MISSION</a> |
+<a href="#" onclick="openModal('vision'); return false;">VISION</a>
 
-<a href="#" onclick="openModal('about'); return false;">ABOUT</a> |
+<a href="#" onclick="openModal('mission'); return false;">MISSION</a>
 
-<a href="#" onclick="openContact(); return false;">CONTACT</a> |
+<a href="#" onclick="openModal('about'); return false;">ABOUT</a>
 
-<a href="gallery.html">GALLERY</a> |
+<a href="#" onclick="openContact(); return false;">CONTACT</a>
 
-<a href="branches.html">BRANCHES</a> |
+<a href="gallery.html">GALLERY</a>
+
+<a href="branches.html">BRANCHES</a>
 
 <a href="comments.html">COMMENTS</a>
+
 </div>
 </div>
 
