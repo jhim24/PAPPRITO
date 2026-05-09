@@ -692,21 +692,25 @@ text-align:center;
 background:linear-gradient(90deg,#d71920,#5c0000);
 }
 
-.partner-front img{
-    .partner-front{
+.partner-front{
 display:flex;
+align-items:center;
+width:100%;
 }
 
-.partner-front div{
-flex:1;
-text-align:center;
-}
+.partner-front img{
 width:90px;
 height:90px;
 border-radius:50%;
 object-fit:cover;
 border:4px solid #ffcc00;
-margin-bottom:10px;
+margin-right:20px;
+flex-shrink:0;
+}
+
+.partner-front div{
+flex:1;
+text-align:center;
 }
 
 .partner-front h3{
@@ -988,6 +992,8 @@ Founder of PAPPRITO with passion for Filipino food and business innovation.
 <div class="partner-front">
 
 <img src="partner11.jpg">
+
+<div>
 
 <h3>PARTNER NAME</h3>
 
