@@ -449,9 +449,12 @@ font-size:20px;
 }
 
 /* DASHBOARD CARDS */
+/* DASHBOARD CARDS */
 .dashboard-grid{
 
 display:flex;
+
+flex-direction:row;
 
 overflow-x:auto;
 
@@ -459,9 +462,11 @@ gap:10px;
 
 padding-bottom:5px;
 
+white-space:nowrap;
+
 }
 
-/* CARD FIXED SIZE */
+/* CARD */
 .card{
 
 min-width:180px;
@@ -469,15 +474,6 @@ min-width:180px;
 flex-shrink:0;
 
 }
-/* CARD */
-.card{
-
-padding:15px;
-
-border-radius:14px;
-
-}
-
 .card h3{
 
 font-size:11px;
