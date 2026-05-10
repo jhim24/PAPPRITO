@@ -187,23 +187,14 @@ background:#57606f;
 .accept-btn,
 .preparing-btn,
 .ready-btn,
-.done-btn{
-/* DELETE BUTTON */
+.done-btn,
 .delete-btn{
-background:#ff4757;
-border:none;
-padding:5px 8px;
-border-radius:20px;
-font-size:10px;
-cursor:pointer;
-color:white;
-margin:2px;
-}
+
 border:none;
 
-padding:5px 8px;
+padding:6px 10px;
 
-border-radius:20px;
+border-radius:25px;
 
 font-size:10px;
 
@@ -212,22 +203,67 @@ cursor:pointer;
 color:white;
 
 margin:2px;
+
+font-weight:bold;
+
+transition:0.3s;
+
+box-shadow:
+0 3px 8px rgba(0,0,0,0.15);
+
 }
 
+/* HOVER EFFECT */
+.accept-btn:hover,
+.preparing-btn:hover,
+.ready-btn:hover,
+.done-btn:hover,
+.delete-btn:hover{
+
+transform:translateY(-2px) scale(1.05);
+
+opacity:0.9;
+
+}
+
+/* ACCEPT */
 .accept-btn{
-background:#2ed573;
+
+background:
+linear-gradient(135deg,#2ed573,#17c964);
+
 }
 
+/* PREPARING */
 .preparing-btn{
-background:#ffa502;
+
+background:
+linear-gradient(135deg,#ffa502,#ff7f50);
+
 }
 
+/* READY */
 .ready-btn{
-background:#1e90ff;
+
+background:
+linear-gradient(135deg,#1e90ff,#3742fa);
+
 }
 
+/* DONE */
 .done-btn{
-background:#57606f;
+
+background:
+linear-gradient(135deg,#57606f,#747d8c);
+
+}
+
+/* DELETE */
+.delete-btn{
+
+background:
+linear-gradient(135deg,#ff4757,#ff6b81);
+
 }
 /* MOBILE */
 @media(max-width:768px){
