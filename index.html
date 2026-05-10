@@ -567,151 +567,165 @@ display:block;
 margin:0;
 padding:0;
 }
-/* TEAM SECTION */
+    /* TEAM SECTION */
 .team-section{
-display:flex;
-justify-content:center;
-align-items:flex-start;
-gap:15px;
-flex-wrap:wrap;
-
-padding:20px 20px 50px;
+display:grid;
+grid-template-columns:320px 1fr;
+gap:20px;
+padding:30px 15px;
+align-items:start;
 }
 
-/* CARD */
-.team-card{
-perspective:1000px;
-}
-
-/* INNER */
-.team-card-inner{
-position:relative;
-width:220px;
-height:340px;
-margin:auto;
-}
-
-/* FRONT + BACK */
-.team-front,
-.team-back{
-position:absolute;
-width:100%;
-height:100%;
-
-border-radius:8px;
-overflow:hidden;
-
-box-shadow:
-0 0 15px rgba(255,0,0,0.3),
-0 0 30px rgba(0,0,0,0.5);
-}
-
-/* FRONT */
-.team-front{
-background:linear-gradient(180deg,#320000,#111);
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-padding:25px;
-text-align:center;
-
-border:2px solid #ff2a2a;
-}
-
-/* IMAGE */
-.team-image img{
-width:135px;
-height:170px;
-object-fit:cover;
-
+/* LEFT */
+.team-left{
+background:linear-gradient(180deg,#d71920,#111);
+padding:30px 20px;
 border-radius:20px;
-
-border:3px solid #ffcc00;
-
-box-shadow:
-0 0 15px rgba(255,204,0,0.4);
+text-align:center;
 }
 
-/* INFO */
-.team-info{
-margin-top:20px;
-color:white;
+.team-left h2{
+font-size:40px;
+margin-bottom:20px;
 }
 
-.team-info h3{
-font-size:16px;
-font-weight:700;
-margin-bottom:10px;
+.ceo-img{
+width:200px;
+height:200px;
+border-radius:50%;
+object-fit:cover;
+border:5px solid #ffcc00;
+margin-bottom:20px;
 }
 
-.team-info p{
-font-size:11px;
+.team-left h3{
+font-size:28px;
+margin-bottom:5px;
+}
+
+.position{
 color:#ffcc00;
+margin-bottom:15px;
 font-weight:bold;
 }
 
-/* BACK */
-.team-back{
-background:linear-gradient(180deg,#111,#2b0000);
-color:white;
+.team-desc{
+line-height:1.8;
+color:#ddd;
+}
 
-transform:rotateY(180deg);
-
+/* RIGHT */
+.team-right{
 display:flex;
 flex-direction:column;
-justify-content:center;
+gap:20px;
+}
+
+.partner-card{
+display:flex;
 align-items:center;
-
-padding:30px;
-text-align:center;
+gap:20px;
+background:linear-gradient(90deg,#d71920,#5c0000);
+padding:20px;
+border-radius:20px;
 }
 
-.team-back h2{
-font-size:18px;
-margin-bottom:20px;
+.partner-card img{
+width:140px;
+height:140px;
+border-radius:50%;
+object-fit:cover;
+border:4px solid #ffcc00;
+}
+
+.partner-card h3{
+font-size:28px;
+margin-bottom:5px;
+}
+
+.partner-card p{
 color:#ffcc00;
+font-weight:bold;
+margin-bottom:10px;
 }
 
-.team-back p{
-line-height:1.5;
-font-size:11px;
-color:#ddd;
+.partner-card span{
+color:white;
+line-height:1.7;
 }
 
 /* MOBILE */
 @media(max-width:768px){
 
 .team-section{
-display:flex;
-justify-content:center;
-align-items:flex-start;
-gap:12px;
+grid-template-columns:120px 1fr;
+gap:10px;
+padding:15px 8px;
+align-items:start;
 }
 
-.team-card-inner{
-width:170px;
-height:300px;
+.team-left{
+padding:15px 10px;
+border-radius:15px;
 }
 
-.team-image img{
-width:100px;
-height:130px;
-}
-
-.team-info h3{
-font-size:16px;
-}
-
-.team-back h2{
+.team-left h2{
 font-size:18px;
+margin-bottom:10px;
 }
 
-.team-back p{
-font-size:13px;
-line-height:1.6;
+.ceo-img{
+width:80px;
+height:80px;
+margin-bottom:10px;
+border-width:3px;
 }
 
+.team-left h3{
+font-size:14px;
+}
+
+.position{
+font-size:11px;
+}
+
+.team-desc{
+font-size:10px;
+line-height:1.4;
+}
+
+.team-right{
+gap:10px;
+}
+
+.partner-card{
+padding:10px;
+gap:10px;
+border-radius:15px;
+flex-direction:row;
+text-align:left;
+align-items:center;
+}
+
+.partner-card img{
+width:70px;
+height:70px;
+}
+
+.partner-card h3{
+font-size:14px;
+margin-bottom:3px;
+}
+
+.partner-card p{
+font-size:11px;
+margin-bottom:4px;
+}
+
+.partner-card span{
+font-size:10px;
+line-height:1.4;
+}
 }
 </style>
 </head>
@@ -867,124 +881,54 @@ Private vehicles may pass through Aguinaldo Highway or CALAX route for faster tr
 
 </div>
 <!-- OUR TEAM -->
-
-<h1 style="
-text-align:center;
-font-size:55px;
-margin-top:20px;
-margin-bottom:40px;
-letter-spacing:2px;
-font-weight:bold;
-">
-OUR TEAM
-</h1>
-
 <div class="team-section">
 
-<!-- CEO -->
-<div class="team-card">
+<!-- LEFT CEO -->
+<div class="team-left">
 
-<div class="team-card-inner">
+<h2>OUR TEAM</h2>
 
-<!-- FRONT -->
-<div class="team-front">
-
-<div class="team-image">
-<img src="ceo.jpg">
-</div>
-
-<div class="team-info">
+<img src="ceo.jpg" class="ceo-img">
 
 <h3>CEO NAME</h3>
 
-<p>CEO / Founder</p>
+<p class="position">CEO / Founder</p>
 
-</div>
-
-</div>
-
-<!-- BACK -->
-<div class="team-back">
-
-<h2>ABOUT</h2>
-
-<p>
+<p class="team-desc">
 Founder of PAPPRITO with passion for Filipino food and business innovation.
-Leading the company with strong vision and dedication to Filipino cuisine.
 </p>
 
 </div>
 
-</div>
+<!-- RIGHT PARTNERS -->
+<div class="team-right">
 
-</div>
+<div class="partner-card">
 
-<!-- PARTNER 1 -->
-<div class="team-card">
-
-<div class="team-card-inner">
-
-<div class="team-front">
-
-<div class="team-image">
 <img src="partner01.jpg">
-</div>
 
-<div class="team-info">
-
+<div>
 <h3>PARTNER NAME</h3>
-
 <p>Managing Partner</p>
 
-</div>
-
-</div>
-
-<div class="team-back">
-
-<h2>ABOUT</h2>
-
-<p>
+<span>
 Handles operations and business management of PAPPRITO.
-Focused on maintaining quality service and smooth operations.
-</p>
-
+</span>
 </div>
 
 </div>
 
-</div>
+<div class="partner-card">
 
-<!-- PARTNER 2 -->
-<div class="team-card">
-
-<div class="team-card-inner">
-
-<div class="team-front">
-
-<div class="team-image">
 <img src="partner02.jpg">
-</div>
 
-<div class="team-info">
-
+<div>
 <h3>PARTNER NAME</h3>
-
 <p>Business Partner</p>
 
-</div>
-
-</div>
-
-<div class="team-back">
-
-<h2>ABOUT</h2>
-
-<p>
+<span>
 Supports marketing and customer experience development.
-Helping build stronger customer relationships and branding.
-</p>
-
+</span>
 </div>
 
 </div>
