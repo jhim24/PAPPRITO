@@ -740,7 +740,11 @@ Live Orders
 
 <tr>
 
-<th>ORDER</th>
+<th>ORDER #</th>
+<th>CUSTOMER</th>
+<th>PHONE</th>
+<th>TYPE</th>
+<th>PAYMENT</th>
 <th>PRODUCT</th>
 <th>QTY</th>
 <th>AMOUNT</th>
@@ -850,27 +854,50 @@ table.innerHTML += `
 <tr>
 
 <td>
-#${orderId}
+${order.orderNumber || "#" + orderId}
 </td>
 
 <td>
+${order.customer || "-"}
+</td>
+
+<td>
+${order.phone || "-"}
+</td>
+
+<td>
+${order.orderType || "-"}
+</td>
+
+<td>
+${order.payment || "-"}
+</td>
+
+<td>
+
 ${item.name}
+
+<br>
+
+<small style="color:#999;">
+${order.address || ""}
+</small>
+
+<br>
+
+<small style="color:#ffcc00;">
+${order.notes || ""}
+</small>
+
 </td>
 
 <td>
-1
+${item.qty || 1}
 </td>
 
 <td>
-₱${item.price}
+₱${item.price * (item.qty || 1)}
 </td>
-
-<td>
-
-<span class="status new">
-${order.status}
-</span>
-
 </td>
 
 <td>
