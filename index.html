@@ -183,7 +183,34 @@ box-shadow:
 0 0 20px #ff0000;
 
 }
+/* SOUND BUTTON */
+.sound-btn{
 
+position:absolute;
+
+bottom:30px;
+right:30px;
+
+z-index:5;
+
+background:
+rgba(0,0,0,0.6);
+
+color:white;
+
+border:none;
+
+padding:12px 18px;
+
+border-radius:40px;
+
+cursor:pointer;
+
+font-weight:bold;
+
+backdrop-filter:blur(10px);
+
+}
 /* MOBILE */
 @media(max-width:768px){
 
@@ -980,6 +1007,7 @@ autoplay
 muted
 loop
 playsinline
+id="heroVideo"
 class="hero-video">
 
 <source
@@ -987,7 +1015,13 @@ src="hero-video.mp4"
 type="video/mp4">
 
 </video>
+<button
+class="sound-btn"
+onclick="toggleSound()">
 
+🔊 SOUND
+
+</button>
 <div class="video-overlay">
 
 <h1>
@@ -1412,6 +1446,18 @@ function closeDYK(){
         console.log("PWA Ready");
       });
   });
+}
+    /* VIDEO SOUND */
+
+function toggleSound(){
+
+const video =
+document.getElementById(
+"heroVideo"
+);
+
+video.muted = !video.muted;
+
 }
 </script>
     
