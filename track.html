@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Track Order</title>
+
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:
+linear-gradient(
+135deg,
+#020617,
+#071226,
+#0f172a
+);
+
+color:white;
+
+min-height:100vh;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+padding:20px;
+}
+
+.container{
+
+width:100%;
+max-width:500px;
+
+background:
+rgba(255,255,255,0.05);
+
+padding:30px;
+
+border-radius:25px;
+
+backdrop-filter:blur(12px);
+
+border:
+1px solid rgba(255,255,255,0.08);
+
+}
+
+h1{
+text-align:center;
+margin-bottom:25px;
+color:#ffcc00;
+}
+
+input{
+
+width:100%;
+
+padding:14px;
+
+border:none;
+
+border-radius:14px;
+
+background:#111827;
+
+color:white;
+
+margin-bottom:15px;
+
+outline:none;
+
+}
+
+button{
+
+width:100%;
+
+padding:14px;
+
+border:none;
+
+border-radius:14px;
+
+background:
+linear-gradient(
+135deg,
+#ffcc00,
+#f59e0b
+);
+
+font-weight:bold;
+
+cursor:pointer;
+
+margin-bottom:20px;
+
+}
+
+.result{
+
+background:#111827;
+
+padding:20px;
+
+border-radius:18px;
+
+display:none;
+
+}
+
+.result h2{
+
+margin-bottom:15px;
+
+}
+
+.status{
+
+display:inline-block;
+
+padding:8px 16px;
+
+border-radius:30px;
+
+font-weight:bold;
+
+margin-top:10px;
+
+}
+
+/* STATUS COLORS */
+
+.new{
+background:#ef4444;
+}
+
+.accepted{
+background:#22c55e;
+}
+
+.preparing{
+background:#f59e0b;
+color:black;
+}
+
+.ready{
+background:#3b82f6;
+}
+
+.delivered{
+background:#8b5cf6;
+}
+
+.item{
+padding:10px 0;
+border-bottom:
+1px solid rgba(255,255,255,0.05);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>
+📦 Track Your Order
+</h1>
+
+<input
+type="text"
+id="trackInput"
+placeholder="Enter Order Number">
+
+<button onclick="trackOrder()">
+TRACK ORDER
+</button>
+
+<div id="result" class="result"></div>
+
+</div>
+
+<script>
+
+/* FIREBASE */
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyAV9T5w_1azmPHIJcZpraXP06TItj7HEuA",
+
+authDomain: "papprito-orders.firebaseapp.com",
+
+databaseURL:
+"https://papprito-orders-default-rtdb.firebaseio.com",
+
+projectId: "papprito-orders",
+
+storageBucket:
+"papprito-orders.firebasestorage.app",
+
+messagingSenderId: "831941801424",
+
+appId:
+"1:831941801424:web:40a99cdfb312dac2d275d5"
+
+};
+
+firebase.initializeApp(firebaseConfig);
+
+/* TRACK */
+
+function trackOrder(){
+
+const orderNumber =
+document.getElementById("trackInput").value;
+
+const result =
+document.getElementById("result");
+
+firebase.database()
+.ref("orders")
+.once("value", snapshot=>{
+
+let found = false;
+
+snapshot.forEach(child=>{
+
+const order = child.val();
+
+if(order.orderNumber === orderNumber){
+
+found = true;
+
+let itemsHTML = "";
+
+order.items.forEach(item=>{
+
+itemsHTML += `
+
+<div class="item">
+
+${item.name}
+
+x${item.qty || 1}
+
+</div>
+
+`;
+
+});
+
+result.style.display = "block";
+
+result.innerHTML = `
+
+<h2>
+${order.orderNumber}
+</h2>
+
+<p>
+👤 ${order.customer}
+</p>
+
+<p>
+📱 ${order.phone}
+</p>
+
+<p>
+💳 ${order.payment}
+</p>
+
+<p>
+📦 ${order.orderType}
+</p>
+
+<p>
+💰 ₱${order.total}
+</p>
+
+<br>
+
+<h3>
+Items
+</h3>
+
+${itemsHTML}
+
+<br>
+
+<div class="
+status
+${order.status.toLowerCase()}
+">
+
+${order.status}
+
+</div>
+
+`;
+
+}
+
+});
+
+if(!found){
+
+result.style.display = "block";
+
+result.innerHTML = `
+
+<h2>
+❌ Order Not Found
+</h2>
+
+`;
+
+}
+
+});
+
+}
+
+</script>
+
+</body>
+</html>
