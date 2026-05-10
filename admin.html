@@ -60,6 +60,52 @@ border-radius:20px;
 
 margin-top:10px;
 }
+  /* ACTION BUTTONS */
+.actions{
+margin-top:12px;
+
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+}
+
+.actions button{
+border:none;
+
+padding:6px 12px;
+
+border-radius:20px;
+
+font-size:11px;
+
+cursor:pointer;
+
+font-weight:bold;
+}
+
+/* ACCEPT */
+.accept-btn{
+background:#28a745;
+color:white;
+}
+
+/* PREPARING */
+.preparing-btn{
+background:#ff9800;
+color:white;
+}
+
+/* READY */
+.ready-btn{
+background:#2196f3;
+color:white;
+}
+
+/* DELIVERED */
+.done-btn{
+background:#777;
+color:white;
+}
   /* TABLE DESIGN */
 .order table{
 margin-top:12px;
@@ -175,7 +221,7 @@ ordersDiv.innerHTML = "";
 snapshot.forEach(child=>{
 const orderId = child.key.slice(-5);
 const order = child.val();
-
+const orderKey = child.key;
 let rows = "";
 
 order.items.forEach(item=>{
@@ -245,7 +291,57 @@ ${order.createdAt}
 ${order.status}
 
 </div>
+<div class="actions">
 
+<button class="accept-btn"
+
+onclick="
+updateStatus(
+'${orderKey}',
+'ACCEPTED'
+)">
+
+ACCEPT
+
+</button>
+
+<button class="preparing-btn"
+
+onclick="
+updateStatus(
+'${orderKey}',
+'PREPARING'
+)">
+
+PREPARING
+
+</button>
+
+<button class="ready-btn"
+
+onclick="
+updateStatus(
+'${orderKey}',
+'READY'
+)">
+
+READY
+
+</button>
+
+<button class="done-btn"
+
+onclick="
+updateStatus(
+'${orderKey}',
+'DELIVERED'
+)">
+
+DONE
+
+</button>
+
+</div>
 </div>
 
 ` + ordersDiv.innerHTML;
@@ -253,7 +349,18 @@ ${order.status}
 });
 
 });
+/* UPDATE STATUS */
+function updateStatus(orderKey,status){
 
+firebase.database()
+.ref("orders/" + orderKey)
+.update({
+
+status: status
+
+});
+
+}
 </script>
 <audio id="notifySound">
 
