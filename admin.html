@@ -1,176 +1,173 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PAPPRITO Admin Panel</title>
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>PAPPRITO LIVE ORDERS</title>
 
 <style>
+
 body{
-    font-family:Arial;
-    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-    color:white;
-    padding:20px;
+background:#111;
+color:white;
+font-family:Arial;
+padding:20px;
 }
 
-.container{
-    max-width:500px;
-    margin:auto;
-    background:#ffffff10;
-    padding:20px;
-    border-radius:10px;
+h1{
+margin-bottom:20px;
 }
 
-input, select{
-    width:100%;
-    padding:10px;
-    margin:5px 0;
-    border:none;
-    border-radius:5px;
+.order{
+background:#1a1a1a;
+
+padding:20px;
+
+border-radius:15px;
+
+margin-bottom:15px;
+
+border-left:5px solid #ffcc00;
 }
 
-button{
-    width:100%;
-    padding:10px;
-    background:#ffcc00;
-    border:none;
-    border-radius:5px;
-    cursor:pointer;
+.item{
+margin:5px 0;
 }
 
-.product{
-    background:#00000050;
-    margin-top:10px;
-    padding:10px;
-    border-radius:5px;
+.total{
+color:#ffcc00;
+font-weight:bold;
+margin-top:10px;
 }
+
+.time{
+color:#999;
+margin-top:10px;
+font-size:13px;
+}
+
+.status{
+background:#d71920;
+display:inline-block;
+
+padding:5px 12px;
+
+border-radius:20px;
+
+margin-top:10px;
+}
+
 </style>
+
 </head>
 
 <body>
 
-<div class="container">
+<h1>
+🍔 PAPPRITO LIVE ORDERS
+</h1>
 
-<h2>🔒 PAPPRITO Admin</h2>
+<div id="orders"></div>
 
-<input id="name" placeholder="Product name">
-<input id="price" placeholder="Price">
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 
-<select id="category">
-    <option value="beef">Beef</option>
-    <option value="pork">Pork</option>
-    <option value="chicken">Chicken</option>
-    <option value="seafood">Seafood</option>
-    <option value="veggies">Veggies</option>
-    <option value="noodles">Noodles</option>
-    <option value="sides">Sides</option>
-    <option value="drinks">Drinks</option>
-    <option value="beers">Beers</option>
-</select>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 
-<input type="file" id="imageFile">
-<img id="preview" style="width:100px; display:none;">
+<script>
 
-<button onclick="addProduct()">Add Product</button>
+const firebaseConfig = {
 
-<h3>📦 Products</h3>
-<div id="list"></div>
+apiKey: "AIzaSyAV9T5w_1azmPHIJcZpraXP06TItj7HEuA",
+
+authDomain: "papprito-orders.firebaseapp.com",
+
+databaseURL:
+"https://papprito-orders-default-rtdb.firebaseio.com",
+
+projectId: "papprito-orders",
+
+storageBucket:
+"papprito-orders.firebasestorage.app",
+
+messagingSenderId: "831941801424",
+
+appId:
+"1:831941801424:web:40a99cdfb312dac2d275d5"
+
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const ordersDiv =
+document.getElementById("orders");
+
+/* LIVE ORDERS */
+firebase.database()
+.ref("orders")
+.on("value", snapshot=>{
+
+ordersDiv.innerHTML = "";
+
+snapshot.forEach(child=>{
+
+const order = child.val();
+
+let itemsHTML = "";
+
+order.items.forEach(item=>{
+
+itemsHTML += `
+
+<div class="item">
+
+${item.name}
+- ₱${item.price}
 
 </div>
 
-<script type="module">
+`;
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
-import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
-
-// 🔥 YOUR FIREBASE CONFIG
-const firebaseConfig = {
-  apiKey: "AIzaSyC4gsiZSRqRsLBcOplI9IRzG1wo47UoWfM",
-  authDomain: "papprito-menu.firebaseapp.com",
-  projectId: "papprito-menu",
-  storageBucket: "papprito-menu.firebasestorage.app",
-  messagingSenderId: "397381192330",
-  appId: "1:397381192330:web:5a779247b09df85281bb73"
-};
-
-// INIT
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-// IMAGE PREVIEW
-let uploadedImage = "";
-
-document.getElementById("imageFile").addEventListener("change", function(e){
-    const file = e.target.files[0];
-    const reader = new FileReader();
-
-    reader.onload = function(){
-        uploadedImage = reader.result;
-        document.getElementById("preview").src = uploadedImage;
-        document.getElementById("preview").style.display = "block";
-    };
-
-    if(file) reader.readAsDataURL(file);
 });
 
-// ADD PRODUCT
-async function addProduct(){
+ordersDiv.innerHTML = `
 
-    let name = document.getElementById("name").value;
-    let price = document.getElementById("price").value;
-    let category = document.getElementById("category").value;
+<div class="order">
 
-    if(!name || !price || !uploadedImage){
-        alert("Fill all fields!");
-        return;
-    }
+<h3>
+🧾 New Order
+</h3>
 
-    await addDoc(collection(db, "menu"), {
-        name,
-        price,
-        category,
-        img: uploadedImage
-    });
+${itemsHTML}
 
-    alert("Saved to Firebase!");
+<div class="total">
 
-    document.getElementById("name").value="";
-    document.getElementById("price").value="";
-    document.getElementById("preview").style.display="none";
+Total: ₱${order.total}
 
-    loadProducts();
-}
+</div>
 
-// LOAD PRODUCTS
-async function loadProducts(){
+<div class="time">
 
-    const snapshot = await getDocs(collection(db, "menu"));
-    const container = document.getElementById("list");
+${order.createdAt}
 
-    container.innerHTML="";
+</div>
 
-    snapshot.forEach((docSnap)=>{
-        const item = docSnap.data();
+<div class="status">
 
-        container.innerHTML += `
-        <div class="product">
-            <b>${item.name}</b><br>
-            ₱${item.price}<br>
-            <img src="${item.img}" width="80"><br>
-            <button onclick="deleteProduct('${docSnap.id}')">Delete</button>
-        </div>
-        `;
-    });
-}
+${order.status}
 
-// DELETE
-async function deleteProduct(id){
-    await deleteDoc(doc(db, "menu", id));
-    loadProducts();
-}
+</div>
 
-// INITIAL LOAD
-loadProducts();
+</div>
+
+` + ordersDiv.innerHTML;
+
+});
+
+});
 
 </script>
 
