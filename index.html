@@ -567,165 +567,159 @@ display:block;
 margin:0;
 padding:0;
 }
-    /* TEAM SECTION */
+   /* TEAM SECTION */
 .team-section{
 display:grid;
-grid-template-columns:320px 1fr;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
 gap:20px;
 padding:30px 15px;
-align-items:start;
 }
 
-/* LEFT */
-.team-left{
-background:linear-gradient(180deg,#d71920,#111);
-padding:30px 20px;
+/* CARD */
+.team-card{
+perspective:1000px;
+}
+
+/* INNER */
+.team-card-inner{
+position:relative;
+width:100%;
+height:260px;
+transition:transform 0.8s;
+transform-style:preserve-3d;
+}
+
+.team-card:hover .team-card-inner{
+transform:rotateY(180deg);
+}
+
+/* FRONT + BACK */
+.team-front,
+.team-back{
+position:absolute;
+width:100%;
+height:100%;
+backface-visibility:hidden;
+
 border-radius:20px;
-text-align:center;
+overflow:hidden;
+
+box-shadow:0 5px 20px rgba(0,0,0,0.3);
 }
 
-.team-left h2{
-font-size:40px;
-margin-bottom:20px;
-}
-
-.ceo-img{
-width:200px;
-height:200px;
-border-radius:50%;
-object-fit:cover;
-border:5px solid #ffcc00;
-margin-bottom:20px;
-}
-
-.team-left h3{
-font-size:28px;
-margin-bottom:5px;
-}
-
-.position{
-color:#ffcc00;
-margin-bottom:15px;
-font-weight:bold;
-}
-
-.team-desc{
-line-height:1.8;
-color:#ddd;
-}
-
-/* RIGHT */
-.team-right{
-display:flex;
-flex-direction:column;
-gap:20px;
-}
-
-.partner-card{
+/* FRONT */
+.team-front{
+background:linear-gradient(90deg,#d71920,#5c0000);
 display:flex;
 align-items:center;
-gap:20px;
-background:linear-gradient(90deg,#d71920,#5c0000);
 padding:20px;
-border-radius:20px;
+gap:20px;
 }
 
-.partner-card img{
-width:140px;
-height:140px;
-border-radius:50%;
+/* IMAGE LEFT */
+.team-image img{
+width:130px;
+height:130px;
+border-radius:15px;
 object-fit:cover;
 border:4px solid #ffcc00;
 }
 
-.partner-card h3{
-font-size:28px;
-margin-bottom:5px;
+/* INFO RIGHT */
+.team-info{
+flex:1;
+color:white;
 }
 
-.partner-card p{
-color:#ffcc00;
-font-weight:bold;
+.team-info h2{
 margin-bottom:10px;
 }
 
-.partner-card span{
-color:white;
+.team-info h3{
+font-size:24px;
+margin-bottom:10px;
+}
+
+.team-info p{
 line-height:1.7;
+color:#eee;
+}
+
+/* BACK */
+.team-back{
+background:#111;
+color:white;
+transform:rotateY(180deg);
+
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+
+padding:25px;
+text-align:center;
+}
+
+.team-back h2{
+margin-bottom:15px;
+color:#ffcc00;
+}
+
+/* BOTTOM INFO */
+.team-bottom{
+text-align:center;
+margin-top:15px;
+}
+
+.team-bottom h3{
+font-size:22px;
+margin-bottom:5px;
+}
+
+.team-bottom p{
+color:#ffcc00;
+font-weight:bold;
 }
 
 /* MOBILE */
 @media(max-width:768px){
 
-.team-section{
-grid-template-columns:120px 1fr;
+.team-front{
+flex-direction:row;
+padding:15px;
 gap:10px;
-padding:15px 8px;
-align-items:start;
 }
 
-.team-left{
-padding:15px 10px;
-border-radius:15px;
-}
-
-.team-left h2{
-font-size:18px;
-margin-bottom:10px;
-}
-
-.ceo-img{
+.team-image img{
 width:80px;
 height:80px;
-margin-bottom:10px;
-border-width:3px;
 }
 
-.team-left h3{
-font-size:14px;
+.team-info h2{
+font-size:18px;
 }
 
-.position{
-font-size:11px;
+.team-info h3{
+font-size:16px;
 }
 
-.team-desc{
-font-size:10px;
-line-height:1.4;
+.team-info p{
+font-size:12px;
+line-height:1.5;
 }
 
-.team-right{
-gap:10px;
+.team-card-inner{
+height:220px;
 }
 
-.partner-card{
-padding:10px;
-gap:10px;
-border-radius:15px;
-flex-direction:row;
-text-align:left;
-align-items:center;
+.team-bottom h3{
+font-size:16px;
 }
 
-.partner-card img{
-width:70px;
-height:70px;
+.team-bottom p{
+font-size:12px;
 }
 
-.partner-card h3{
-font-size:14px;
-margin-bottom:3px;
-}
-
-.partner-card p{
-font-size:11px;
-margin-bottom:4px;
-}
-
-.partner-card span{
-font-size:10px;
-line-height:1.4;
-}
 }
 </style>
 </head>
@@ -883,56 +877,135 @@ Private vehicles may pass through Aguinaldo Highway or CALAX route for faster tr
 <!-- OUR TEAM -->
 <div class="team-section">
 
-<!-- LEFT CEO -->
-<div class="team-left">
+<!-- CEO -->
+<div class="team-card">
 
+<div class="team-card-inner">
+
+<!-- FRONT -->
+<div class="team-front">
+
+<div class="team-image">
+<img src="ceo.jpg">
+</div>
+
+<div class="team-info">
 <h2>OUR TEAM</h2>
-
-<img src="ceo.jpg" class="ceo-img">
 
 <h3>CEO NAME</h3>
 
-<p class="position">CEO / Founder</p>
-
-<p class="team-desc">
+<p>
 Founder of PAPPRITO with passion for Filipino food and business innovation.
+</p>
+</div>
+
+</div>
+
+<!-- BACK -->
+<div class="team-back">
+
+<h2>ABOUT</h2>
+
+<p>
+Founder of PAPPRITO with passion for Filipino food and business innovation.
+Leading the company with strong vision and dedication to Filipino cuisine.
 </p>
 
 </div>
 
-<!-- RIGHT PARTNERS -->
-<div class="team-right">
+</div>
 
-<div class="partner-card">
+<!-- BOTTOM INFO -->
+<div class="team-bottom">
+<h3>CEO NAME</h3>
+<p>CEO / Founder</p>
+</div>
 
+</div>
+
+<!-- PARTNER 1 -->
+<div class="team-card">
+
+<div class="team-card-inner">
+
+<div class="team-front">
+
+<div class="team-image">
 <img src="partner01.jpg">
+</div>
 
-<div>
+<div class="team-info">
+<h3>PARTNER NAME</h3>
+
+<p>
+Handles operations and business management of PAPPRITO.
+</p>
+</div>
+
+</div>
+
+<div class="team-back">
+
+<h2>ABOUT</h2>
+
+<p>
+Handles operations and business management of PAPPRITO.
+Focused on maintaining quality service and smooth operations.
+</p>
+
+</div>
+
+</div>
+
+<div class="team-bottom">
 <h3>PARTNER NAME</h3>
 <p>Managing Partner</p>
-
-<span>
-Handles operations and business management of PAPPRITO.
-</span>
 </div>
 
 </div>
 
-<div class="partner-card">
+<!-- PARTNER 2 -->
+<div class="team-card">
 
+<div class="team-card-inner">
+
+<div class="team-front">
+
+<div class="team-image">
 <img src="partner02.jpg">
+</div>
 
-<div>
+<div class="team-info">
+<h3>PARTNER NAME</h3>
+
+<p>
+Supports marketing and customer experience development.
+</p>
+</div>
+
+</div>
+
+<div class="team-back">
+
+<h2>ABOUT</h2>
+
+<p>
+Supports marketing and customer experience development.
+Helping build stronger customer relationships and branding.
+</p>
+
+</div>
+
+</div>
+
+<div class="team-bottom">
 <h3>PARTNER NAME</h3>
 <p>Business Partner</p>
-
-<span>
-Supports marketing and customer experience development.
-</span>
 </div>
 
 </div>
 
+</div>
 </div>
 
 </div>
