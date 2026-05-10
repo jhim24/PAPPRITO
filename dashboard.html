@@ -188,7 +188,17 @@ background:#57606f;
 .preparing-btn,
 .ready-btn,
 .done-btn{
-
+/* DELETE BUTTON */
+.delete-btn{
+background:#ff4757;
+border:none;
+padding:5px 8px;
+border-radius:20px;
+font-size:10px;
+cursor:pointer;
+color:white;
+margin:2px;
+}
 border:none;
 
 padding:5px 8px;
@@ -518,7 +528,13 @@ updateStatus(
 )">
 DONE
 </button>
-
+<button class="delete-btn"
+onclick="
+deleteOrder(
+'${child.key}'
+)">
+DELETE
+</button>
 </td>
 </tr>
 
@@ -552,6 +568,17 @@ firebase.database()
 status: status
 
 });
+
+}
+  function deleteOrder(orderKey){
+
+if(confirm("Delete this order?")){
+
+firebase.database()
+.ref("orders/" + orderKey)
+.remove();
+
+}
 
 }
 </script>
