@@ -714,8 +714,12 @@ Settings
 
 </div>
 
-<button class="delete-btn">
+<button
+class="delete-btn"
+onclick="logout()">
+
 🚪 Logout
+
 </button>
 
 </div>
@@ -826,6 +830,11 @@ const pass =
 document.getElementById("password").value;
 
 if(pass === "papprito123"){
+
+localStorage.setItem(
+"pappritoLogin",
+"true"
+);
 
 document.getElementById("loginPage")
 .style.display = "none";
@@ -1052,7 +1061,31 @@ firebase.database()
 }
 
 }
+/* LOGOUT */
 
+function logout(){
+
+localStorage.removeItem(
+"pappritoLogin"
+);
+
+location.reload();
+
+}
+  /* AUTO LOGIN */
+
+if(
+localStorage.getItem("pappritoLogin")
+=== "true"
+){
+
+document.getElementById("loginPage")
+.style.display = "none";
+
+document.getElementById("dashboardContent")
+.style.display = "flex";
+
+}
 </script>
 
 </body>
