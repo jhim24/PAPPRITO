@@ -380,6 +380,17 @@ DELETE
 /* UPDATE STATUS */
 function updateStatus(orderKey,status){
 
+/* AUTO DELETE WHEN DONE */
+if(status === "DELIVERED"){
+
+firebase.database()
+.ref("orders/" + orderKey)
+.remove();
+
+return;
+
+}
+
 firebase.database()
 .ref("orders/" + orderKey)
 .update({
