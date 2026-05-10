@@ -733,11 +733,72 @@ font-size:10px;
 line-height:1.4;
 }
 }
+    /* SPLASH SCREEN */
+#splash-screen{
+position:fixed;
+inset:0;
+background:#d71920;
+
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+
+z-index:999999;
+
+animation:fadeOut 1s ease forwards;
+animation-delay:2.5s;
+}
+
+.splash-logo{
+width:180px;
+height:180px;
+
+border-radius:30px;
+
+animation:pulse 2s infinite;
+}
+
+#splash-screen h1{
+font-size:42px;
+margin-top:20px;
+font-weight:bold;
+}
+
+#splash-screen p{
+margin-top:10px;
+font-size:16px;
+letter-spacing:2px;
+}
+
+/* LOGO PULSE */
+@keyframes pulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.08);}
+100%{transform:scale(1);}
+}
+
+/* FADE OUT */
+@keyframes fadeOut{
+to{
+opacity:0;
+visibility:hidden;
+}
+}
 </style>
 </head>
 
 <body>
+<!-- SPLASH SCREEN -->
+<div id="splash-screen">
 
+<img src="icon-512.png" class="splash-logo">
+
+<h1>PAPPRITO</h1>
+
+<p>Lasap Ang Pinoy Sarap!</p>
+
+</div>
 <!-- NAVBAR -->
 <div class="navbar">
 <div class="logo-container">
