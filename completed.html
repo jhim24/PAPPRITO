@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PAPPRITO COMPLETED</title>
+
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:#0f172a;
+color:white;
+display:flex;
+min-height:100vh;
+}
+
+/* SIDEBAR */
+.sidebar{
+width:230px;
+background:#020617;
+padding:20px;
+}
+
+.logo{
+font-size:24px;
+font-weight:bold;
+color:#ffcc00;
+margin-bottom:30px;
+}
+
+.menu{
+list-style:none;
+}
+
+.menu li{
+padding:14px;
+margin-bottom:10px;
+border-radius:14px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.menu li:hover,
+.menu li.active{
+background:#111827;
+color:#ffcc00;
+}
+
+/* MAIN */
+.main{
+flex:1;
+padding:25px;
+overflow-x:auto;
+}
+
+h1{
+margin-bottom:20px;
+}
+
+/* TABLE */
+table{
+width:100%;
+border-collapse:collapse;
+min-width:1100px;
+background:#111827;
+}
+
+th{
+padding:10px;
+background:#1e293b;
+color:#ffcc00;
+font-size:12px;
+border:1px solid rgba(255,255,255,0.08);
+}
+
+td{
+padding:8px;
+font-size:11px;
+border:1px solid rgba(255,255,255,0.05);
+}
+
+.status{
+background:#8b5cf6;
+padding:5px 10px;
+border-radius:20px;
+font-size:10px;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+body{
+flex-direction:column;
+}
+
+.sidebar{
+width:100%;
+overflow-x:auto;
+}
+
+.menu{
+display:flex;
+gap:8px;
+}
+
+.menu li{
+white-space:nowrap;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+
+<div class="logo">
+<i class="fa-solid fa-burger"></i>
+PAPPRITO
+</div>
+
+<ul class="menu">
+
+<li onclick="location.href='dashboard.html'">
+<i class="fa-solid fa-house"></i>
+Dashboard
+</li>
+
+<li onclick="location.href='reports.html'">
+<i class="fa-solid fa-chart-line"></i>
+Reports
+</li>
+
+<li class="active">
+<i class="fa-solid fa-circle-check"></i>
+Completed
+</li>
+
+</ul>
+
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+<h1>
+✅ Completed Orders
+</h1>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ORDER #</th>
+<th>CUSTOMER</th>
+<th>PHONE</th>
+<th>PRODUCT</th>
+<th>PAYMENT</th>
+<th>TOTAL</th>
+<th>TIME</th>
+<th>STATUS</th>
+
+</tr>
+
+</thead>
+
+<tbody id="completedTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+<script>
+
+/* FIREBASE */
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyAV9T5w_1azmPHIJcZpraXP06TItj7HEuA",
+
+authDomain: "papprito-orders.firebaseapp.com",
+
+databaseURL:
+"https://papprito-orders-default-rtdb.firebaseio.com",
+
+projectId: "papprito-orders",
+
+storageBucket:
+"papprito-orders.firebasestorage.app",
+
+messagingSenderId: "831941801424",
+
+appId:
+"1:831941801424:web:40a99cdfb312dac2d275d5"
+
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const table =
+document.getElementById("completedTable");
+
+firebase.database()
+.ref("orders")
+.on("value", snapshot=>{
+
+table.innerHTML = "";
+
+snapshot.forEach(child=>{
+
+const order = child.val();
+
+if(order.status === "DELIVERED"){
+
+order.items.forEach(item=>{
+
+table.innerHTML += `
+
+<tr>
+
+<td>
+${order.orderNumber}
+</td>
+
+<td>
+${order.customer}
+</td>
+
+<td>
+${order.phone}
+</td>
+
+<td>
+${item.name}
+</td>
+
+<td>
+${order.payment}
+</td>
+
+<td>
+₱${order.total}
+</td>
+
+<td>
+${order.createdAt}
+</td>
+
+<td>
+
+<span class="status">
+DELIVERED
+</span>
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+}
+
+});
+
+});
+
+</script>
+
+</body>
+</html>
