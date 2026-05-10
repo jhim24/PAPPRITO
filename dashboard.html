@@ -183,7 +183,42 @@ background:#1e90ff;
 .DELIVERED{
 background:#57606f;
 }
+/* BUTTONS */
+.accept-btn,
+.preparing-btn,
+.ready-btn,
+.done-btn{
 
+border:none;
+
+padding:5px 8px;
+
+border-radius:20px;
+
+font-size:10px;
+
+cursor:pointer;
+
+color:white;
+
+margin:2px;
+}
+
+.accept-btn{
+background:#2ed573;
+}
+
+.preparing-btn{
+background:#ffa502;
+}
+
+.ready-btn{
+background:#1e90ff;
+}
+
+.done-btn{
+background:#57606f;
+}
 /* MOBILE */
 @media(max-width:768px){
 
@@ -324,7 +359,8 @@ Dashboard Overview
 <th>Status</th>
 
 <th>Time</th>
-
+  
+<th>Action</th>
 </tr>
 
 </thead>
@@ -445,7 +481,45 @@ ${order.status}
 <td>
 ${order.createdAt}
 </td>
+<td>
 
+<button class="accept-btn"
+onclick="
+updateStatus(
+'${child.key}',
+'ACCEPTED'
+)">
+ACCEPT
+</button>
+
+<button class="preparing-btn"
+onclick="
+updateStatus(
+'${child.key}',
+'PREPARING'
+)">
+PREP
+</button>
+
+<button class="ready-btn"
+onclick="
+updateStatus(
+'${child.key}',
+'READY'
+)">
+READY
+</button>
+
+<button class="done-btn"
+onclick="
+updateStatus(
+'${child.key}',
+'DELIVERED'
+)">
+DONE
+</button>
+
+</td>
 </tr>
 
 `;
@@ -469,7 +543,17 @@ document.getElementById("grossProfit")
 .innerText = "₱" + sales;
 
 });
+function updateStatus(orderKey,status){
 
+firebase.database()
+.ref("orders/" + orderKey)
+.update({
+
+status: status
+
+});
+
+}
 </script>
 
 </body>
