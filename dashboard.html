@@ -220,9 +220,13 @@ font-size:10px;
 
 <ul class="menu">
 
-<li>📊 Dashboard</li>
+<li onclick="showPage('dashboardPage')">
+📊 Dashboard
+</li>
 
-<li>🧾 Live Orders</li>
+<li onclick="showPage('ordersPage')">
+🧾 Live Orders
+</li>
 
 <li>💰 Sales</li>
 
@@ -247,7 +251,7 @@ Dashboard Overview
 </h1>
 
 </div>
-
+<div id="dashboardPage">
 <!-- DASHBOARD CARDS -->
 <div class="dashboard-grid">
 
@@ -294,8 +298,10 @@ Dashboard Overview
 </div>
 
 <!-- LIVE ORDERS -->
-<div class="orders-section">
+<div id="ordersPage" style="display:none;">
 
+<div class="orders-section">
+</div>
 <h2>
 🧾 Live Orders
 </h2>
@@ -333,7 +339,19 @@ Dashboard Overview
 </div>
 
 <script>
+<script>
+  function showPage(pageId){
 
+document.getElementById("dashboardPage")
+.style.display = "none";
+
+document.getElementById("ordersPage")
+.style.display = "none";
+
+document.getElementById(pageId)
+.style.display = "block";
+
+}
 /* FIREBASE */
 
 const firebaseConfig = {
