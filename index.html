@@ -733,72 +733,11 @@ font-size:10px;
 line-height:1.4;
 }
 }
-    /* SPLASH SCREEN */
-#splash-screen{
-position:fixed;
-inset:0;
-background:#d71920;
-
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-
-z-index:999999;
-
-animation:fadeOut 1s ease forwards;
-animation-delay:2.5s;
-}
-
-.splash-logo{
-width:180px;
-height:180px;
-
-border-radius:30px;
-
-animation:pulse 2s infinite;
-}
-
-#splash-screen h1{
-font-size:42px;
-margin-top:20px;
-font-weight:bold;
-}
-
-#splash-screen p{
-margin-top:10px;
-font-size:16px;
-letter-spacing:2px;
-}
-
-/* LOGO PULSE */
-@keyframes pulse{
-0%{transform:scale(1);}
-50%{transform:scale(1.08);}
-100%{transform:scale(1);}
-}
-
-/* FADE OUT */
-@keyframes fadeOut{
-to{
-opacity:0;
-visibility:hidden;
-}
-}
 </style>
 </head>
 
 <body>
-<!-- SPLASH SCREEN -->
-<div id="splash-screen">
 
-<img src="icon-512.png" class="splash-logo">
-
-<h1>PAPPRITO</h1>
-
-<p>Lasap Ang Pinoy Sarap!</p>
-
-</div>
 <!-- NAVBAR -->
 <div class="navbar">
 <div class="logo-container">
@@ -1114,18 +1053,19 @@ We foster teamwork, and the strong force keeps us unified and allows us to treat
 
 if(type==="vision"){
 title="OUR VISION";
-text=`To be the everyday Filipino table—known for hearty, great-tasting food and honest value that bring people together.`;
+text=`To be the go-to restaurant for hearty Filipino food, delivering superior value through our delicious and affordable meals.`;
 }
 
 if(type==="mission"){
 title="OUR MISSION";
-text=`To consistently serve honest, satisfying Filipino meals at prices people can rely on.`;
+text=`To serve fresh and delicious food, promoting delightful eating to everyone.`;
 }
 
 if(type==="about"){
 title="ABOUT US";
-text=At Papprito, we believe that good Filipino food should be enjoyed every day, by everyone. Founded in Tagaytay more than 14 years ago, we set out to create a place where flavor, warmth and affordability all come together. From Day One, our vision has always been for our guests to savor the meals they love, at prices they feel good about. Every dish we serve, from Tagaytay specialties such as Tapang Taal, Bulalo and Crispy Tawilis to our festive Pancit Bilaos, showcases our pledge to serve sarap consistently. Our hearty all-day breakfast Rapsilog and hefty Macho and Todo Meals bear our commitment to provide busog without ripping the wallet.
-Come visit our warm abode and experience why "Masarap maging affordable" is not a fancy tagline, but rather our guiding principle in serving everyone every day.
+text=`Papa Prito entered the bustling and cut-throat gourmet scene in Tagaytay City on 30th of October 2011 with the promise of food and ambiance both rich in taste but light on the pocket - not the easiest combination. Since then, it has become Tagaytay's social equalizer, cutting across social classes, and growing a local following - rare in a town where food business relies heavily on tourists and weekenders for survival.
+
+Serving Filipino favorites that are rich in taste but within reach of the ordinary people, satisfying not just hunger but a taste for the extraordinary.
 
 Slogan:
 "Lasap Ang Pinoy Sarap!"`;
