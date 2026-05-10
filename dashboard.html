@@ -61,11 +61,7 @@ box-shadow:
 
 /* ===== LOGO ===== */
 .logo{
-font-size:34px;
-font-weight:bold;
-color:#ffcc00;
-margin-bottom:30px;
-}
+font-size:20px;
 
 /* ===== MENU ===== */
 .menu{
@@ -176,11 +172,7 @@ color:white;
 }
 
 .card p{
-margin-top:12px;
-font-size:42px;
-font-weight:bold;
-}
-
+font-size:34px;
 /* COLORS */
 .sales{
 background:
@@ -343,7 +335,109 @@ background:#ef4444;
 transform:scale(1.05);
 opacity:0.9;
 }
+/* ===== LOGIN ===== */
+.login-page{
 
+position:fixed;
+inset:0;
+
+background:
+linear-gradient(
+135deg,
+#020617,
+#071226,
+#0f172a
+);
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+z-index:99999;
+
+}
+
+.login-box{
+
+width:340px;
+
+background:
+rgba(255,255,255,0.05);
+
+padding:35px;
+
+border-radius:25px;
+
+backdrop-filter:blur(12px);
+
+border:
+1px solid rgba(255,255,255,0.08);
+
+box-shadow:
+0 15px 35px rgba(0,0,0,0.35);
+
+}
+
+.login-box h2{
+
+margin-bottom:20px;
+text-align:center;
+color:#ffcc00;
+
+}
+
+.login-box input{
+
+width:100%;
+
+padding:14px;
+
+border:none;
+
+border-radius:14px;
+
+background:#111827;
+
+color:white;
+
+margin-bottom:15px;
+
+outline:none;
+
+}
+
+.login-box button{
+
+width:100%;
+
+padding:14px;
+
+border:none;
+
+border-radius:14px;
+
+background:
+linear-gradient(
+135deg,
+#ffcc00,
+#f59e0b
+);
+
+font-weight:bold;
+
+cursor:pointer;
+
+}
+
+#errorMsg{
+
+margin-top:10px;
+
+text-align:center;
+
+color:#ff6b81;
+
+}
 /* ===== MOBILE ===== */
 @media(max-width:768px){
 
@@ -502,7 +596,17 @@ onclick="showPage('dashboardPage')">
 <h1>
 Dashboard Overview
 </h1>
+<div class="top-right">
 
+<div class="top-box">
+📅 May 10, 2026
+</div>
+
+<div class="top-box">
+👤 Admin
+</div>
+
+</div>
 </div>
 <div id="dashboardPage">
   
@@ -540,7 +644,7 @@ Dashboard Overview
 🧾 Live Orders
 </h2>
 
-<table>
+<table class="order-table">
 
 <thead>
 
