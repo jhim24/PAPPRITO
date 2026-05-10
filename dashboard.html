@@ -746,6 +746,8 @@ Live Orders
 <th>TYPE</th>
 <th>PAYMENT</th>
 <th>PRODUCT</th>
+<th>ADDRESS</th>
+<th>NOTES</th>
 <th>QTY</th>
 <th>AMOUNT</th>
 <th>STATUS</th>
@@ -874,27 +876,20 @@ ${order.payment || "-"}
 </td>
 
 <td>
-
 ${item.name}
+</td>
 
-<br>
+<td>
+${order.address || "-"}
+</td>
 
-<small style="color:#999;">
-${order.address || ""}
-</small>
-
-<br>
-
-<small style="color:#ffcc00;">
-${order.notes || ""}
-</small>
-
+<td>
+${order.notes || "-"}
 </td>
 
 <td>
 ${item.qty || 1}
 </td>
-
 <td>
 ₱${item.price * (item.qty || 1)}
 </td>
