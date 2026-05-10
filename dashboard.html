@@ -22,641 +22,399 @@ box-sizing:border-box;
 font-family:Arial,sans-serif;
 }
 
+/* ===== BODY ===== */
 body{
-
+margin:0;
+font-family:'Segoe UI',sans-serif;
 background:
 linear-gradient(
 135deg,
-#0f172a,
-#111827,
-#1e293b
+#020617,
+#071226,
+#0f172a
 );
-
-display:flex;
-
-min-height:100vh;
-
 color:white;
-
+display:flex;
+min-height:100vh;
+overflow:hidden;
 }
 
-/* SIDEBAR */
+/* ===== SIDEBAR ===== */
 .sidebar{
-
-width:230px;
-
+width:240px;
 background:
 linear-gradient(
 180deg,
 #020617,
-#0f172a,
-#111827
+#081226,
+#0f172a
 );
-
-color:white;
-
 padding:20px;
-
+display:flex;
+flex-direction:column;
+justify-content:space-between;
 border-right:
 1px solid rgba(255,255,255,0.08);
-
 box-shadow:
-5px 0 20px rgba(0,0,0,0.25);
-
+5px 0 20px rgba(0,0,0,0.3);
 }
 
+/* ===== LOGO ===== */
 .logo{
-font-size:24px;
+font-size:34px;
 font-weight:bold;
-margin-bottom:30px;
 color:#ffcc00;
+margin-bottom:30px;
 }
 
+/* ===== MENU ===== */
 .menu{
 list-style:none;
+padding:0;
+margin:0;
 }
 
 .menu li{
-padding:14px;
-border-radius:10px;
-margin-bottom:8px;
+padding:16px 18px;
+margin-bottom:10px;
+border-radius:16px;
 cursor:pointer;
+font-size:15px;
 transition:0.3s;
+display:flex;
+align-items:center;
+gap:12px;
+color:#ddd;
 }
 
 .menu li:hover{
-
 background:
 linear-gradient(
 135deg,
-#1e293b,
-#334155
+#111827,
+#1e293b
 );
-
 transform:translateX(5px);
-
+color:white;
 }
 
-/* MAIN */
+.menu li.active{
+background:
+linear-gradient(
+135deg,
+#111827,
+#1e293b
+);
+border:
+1px solid rgba(255,204,0,0.25);
+box-shadow:
+0 0 15px rgba(255,204,0,0.1);
+color:#ffcc00;
+}
+
+/* ===== MAIN ===== */
 .main{
 flex:1;
-padding:20px;
-overflow:auto;
+padding:25px;
+overflow-y:auto;
 }
 
-/* TOP */
+/* ===== TOPBAR ===== */
 .topbar{
 display:flex;
 justify-content:space-between;
 align-items:center;
-margin-bottom:20px;
+margin-bottom:25px;
+}
+
+.topbar h1{
+font-size:44px;
+margin:0;
+font-weight:700;
+}
+
+.top-right{
+display:flex;
+gap:15px;
+align-items:center;
+}
+
+.top-box{
+background:
+rgba(255,255,255,0.05);
+padding:12px 18px;
+border-radius:18px;
+border:
+1px solid rgba(255,255,255,0.08);
+}
+
+/* ===== DASHBOARD GRID ===== */
+.dashboard-grid{
+display:grid;
+grid-template-columns:
+repeat(auto-fit,minmax(240px,1fr));
+gap:18px;
+margin-bottom:25px;
+}
+
+/* ===== CARD ===== */
+.card{
+padding:22px;
+border-radius:22px;
+position:relative;
+overflow:hidden;
+box-shadow:
+0 10px 25px rgba(0,0,0,0.3);
+border:
+1px solid rgba(255,255,255,0.08);
+}
+
+.card h3{
+margin:0;
+font-size:16px;
+color:white;
+}
+
+.card p{
+margin-top:12px;
+font-size:42px;
+font-weight:bold;
+}
+
+/* COLORS */
+.sales{
+background:
+linear-gradient(
+135deg,
+#ff4d6d,
+#c9184a
+);
+}
+
+.orders{
+background:
+linear-gradient(
+135deg,
+#1e90ff,
+#2563eb
+);
+}
+
+.completed{
+background:
+linear-gradient(
+135deg,
+#10b981,
+#059669
+);
+}
+
+.profit{
+background:
+linear-gradient(
+135deg,
+#8b5cf6,
+#6d28d9
+);
+}
+
+/* ===== LIVE ORDERS ===== */
+.orders-section{
+background:
+rgba(255,255,255,0.04);
+padding:25px;
+border-radius:24px;
+border:
+1px solid rgba(255,255,255,0.08);
+box-shadow:
+0 10px 30px rgba(0,0,0,0.25);
+}
+
+/* ===== TABLE ===== */
+.order-table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+}
+
+.order-table th{
+background:
+rgba(255,255,255,0.05);
+padding:14px;
+font-size:13px;
+color:#ffcc00;
+text-align:left;
+border-bottom:
+1px solid rgba(255,255,255,0.08);
+}
+
+.order-table td{
+padding:14px;
+font-size:13px;
+border-bottom:
+1px solid rgba(255,255,255,0.05);
+color:#eee;
+}
+
+/* ===== STATUS ===== */
+.status{
+padding:6px 14px;
+border-radius:30px;
+font-size:11px;
+font-weight:bold;
+display:inline-block;
+}
+
+.new{
+background:#ef4444;
+}
+
+.preparing{
+background:#f59e0b;
+}
+
+.ready{
+background:#3b82f6;
+}
+
+.done{
+background:#10b981;
+}
+
+/* ===== ACTION BUTTONS ===== */
+.action-buttons{
+display:flex;
+gap:6px;
+overflow-x:auto;
+white-space:nowrap;
+}
+
+.action-buttons::-webkit-scrollbar{
+height:4px;
+}
+
+.action-buttons::-webkit-scrollbar-thumb{
+background:#555;
+border-radius:20px;
+}
+
+/* ===== BUTTONS ===== */
+.accept-btn,
+.preparing-btn,
+.ready-btn,
+.done-btn,
+.delete-btn{
+
+border:none;
+padding:7px 10px;
+border-radius:12px;
+font-size:11px;
+cursor:pointer;
+font-weight:bold;
+color:white;
+transition:0.3s;
+}
+
+.accept-btn{
+background:#10b981;
+}
+
+.preparing-btn{
+background:#f59e0b;
+}
+
+.ready-btn{
+background:#2563eb;
+}
+
+.done-btn{
+background:#64748b;
+}
+
+.delete-btn{
+background:#ef4444;
+}
+
+.accept-btn:hover,
+.preparing-btn:hover,
+.ready-btn:hover,
+.done-btn:hover,
+.delete-btn:hover{
+transform:scale(1.05);
+opacity:0.9;
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:768px){
+
+body{
+flex-direction:column;
+overflow:auto;
+}
+
+/* SIDEBAR */
+.sidebar{
+width:100%;
+padding:12px;
+}
+
+/* MENU */
+.menu{
+display:flex;
+overflow-x:auto;
+gap:10px;
+}
+
+.menu li{
+white-space:nowrap;
+margin-bottom:0;
+}
+
+/* MAIN */
+.main{
+padding:15px;
+}
+
+/* TOPBAR */
+.topbar{
+flex-direction:column;
+align-items:flex-start;
+gap:10px;
 }
 
 .topbar h1{
 font-size:28px;
 }
 
-/* DASHBOARD GRID */
+/* DASHBOARD */
 .dashboard-grid{
-
 display:flex;
-
-flex-direction:row;
-
 overflow-x:auto;
-
-overflow-y:hidden;
-
--webkit-overflow-scrolling:touch;
-
-scrollbar-width:none;
-
-gap:10px;
-
+gap:12px;
 padding-bottom:5px;
-
-white-space:nowrap;
-
 }
 
-/* HIDE MOBILE SCROLLBAR */
 .dashboard-grid::-webkit-scrollbar{
-
 display:none;
-
 }
-/* CARD */
-min-width:180px;
+
+.card{
+min-width:220px;
 flex-shrink:0;
-.card h3{
-font-size:14px;
-margin-bottom:10px;
 }
 
 .card p{
 font-size:30px;
-font-weight:bold;
-}
-
-/* COLORS */
-.red{
-background:linear-gradient(135deg,#ff4b5c,#ff6b81);
-}
-
-.blue{
-background:linear-gradient(135deg,#1e90ff,#3742fa);
-}
-
-.green{
-background:linear-gradient(135deg,#2ed573,#1dd1a1);
-}
-
-.purple{
-background:linear-gradient(135deg,#a55eea,#8854d0);
 }
 
 /* TABLE */
 .orders-section{
-
-background:
-linear-gradient(
-135deg,
-#111827,
-#1e293b
-);
-
-padding:20px;
-
-border-radius:18px;
-
-box-shadow:
-0 5px 20px rgba(0,0,0,0.35);
-
-border:
-1px solid rgba(255,255,255,0.08);
-
-color:white;
-
-}
-.orders-section h2{
-margin-bottom:15px;
-}
-
-table{
-width:100%;
-border-collapse:collapse;
-}
-
-th{
-
-background:
-linear-gradient(
-135deg,
-#334155,
-#1e293b
-);
-
-color:#ffcc00;
-
-padding:12px;
-
-font-size:13px;
-
-border-bottom:
-1px solid rgba(255,255,255,0.08);
-
-}
-td{
-
-padding:10px;
-
-border-bottom:
-1px solid rgba(255,255,255,0.08);
-
-font-size:12px;
-
-text-align:center;
-
-color:white;
-
-}
-/* ACTION BUTTON WRAP */
-.action-buttons{
-
-display:flex;
-
-gap:5px;
-
 overflow-x:auto;
-
-white-space:nowrap;
-
-padding-bottom:3px;
-
-justify-content:flex-start;
-
 }
 
-/* SCROLLBAR */
-.action-buttons::-webkit-scrollbar{
-
-height:4px;
-
+.order-table{
+min-width:900px;
 }
-
-.action-buttons::-webkit-scrollbar-thumb{
-
-background:#555;
-
-border-radius:20px;
-
-}
-.status{
-padding:5px 10px;
-border-radius:20px;
-color:white;
-font-size:11px;
-font-weight:bold;
-display:inline-block;
-}
-
-.NEW{
-background:#ff4757;
-}
-
-.ACCEPTED{
-background:#2ed573;
-}
-
-.PREPARING{
-background:#ffa502;
-}
-
-.READY{
-background:#1e90ff;
-}
-
-.DELIVERED{
-background:#57606f;
-}
-/* BUTTONS */
-.accept-btn,
-.preparing-btn,
-.ready-btn,
-.done-btn,
-.delete-btn{
-
-border:none;
-
-padding:6px 10px;
-
-border-radius:25px;
-
-font-size:10px;
-
-cursor:pointer;
-
-color:white;
-
-margin:2px;
-
-font-weight:bold;
-
-transition:0.3s;
-
-box-shadow:
-0 3px 8px rgba(0,0,0,0.15);
-
-}
-
-/* HOVER EFFECT */
-.accept-btn:hover,
-.preparing-btn:hover,
-.ready-btn:hover,
-.done-btn:hover,
-.delete-btn:hover{
-
-transform:translateY(-2px) scale(1.05);
-
-opacity:0.9;
-
-}
-
-/* ACCEPT */
-.accept-btn{
-
-background:
-linear-gradient(135deg,#2ed573,#17c964);
-
-}
-
-/* PREPARING */
-.preparing-btn{
-
-background:
-linear-gradient(135deg,#ffa502,#ff7f50);
-
-}
-
-/* READY */
-.ready-btn{
-
-background:
-linear-gradient(135deg,#1e90ff,#3742fa);
-
-}
-
-/* DONE */
-.done-btn{
-
-background:
-linear-gradient(135deg,#57606f,#747d8c);
-
-}
-
-/* DELETE */
-.delete-btn{
-
-background:
-linear-gradient(135deg,#ff4757,#ff6b81);
-
-}
-/* MOBILE RESPONSIVE */
-@media(max-width:768px){
-
-body{
-flex-direction:column;
-}
-
-/* SIDEBAR */
-.sidebar{
-
-width:100%;
-
-padding:10px;
-
-display:flex;
-
-flex-direction:column;
-
-align-items:center;
-
-}
-
-/* LOGO */
-.logo{
-
-font-size:20px;
-
-margin-bottom:15px;
-
-}
-
-/* MENU */
-.menu{
-
-display:flex;
-
-overflow-x:auto;
-
-gap:8px;
-
-width:100%;
-
-padding-bottom:5px;
-
-}
-
-.menu li{
-
-white-space:nowrap;
-
-padding:10px 14px;
-
-font-size:12px;
-
-margin-bottom:0;
-
-flex-shrink:0;
-
-}
-
-/* MAIN */
-.main{
-
-padding:12px;
-
-}
-
-/* TOPBAR */
-.topbar h1{
-
-font-size:20px;
-
-}
-
-/* DASHBOARD CARDS */
-/* DASHBOARD CARDS */
-.dashboard-grid{
-
-display:flex;
-
-flex-direction:row;
-
-overflow-x:auto;
-
-gap:10px;
-
-padding-bottom:5px;
-
-white-space:nowrap;
-
-}
-
-/* CARD */
-.card{
-
-min-width:180px;
-
-flex-shrink:0;
-
-}
-.card h3{
-
-font-size:11px;
-
-}
-
-.card p{
-
-font-size:20px;
-
-}
-
-/* LIVE ORDERS */
-.orders-section{
-
-padding:12px;
-
-overflow-x:auto;
-
-}
-
-/* TABLE */
-table{
-
-min-width:700px;
-
-}
-
-/* TABLE TEXT */
-th{
-
-font-size:11px;
-
-padding:10px;
-
-}
-
-td{
-
-font-size:10px;
-
-padding:8px;
-
-}
-
-/* BUTTONS */
-.accept-btn,
-.preparing-btn,
-.ready-btn,
-.done-btn,
-.delete-btn{
-
-font-size:9px;
-
-padding:5px 7px;
-
-white-space:nowrap;
-
-}
-
-/* STATUS */
-.status{
-
-font-size:9px;
-
-padding:4px 8px;
-
-}
-
-}
-  /* LOGIN */
-.login-page{
-
-position:fixed;
-
-inset:0;
-
-background:
-linear-gradient(
-135deg,
-#020617,
-#111827,
-#1e293b
-);
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-z-index:999999;
-
-}
-
-.login-box{
-
-background:
-rgba(255,255,255,0.05);
-
-backdrop-filter:blur(12px);
-
-padding:35px;
-
-border-radius:20px;
-
-width:320px;
-
-text-align:center;
-
-border:
-1px solid rgba(255,255,255,0.08);
-
-box-shadow:
-0 10px 30px rgba(0,0,0,0.35);
-
-}
-
-.login-box h2{
-
-margin-bottom:20px;
-
-color:#ffcc00;
-
-}
-
-.login-box input{
-
-width:100%;
-
-padding:12px;
-
-border:none;
-
-border-radius:12px;
-
-margin-bottom:15px;
-
-background:#1e293b;
-
-color:white;
-
-outline:none;
-
-}
-
-.login-box button{
-
-width:100%;
-
-padding:12px;
-
-border:none;
-
-border-radius:12px;
-
-background:
-linear-gradient(
-135deg,
-#ffcc00,
-#ffa502
-);
-
-font-weight:bold;
-
-cursor:pointer;
-
-}
-
-#errorMsg{
-
-margin-top:10px;
-
-color:#ff6b81;
-
-font-size:13px;
 
 }
 </style>
@@ -693,32 +451,48 @@ style="display:none;">
 <!-- SIDEBAR -->
 <div class="sidebar">
 
+<div>
+
 <div class="logo">
 🍔 PAPPRITO
 </div>
 
 <ul class="menu">
 
-<li onclick="showPage('dashboardPage')">
-📊 Dashboard
+<li class="active"
+onclick="showPage('dashboardPage')">
+🏠 Dashboard
 </li>
 
 <li onclick="showPage('ordersPage')">
-🧾 Live Orders
+📦 Live Orders
 </li>
 
-<li>💰 Sales</li>
+<li onclick="showPage('salesPage')">
+💰 Sales
+</li>
 
-<li>📦 Completed</li>
+<li onclick="showPage('completedPage')">
+✅ Completed
+</li>
 
-<li>📈 Reports</li>
+<li onclick="showPage('reportsPage')">
+📊 Reports
+</li>
 
-<li>⚙️ Settings</li>
+<li onclick="showPage('settingsPage')">
+⚙ Settings
+</li>
 
 </ul>
 
 </div>
 
+<button class="delete-btn">
+🚪 Logout
+</button>
+
+</div>
 <!-- MAIN -->
 <div class="main">
 
@@ -735,44 +509,24 @@ Dashboard Overview
 <!-- DASHBOARD CARDS -->
 <div class="dashboard-grid">
 
-<div class="card red">
-
+<div class="card sales">
 <h3>Net Sales Today</h3>
-
-<p id="salesToday">
-₱0
-</p>
-
+<p id="salesToday">₱0</p>
 </div>
 
-<div class="card blue">
-
+<div class="card orders">
 <h3>Total Orders</h3>
-
-<p id="totalOrders">
-0
-</p>
-
+<p id="totalOrders">0</p>
 </div>
 
-<div class="card green">
-
+<div class="card completed">
 <h3>Completed Orders</h3>
-
-<p id="completedOrders">
-0
-</p>
-
+<p id="completedOrders">0</p>
 </div>
 
-<div class="card purple">
-
+<div class="card profit">
 <h3>Gross Profit</h3>
-
-<p id="grossProfit">
-₱0
-</p>
-
+<p id="grossProfit">₱0</p>
 </div>
 
 </div>
