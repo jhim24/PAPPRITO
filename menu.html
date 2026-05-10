@@ -905,13 +905,16 @@ new Date().toLocaleString()
 /* SAVE TO FIREBASE */
 firebase.database()
 .ref("orders")
-.push(order);
+.push(order)
+.then(()=>{
 
 window.location.href =
 
 "track.html?order=" +
 
 order.orderNumber;
+
+});
 
 cart = [];
 
