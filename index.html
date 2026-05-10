@@ -567,12 +567,12 @@ display:block;
 margin:0;
 padding:0;
 }
-   /* TEAM SECTION */
+/* TEAM SECTION */
 .team-section{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-gap:20px;
-padding:30px 15px;
+gap:30px;
+padding:20px 20px 50px;
 }
 
 /* CARD */
@@ -584,7 +584,7 @@ perspective:1000px;
 .team-card-inner{
 position:relative;
 width:100%;
-height:260px;
+height:520px;
 transition:transform 0.8s;
 transform-style:preserve-3d;
 }
@@ -601,66 +601,64 @@ width:100%;
 height:100%;
 backface-visibility:hidden;
 
-border-radius:20px;
+border-radius:25px;
 overflow:hidden;
 
-box-shadow:0 5px 20px rgba(0,0,0,0.3);
+box-shadow:
+0 0 15px rgba(255,0,0,0.3),
+0 0 30px rgba(0,0,0,0.5);
 }
 
 /* FRONT */
 .team-front{
-background:linear-gradient(180deg,#2b0000,#0f0f0f);
+background:linear-gradient(180deg,#320000,#111);
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-padding:20px;
-gap:10px;
+padding:25px;
 text-align:center;
 
 border:2px solid #ff2a2a;
 }
 
-/* IMAGE LEFT */
+/* IMAGE */
 .team-image img{
-width:220px;
-height:260px;
-border-radius:20px;
+width:230px;
+height:300px;
 object-fit:cover;
 
-border:2px solid #ffcc00;
+border-radius:20px;
+
+border:3px solid #ffcc00;
 
 box-shadow:
-0 0 10px rgba(255,204,0,0.4);
+0 0 15px rgba(255,204,0,0.4);
 }
 
-/* INFO RIGHT */
+/* INFO */
 .team-info{
+margin-top:20px;
 color:white;
-text-align:center;
-}
-
-.team-info h2{
-margin-bottom:10px;
 }
 
 .team-info h3{
-font-size:40px;
-font-weight:bold;
-margin-top:10px;
-margin-bottom:5px;
+font-size:38px;
+font-weight:700;
+margin-bottom:10px;
 }
 
 .team-info p{
+font-size:24px;
 color:#ffcc00;
 font-weight:bold;
-font-size:24px;
 }
 
 /* BACK */
 .team-back{
-background:#111;
+background:linear-gradient(180deg,#111,#2b0000);
 color:white;
+
 transform:rotateY(180deg);
 
 display:flex;
@@ -668,52 +666,55 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 
-padding:25px;
+padding:30px;
 text-align:center;
 }
 
 .team-back h2{
-margin-bottom:15px;
+font-size:35px;
+margin-bottom:20px;
 color:#ffcc00;
+}
+
+.team-back p{
+line-height:1.8;
+font-size:17px;
+color:#ddd;
 }
 
 /* MOBILE */
 @media(max-width:768px){
 
-.team-front{
-flex-direction:row;
-padding:15px;
-gap:10px;
-}
-
-.team-image img{
-width:80px;
-height:80px;
-}
-
-.team-info h2{
-font-size:18px;
-}
-
-.team-info h3{
-font-size:16px;
-}
-
-.team-info p{
-font-size:12px;
-line-height:1.5;
+.team-section{
+grid-template-columns:1fr;
+padding:10px;
+gap:20px;
 }
 
 .team-card-inner{
+height:430px;
+}
+
+.team-image img{
+width:170px;
 height:220px;
 }
 
-.team-bottom h3{
+.team-info h3{
+font-size:24px;
+}
+
+.team-info p{
 font-size:16px;
 }
 
-.team-bottom p{
-font-size:12px;
+.team-back h2{
+font-size:24px;
+}
+
+.team-back p{
+font-size:13px;
+line-height:1.6;
 }
 
 }
@@ -871,15 +872,18 @@ Private vehicles may pass through Aguinaldo Highway or CALAX route for faster tr
 
 </div>
 <!-- OUR TEAM -->
-    <h1 style="
+
+<h1 style="
 text-align:center;
 font-size:55px;
 margin-top:20px;
-margin-bottom:30px;
+margin-bottom:40px;
 letter-spacing:2px;
+font-weight:bold;
 ">
 OUR TEAM
 </h1>
+
 <div class="team-section">
 
 <!-- CEO -->
@@ -902,6 +906,8 @@ OUR TEAM
 
 </div>
 
+</div>
+
 <!-- BACK -->
 <div class="team-back">
 
@@ -914,12 +920,6 @@ Leading the company with strong vision and dedication to Filipino cuisine.
 
 </div>
 
-</div>
-
-<!-- BOTTOM INFO -->
-<div class="team-bottom">
-<h3>CEO NAME</h3>
-<p>CEO / Founder</p>
 </div>
 
 </div>
@@ -936,11 +936,11 @@ Leading the company with strong vision and dedication to Filipino cuisine.
 </div>
 
 <div class="team-info">
+
 <h3>PARTNER NAME</h3>
 
-<p>
-Handles operations and business management of PAPPRITO.
-</p>
+<p>Managing Partner</p>
+
 </div>
 
 </div>
@@ -958,11 +958,6 @@ Focused on maintaining quality service and smooth operations.
 
 </div>
 
-<div class="team-bottom">
-<h3>PARTNER NAME</h3>
-<p>Managing Partner</p>
-</div>
-
 </div>
 
 <!-- PARTNER 2 -->
@@ -977,11 +972,11 @@ Focused on maintaining quality service and smooth operations.
 </div>
 
 <div class="team-info">
+
 <h3>PARTNER NAME</h3>
 
-<p>
-Supports marketing and customer experience development.
-</p>
+<p>Business Partner</p>
+
 </div>
 
 </div>
@@ -995,13 +990,6 @@ Supports marketing and customer experience development.
 Helping build stronger customer relationships and branding.
 </p>
 
-</div>
-
-</div>
-
-<div class="team-bottom">
-<h3>PARTNER NAME</h3>
-<p>Business Partner</p>
 </div>
 
 </div>
