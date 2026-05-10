@@ -118,15 +118,21 @@ font-size:28px;
 
 /* DASHBOARD GRID */
 .dashboard-grid{
+
 display:grid;
+
 grid-template-columns:
 repeat(auto-fit,minmax(220px,1fr));
 
 gap:15px;
 
 margin-bottom:20px;
-}
 
+overflow-x:auto;
+
+padding-bottom:5px;
+
+}
 /* CARD */
 .card{
 padding:20px;
@@ -445,12 +451,24 @@ font-size:20px;
 /* DASHBOARD CARDS */
 .dashboard-grid{
 
-grid-template-columns:1fr 1fr;
+display:flex;
+
+overflow-x:auto;
 
 gap:10px;
 
+padding-bottom:5px;
+
 }
 
+/* CARD FIXED SIZE */
+.card{
+
+min-width:180px;
+
+flex-shrink:0;
+
+}
 /* CARD */
 .card{
 
