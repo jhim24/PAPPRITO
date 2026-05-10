@@ -300,7 +300,22 @@ ${order.orderNumber}
 <p>
 💰 ₱${order.total}
 </p>
+<br>
 
+<p>
+🚚 Rider:
+${order.riderName || "Not Assigned"}
+</p>
+
+<p>
+📱 Rider Phone:
+${order.riderPhone || "-"}
+</p>
+
+<p>
+🏍 Vehicle:
+${order.riderVehicle || "-"}
+</p>
 <br>
 
 <h3>
