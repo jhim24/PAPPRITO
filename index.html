@@ -73,6 +73,138 @@ padding-right:10px;
 
 box-sizing:border-box;
 }
+    /* VIDEO HERO */
+.video-hero{
+
+position:relative;
+
+width:100%;
+
+height:100vh;
+
+overflow:hidden;
+
+}
+
+/* VIDEO */
+.hero-video{
+
+position:absolute;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+object-fit:cover;
+
+}
+
+/* OVERLAY */
+.video-overlay{
+
+position:relative;
+
+z-index:2;
+
+width:100%;
+height:100%;
+
+background:
+rgba(0,0,0,0.45);
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+
+align-items:center;
+
+text-align:center;
+
+padding:20px;
+
+}
+
+/* TEXT */
+.video-overlay h1{
+
+font-size:60px;
+
+margin-bottom:15px;
+
+color:white;
+
+text-shadow:
+0 0 10px rgba(0,0,0,0.5);
+
+}
+
+.video-overlay p{
+
+font-size:22px;
+
+margin-bottom:25px;
+
+color:#ffcc00;
+
+}
+
+/* BUTTON */
+.video-btn{
+
+background:
+linear-gradient(
+45deg,
+#ffcc00,
+#ff3b3b
+);
+
+padding:14px 35px;
+
+border-radius:40px;
+
+font-weight:bold;
+
+font-size:16px;
+
+transition:0.3s;
+
+}
+
+.video-btn:hover{
+
+transform:scale(1.08);
+
+box-shadow:
+0 0 10px #ffcc00,
+0 0 20px #ff0000;
+
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+.video-hero{
+height:70vh;
+}
+
+.video-overlay h1{
+font-size:34px;
+}
+
+.video-overlay p{
+font-size:15px;
+}
+
+.video-btn{
+padding:12px 24px;
+font-size:14px;
+}
+
+}
 /* SECTION */
 .section{padding:30px 15px;}
 .section h2{text-align:center;margin-bottom:20px;}
@@ -840,7 +972,42 @@ visibility:hidden;
 
 </div>
 </div>
+<!-- VIDEO HERO -->
+<div class="video-hero">
 
+<video
+autoplay
+muted
+loop
+playsinline
+class="hero-video">
+
+<source
+src="hero-video.mp4"
+type="video/mp4">
+
+</video>
+
+<div class="video-overlay">
+
+<h1>
+WELCOME TO PAPPRITO
+</h1>
+
+<p>
+Lasap Ang Pinoy Sarap!
+</p>
+
+<a href="menu.html"
+class="video-btn">
+
+ORDER NOW
+
+</a>
+
+</div>
+
+</div>
 <!-- HERO -->
 <div class="hero" id="home">
   <img id="heroImage" src="restaurant-hero.jpg" class="hero-img">
