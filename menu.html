@@ -381,7 +381,8 @@ body{
 Total: ₱0
 </h3>
 
-<a href="https://m.me/papprito"
+<a href="#"
+onclick="sendOrder()"
 target="_blank"
 class="checkout-btn">
 
@@ -631,7 +632,52 @@ document.getElementById("cartModal")
 .style.display="none";
 
 }
+/* SEND ORDER */
+function sendOrder(){
 
+if(cart.length === 0){
+
+alert("Cart is empty!");
+
+return;
+
+}
+
+let total = 0;
+
+cart.forEach(item=>{
+
+total += item.price;
+
+});
+
+const order = {
+
+items: cart,
+
+total: total,
+
+status: "NEW",
+
+createdAt:
+new Date().toLocaleString()
+
+};
+
+/* SAVE TO FIREBASE */
+firebase.database()
+.ref("orders")
+.push(order);
+
+alert("Order Sent Successfully!");
+
+cart = [];
+
+updateCart();
+
+closeCart();
+
+}
 /* DEFAULT */
 show('beef');
 
