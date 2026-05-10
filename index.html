@@ -486,13 +486,69 @@ height:700px;
 
     box-shadow:0 0 5px rgba(0,0,0,0.5);
 }
-    /* TEAM FLIP CARD */
+   /* TEAM FLIP CARD */
 .flip-card{
 background:transparent;
-width:300px;
-height:350px;
+width:100%;
+height:100%;
 perspective:1000px;
-margin:auto;
+}
+
+.partner-flip{
+height:180px;
+}
+
+.flip-card-inner{
+position:relative;
+width:100%;
+height:100%;
+transition:transform 0.8s;
+transform-style:preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner{
+transform:rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back{
+position:absolute;
+width:100%;
+height:100%;
+backface-visibility:hidden;
+
+border-radius:20px;
+overflow:hidden;
+}
+
+.flip-card-front{
+background:transparent;
+}
+
+.flip-card-back{
+background:linear-gradient(180deg,#d71920,#111);
+color:white;
+
+transform:rotateY(180deg);
+
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+
+padding:20px;
+text-align:center;
+}
+
+.flip-btn{
+margin-top:15px;
+padding:10px 20px;
+border:none;
+border-radius:30px;
+background:#ffcc00;
+color:black;
+font-weight:bold;
+cursor:pointer;
 }
 
 .flip-card-inner{
@@ -881,12 +937,25 @@ Private vehicles may pass through Aguinaldo Highway or CALAX route for faster tr
 
 </div>
 <!-- OUR TEAM -->
+
+<h2 style="
+text-align:center;
+font-size:38px;
+margin-bottom:25px;
+color:white;
+">
+OUR TEAM
+</h2>
+
 <div class="team-section">
 
-<!-- LEFT CEO -->
-<div class="team-left">
+<!-- CEO -->
+<div class="flip-card">
 
-<h2>OUR TEAM</h2>
+<div class="flip-card-inner">
+
+<!-- FRONT -->
+<div class="flip-card-front team-left">
 
 <img src="ceo.jpg" class="ceo-img">
 
@@ -894,16 +963,36 @@ Private vehicles may pass through Aguinaldo Highway or CALAX route for faster tr
 
 <p class="position">CEO / Founder</p>
 
-<p class="team-desc">
+<button class="flip-btn">
+VIEW BIO
+</button>
+
+</div>
+
+<!-- BACK -->
+<div class="flip-card-back">
+
+<h3>ABOUT CEO</h3>
+
+<p>
 Founder of PAPPRITO with passion for Filipino food and business innovation.
 </p>
 
 </div>
 
-<!-- RIGHT PARTNERS -->
+</div>
+</div>
+
+<!-- RIGHT -->
 <div class="team-right">
 
-<div class="partner-card">
+<!-- PARTNER 1 -->
+<div class="flip-card partner-flip">
+
+<div class="flip-card-inner">
+
+<!-- FRONT -->
+<div class="flip-card-front partner-card">
 
 <img src="partner01.jpg">
 
@@ -911,14 +1000,35 @@ Founder of PAPPRITO with passion for Filipino food and business innovation.
 <h3>PARTNER NAME</h3>
 <p>Managing Partner</p>
 
-<span>
+<button class="flip-btn">
+VIEW BIO
+</button>
+
+</div>
+
+</div>
+
+<!-- BACK -->
+<div class="flip-card-back">
+
+<h3>ABOUT PARTNER</h3>
+
+<p>
 Handles operations and business management of PAPPRITO.
-</span>
-</div>
+</p>
 
 </div>
 
-<div class="partner-card">
+</div>
+</div>
+
+<!-- PARTNER 2 -->
+<div class="flip-card partner-flip">
+
+<div class="flip-card-inner">
+
+<!-- FRONT -->
+<div class="flip-card-front partner-card">
 
 <img src="partner02.jpg">
 
@@ -926,11 +1036,26 @@ Handles operations and business management of PAPPRITO.
 <h3>PARTNER NAME</h3>
 <p>Business Partner</p>
 
-<span>
-Supports marketing and customer experience development.
-</span>
+<button class="flip-btn">
+VIEW BIO
+</button>
+
 </div>
 
+</div>
+
+<!-- BACK -->
+<div class="flip-card-back">
+
+<h3>ABOUT PARTNER</h3>
+
+<p>
+Supports marketing and customer experience development.
+</p>
+
+</div>
+
+</div>
 </div>
 
 </div>
