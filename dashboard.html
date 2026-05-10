@@ -983,7 +983,13 @@ updateStatus(
 )">
 PREP
 </button>
-
+<button class="accept-btn"
+onclick="
+assignRider(
+'${child.key}'
+)">
+RIDER
+</button>
 <button class="ready-btn"
 onclick="
 updateStatus(
@@ -1084,6 +1090,36 @@ document.getElementById("loginPage")
 
 document.getElementById("dashboardContent")
 .style.display = "flex";
+
+}
+  /* ASSIGN RIDER */
+
+function assignRider(orderKey){
+
+const riderName =
+prompt("Rider Name");
+
+if(!riderName) return;
+
+const riderPhone =
+prompt("Rider Phone");
+
+const riderVehicle =
+prompt("Vehicle");
+
+firebase.database()
+.ref("orders/" + orderKey)
+.update({
+
+riderName:riderName,
+
+riderPhone:riderPhone,
+
+riderVehicle:riderVehicle
+
+});
+
+alert("Rider Assigned");
 
 }
 </script>
