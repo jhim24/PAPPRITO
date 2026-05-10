@@ -681,66 +681,80 @@ margin-bottom:10px;
 
 .team-line{
 width:140px;
-margin-bottom:30px;
-}
-
-/* CEO */
-.ceo-top{
 margin-bottom:25px;
 }
 
-/* PARTNERS STACK */
+/* CEO TOP */
+.ceo-top{
+display:flex;
+justify-content:center;
+margin-bottom:20px;
+}
+
+/* PARTNERS ROW */
 .partner-row{
-flex-direction:column;
-align-items:center;
-gap:18px;
+display:flex;
+justify-content:center;
+align-items:flex-start;
+gap:12px;
+flex-wrap:nowrap;
 }
 
-/* CARD */
-.team-card{
+/* CEO CARD */
+.ceo-card{
 width:92%;
-max-width:320px;
-height:430px;
+max-width:300px;
+height:420px;
+
+transform:none;
 }
 
-/* IMAGE */
-.team-front img{
-height:210px;
+/* PARTNER CARDS */
+.partner-row .team-card{
+width:48%;
+max-width:165px;
+height:300px;
+}
+
+/* CEO IMAGE */
+.ceo-card .team-front img{
+height:220px;
+}
+
+/* PARTNER IMAGE */
+.partner-row .team-front img{
+height:120px;
 }
 
 /* NAME */
 .team-front h3{
-font-size:28px;
+font-size:18px;
 }
 
 /* POSITION */
 .team-front p{
-font-size:16px;
+font-size:13px;
+margin-bottom:10px;
 }
 
 /* BUTTON */
 .flip-btn{
-font-size:18px;
+font-size:14px;
 }
 
 /* BACK */
 .team-back{
-padding:20px;
+padding:12px;
 }
 
 .team-back h4{
-font-size:24px;
-margin-bottom:12px;
+font-size:18px;
+margin-bottom:8px;
 }
 
 .team-back span{
-font-size:14px;
-line-height:1.6;
-}
-
-/* CEO SIZE */
-.ceo-card{
-transform:none;
+font-size:11px;
+line-height:1.5;
 }
 }
 </style>
