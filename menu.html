@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>PAPPRITO MENU</title>
 
 <style>
@@ -13,6 +14,12 @@
     font-family:'Segoe UI',sans-serif;
 }
 
+body{
+    background:#111;
+    color:white;
+    overflow-x:hidden;
+}
+
 /* HEADER */
 .header{
     background:#d71920;
@@ -21,34 +28,39 @@
     display:flex;
     align-items:center;
     gap:10px;
+    position:sticky;
+    top:0;
+    z-index:999;
 }
 
 .back-btn{
     background:#ffcc00;
     border:none;
-    padding:6px 12px;
+    padding:8px 14px;
     cursor:pointer;
     font-weight:bold;
+    border-radius:8px;
 }
 
 /* LAYOUT */
 .container{
     display:flex;
-    height:calc(100vh - 50px);
+    min-height:100vh;
 }
 
-/* SIDEBAR (SMALLER) */
+/* SIDEBAR */
 .sidebar{
-    width:130px;
+    width:140px;
     background:#d71920;
     color:white;
-    padding:10px;
+    padding:12px;
     overflow-y:auto;
 }
 
 .sidebar h3{
-    font-size:13px;
-    margin-bottom:10px;
+    font-size:14px;
+    margin-bottom:12px;
+    text-align:center;
 }
 
 .sidebar ul{
@@ -56,9 +68,12 @@
 }
 
 .sidebar li{
-    padding:8px;
+    padding:10px;
     cursor:pointer;
-    font-size:12px;
+    font-size:13px;
+    border-radius:8px;
+    margin-bottom:5px;
+    transition:0.3s;
 }
 
 .sidebar li:hover{
@@ -69,21 +84,20 @@
 /* PRODUCTS */
 .products{
     flex:1;
-    padding:12px;
-    overflow-y:auto;
+    padding:15px;
 
     display:grid;
     grid-template-columns:repeat(4,1fr);
     gap:15px;
 }
 
-/* CARD (POSTER STYLE) */
+/* CARD */
 .card{
-    background:#fff;
-    border-radius:16px;
+    background:#1a1a1a;
+    border-radius:18px;
     overflow:hidden;
-    box-shadow:0 6px 18px rgba(0,0,0,0.25);
-    border:2px solid #f4c542;
+    border:2px solid #ffcc00;
+    box-shadow:0 6px 18px rgba(0,0,0,0.4);
     transition:0.3s;
 }
 
@@ -91,32 +105,33 @@
     transform:scale(1.03);
 }
 
-/* IMAGE (POSTER LOOK) */
+/* IMAGE */
 .card img{
     width:100%;
     height:220px;
     object-fit:cover;
-    object-position:center;
     display:block;
+    cursor:pointer;
 }
-/* NAME */
-.card h4{
-    margin:0;
-    padding:8px;
-    background:#ffcc00;
+
+/* INFO */
+.card-info{
     text-align:center;
-    font-size:14px;
+}
+
+.card-info h4{
+    background:#ffcc00;
+    color:black;
+    padding:10px;
+    font-size:15px;
     font-weight:bold;
 }
 
-/* PRICE */
-.card p{
-    margin:0;
-    padding:8px;
+.card-info p{
     background:#d71920;
     color:white;
-    text-align:center;
-    font-size:13px;
+    padding:10px;
+    font-size:14px;
     font-weight:bold;
 }
 
@@ -128,102 +143,129 @@
     background:rgba(0,0,0,0.95);
     justify-content:center;
     align-items:center;
-    z-index:9999;
+    z-index:99999;
 }
 
 .zoom-modal img{
     max-width:95%;
     max-height:90%;
-    border-radius:10px;
+    border-radius:12px;
 }
 
 .zoom-close{
     position:absolute;
     top:20px;
     right:20px;
-    font-size:28px;
     color:white;
+    font-size:30px;
+    cursor:pointer;
 }
 
 /* MOBILE */
 @media(max-width:768px){
 
-    .container{
-        flex-direction:column;
-    }
+.container{
+    flex-direction:column;
+}
 
-    .sidebar{
-        width:100%;
-        display:flex;
-        overflow-x:auto;
-    }
+.sidebar{
+    width:100%;
+    overflow-x:auto;
+}
 
-    .sidebar ul{
-        display:flex;
-        gap:10px;
-    }
+.sidebar ul{
+    display:flex;
+    gap:8px;
+}
 
-    .products{
-        grid-template-columns:repeat(2,1fr);
-    }
+.sidebar li{
+    white-space:nowrap;
+}
 
-    .card img{
-        height:220px;
-    }
+.products{
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.card img{
+    height:180px;
+}
+
+.card-info h4{
+    font-size:13px;
+}
+
+.card-info p{
+    font-size:12px;
+}
+
 }
 </style>
 </head>
 
 <body>
 
+<!-- HEADER -->
 <div class="header">
-    <button class="back-btn" onclick="history.back()">← Back</button>
-    <h2>MENU</h2>
+
+<button class="back-btn" onclick="history.back()">
+← Back
+</button>
+
+<h2>MENU</h2>
+
 </div>
 
 <div class="container">
 
-    <!-- SIDEBAR -->
-    <div class="sidebar">
-        <h3>Category</h3>
-        <ul>
-            <li onclick="show('beef')">Beef</li>
-            <li onclick="show('pork')">Pork</li>
-            <li onclick="show('chicken')">Chicken</li>
-            <li onclick="show('seafood')">Seafood</li>
-            <li onclick="show('veggies')">Veggies</li>
-            <li onclick="show('noodles')">Noodles</li>
-            <li onclick="show('sides')">Sides</li>
-            <li onclick="show('drinks')">Drinks</li>
-            <li onclick="show('beers')">Beers</li>
-        </ul>
-    </div>
+<!-- SIDEBAR -->
+<div class="sidebar">
 
-    <!-- PRODUCTS -->
-    <div class="products" id="products"></div>
+<h3>Category</h3>
+
+<ul>
+<li onclick="show('beef')">Beef</li>
+<li onclick="show('pork')">Pork</li>
+<li onclick="show('chicken')">Chicken</li>
+<li onclick="show('seafood')">Seafood</li>
+<li onclick="show('veggies')">Veggies</li>
+<li onclick="show('noodles')">Noodles</li>
+<li onclick="show('sides')">Sides</li>
+<li onclick="show('drinks')">Drinks</li>
+<li onclick="show('beers')">Beers</li>
+</ul>
+
+</div>
+
+<!-- PRODUCTS -->
+<div class="products" id="products"></div>
 
 </div>
 
 <!-- ZOOM -->
 <div id="zoomModal" class="zoom-modal" onclick="closeZoom()">
-    <span class="zoom-close">✖</span>
-    <img id="zoomImg">
+
+<span class="zoom-close">✖</span>
+
+<img id="zoomImg">
+
 </div>
 
 <script>
+
 const data = {
 
 beef:[
 {name:"Bulalo Grupo",price:"₱710",img:"bulalogroup.jpg"},
 {name:"Bulalo Solo",price:"₱185",img:"bulalo.jpg"},
-{name:"Bistek Tagalog",price:"₱279",img:"bistek.jpg"}  
+{name:"Bistek Tagalog",price:"₱279",img:"bistek.jpg"}
 ],
 
 pork:[
 {name:"Lechon Kawali",price:"₱395",img:"lechon.jpg"},
 {name:"Pork Sisig",price:"₱315",img:"sisig.jpg"},
 {name:"Lumpiang Shanghai",price:"₱235",img:"lumpia.jpg"},
-{name:"Coming Soon",price:"",img:"no-image.jpg"}
+{name:"Coming Soon",price:"Soon",img:"no-image.jpg"}
 ],
 
 chicken:[
@@ -240,8 +282,8 @@ seafood:[
 veggies:[
 {name:"Chop Suey",price:"₱235",img:"chopsuey.jpg"},
 {name:"Tortang Talong",price:"₱192",img:"talong.jpg"},
-{name:"Coming Soon",price:"",img:"no-image.jpg"},
-{name:"Coming Soon",price:"",img:"no-image.jpg"}
+{name:"Coming Soon",price:"Soon",img:"no-image.jpg"},
+{name:"Coming Soon",price:"Soon",img:"no-image.jpg"}
 ],
 
 noodles:[
@@ -282,32 +324,55 @@ beers:[
 
 };
 
+/* SHOW CATEGORY */
 function show(cat){
-    const container = document.getElementById("products");
-    container.innerHTML="";
 
-    data[cat].forEach(item=>{
-        container.innerHTML += `
-        <div class="card">
-            <img src="${item.img}" onclick="openZoom('${item.img}')">
-           <h4>${item.name || "Coming Soon"}</h4>
-            <p>${item.price}</p>
-        </div>`;
-    });
+const container = document.getElementById("products");
+
+container.innerHTML = "";
+
+data[cat].forEach(item=>{
+
+container.innerHTML += `
+
+<div class="card">
+
+<img src="${item.img}" onclick="openZoom('${item.img}')">
+
+<div class="card-info">
+
+<h4>${item.name}</h4>
+
+<p>${item.price}</p>
+
+</div>
+
+</div>
+
+`;
+
+});
+
 }
 
 /* ZOOM */
 function openZoom(img){
-    document.getElementById("zoomModal").style.display="flex";
-    document.getElementById("zoomImg").src = img;
+
+document.getElementById("zoomModal").style.display="flex";
+
+document.getElementById("zoomImg").src = img;
+
 }
 
 function closeZoom(){
-    document.getElementById("zoomModal").style.display="none";
+
+document.getElementById("zoomModal").style.display="none";
+
 }
 
 /* DEFAULT */
 show('beef');
+
 </script>
 
 </body>
