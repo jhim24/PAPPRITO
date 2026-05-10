@@ -729,6 +729,127 @@ font-size:10px;
 line-height:1.4;
 }
 }
+    /* TEAM SECTION */
+.team-section{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:25px;
+padding:40px 20px;
+}
+
+/* FLIP CARD */
+.flip-card{
+background:transparent;
+height:380px;
+perspective:1000px;
+}
+
+.flip-card-inner{
+position:relative;
+width:100%;
+height:100%;
+transition:transform 0.8s;
+transform-style:preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner{
+transform:rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back{
+position:absolute;
+width:100%;
+height:100%;
+backface-visibility:hidden;
+
+border-radius:20px;
+overflow:hidden;
+
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+
+padding:25px;
+text-align:center;
+
+box-shadow:0 5px 20px rgba(0,0,0,0.3);
+}
+
+/* FRONT */
+.flip-card-front{
+background:white;
+color:black;
+}
+
+.flip-card-front img{
+width:140px;
+height:140px;
+border-radius:50%;
+object-fit:cover;
+border:5px solid #ffcc00;
+margin:15px 0;
+}
+
+.flip-card-front h3{
+font-size:26px;
+}
+
+/* ROLE TOP */
+.top-role{
+position:absolute;
+top:18px;
+
+background:#d71920;
+color:white;
+
+padding:8px 16px;
+border-radius:30px;
+
+font-size:14px;
+font-weight:bold;
+}
+
+/* BACK */
+.flip-card-back{
+background:linear-gradient(180deg,#d71920,#111);
+color:white;
+transform:rotateY(180deg);
+}
+
+.flip-card-back h2{
+margin-bottom:15px;
+color:#ffcc00;
+}
+
+.flip-card-back p{
+line-height:1.7;
+color:#eee;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+.team-section{
+grid-template-columns:1fr;
+padding:20px 15px;
+}
+
+.flip-card{
+height:340px;
+}
+
+.flip-card-front h3{
+font-size:22px;
+}
+
+.top-role{
+font-size:12px;
+padding:6px 14px;
+}
+
+}
 </style>
 </head>
 
@@ -882,59 +1003,94 @@ Private vehicles may pass through Aguinaldo Highway or CALAX route for faster tr
 </p>
 
 </div>
-<!-- OUR TEAM -->
+<!-- TEAM SECTION -->
 <div class="team-section">
 
-<!-- LEFT CEO -->
-<div class="team-left">
+<!-- CEO -->
+<div class="flip-card">
+<div class="flip-card-inner">
 
-<h2>OUR TEAM</h2>
+<!-- FRONT -->
+<div class="flip-card-front">
 
-<img src="ceo.jpg" class="ceo-img">
+<p class="top-role">CEO / Founder</p>
+
+<img src="ceo.jpg">
 
 <h3>CEO NAME</h3>
 
-<p class="position">CEO / Founder</p>
+</div>
 
-<p class="team-desc">
+<!-- BACK -->
+<div class="flip-card-back">
+
+<h2>ABOUT</h2>
+
+<p>
 Founder of PAPPRITO with passion for Filipino food and business innovation.
 </p>
 
 </div>
 
-<!-- RIGHT PARTNERS -->
-<div class="team-right">
+</div>
+</div>
 
-<div class="partner-card">
+<!-- PARTNER 1 -->
+<div class="flip-card">
+<div class="flip-card-inner">
+
+<!-- FRONT -->
+<div class="flip-card-front">
+
+<p class="top-role">Managing Partner</p>
 
 <img src="partner01.jpg">
 
-<div>
 <h3>PARTNER NAME</h3>
-<p>Managing Partner</p>
-
-<span>
-Handles operations and business management of PAPPRITO.
-</span>
-</div>
 
 </div>
 
-<div class="partner-card">
+<!-- BACK -->
+<div class="flip-card-back">
+
+<h2>INFO</h2>
+
+<p>
+Managing operations and business growth of PAPPRITO.
+</p>
+
+</div>
+
+</div>
+</div>
+
+<!-- PARTNER 2 -->
+<div class="flip-card">
+<div class="flip-card-inner">
+
+<!-- FRONT -->
+<div class="flip-card-front">
+
+<p class="top-role">Business Partner</p>
 
 <img src="partner02.jpg">
 
-<div>
 <h3>PARTNER NAME</h3>
-<p>Business Partner</p>
-
-<span>
-Supports marketing and customer experience development.
-</span>
-</div>
 
 </div>
 
+<!-- BACK -->
+<div class="flip-card-back">
+
+<h2>INFO</h2>
+
+<p>
+Supporting marketing and customer experience development.
+</p>
+
+</div>
+
+</div>
 </div>
 
 </div>
