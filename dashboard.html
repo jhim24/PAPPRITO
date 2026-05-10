@@ -3,14 +3,11 @@
 <head>
 
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>PAPPRITO DASHBOARD</title>
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 
 <style>
@@ -19,13 +16,10 @@ content="width=device-width, initial-scale=1.0">
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial,sans-serif;
+font-family:'Segoe UI',sans-serif;
 }
 
-/* ===== BODY ===== */
 body{
-margin:0;
-font-family:'Segoe UI',sans-serif;
 background:
 linear-gradient(
 135deg,
@@ -35,11 +29,79 @@ linear-gradient(
 );
 color:white;
 display:flex;
-min-height:100vh;
+height:100vh;
 overflow:hidden;
 }
 
-/* ===== SIDEBAR ===== */
+/* LOGIN */
+.login-page{
+position:fixed;
+inset:0;
+background:
+linear-gradient(
+135deg,
+#020617,
+#071226,
+#0f172a
+);
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:99999;
+}
+
+.login-box{
+width:340px;
+background:
+rgba(255,255,255,0.05);
+padding:35px;
+border-radius:25px;
+backdrop-filter:blur(12px);
+border:
+1px solid rgba(255,255,255,0.08);
+box-shadow:
+0 15px 35px rgba(0,0,0,0.35);
+}
+
+.login-box h2{
+margin-bottom:20px;
+text-align:center;
+color:#ffcc00;
+}
+
+.login-box input{
+width:100%;
+padding:14px;
+border:none;
+border-radius:14px;
+background:#111827;
+color:white;
+margin-bottom:15px;
+outline:none;
+}
+
+.login-box button{
+width:100%;
+padding:14px;
+border:none;
+border-radius:14px;
+background:
+linear-gradient(
+135deg,
+#ffcc00,
+#f59e0b
+);
+font-weight:bold;
+cursor:pointer;
+}
+
+#errorMsg{
+margin-top:10px;
+text-align:center;
+color:#ff6b81;
+}
+
+/* SIDEBAR */
 .sidebar{
 width:240px;
 background:
@@ -55,45 +117,29 @@ flex-direction:column;
 justify-content:space-between;
 border-right:
 1px solid rgba(255,255,255,0.08);
-box-shadow:
-5px 0 20px rgba(0,0,0,0.3);
 }
 
-/* ===== LOGO ===== */
 .logo{
-font-size:20px;
+font-size:26px;
+font-weight:bold;
+color:#ffcc00;
+margin-bottom:30px;
+}
 
-/* ===== MENU ===== */
 .menu{
 list-style:none;
-padding:0;
-margin:0;
 }
 
 .menu li{
-padding:16px 18px;
+padding:15px;
 margin-bottom:10px;
 border-radius:16px;
 cursor:pointer;
-font-size:15px;
 transition:0.3s;
-display:flex;
-align-items:center;
-gap:12px;
-color:#ddd;
+font-size:14px;
 }
 
-.menu li:hover{
-background:
-linear-gradient(
-135deg,
-#111827,
-#1e293b
-);
-transform:translateX(5px);
-color:white;
-}
-
+.menu li:hover,
 .menu li.active{
 background:
 linear-gradient(
@@ -101,21 +147,17 @@ linear-gradient(
 #111827,
 #1e293b
 );
-border:
-1px solid rgba(255,204,0,0.25);
-box-shadow:
-0 0 15px rgba(255,204,0,0.1);
 color:#ffcc00;
 }
 
-/* ===== MAIN ===== */
+/* MAIN */
 .main{
 flex:1;
 padding:25px;
 overflow-y:auto;
 }
 
-/* ===== TOPBAR ===== */
+/* TOPBAR */
 .topbar{
 display:flex;
 justify-content:space-between;
@@ -124,56 +166,49 @@ margin-bottom:25px;
 }
 
 .topbar h1{
-font-size:44px;
-margin:0;
-font-weight:700;
+font-size:40px;
 }
 
 .top-right{
 display:flex;
-gap:15px;
-align-items:center;
+gap:10px;
 }
 
 .top-box{
+padding:12px 18px;
 background:
 rgba(255,255,255,0.05);
-padding:12px 18px;
-border-radius:18px;
+border-radius:15px;
 border:
 1px solid rgba(255,255,255,0.08);
 }
 
-/* ===== DASHBOARD GRID ===== */
+/* DASHBOARD */
 .dashboard-grid{
 display:grid;
 grid-template-columns:
-repeat(auto-fit,minmax(240px,1fr));
+repeat(auto-fit,minmax(220px,1fr));
 gap:18px;
 margin-bottom:25px;
 }
 
-/* ===== CARD ===== */
 .card{
-padding:22px;
-border-radius:22px;
-position:relative;
-overflow:hidden;
+padding:25px;
+border-radius:24px;
 box-shadow:
-0 10px 25px rgba(0,0,0,0.3);
-border:
-1px solid rgba(255,255,255,0.08);
+0 10px 30px rgba(0,0,0,0.3);
 }
 
 .card h3{
-margin:0;
 font-size:16px;
-color:white;
+margin-bottom:10px;
 }
 
 .card p{
-font-size:34px;
-/* COLORS */
+font-size:36px;
+font-weight:bold;
+}
+
 .sales{
 background:
 linear-gradient(
@@ -210,7 +245,7 @@ linear-gradient(
 );
 }
 
-/* ===== LIVE ORDERS ===== */
+/* LIVE ORDERS */
 .orders-section{
 background:
 rgba(255,255,255,0.04);
@@ -218,23 +253,20 @@ padding:25px;
 border-radius:24px;
 border:
 1px solid rgba(255,255,255,0.08);
-box-shadow:
-0 10px 30px rgba(0,0,0,0.25);
+overflow-x:auto;
 }
 
-/* ===== TABLE ===== */
 .order-table{
 width:100%;
 border-collapse:collapse;
 margin-top:20px;
+min-width:1100px;
 }
 
 .order-table th{
-background:
-rgba(255,255,255,0.05);
 padding:14px;
-font-size:13px;
 color:#ffcc00;
+font-size:13px;
 text-align:left;
 border-bottom:
 1px solid rgba(255,255,255,0.08);
@@ -245,16 +277,14 @@ padding:14px;
 font-size:13px;
 border-bottom:
 1px solid rgba(255,255,255,0.05);
-color:#eee;
 }
 
-/* ===== STATUS ===== */
+/* STATUS */
 .status{
-padding:6px 14px;
-border-radius:30px;
+padding:6px 12px;
+border-radius:20px;
 font-size:11px;
 font-weight:bold;
-display:inline-block;
 }
 
 .new{
@@ -273,38 +303,26 @@ background:#3b82f6;
 background:#10b981;
 }
 
-/* ===== ACTION BUTTONS ===== */
+/* ACTION BUTTONS */
 .action-buttons{
 display:flex;
-gap:6px;
+gap:5px;
 overflow-x:auto;
 white-space:nowrap;
 }
 
-.action-buttons::-webkit-scrollbar{
-height:4px;
-}
-
-.action-buttons::-webkit-scrollbar-thumb{
-background:#555;
-border-radius:20px;
-}
-
-/* ===== BUTTONS ===== */
 .accept-btn,
 .preparing-btn,
 .ready-btn,
 .done-btn,
 .delete-btn{
-
 border:none;
 padding:7px 10px;
 border-radius:12px;
 font-size:11px;
-cursor:pointer;
 font-weight:bold;
 color:white;
-transition:0.3s;
+cursor:pointer;
 }
 
 .accept-btn{
@@ -327,118 +345,7 @@ background:#64748b;
 background:#ef4444;
 }
 
-.accept-btn:hover,
-.preparing-btn:hover,
-.ready-btn:hover,
-.done-btn:hover,
-.delete-btn:hover{
-transform:scale(1.05);
-opacity:0.9;
-}
-/* ===== LOGIN ===== */
-.login-page{
-
-position:fixed;
-inset:0;
-
-background:
-linear-gradient(
-135deg,
-#020617,
-#071226,
-#0f172a
-);
-
-display:flex;
-justify-content:center;
-align-items:center;
-
-z-index:99999;
-
-}
-
-.login-box{
-
-width:340px;
-
-background:
-rgba(255,255,255,0.05);
-
-padding:35px;
-
-border-radius:25px;
-
-backdrop-filter:blur(12px);
-
-border:
-1px solid rgba(255,255,255,0.08);
-
-box-shadow:
-0 15px 35px rgba(0,0,0,0.35);
-
-}
-
-.login-box h2{
-
-margin-bottom:20px;
-text-align:center;
-color:#ffcc00;
-
-}
-
-.login-box input{
-
-width:100%;
-
-padding:14px;
-
-border:none;
-
-border-radius:14px;
-
-background:#111827;
-
-color:white;
-
-margin-bottom:15px;
-
-outline:none;
-
-}
-
-.login-box button{
-
-width:100%;
-
-padding:14px;
-
-border:none;
-
-border-radius:14px;
-
-background:
-linear-gradient(
-135deg,
-#ffcc00,
-#f59e0b
-);
-
-font-weight:bold;
-
-cursor:pointer;
-
-}
-
-#errorMsg{
-
-margin-top:10px;
-
-text-align:center;
-
-color:#ff6b81;
-
-}
-/* ===== MOBILE ===== */
+/* MOBILE */
 @media(max-width:768px){
 
 body{
@@ -446,13 +353,11 @@ flex-direction:column;
 overflow:auto;
 }
 
-/* SIDEBAR */
 .sidebar{
 width:100%;
 padding:12px;
 }
 
-/* MENU */
 .menu{
 display:flex;
 overflow-x:auto;
@@ -464,12 +369,10 @@ white-space:nowrap;
 margin-bottom:0;
 }
 
-/* MAIN */
 .main{
 padding:15px;
 }
 
-/* TOPBAR */
 .topbar{
 flex-direction:column;
 align-items:flex-start;
@@ -480,16 +383,10 @@ gap:10px;
 font-size:28px;
 }
 
-/* DASHBOARD */
 .dashboard-grid{
 display:flex;
 overflow-x:auto;
 gap:12px;
-padding-bottom:5px;
-}
-
-.dashboard-grid::-webkit-scrollbar{
-display:none;
 }
 
 .card{
@@ -501,22 +398,15 @@ flex-shrink:0;
 font-size:30px;
 }
 
-/* TABLE */
-.orders-section{
-overflow-x:auto;
 }
 
-.order-table{
-min-width:900px;
-}
-
-}
 </style>
 
 </head>
 
 <body>
-<!-- LOGIN SCREEN -->
+
+<!-- LOGIN -->
 <div id="loginPage" class="login-page">
 
 <div class="login-box">
@@ -539,8 +429,10 @@ LOGIN
 </div>
 
 </div>
+
+<!-- DASHBOARD -->
 <div id="dashboardContent"
-style="display:none;">
+style="display:none;width:100%;display:flex;">
 
 <!-- SIDEBAR -->
 <div class="sidebar">
@@ -553,28 +445,27 @@ style="display:none;">
 
 <ul class="menu">
 
-<li class="active"
-onclick="showPage('dashboardPage')">
+<li class="active">
 🏠 Dashboard
 </li>
 
-<li onclick="showPage('ordersPage')">
+<li>
 📦 Live Orders
 </li>
 
-<li onclick="showPage('salesPage')">
+<li>
 💰 Sales
 </li>
 
-<li onclick="showPage('completedPage')">
+<li>
 ✅ Completed
 </li>
 
-<li onclick="showPage('reportsPage')">
+<li>
 📊 Reports
 </li>
 
-<li onclick="showPage('settingsPage')">
+<li>
 ⚙ Settings
 </li>
 
@@ -587,15 +478,19 @@ onclick="showPage('dashboardPage')">
 </button>
 
 </div>
+
 <!-- MAIN -->
 <div class="main">
 
-<!-- TOP -->
+<!-- TOPBAR -->
 <div class="topbar">
 
+<div>
 <h1>
 Dashboard Overview
 </h1>
+</div>
+
 <div class="top-right">
 
 <div class="top-box">
@@ -607,10 +502,10 @@ Dashboard Overview
 </div>
 
 </div>
+
 </div>
-<div id="dashboardPage">
-  
-<!-- DASHBOARD CARDS -->
+
+<!-- CARDS -->
 <div class="dashboard-grid">
 
 <div class="card sales">
@@ -634,14 +529,12 @@ Dashboard Overview
 </div>
 
 </div>
-</div>
-<!-- LIVE ORDERS -->
-<div id="ordersPage" style="display:none;">
 
+<!-- LIVE ORDERS -->
 <div class="orders-section">
 
 <h2>
-🧾 Live Orders
+📦 Live Orders
 </h2>
 
 <table class="order-table">
@@ -650,19 +543,14 @@ Dashboard Overview
 
 <tr>
 
-<th>Order #</th>
+<th>ORDER</th>
+<th>PRODUCT</th>
+<th>QTY</th>
+<th>AMOUNT</th>
+<th>STATUS</th>
+<th>TIME</th>
+<th>ACTIONS</th>
 
-<th>Product</th>
-
-<th>Qty</th>
-
-<th>Amount</th>
-
-<th>Status</th>
-
-<th>Time</th>
-  
-<th>Action</th>
 </tr>
 
 </thead>
@@ -676,11 +564,12 @@ Dashboard Overview
 </div>
 
 </div>
-  
+
 </div>
 
 <script>
- /* LOGIN */
+
+/* LOGIN */
 function login(){
 
 const pass =
@@ -703,18 +592,6 @@ document.getElementById("errorMsg")
 
 }
 
-/* PAGE SWITCH */
-function showPage(pageId){
-document.getElementById("dashboardPage")
-.style.display = "none";
-
-document.getElementById("ordersPage")
-.style.display = "none";
-
-document.getElementById(pageId)
-.style.display = "block";
-
-}
 /* FIREBASE */
 
 const firebaseConfig = {
@@ -751,9 +628,7 @@ firebase.database()
 table.innerHTML = "";
 
 let sales = 0;
-
 let totalOrders = 0;
-
 let completed = 0;
 
 snapshot.forEach(child=>{
@@ -768,9 +643,7 @@ totalOrders++;
 sales += Number(order.total);
 
 if(order.status === "DELIVERED"){
-
 completed++;
-
 }
 
 order.items.forEach(item=>{
@@ -797,10 +670,8 @@ ${item.name}
 
 <td>
 
-<span class="status ${order.status}">
-
+<span class="status new">
 ${order.status}
-
 </span>
 
 </td>
@@ -808,6 +679,7 @@ ${order.status}
 <td>
 ${order.createdAt}
 </td>
+
 <td>
 
 <div class="action-buttons">
@@ -859,6 +731,7 @@ DELETE
 </div>
 
 </td>
+
 </tr>
 
 `;
@@ -866,8 +739,6 @@ DELETE
 });
 
 });
-
-/* UPDATE DASHBOARD */
 
 document.getElementById("salesToday")
 .innerText = "₱" + sales;
@@ -882,18 +753,22 @@ document.getElementById("grossProfit")
 .innerText = "₱" + sales;
 
 });
+
+/* UPDATE STATUS */
 function updateStatus(orderKey,status){
 
 firebase.database()
 .ref("orders/" + orderKey)
 .update({
 
-status: status
+status:status
 
 });
 
 }
-  function deleteOrder(orderKey){
+
+/* DELETE */
+function deleteOrder(orderKey){
 
 if(confirm("Delete this order?")){
 
@@ -904,6 +779,7 @@ firebase.database()
 }
 
 }
+
 </script>
 
 </body>
