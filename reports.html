@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PAPPRITO REPORTS</title>
+
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:
+linear-gradient(
+135deg,
+#020617,
+#071226,
+#0f172a
+);
+color:white;
+display:flex;
+min-height:100vh;
+}
+
+/* SIDEBAR */
+.sidebar{
+width:230px;
+background:
+linear-gradient(
+180deg,
+#020617,
+#081226,
+#0f172a
+);
+padding:20px;
+border-right:
+1px solid rgba(255,255,255,0.08);
+}
+
+.logo{
+font-size:24px;
+font-weight:bold;
+color:#ffcc00;
+margin-bottom:30px;
+}
+
+.menu{
+list-style:none;
+}
+
+.menu li{
+padding:14px;
+margin-bottom:10px;
+border-radius:14px;
+cursor:pointer;
+transition:0.3s;
+font-size:14px;
+}
+
+.menu li:hover,
+.menu li.active{
+background:#111827;
+color:#ffcc00;
+}
+
+/* MAIN */
+.main{
+flex:1;
+padding:25px;
+overflow-y:auto;
+}
+
+.topbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:25px;
+}
+
+.topbar h1{
+font-size:36px;
+}
+
+/* CARDS */
+.cards{
+display:grid;
+grid-template-columns:
+repeat(auto-fit,minmax(220px,1fr));
+gap:18px;
+margin-bottom:25px;
+}
+
+.card{
+padding:22px;
+border-radius:22px;
+box-shadow:
+0 10px 25px rgba(0,0,0,0.3);
+}
+
+.card h3{
+font-size:15px;
+margin-bottom:10px;
+}
+
+.card p{
+font-size:32px;
+font-weight:bold;
+}
+
+.sales{
+background:
+linear-gradient(
+135deg,
+#22c55e,
+#15803d
+);
+}
+
+.orders{
+background:
+linear-gradient(
+135deg,
+#3b82f6,
+#1d4ed8
+);
+}
+
+.completed{
+background:
+linear-gradient(
+135deg,
+#f59e0b,
+#d97706
+);
+}
+
+.payments{
+background:
+linear-gradient(
+135deg,
+#8b5cf6,
+#6d28d9
+);
+}
+
+/* REPORT BOX */
+.report-box{
+background:
+rgba(255,255,255,0.04);
+padding:25px;
+border-radius:22px;
+margin-bottom:20px;
+border:
+1px solid rgba(255,255,255,0.08);
+}
+
+.report-box h2{
+margin-bottom:18px;
+font-size:20px;
+color:#ffcc00;
+}
+
+.report-item{
+padding:12px 0;
+border-bottom:
+1px solid rgba(255,255,255,0.05);
+
+display:flex;
+justify-content:space-between;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+body{
+flex-direction:column;
+}
+
+.sidebar{
+width:100%;
+overflow-x:auto;
+}
+
+.menu{
+display:flex;
+gap:8px;
+}
+
+.menu li{
+white-space:nowrap;
+margin-bottom:0;
+}
+
+.main{
+padding:15px;
+}
+
+.cards{
+display:flex;
+overflow-x:auto;
+}
+
+.card{
+min-width:220px;
+flex-shrink:0;
+}
+
+.topbar h1{
+font-size:28px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+
+<div class="logo">
+<i class="fa-solid fa-chart-line"></i>
+PAPPRITO
+</div>
+
+<ul class="menu">
+
+<li onclick="location.href='dashboard.html'">
+<i class="fa-solid fa-house"></i>
+Dashboard
+</li>
+
+<li class="active">
+<i class="fa-solid fa-chart-pie"></i>
+Reports
+</li>
+
+</ul>
+
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+<!-- TOPBAR -->
+<div class="topbar">
+
+<h1>
+📊 Reports Overview
+</h1>
+
+</div>
+
+<!-- CARDS -->
+<div class="cards">
+
+<div class="card sales">
+<h3>Total Sales</h3>
+<p id="totalSales">₱0</p>
+</div>
+
+<div class="card orders">
+<h3>Total Orders</h3>
+<p id="totalOrders">0</p>
+</div>
+
+<div class="card completed">
+<h3>Completed Orders</h3>
+<p id="completedOrders">0</p>
+</div>
+
+<div class="card payments">
+<h3>GCash Payments</h3>
+<p id="gcashTotal">₱0</p>
+</div>
+
+</div>
+
+<!-- BEST SELLERS -->
+<div class="report-box">
+
+<h2>
+🔥 Best Selling Products
+</h2>
+
+<div id="bestSellers"></div>
+
+</div>
+
+<!-- PAYMENT REPORT -->
+<div class="report-box">
+
+<h2>
+💳 Payment Summary
+</h2>
+
+<div id="paymentSummary"></div>
+
+</div>
+
+<!-- ORDER TYPES -->
+<div class="report-box">
+
+<h2>
+📦 Order Types
+</h2>
+
+<div id="orderTypes"></div>
+
+</div>
+
+</div>
+
+<script>
+
+/* FIREBASE */
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyAV9T5w_1azmPHIJcZpraXP06TItj7HEuA",
+
+authDomain: "papprito-orders.firebaseapp.com",
+
+databaseURL:
+"https://papprito-orders-default-rtdb.firebaseio.com",
+
+projectId: "papprito-orders",
+
+storageBucket:
+"papprito-orders.firebasestorage.app",
+
+messagingSenderId: "831941801424",
+
+appId:
+"1:831941801424:web:40a99cdfb312dac2d275d5"
+
+};
+
+firebase.initializeApp(firebaseConfig);
+
+/* DATA */
+
+let sales = 0;
+let totalOrders = 0;
+let completed = 0;
+let gcash = 0;
+
+let products = {};
+let payments = {};
+let types = {};
+
+firebase.database()
+.ref("orders")
+.on("value", snapshot=>{
+
+sales = 0;
+totalOrders = 0;
+completed = 0;
+gcash = 0;
+
+products = {};
+payments = {};
+types = {};
+
+snapshot.forEach(child=>{
+
+const order = child.val();
+
+totalOrders++;
+
+sales += Number(order.total);
+
+if(order.status === "DELIVERED"){
+completed++;
+}
+
+if(order.payment === "GCASH"){
+gcash += Number(order.total);
+}
+
+/* PRODUCTS */
+order.items.forEach(item=>{
+
+if(!products[item.name]){
+products[item.name] = 0;
+}
+
+products[item.name] += item.qty || 1;
+
+});
+
+/* PAYMENTS */
+if(!payments[order.payment]){
+payments[order.payment] = 0;
+}
+
+payments[order.payment] += Number(order.total);
+
+/* TYPES */
+if(!types[order.orderType]){
+types[order.orderType] = 0;
+}
+
+types[order.orderType]++;
+
+});
+
+/* UPDATE CARDS */
+
+document.getElementById("totalSales")
+.innerText = "₱" + sales;
+
+document.getElementById("totalOrders")
+.innerText = totalOrders;
+
+document.getElementById("completedOrders")
+.innerText = completed;
+
+document.getElementById("gcashTotal")
+.innerText = "₱" + gcash;
+
+/* BEST SELLERS */
+
+let bestHTML = "";
+
+Object.entries(products)
+.sort((a,b)=>b[1]-a[1])
+.forEach(([name,qty])=>{
+
+bestHTML += `
+
+<div class="report-item">
+
+<span>${name}</span>
+
+<strong>${qty} sold</strong>
+
+</div>
+
+`;
+
+});
+
+document.getElementById("bestSellers")
+.innerHTML = bestHTML;
+
+/* PAYMENT SUMMARY */
+
+let paymentHTML = "";
+
+Object.entries(payments)
+.forEach(([pay,total])=>{
+
+paymentHTML += `
+
+<div class="report-item">
+
+<span>${pay}</span>
+
+<strong>₱${total}</strong>
+
+</div>
+
+`;
+
+});
+
+document.getElementById("paymentSummary")
+.innerHTML = paymentHTML;
+
+/* ORDER TYPES */
+
+let typeHTML = "";
+
+Object.entries(types)
+.forEach(([type,count])=>{
+
+typeHTML += `
+
+<div class="report-item">
+
+<span>${type}</span>
+
+<strong>${count}</strong>
+
+</div>
+
+`;
+
+});
+
+document.getElementById("orderTypes")
+.innerHTML = typeHTML;
+
+});
+
+</script>
+
+</body>
+</html>
