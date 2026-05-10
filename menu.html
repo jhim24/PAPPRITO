@@ -380,7 +380,63 @@ body{
 <h3 id="cartTotal">
 Total: ₱0
 </h3>
+<input
+type="text"
+id="customerName"
+placeholder="Customer Name"
+style="
+width:100%;
+padding:12px;
+margin-top:15px;
+border:none;
+border-radius:10px;
+background:#222;
+color:white;
+">
 
+<input
+type="text"
+id="tableNumber"
+placeholder="Table Number"
+style="
+width:100%;
+padding:12px;
+margin-top:10px;
+border:none;
+border-radius:10px;
+background:#222;
+color:white;
+">
+
+<select
+id="paymentMethod"
+style="
+width:100%;
+padding:12px;
+margin-top:10px;
+border:none;
+border-radius:10px;
+background:#222;
+color:white;
+">
+
+<option value="CASH">
+💵 CASH
+</option>
+
+<option value="GCASH">
+📱 GCASH
+</option>
+
+<option value="MAYA">
+💳 MAYA
+</option>
+
+<option value="CARD">
+🏦 CARD
+</option>
+
+</select>
 <a href="#"
 onclick="sendOrder()"
 target="_blank"
@@ -635,14 +691,16 @@ document.getElementById("cartModal")
 /* SEND ORDER */
 function sendOrder(){
 
-if(cart.length === 0){
+const customer =
+document.getElementById("customerName").value;
 
-alert("Cart is empty!");
+if(customer === ""){
+
+alert("Enter customer name");
 
 return;
 
 }
-
 let total = 0;
 
 cart.forEach(item=>{
@@ -652,6 +710,15 @@ total += item.price;
 });
 
 const order = {
+
+customer:
+document.getElementById("customerName").value,
+
+table:
+document.getElementById("tableNumber").value,
+
+payment:
+document.getElementById("paymentMethod").value,
 
 items: cart,
 
