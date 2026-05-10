@@ -486,7 +486,71 @@ height:700px;
 
     box-shadow:0 0 5px rgba(0,0,0,0.5);
 }
-  
+    /* TEAM FLIP CARD */
+.flip-card{
+background:transparent;
+width:300px;
+height:350px;
+perspective:1000px;
+margin:auto;
+}
+
+.flip-card-inner{
+position:relative;
+width:100%;
+height:100%;
+transition:transform 0.8s;
+transform-style:preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner{
+transform:rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back{
+position:absolute;
+width:100%;
+height:100%;
+backface-visibility:hidden;
+
+border-radius:15px;
+overflow:hidden;
+
+box-shadow:0 5px 20px rgba(0,0,0,0.3);
+}
+
+/* FRONT */
+.flip-card-front{
+background:white;
+color:black;
+text-align:center;
+padding:20px;
+}
+
+.flip-card-front img{
+width:120px;
+height:140px;
+border-radius:20px;
+object-fit:cover;
+margin-top:20px;
+}
+
+/* BACK */
+.flip-card-back{
+background:#d71920;
+color:white;
+
+transform:rotateY(180deg);
+
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+
+text-align:center;
+padding:20px;
+}
     /* FACEBOOK FEED */
 .facebook-wrapper{
 width:100vw;
@@ -503,254 +567,164 @@ display:block;
 margin:0;
 padding:0;
 }
-  /* =========================
-   PREMIUM TEAM SECTION
-========================= */
+    /* TEAM SECTION */
+.team-section{
+display:grid;
+grid-template-columns:320px 1fr;
+gap:20px;
+padding:30px 15px;
+align-items:start;
+}
 
-.team-wrapper{
-padding:60px 20px;
-background:
-linear-gradient(rgba(0,0,0,.88),rgba(0,0,0,.92)),
-url('restaurant-bg.jpg');
-background-size:cover;
-background-position:center;
+/* LEFT */
+.team-left{
+background:linear-gradient(180deg,#d71920,#111);
+padding:30px 20px;
+border-radius:20px;
 text-align:center;
 }
 
-.team-title{
-font-size:65px;
-font-weight:800;
-margin-bottom:15px;
-font-family:Georgia,serif;
-text-shadow:0 0 15px rgba(255,255,255,.2);
+.team-left h2{
+font-size:40px;
+margin-bottom:20px;
 }
 
-.team-line{
-width:220px;
-height:4px;
-background:#ffcc00;
-margin:0 auto 50px;
-border-radius:10px;
-box-shadow:0 0 15px #ffcc00;
-}
-
-.ceo-top{
-display:flex;
-justify-content:center;
-margin-bottom:45px;
-}
-
-.partner-row{
-display:flex;
-justify-content:center;
-gap:30px;
-flex-wrap:wrap;
-}
-
-.team-card{
-width:320px;
-height:500px;
-perspective:1200px;
-
-transition:.4s ease;
-}
-    .team-card:hover{
-transform:translateY(-10px);
-}
-.team-card-inner{
-width:100%;
-height:100%;
-position:relative;
-
-transition:
-transform 1.2s cubic-bezier(.4,.2,.2,1);
-
-transform-style:preserve-3d;
-}
-.team-card:hover{
-transform:translateY(-10px);
-}
-.team-card:hover .team-card-inner{
-transform:rotateY(180deg);
-}
-
-.team-front,
-.team-back{
-position:absolute;
-width:100%;
-height:100%;
-backface-visibility:hidden;
-border-radius:25px;
-overflow:hidden;
-}
-
-.team-front{
-background:
-linear-gradient(180deg,#650000,#120000);
-
-border:2px solid rgba(255,0,0,.7);
-
-box-shadow:
-0 0 15px rgba(255,0,0,.3),
-0 0 30px rgba(255,215,0,.12);
-
-padding:20px;
-
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:flex-start;
-}
-
-.team-front img{
-width:100%;
-height:290px;
+.ceo-img{
+width:200px;
+height:200px;
+border-radius:50%;
 object-fit:cover;
-border-radius:20px;
-border:2px solid #ffcc00;
+border:5px solid #ffcc00;
 margin-bottom:20px;
 }
 
-.team-front h3{
-font-size:42px;
-font-weight:800;
-margin-bottom:8px;
-color:white;
-font-family:Georgia,serif;
+.team-left h3{
+font-size:28px;
+margin-bottom:5px;
 }
 
-.team-front p{
-font-size:24px;
-font-weight:700;
+.position{
 color:#ffcc00;
-margin-bottom:20px;
-}
-
-.flip-btn{
-margin-top:auto;
-font-size:30px;
+margin-bottom:15px;
 font-weight:bold;
-color:#ffcc00;
-display:flex;
-align-items:center;
-gap:10px;
 }
 
-.team-back{
-background:
-linear-gradient(180deg,#0f0f0f,#1a1a1a);
+.team-desc{
+line-height:1.8;
+color:#ddd;
+}
 
-border:2px solid #ffcc00;
-
-transform:rotateY(180deg);
-
+/* RIGHT */
+.team-right{
 display:flex;
 flex-direction:column;
-justify-content:center;
+gap:20px;
+}
+
+.partner-card{
+display:flex;
 align-items:center;
-
-padding:30px;
-
-box-shadow:
-0 0 20px rgba(255,215,0,.2);
+gap:20px;
+background:linear-gradient(90deg,#d71920,#5c0000);
+padding:20px;
+border-radius:20px;
 }
 
-.team-back h4{
-font-size:38px;
+.partner-card img{
+width:140px;
+height:140px;
+border-radius:50%;
+object-fit:cover;
+border:4px solid #ffcc00;
+}
+
+.partner-card h3{
+font-size:28px;
+margin-bottom:5px;
+}
+
+.partner-card p{
 color:#ffcc00;
-margin-bottom:20px;
+font-weight:bold;
+margin-bottom:10px;
 }
 
-.team-back span{
-font-size:20px;
-line-height:1.8;
-color:#f1f1f1;
+.partner-card span{
+color:white;
+line-height:1.7;
 }
 
-.ceo-card{
-transform:scale(1.08);
-z-index:2;
-}
-
+/* MOBILE */
 @media(max-width:768px){
 
-.team-title{
-font-size:38px;
-margin-bottom:10px;
+.team-section{
+grid-template-columns:120px 1fr;
+gap:10px;
+padding:15px 8px;
+align-items:start;
 }
 
-.team-line{
-width:140px;
-margin-bottom:25px;
+.team-left{
+padding:15px 10px;
+border-radius:15px;
 }
 
-/* CEO INLINE */
-.ceo-top{
-display:flex;
-justify-content:center;
-margin-bottom:15px;
-}
-
-/* PARTNERS INLINE */
-.partner-row{
-display:flex;
-justify-content:center;
-align-items:flex-start;
-gap:8px;
-flex-wrap:nowrap;
-}
-    
-/* ALL CARDS SAME SIZE */
-.ceo-card,
-.partner-row .team-card{
-width:31%;
-max-width:110px;
-height:240px;
-
-transform:none;
-flex-shrink:0;
-}
-
-/* ALL IMAGES */
-.team-front img{
-height:90px;
-border-radius:18px;
-}
-
-/* PARTNER IMAGE */
-.partner-row .team-front img{
-height:120px;
-}
-
-/* NAME */
-.team-front h3{
+.team-left h2{
 font-size:18px;
-}
-
-/* POSITION */
-.team-front p{
-font-size:13px;
 margin-bottom:10px;
 }
 
-/* BUTTON */
-.flip-btn{
+.ceo-img{
+width:80px;
+height:80px;
+margin-bottom:10px;
+border-width:3px;
+}
+
+.team-left h3{
 font-size:14px;
 }
 
-/* BACK */
-.team-back{
-padding:12px;
-}
-
-.team-back h4{
-font-size:18px;
-margin-bottom:8px;
-}
-
-.team-back span{
+.position{
 font-size:11px;
-line-height:1.5;
+}
+
+.team-desc{
+font-size:10px;
+line-height:1.4;
+}
+
+.team-right{
+gap:10px;
+}
+
+.partner-card{
+padding:10px;
+gap:10px;
+border-radius:15px;
+flex-direction:row;
+text-align:left;
+align-items:center;
+}
+
+.partner-card img{
+width:70px;
+height:70px;
+}
+
+.partner-card h3{
+font-size:14px;
+margin-bottom:3px;
+}
+
+.partner-card p{
+font-size:11px;
+margin-bottom:4px;
+}
+
+.partner-card span{
+font-size:10px;
+line-height:1.4;
 }
 }
 </style>
@@ -907,116 +881,56 @@ Private vehicles may pass through Aguinaldo Highway or CALAX route for faster tr
 
 </div>
 <!-- OUR TEAM -->
-<div class="team-wrapper">
+<div class="team-section">
 
-<h2 class="team-title">OUR TEAM</h2>
+<!-- LEFT CEO -->
+<div class="team-left">
 
-<div class="team-line"></div>
+<h2>OUR TEAM</h2>
 
-<!-- CEO -->
-<div class="ceo-top">
-
-<div class="team-card ceo-card">
-
-<div class="team-card-inner">
-
-<div class="team-front">
-
-<img src="ceo.jpg">
+<img src="ceo.jpg" class="ceo-img">
 
 <h3>CEO NAME</h3>
 
-<p>CEO / Founder</p>
+<p class="position">CEO / Founder</p>
 
-<div class="flip-btn">
-<i class="fa-solid fa-rotate"></i> FLIP
-</div>
-
-</div>
-
-<div class="team-back">
-
-<h4>ABOUT</h4>
-
-<span>
+<p class="team-desc">
 Founder of PAPPRITO with passion for Filipino food and business innovation.
-Leading the company with strong vision and dedication to Filipino cuisine.
-</span>
+</p>
 
 </div>
 
-</div>
-</div>
+<!-- RIGHT PARTNERS -->
+<div class="team-right">
 
-</div>
-
-<!-- PARTNERS -->
-<div class="partner-row">
-
-<!-- PARTNER 1 -->
-<div class="team-card">
-
-<div class="team-card-inner">
-
-<div class="team-front">
+<div class="partner-card">
 
 <img src="partner01.jpg">
 
-<h3>PARTNER</h3>
-
+<div>
+<h3>PARTNER NAME</h3>
 <p>Managing Partner</p>
-
-<div class="flip-btn">
-<i class="fa-solid fa-rotate"></i> FLIP
-</div>
-
-</div>
-
-<div class="team-back">
-
-<h4>ABOUT</h4>
 
 <span>
 Handles operations and business management of PAPPRITO.
-Focused on maintaining quality service and smooth operations.
 </span>
-
 </div>
 
 </div>
-</div>
 
-<!-- PARTNER 2 -->
-<div class="team-card">
-
-<div class="team-card-inner">
-
-<div class="team-front">
+<div class="partner-card">
 
 <img src="partner02.jpg">
 
-<h3>PARTNER</h3>
-
+<div>
+<h3>PARTNER NAME</h3>
 <p>Business Partner</p>
-
-<div class="flip-btn">
-<i class="fa-solid fa-rotate"></i> FLIP
-</div>
-
-</div>
-
-<div class="team-back">
-
-<h4>ABOUT</h4>
 
 <span>
 Supports marketing and customer experience development.
-Helping build stronger customer relationships and branding.
 </span>
-
 </div>
 
-</div>
 </div>
 
 </div>
