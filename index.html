@@ -1156,6 +1156,14 @@ document.addEventListener("mouseup", () => {
 function closeDYK(){
     document.getElementById("dykModal").style.display = "none";
 }
+    if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("service-worker.js")
+      .then(() => {
+        console.log("PWA Ready");
+      });
+  });
+}
 </script>
     
     <!-- 🔥 FLOATING ICON -->
