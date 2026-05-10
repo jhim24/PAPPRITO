@@ -231,7 +231,7 @@ body{
 }
 
 .cart-item{
-    padding:10px 0;
+    padding:12px 0;
     border-bottom:1px solid #333;
 }
 
@@ -270,6 +270,16 @@ body{
     border-radius:30px;
 
     cursor:pointer;
+}
+
+.remove-btn{
+    background:#ff3b3b;
+    border:none;
+    color:white;
+    padding:5px 10px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:12px;
 }
 
 /* MOBILE */
@@ -380,6 +390,7 @@ body{
 <h3 id="cartTotal">
 Total: ₱0
 </h3>
+
 <input
 type="text"
 id="customerName"
@@ -396,8 +407,8 @@ color:white;
 
 <input
 type="text"
-id="tableNumber"
-placeholder="Table Number"
+id="customerPhone"
+placeholder="Phone Number"
 style="
 width:100%;
 padding:12px;
@@ -407,10 +418,11 @@ border-radius:10px;
 background:#222;
 color:white;
 ">
+
 <input
 type="text"
-id="customerPhone"
-placeholder="Phone Number"
+id="tableNumber"
+placeholder="Table Number"
 style="
 width:100%;
 padding:12px;
@@ -450,30 +462,8 @@ color:white;
 resize:none;
 height:70px;
 "></textarea>
-    <select
-id="orderType"
-style="
-width:100%;
-padding:12px;
-margin-top:10px;
-border:none;
-border-radius:10px;
-background:#222;
-color:white;
-">
 
-<option value="DINE IN">
-🍽 DINE IN
-</option>
-
-<option value="TAKE OUT">
-🥡 TAKE OUT
-</option>
-
-<option value="DELIVERY">
-🚚 DELIVERY
-</option>
-        <select
+<select
 id="orderType"
 style="
 width:100%;
@@ -498,6 +488,7 @@ color:white;
 </option>
 
 </select>
+
 <select
 id="paymentMethod"
 style="
@@ -527,12 +518,12 @@ color:white;
 </option>
 
 </select>
+
 <a href="#"
 onclick="sendOrder()"
-target="_blank"
 class="checkout-btn">
 
-📩 ORDER VIA MESSENGER
+📩 PLACE ORDER
 
 </a>
 
@@ -546,10 +537,13 @@ Close
 </div>
 
 </div>
+
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
 <script>
+
 const firebaseConfig = {
 
 apiKey: "AIzaSyAV9T5w_1azmPHIJcZpraXP06TItj7HEuA",
@@ -574,6 +568,7 @@ appId:
 firebase.initializeApp(firebaseConfig);
 
 const db = firebase.database();
+
 const data = {
 
 beef:[
@@ -669,31 +664,19 @@ onclick="openZoom('${item.img}')">
 <p>${item.price}</p>
 
 <button class="cart-btn"
-
 onclick="addToCart(
-<div style="
-display:flex;
-justify-content:space-between;
-align-items:center;
-">
+'${item.name}',
+'${item.price}'
+)">
 
-<div>
+🛒 Add to Cart
 
-${item.name}
-
-<br>
-
-x${item.qty}
-
-</div>
-
-<div>
-
-₱${item.price * item.qty}
+</button>
 
 </div>
 
 </div>
+
 `;
 
 });
@@ -736,15 +719,6 @@ existing.qty += 1;
 
 }else{
 
-const existing =
-cart.find(item=>item.name === name);
-
-if(existing){
-
-existing.qty += 1;
-
-}else{
-
 cart.push({
 name:name,
 price:cleanPrice,
@@ -756,6 +730,15 @@ qty:1
 updateCart();
 
 alert(name + " added to cart!");
+
+}
+
+/* REMOVE */
+function removeItem(name){
+
+cart = cart.filter(item=>item.name !== name);
+
+updateCart();
 
 }
 
@@ -780,11 +763,38 @@ items.innerHTML += `
 
 <div class="cart-item">
 
+<div style="
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px;
+">
+
+<div>
+
 ${item.name}
+
+<br>
 
 x${item.qty}
 
-- ₱${item.price * item.qty}
+</div>
+
+<div>
+
+₱${item.price * item.qty}
+
+</div>
+
+<button
+class="remove-btn"
+onclick="removeItem('${item.name}')">
+
+✖
+
+</button>
+
+</div>
 
 </div>
 
@@ -813,8 +823,17 @@ document.getElementById("cartModal")
 .style.display="none";
 
 }
+
 /* SEND ORDER */
 function sendOrder(){
+
+if(cart.length === 0){
+
+alert("Cart is empty!");
+
+return;
+
+}
 
 const customer =
 document.getElementById("customerName").value;
@@ -826,7 +845,8 @@ alert("Enter customer name");
 return;
 
 }
-    const phone =
+
+const phone =
 document.getElementById("customerPhone").value;
 
 if(phone === ""){
@@ -836,15 +856,20 @@ alert("Enter phone number");
 return;
 
 }
+
 let total = 0;
+
+cart.forEach(item=>{
 
 total += item.price * item.qty;
 
 });
 
 const order = {
-orderType:
-document.getElementById("orderType").value,
+
+orderNumber:
+"PAP-" + Date.now(),
+
 customer:
 document.getElementById("customerName").value,
 
@@ -863,6 +888,9 @@ document.getElementById("tableNumber").value,
 payment:
 document.getElementById("paymentMethod").value,
 
+orderType:
+document.getElementById("orderType").value,
+
 items: cart,
 
 total: total,
@@ -871,11 +899,6 @@ status: "NEW",
 
 createdAt:
 new Date().toLocaleString()
-    orderType:
-document.getElementById("orderType").value,
-
-orderNumber:
-"PAP-" + Date.now(),
 
 };
 
@@ -893,9 +916,11 @@ updateCart();
 closeCart();
 
 }
+
 /* DEFAULT */
 show('beef');
 
 </script>
+
 </body>
 </html>
