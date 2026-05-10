@@ -3,13 +3,11 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
 <title>Track Order</title>
-
-<link rel="stylesheet"
-href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
@@ -24,6 +22,7 @@ font-family:'Segoe UI',sans-serif;
 }
 
 body{
+
 background:
 linear-gradient(
 135deg,
@@ -37,10 +36,13 @@ color:white;
 min-height:100vh;
 
 display:flex;
+
 justify-content:center;
+
 align-items:center;
 
 padding:20px;
+
 }
 
 .container{
@@ -63,9 +65,13 @@ border:
 }
 
 h1{
+
 text-align:center;
+
 margin-bottom:25px;
+
 color:#ffcc00;
+
 }
 
 input{
@@ -125,12 +131,6 @@ display:none;
 
 }
 
-.result h2{
-
-margin-bottom:15px;
-
-}
-
 .status{
 
 display:inline-block;
@@ -141,7 +141,7 @@ border-radius:30px;
 
 font-weight:bold;
 
-margin-top:10px;
+margin-top:15px;
 
 }
 
@@ -169,9 +169,12 @@ background:#8b5cf6;
 }
 
 .item{
+
 padding:10px 0;
+
 border-bottom:
 1px solid rgba(255,255,255,0.05);
+
 }
 
 </style>
@@ -276,6 +279,8 @@ result.innerHTML = `
 ${order.orderNumber}
 </h2>
 
+<br>
+
 <p>
 👤 ${order.customer}
 </p>
@@ -336,6 +341,26 @@ result.innerHTML = `
 }
 
 });
+
+}
+
+/* AUTO TRACK */
+
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+const orderParam =
+params.get("order");
+
+if(orderParam){
+
+document.getElementById(
+"trackInput"
+).value = orderParam;
+
+trackOrder();
 
 }
 
