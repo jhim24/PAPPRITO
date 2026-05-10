@@ -450,6 +450,29 @@ color:white;
 resize:none;
 height:70px;
 "></textarea>
+    <select
+id="orderType"
+style="
+width:100%;
+padding:12px;
+margin-top:10px;
+border:none;
+border-radius:10px;
+background:#222;
+color:white;
+">
+
+<option value="DINE IN">
+🍽 DINE IN
+</option>
+
+<option value="TAKE OUT">
+🥡 TAKE OUT
+</option>
+
+<option value="DELIVERY">
+🚚 DELIVERY
+</option>
 <select
 id="paymentMethod"
 style="
@@ -668,10 +691,22 @@ function addToCart(name,price){
 const cleanPrice =
 parseInt(price.replace(/[₱,]/g,"")) || 0;
 
+const existing =
+cart.find(item=>item.name === name);
+
+if(existing){
+
+existing.qty += 1;
+
+}else{
+
 cart.push({
 name:name,
-price:cleanPrice
+price:cleanPrice,
+qty:1
 });
+
+}
 
 updateCart();
 
@@ -694,14 +729,17 @@ let total = 0;
 
 cart.forEach(item=>{
 
-total += item.price;
+total += item.price * item.qty;
 
 items.innerHTML += `
 
 <div class="cart-item">
 
 ${item.name}
-- ₱${item.price}
+
+x${item.qty}
+
+- ₱${item.price * item.qty}
 
 </div>
 
@@ -789,6 +827,11 @@ status: "NEW",
 
 createdAt:
 new Date().toLocaleString()
+    orderType:
+document.getElementById("orderType").value,
+
+orderNumber:
+"PAP-" + Date.now(),
 
 };
 
