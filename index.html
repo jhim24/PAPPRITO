@@ -348,24 +348,26 @@ margin-left:6px;
     color:#ccc;
 }
 /* TEAM MOBILE */
-.events-container{
+.team-section{
 display:flex;
-flex-wrap:wrap;
-justify-content:center;
-gap:10px;
+flex-direction:column;
+gap:15px;
 }
 
-/* CEO FULL WIDTH */
-.flip-card:first-child{
+.team-section > .flip-card{
 width:100%;
-max-width:320px;
+height:320px;
 }
 
-/* PARTNERS LEFT RIGHT */
-.flip-card:nth-child(2),
-.flip-card:nth-child(3){
-width:48%;
-height:300px;
+.team-right{
+display:flex;
+flex-direction:column;
+gap:15px;
+}
+
+.partner-flip{
+width:100%;
+height:190px;
 }
 
 /* SMALLER IMAGE */
