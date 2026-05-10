@@ -684,30 +684,32 @@ width:140px;
 margin-bottom:25px;
 }
 
-/* CEO TOP */
+/* CEO INLINE */
 .ceo-top{
 display:flex;
 justify-content:center;
-margin-bottom:20px;
+margin-bottom:0;
 }
 
-/* PARTNERS ROW */
+/* ALL INLINE */
 .partner-row{
 display:flex;
 justify-content:center;
 align-items:flex-start;
-gap:12px;
+gap:10px;
 flex-wrap:nowrap;
 }
 
-/* CEO SAME SIZE */
-.ceo-card{
-width:48%;
-max-width:165px;
-height:300px;
+/* SAME SIZE ALL */
+.ceo-card,
+.partner-row .team-card{
+width:31%;
+max-width:110px;
+height:240px;
 
 transform:none;
 }
+    
 /* PARTNER CARDS */
 .partner-row .team-card{
 width:48%;
@@ -715,9 +717,10 @@ max-width:165px;
 height:300px;
 }
 
-/* CEO IMAGE SAME SIZE */
-.ceo-card .team-front img{
-height:120px;
+/* ALL IMAGES */
+.team-front img{
+height:90px;
+border-radius:18px;
 }
 
 /* PARTNER IMAGE */
