@@ -17,7 +17,31 @@ color:white;
 font-family:Arial;
 padding:20px;
 }
+/* DASHBOARD */
+.dashboard{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:12px;
+margin-bottom:20px;
+}
 
+.dash-box{
+background:#1a1a1a;
+padding:15px;
+border-radius:15px;
+border-left:5px solid #ffcc00;
+}
+
+.dash-box h3{
+font-size:14px;
+margin-bottom:8px;
+}
+
+.dash-box p{
+font-size:24px;
+font-weight:bold;
+color:#ffcc00;
+}
 h1{
 margin-bottom:20px;
 }
@@ -195,7 +219,29 @@ margin-top:8px;
 <h1>
 🍔 PAPPRITO LIVE ORDERS
 </h1>
+<div class="dashboard">
 
+<div class="dash-box">
+<h3>💰 Earnings Today</h3>
+<p id="earnings">₱0</p>
+</div>
+
+<div class="dash-box">
+<h3>📦 Total Orders</h3>
+<p id="totalOrders">0</p>
+</div>
+
+<div class="dash-box">
+<h3>✅ Completed</h3>
+<p id="completedOrders">0</p>
+</div>
+
+<div class="dash-box">
+<h3>📊 Sales History</h3>
+<p id="salesHistory">0</p>
+</div>
+
+</div>
 <div id="orders"></div>
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
@@ -237,10 +283,19 @@ firebase.database()
 document.getElementById("notifySound")
 .play();
 ordersDiv.innerHTML = "";
-
+let earningsToday = 0;
+let totalOrders = 0;
+let completedOrders = 0;
 snapshot.forEach(child=>{
 const orderId = child.key.slice(-5);
 const order = child.val();
+  totalOrders++;
+
+earningsToday += Number(order.total);
+
+if(order.status === "DELIVERED"){
+completedOrders++;
+}
 const orderKey = child.key;
 let rows = "";
 
@@ -373,7 +428,17 @@ DELETE
 </div>
 
 ` + ordersDiv.innerHTML;
+document.getElementById("earnings")
+.innerText = "₱" + earningsToday;
 
+document.getElementById("totalOrders")
+.innerText = totalOrders;
+
+document.getElementById("completedOrders")
+.innerText = completedOrders;
+
+document.getElementById("salesHistory")
+.innerText = totalOrders;
 });
 
 });
@@ -385,12 +450,15 @@ if(status === "DELIVERED"){
 
 firebase.database()
 .ref("orders/" + orderKey)
-.remove();
+.update({
+
+status:"DELIVERED"
+
+});
 
 return;
 
 }
-
 firebase.database()
 .ref("orders/" + orderKey)
 .update({
