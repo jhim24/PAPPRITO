@@ -880,160 +880,60 @@ Private vehicles may pass through Aguinaldo Highway or CALAX route for faster tr
 </p>
 
 </div>
-/* TEAM SECTION */
-.team-section{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-gap:20px;
-padding:30px 15px;
-}
+<!-- OUR TEAM -->
+<div class="team-section">
 
-/* CARD */
-.team-card{
-perspective:1000px;
-}
+<!-- LEFT CEO -->
+<div class="team-left">
 
-/* INNER */
-.team-card-inner{
-position:relative;
-width:100%;
-height:260px;
-transition:transform 0.8s;
-transform-style:preserve-3d;
-}
+<h2>OUR TEAM</h2>
 
-.team-card:hover .team-card-inner{
-transform:rotateY(180deg);
-}
+<img src="ceo.jpg" class="ceo-img">
 
-/* FRONT + BACK */
-.team-front,
-.team-back{
-position:absolute;
-width:100%;
-height:100%;
-backface-visibility:hidden;
+<h3>CEO NAME</h3>
 
-border-radius:20px;
-overflow:hidden;
+<p class="position">CEO / Founder</p>
 
-box-shadow:0 5px 20px rgba(0,0,0,0.3);
-}
+<p class="team-desc">
+Founder of PAPPRITO with passion for Filipino food and business innovation.
+</p>
 
-/* FRONT */
-.team-front{
-background:linear-gradient(90deg,#d71920,#5c0000);
-display:flex;
-align-items:center;
-padding:20px;
-gap:20px;
-}
+</div>
 
-/* IMAGE LEFT */
-.team-image img{
-width:130px;
-height:130px;
-border-radius:15px;
-object-fit:cover;
-border:4px solid #ffcc00;
-}
+<!-- RIGHT PARTNERS -->
+<div class="team-right">
 
-/* INFO RIGHT */
-.team-info{
-flex:1;
-color:white;
-}
+<div class="partner-card">
 
-.team-info h2{
-margin-bottom:10px;
-}
+<img src="partner01.jpg">
 
-.team-info h3{
-font-size:24px;
-margin-bottom:10px;
-}
+<div>
+<h3>PARTNER NAME</h3>
+<p>Managing Partner</p>
 
-.team-info p{
-line-height:1.7;
-color:#eee;
-}
+<span>
+Handles operations and business management of PAPPRITO.
+</span>
+</div>
 
-/* BACK */
-.team-back{
-background:#111;
-color:white;
-transform:rotateY(180deg);
+</div>
 
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
+<div class="partner-card">
 
-padding:25px;
-text-align:center;
-}
+<img src="partner02.jpg">
 
-.team-back h2{
-margin-bottom:15px;
-color:#ffcc00;
-}
+<div>
+<h3>PARTNER NAME</h3>
+<p>Business Partner</p>
 
-/* BOTTOM INFO */
-.team-bottom{
-text-align:center;
-margin-top:15px;
-}
+<span>
+Supports marketing and customer experience development.
+</span>
+</div>
 
-.team-bottom h3{
-font-size:22px;
-margin-bottom:5px;
-}
+</div>
 
-.team-bottom p{
-color:#ffcc00;
-font-weight:bold;
-}
-
-/* MOBILE */
-@media(max-width:768px){
-
-.team-front{
-flex-direction:row;
-padding:15px;
-gap:10px;
-}
-
-.team-image img{
-width:80px;
-height:80px;
-}
-
-.team-info h2{
-font-size:18px;
-}
-
-.team-info h3{
-font-size:16px;
-}
-
-.team-info p{
-font-size:12px;
-line-height:1.5;
-}
-
-.team-card-inner{
-height:220px;
-}
-
-.team-bottom h3{
-font-size:16px;
-}
-
-.team-bottom p{
-font-size:12px;
-}
-
-}
+</div>
 
 </div>
 <!-- SLIDER -->
