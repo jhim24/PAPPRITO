@@ -530,11 +530,144 @@ padding:4px 8px;
 }
 
 }
+  /* LOGIN */
+.login-page{
+
+position:fixed;
+
+inset:0;
+
+background:
+linear-gradient(
+135deg,
+#020617,
+#111827,
+#1e293b
+);
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+z-index:999999;
+
+}
+
+.login-box{
+
+background:
+rgba(255,255,255,0.05);
+
+backdrop-filter:blur(12px);
+
+padding:35px;
+
+border-radius:20px;
+
+width:320px;
+
+text-align:center;
+
+border:
+1px solid rgba(255,255,255,0.08);
+
+box-shadow:
+0 10px 30px rgba(0,0,0,0.35);
+
+}
+
+.login-box h2{
+
+margin-bottom:20px;
+
+color:#ffcc00;
+
+}
+
+.login-box input{
+
+width:100%;
+
+padding:12px;
+
+border:none;
+
+border-radius:12px;
+
+margin-bottom:15px;
+
+background:#1e293b;
+
+color:white;
+
+outline:none;
+
+}
+
+.login-box button{
+
+width:100%;
+
+padding:12px;
+
+border:none;
+
+border-radius:12px;
+
+background:
+linear-gradient(
+135deg,
+#ffcc00,
+#ffa502
+);
+
+font-weight:bold;
+
+cursor:pointer;
+
+}
+
+#errorMsg{
+
+margin-top:10px;
+
+color:#ff6b81;
+
+font-size:13px;
+
+}
 </style>
 
 </head>
 
 <body>
+<!-- LOGIN SCREEN -->
+<div id="loginPage" class="login-page">
+
+<div class="login-box">
+
+<h2>
+🔐 PAPPRITO LOGIN
+</h2>
+
+<input
+type="password"
+id="password"
+placeholder="Enter Password">
+
+<button onclick="login()">
+LOGIN
+</button>
+
+<p id="errorMsg"></p>
+
+</div>
+
+</div>
+<div id="dashboardContent"
+style="display:none;">
 
 <!-- SIDEBAR -->
 <div class="sidebar">
@@ -664,10 +797,33 @@ Dashboard Overview
 </div>
 
 </div>
+  
+</div>
 
 <script>
   function showPage(pageId){
+/* LOGIN */
+function login(){
 
+const pass =
+document.getElementById("password").value;
+
+if(pass === "papprito123"){
+
+document.getElementById("loginPage")
+.style.display = "none";
+
+document.getElementById("dashboardContent")
+.style.display = "flex";
+
+}else{
+
+document.getElementById("errorMsg")
+.innerText = "Wrong Password";
+
+}
+
+}
 document.getElementById("dashboardPage")
 .style.display = "none";
 
