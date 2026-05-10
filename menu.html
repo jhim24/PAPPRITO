@@ -907,7 +907,10 @@ firebase.database()
 .ref("orders")
 .push(order);
 
-alert("Order Sent Successfully!");
+alert(
+"Order Sent!\n\nTrack Number:\n" +
+order.orderNumber
+);
 
 cart = [];
 
