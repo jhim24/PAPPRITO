@@ -42,6 +42,16 @@ body{
     border-radius:8px;
 }
 
+#cartIcon{
+    margin-left:auto;
+    background:#ffcc00;
+    color:black;
+    padding:8px 14px;
+    border-radius:10px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
 /* LAYOUT */
 .container{
     display:flex;
@@ -135,6 +145,34 @@ body{
     font-weight:bold;
 }
 
+/* CART BUTTON */
+.cart-btn{
+    width:90%;
+    margin:12px auto 15px;
+    display:block;
+
+    background:linear-gradient(45deg,#ffcc00,#ff3b3b);
+    color:white;
+
+    border:none;
+    padding:10px;
+
+    border-radius:30px;
+
+    font-weight:bold;
+    cursor:pointer;
+
+    transition:0.3s;
+}
+
+.cart-btn:hover{
+    transform:scale(1.05);
+
+    box-shadow:
+    0 0 10px #ffcc00,
+    0 0 20px #ff0000;
+}
+
 /* ZOOM */
 .zoom-modal{
     display:none;
@@ -158,6 +196,79 @@ body{
     right:20px;
     color:white;
     font-size:30px;
+    cursor:pointer;
+}
+
+/* CART MODAL */
+.cart-modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.7);
+
+    justify-content:center;
+    align-items:center;
+
+    z-index:999999;
+}
+
+.cart-content{
+    background:#1a1a1a;
+    width:90%;
+    max-width:420px;
+
+    padding:20px;
+
+    border-radius:15px;
+
+    max-height:80vh;
+    overflow-y:auto;
+}
+
+.cart-content h2{
+    margin-bottom:15px;
+    text-align:center;
+}
+
+.cart-item{
+    padding:10px 0;
+    border-bottom:1px solid #333;
+}
+
+.checkout-btn{
+    display:block;
+
+    margin-top:20px;
+
+    background:#0084ff;
+    color:white;
+
+    text-align:center;
+
+    padding:12px;
+
+    border-radius:30px;
+
+    text-decoration:none;
+
+    font-weight:bold;
+}
+
+.close-cart{
+    margin-top:10px;
+
+    width:100%;
+
+    padding:10px;
+
+    background:#ff3b3b;
+
+    border:none;
+
+    color:white;
+
+    border-radius:30px;
+
     cursor:pointer;
 }
 
@@ -214,6 +325,10 @@ body{
 
 <h2>MENU</h2>
 
+<div id="cartIcon">
+🛒 Cart (<span id="cartCount">0</span>)
+</div>
+
 </div>
 
 <div class="container">
@@ -251,6 +366,40 @@ body{
 
 </div>
 
+<!-- CART MODAL -->
+<div id="cartModal" class="cart-modal">
+
+<div class="cart-content">
+
+<h2>
+🛒 Your Cart
+</h2>
+
+<div id="cartItems"></div>
+
+<h3 id="cartTotal">
+Total: ₱0
+</h3>
+
+<a href="https://m.me/papprito"
+target="_blank"
+class="checkout-btn">
+
+📩 ORDER VIA MESSENGER
+
+</a>
+
+<button class="close-cart"
+onclick="closeCart()">
+
+Close
+
+</button>
+
+</div>
+
+</div>
+
 <script>
 
 const data = {
@@ -264,8 +413,7 @@ beef:[
 pork:[
 {name:"Lechon Kawali",price:"₱395",img:"lechon.jpg"},
 {name:"Pork Sisig",price:"₱315",img:"sisig.jpg"},
-{name:"Lumpiang Shanghai",price:"₱235",img:"lumpia.jpg"},
-{name:"Coming Soon",price:"Soon",img:"no-image.jpg"}
+{name:"Lumpiang Shanghai",price:"₱235",img:"lumpia.jpg"}
 ],
 
 chicken:[
@@ -275,50 +423,31 @@ chicken:[
 
 seafood:[
 {name:"Crispy Bangusarap",price:"₱315",img:"bangus.jpg"},
-{name:"Calamares",price:"₱305",img:"calamares.jpg"},
-{name:"Crispy Tawilis",price:"₱285",img:"tawilis.jpg"}
+{name:"Calamares",price:"₱305",img:"calamares.jpg"}
 ],
 
 veggies:[
 {name:"Chop Suey",price:"₱235",img:"chopsuey.jpg"},
-{name:"Tortang Talong",price:"₱192",img:"talong.jpg"},
-{name:"Coming Soon",price:"Soon",img:"no-image.jpg"},
-{name:"Coming Soon",price:"Soon",img:"no-image.jpg"}
+{name:"Tortang Talong",price:"₱192",img:"talong.jpg"}
 ],
 
 noodles:[
-{name:"Canton-Bihon",price:"₱278",img:"canton.jpg"},
 {name:"Palabok",price:"₱195",img:"palabok.jpg"},
-{name:"Beef Mami",price:"₱159",img:"mami.jpg"},
-{name:"Chicken Mami",price:"₱149",img:"mami2.jpg"}
+{name:"Beef Mami",price:"₱159",img:"mami.jpg"}
 ],
 
 sides:[
-{name:"PapShots",price:"₱72",img:"restaurant-hero.jpg"},
-{name:"Spicy Tofu",price:"₱65",img:"tofu.jpg"},
-{name:"Bola Bola Soup",price:"₱68",img:"soup.jpg"},
-{name:"Lumpiang Shanghai",price:"₱49",img:"lumpia.jpg"},
-{name:"Fried Banana",price:"₱35",img:"banana.jpg"},
 {name:"Garlic Rice",price:"₱46",img:"rice.jpg"},
 {name:"Plain Rice",price:"₱32",img:"rice.jpg"}
 ],
 
 drinks:[
 {name:"Softdrinks",price:"₱52",img:"drinks.jpg"},
-{name:"1.5L Softdrinks",price:"₱145",img:"drinks.jpg"},
-{name:"Iced Tea",price:"₱52",img:"icedtea.jpg"},
-{name:"Black Gulaman",price:"₱52",img:"gulaman.jpg"},
-{name:"Pineapple Juice",price:"₱62",img:"juice.jpg"},
-{name:"Calamansi Juice",price:"₱62",img:"juice.jpg"},
-{name:"Iced Coffee",price:"₱59",img:"coffee.jpg"},
-{name:"Hot Choco",price:"₱55",img:"choco.jpg"},
-{name:"Water",price:"₱35",img:"water.jpg"}
+{name:"Iced Tea",price:"₱52",img:"icedtea.jpg"}
 ],
 
 beers:[
 {name:"San Mig Light",price:"₱95",img:"sanmig-light.jpg"},
-{name:"San Miguel Pale",price:"₱95",img:"sanmig-pale.jpg"},
-{name:"San Miguel Flavored",price:"₱95",img:"sanmig-flavored.jpg"},
 {name:"Red Horse",price:"₱105",img:"redhorse.jpg"}
 ]
 
@@ -327,7 +456,8 @@ beers:[
 /* SHOW CATEGORY */
 function show(cat){
 
-const container = document.getElementById("products");
+const container =
+document.getElementById("products");
 
 container.innerHTML = "";
 
@@ -337,13 +467,25 @@ container.innerHTML += `
 
 <div class="card">
 
-<img src="${item.img}" onclick="openZoom('${item.img}')">
+<img src="${item.img}"
+onclick="openZoom('${item.img}')">
 
 <div class="card-info">
 
 <h4>${item.name}</h4>
 
 <p>${item.price}</p>
+
+<button class="cart-btn"
+
+onclick="addToCart(
+'${item.name}',
+'${item.price}'
+)">
+
+🛒 Add to Cart
+
+</button>
 
 </div>
 
@@ -358,15 +500,90 @@ container.innerHTML += `
 /* ZOOM */
 function openZoom(img){
 
-document.getElementById("zoomModal").style.display="flex";
+document.getElementById("zoomModal")
+.style.display="flex";
 
-document.getElementById("zoomImg").src = img;
+document.getElementById("zoomImg")
+.src = img;
 
 }
 
 function closeZoom(){
 
-document.getElementById("zoomModal").style.display="none";
+document.getElementById("zoomModal")
+.style.display="none";
+
+}
+
+/* CART */
+let cart = [];
+
+/* ADD */
+function addToCart(name,price){
+
+const cleanPrice =
+parseInt(price.replace(/[₱,]/g,"")) || 0;
+
+cart.push({
+name:name,
+price:cleanPrice
+});
+
+updateCart();
+
+alert(name + " added to cart!");
+
+}
+
+/* UPDATE */
+function updateCart(){
+
+document.getElementById("cartCount")
+.innerText = cart.length;
+
+const items =
+document.getElementById("cartItems");
+
+items.innerHTML = "";
+
+let total = 0;
+
+cart.forEach(item=>{
+
+total += item.price;
+
+items.innerHTML += `
+
+<div class="cart-item">
+
+${item.name}
+- ₱${item.price}
+
+</div>
+
+`;
+
+});
+
+document.getElementById("cartTotal")
+.innerText = "Total: ₱" + total;
+
+}
+
+/* OPEN CART */
+document.getElementById("cartIcon")
+.addEventListener("click",()=>{
+
+document.getElementById("cartModal")
+.style.display="flex";
+
+});
+
+/* CLOSE CART */
+function closeCart(){
+
+document.getElementById("cartModal")
+.style.display="none";
 
 }
 
