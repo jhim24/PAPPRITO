@@ -654,57 +654,45 @@ color:white;
 line-height:1.7;
 }
 
-/* MOBILE */
+/* MOBILE TEAM */
 @media(max-width:768px){
 
 .team-section{
-grid-template-columns:120px 1fr;
-gap:10px;
-padding:15px 8px;
-align-items:start;
+display:flex;
+flex-direction:column;
+gap:15px;
+padding:15px;
 }
 
-.team-left{
-padding:15px 10px;
-border-radius:15px;
+/* CEO */
+.team-section > .flip-card{
+width:100%;
+height:320px;
 }
 
-.team-left h2{
-font-size:18px;
-margin-bottom:10px;
-}
-
-.ceo-img{
-width:80px;
-height:80px;
-margin-bottom:10px;
-border-width:3px;
-}
-
-.team-left h3{
-font-size:14px;
-}
-
-.position{
-font-size:11px;
-}
-
-.team-desc{
-font-size:10px;
-line-height:1.4;
-}
-
+/* RIGHT */
 .team-right{
-gap:10px;
+display:flex;
+flex-direction:column;
+gap:15px;
 }
 
-.partner-card{
-padding:10px;
-gap:10px;
-border-radius:15px;
-flex-direction:row;
-text-align:left;
-align-items:center;
+/* PARTNERS */
+.partner-flip{
+width:100%;
+height:190px;
+}
+
+/* CEO CARD */
+.team-left{
+padding:20px;
+}
+
+/* IMAGES */
+.ceo-img{
+width:90px;
+height:90px;
+margin-bottom:10px;
 }
 
 .partner-card img{
@@ -712,19 +700,31 @@ width:70px;
 height:70px;
 }
 
+/* PARTNER */
+.partner-card{
+padding:15px;
+gap:15px;
+}
+
+/* TEXT */
+.team-left h3,
 .partner-card h3{
-font-size:14px;
-margin-bottom:3px;
+font-size:18px;
 }
 
+.position,
 .partner-card p{
-font-size:11px;
-margin-bottom:4px;
+font-size:13px;
 }
 
-.partner-card span{
-font-size:10px;
-line-height:1.4;
+.flip-card-back h3{
+font-size:18px;
+margin-bottom:10px;
+}
+
+.flip-card-back p{
+font-size:12px;
+line-height:1.5;
 }
 }
 </style>
