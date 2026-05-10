@@ -352,56 +352,241 @@ background:#ef4444;
 
 body{
 flex-direction:column;
+height:auto;
 overflow:auto;
 }
 
-.sidebar{
-width:100%;
-padding:12px;
+/* DASHBOARD CONTAINER */
+#dashboardContent{
+flex-direction:column;
 }
 
-.menu{
-display:flex;
+/* SIDEBAR */
+.sidebar{
+
+width:100%;
+
+padding:10px;
+
+flex-direction:row;
+
+align-items:center;
+
+justify-content:space-between;
+
 overflow-x:auto;
+
 gap:10px;
+
+position:sticky;
+
+top:0;
+
+z-index:999;
+
+background:#020617;
+
+}
+
+/* LOGO */
+.logo{
+
+font-size:18px;
+
+margin-bottom:0;
+
+white-space:nowrap;
+
+}
+
+/* MENU */
+.menu{
+
+display:flex;
+
+gap:8px;
+
+overflow-x:auto;
+
+flex:1;
+
+padding-bottom:3px;
+
+}
+
+.menu::-webkit-scrollbar{
+display:none;
 }
 
 .menu li{
+
 white-space:nowrap;
+
 margin-bottom:0;
+
+padding:10px 14px;
+
+font-size:12px;
+
+flex-shrink:0;
+
 }
 
+/* LOGOUT BUTTON */
+.sidebar .delete-btn{
+
+white-space:nowrap;
+
+padding:8px 12px;
+
+font-size:11px;
+
+flex-shrink:0;
+
+}
+
+/* MAIN */
 .main{
-padding:15px;
+
+padding:12px;
+
 }
 
+/* TOPBAR */
 .topbar{
+
 flex-direction:column;
+
 align-items:flex-start;
+
 gap:10px;
+
+margin-bottom:18px;
+
 }
 
 .topbar h1{
-font-size:28px;
+
+font-size:26px;
+
 }
 
-.dashboard-grid{
+/* TOP RIGHT */
+.top-right{
+
+width:100%;
+
 display:flex;
+
 overflow-x:auto;
+
+gap:8px;
+
+}
+
+.top-box{
+
+white-space:nowrap;
+
+font-size:12px;
+
+padding:10px 14px;
+
+}
+
+/* DASHBOARD CARDS */
+.dashboard-grid{
+
+display:flex;
+
+overflow-x:auto;
+
 gap:12px;
+
+padding-bottom:5px;
+
+}
+
+.dashboard-grid::-webkit-scrollbar{
+display:none;
 }
 
 .card{
+
 min-width:220px;
+
 flex-shrink:0;
+
+padding:20px;
+
+}
+
+.card h3{
+
+font-size:14px;
+
 }
 
 .card p{
-font-size:30px;
-}
+
+font-size:28px;
 
 }
 
+/* LIVE ORDERS */
+.orders-section{
+
+padding:15px;
+
+overflow-x:auto;
+
+}
+
+/* TABLE */
+.order-table{
+
+min-width:900px;
+
+}
+
+.order-table th{
+
+font-size:11px;
+
+padding:10px;
+
+}
+
+.order-table td{
+
+font-size:10px;
+
+padding:10px;
+
+}
+
+/* BUTTONS */
+.action-buttons{
+
+gap:4px;
+
+}
+
+.accept-btn,
+.preparing-btn,
+.ready-btn,
+.done-btn,
+.delete-btn{
+
+font-size:9px;
+
+padding:6px 8px;
+
+white-space:nowrap;
+
+}
+
+}
 </style>
 
 </head>
