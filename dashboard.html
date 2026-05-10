@@ -23,17 +23,46 @@ font-family:Arial,sans-serif;
 }
 
 body{
-background:#f4f6f9;
+
+background:
+linear-gradient(
+135deg,
+#0f172a,
+#111827,
+#1e293b
+);
+
 display:flex;
+
 min-height:100vh;
+
+color:white;
+
 }
 
 /* SIDEBAR */
 .sidebar{
+
 width:230px;
-background:#111827;
+
+background:
+linear-gradient(
+180deg,
+#020617,
+#0f172a,
+#111827
+);
+
 color:white;
+
 padding:20px;
+
+border-right:
+1px solid rgba(255,255,255,0.08);
+
+box-shadow:
+5px 0 20px rgba(0,0,0,0.25);
+
 }
 
 .logo{
@@ -56,7 +85,16 @@ transition:0.3s;
 }
 
 .menu li:hover{
-background:#1f2937;
+
+background:
+linear-gradient(
+135deg,
+#1e293b,
+#334155
+);
+
+transform:translateX(5px);
+
 }
 
 /* MAIN */
