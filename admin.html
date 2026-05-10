@@ -116,24 +116,79 @@ snapshot.forEach(child=>{
 
 const order = child.val();
 
-let itemsHTML = "";
+let rows = "";
 
 order.items.forEach(item=>{
 
-itemsHTML += `
+rows += `
 
-<div class="item">
+<tr>
 
-${item.name}
-- ₱${item.price}
+<td>${item.name}</td>
 
-</div>
+<td>1</td>
+
+<td>₱${item.price}</td>
+
+</tr>
 
 `;
 
 });
 
 ordersDiv.innerHTML = `
+
+<div class="order">
+
+<h3>
+🧾 Order
+</h3>
+
+<table
+width="100%"
+border="0"
+cellpadding="10"
+style="
+border-collapse:collapse;
+margin-top:15px;
+">
+
+<tr style="
+background:#d71920;
+color:white;
+">
+
+<th>Product</th>
+<th>Qty</th>
+<th>Amount</th>
+
+</tr>
+
+${rows}
+
+</table>
+
+<div class="total">
+
+Total: ₱${order.total}
+
+</div>
+
+<div class="time">
+
+${order.createdAt}
+
+</div>
+
+<div class="status">
+
+${order.status}
+
+</div>
+
+</div>
+
+` + ordersDiv.innerHTML;
 
 <div class="order">
 
