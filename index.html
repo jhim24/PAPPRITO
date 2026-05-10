@@ -616,12 +616,19 @@ width:320px;
 height:500px;
 perspective:1200px;
 }
-
+transition:.4s ease;
+}
+    .team-card:hover{
+transform:translateY(-10px);
+}
 .team-card-inner{
 width:100%;
 height:100%;
 position:relative;
-transition:transform .9s;
+
+transition:
+transform 1.2s cubic-bezier(.4,.2,.2,1);
+
 transform-style:preserve-3d;
 }
 
@@ -723,7 +730,8 @@ color:#f1f1f1;
 }
 
 .ceo-card{
-transform:scale(1.05);
+transform:scale(1.08);
+z-index:2;
 }
 
 @media(max-width:768px){
