@@ -473,6 +473,31 @@ color:white;
 <option value="DELIVERY">
 🚚 DELIVERY
 </option>
+        <select
+id="orderType"
+style="
+width:100%;
+padding:12px;
+margin-top:10px;
+border:none;
+border-radius:10px;
+background:#222;
+color:white;
+">
+
+<option value="DINE IN">
+🍽 DINE IN
+</option>
+
+<option value="TAKE OUT">
+🥡 TAKE OUT
+</option>
+
+<option value="DELIVERY">
+🚚 DELIVERY
+</option>
+
+</select>
 <select
 id="paymentMethod"
 style="
@@ -646,18 +671,29 @@ onclick="openZoom('${item.img}')">
 <button class="cart-btn"
 
 onclick="addToCart(
-'${item.name}',
-'${item.price}'
-)">
+<div style="
+display:flex;
+justify-content:space-between;
+align-items:center;
+">
 
-🛒 Add to Cart
+<div>
 
-</button>
+${item.name}
+
+<br>
+
+x${item.qty}
+
+</div>
+
+<div>
+
+₱${item.price * item.qty}
 
 </div>
 
 </div>
-
 `;
 
 });
@@ -690,6 +726,15 @@ function addToCart(name,price){
 
 const cleanPrice =
 parseInt(price.replace(/[₱,]/g,"")) || 0;
+
+const existing =
+cart.find(item=>item.name === name);
+
+if(existing){
+
+existing.qty += 1;
+
+}else{
 
 const existing =
 cart.find(item=>item.name === name);
@@ -793,14 +838,13 @@ return;
 }
 let total = 0;
 
-cart.forEach(item=>{
-
-total += item.price;
+total += item.price * item.qty;
 
 });
 
 const order = {
-
+orderType:
+document.getElementById("orderType").value,
 customer:
 document.getElementById("customerName").value,
 
