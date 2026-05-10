@@ -733,11 +733,83 @@ font-size:10px;
 line-height:1.4;
 }
 }
+    /* SPLASH SCREEN */
+#splash-screen{
+position:fixed;
+inset:0;
+
+background:linear-gradient(180deg,#d71920,#111);
+
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+
+z-index:999999;
+
+animation:fadeOut 1s ease forwards;
+animation-delay:3s;
+}
+
+/* LOGO */
+.splash-logo{
+width:150px;
+height:150px;
+
+border-radius:30px;
+
+object-fit:cover;
+
+margin-bottom:20px;
+
+box-shadow:
+0 0 20px #ffcc00,
+0 0 40px #ff0000;
+
+animation:pulse 2s infinite;
+}
+
+/* TITLE */
+#splash-screen h1{
+font-size:42px;
+letter-spacing:3px;
+margin-bottom:10px;
+}
+
+/* SLOGAN */
+#splash-screen p{
+font-size:18px;
+color:#ffcc00;
+}
+
+/* LOGO ANIMATION */
+@keyframes pulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.08);}
+100%{transform:scale(1);}
+}
+
+/* SPLASH HIDE */
+@keyframes fadeOut{
+to{
+opacity:0;
+visibility:hidden;
+}
+}
 </style>
 </head>
 
 <body>
+<!-- SPLASH SCREEN -->
+<div id="splash-screen">
 
+    <img src="papprito-logo.jpg" class="splash-logo">
+
+    <h1>PAPPRITO</h1>
+
+    <p>Lasap Ang Pinoy Sarap!</p>
+
+</div>
 <!-- NAVBAR -->
 <div class="navbar">
 <div class="logo-container">
