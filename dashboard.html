@@ -119,18 +119,30 @@ font-size:28px;
 /* DASHBOARD GRID */
 .dashboard-grid{
 
-display:grid;
+display:flex;
 
-grid-template-columns:
-repeat(auto-fit,minmax(220px,1fr));
-
-gap:15px;
-
-margin-bottom:20px;
+flex-direction:row;
 
 overflow-x:auto;
 
+overflow-y:hidden;
+
+-webkit-overflow-scrolling:touch;
+
+scrollbar-width:none;
+
+gap:10px;
+
 padding-bottom:5px;
+
+white-space:nowrap;
+
+}
+
+/* HIDE SCROLLBAR */
+.dashboard-grid::-webkit-scrollbar{
+
+display:none;
 
 }
 /* CARD */
