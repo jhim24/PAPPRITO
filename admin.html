@@ -168,11 +168,12 @@ document.getElementById("orders");
 firebase.database()
 .ref("orders")
 .on("value", snapshot=>{
-
+document.getElementById("notifySound")
+.play();
 ordersDiv.innerHTML = "";
 
 snapshot.forEach(child=>{
-
+const orderId = child.key.slice(-5);
 const order = child.val();
 
 let rows = "";
@@ -200,7 +201,7 @@ ordersDiv.innerHTML = `
 <div class="order">
 
 <h3>
-🧾 Order
+🧾 Order #${orderId}
 </h3>
 
 <table
@@ -254,6 +255,12 @@ ${order.status}
 });
 
 </script>
+<audio id="notifySound">
 
+<source
+src="https://www.soundjay.com/buttons/sounds/button-3.mp3"
+type="audio/mpeg">
+
+</audio>
 </body>
 </html>
