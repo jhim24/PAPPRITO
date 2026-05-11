@@ -226,7 +226,73 @@ border-bottom:
 display:flex;
 justify-content:space-between;
 }
+/* FILTER */
 
+.report-filter{
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+background:#111827;
+padding:20px;
+border-radius:18px;
+margin-bottom:20px;
+align-items:end;
+}
+
+.filter-box{
+display:flex;
+flex-direction:column;
+gap:5px;
+}
+
+.filter-box label{
+font-size:13px;
+color:#cbd5e1;
+}
+
+.filter-box input,
+.filter-box select{
+padding:10px;
+border:none;
+border-radius:10px;
+background:#1e293b;
+color:white;
+min-width:170px;
+}
+
+.report-filter button{
+padding:10px 20px;
+border:none;
+border-radius:12px;
+background:#22c55e;
+color:white;
+cursor:pointer;
+font-weight:bold;
+}
+
+/* TABLE */
+
+.sales-table{
+width:100%;
+border-collapse:collapse;
+margin-top:15px;
+}
+
+.sales-table th{
+background:#1d4ed8;
+padding:12px;
+text-align:left;
+}
+
+.sales-table td{
+padding:12px;
+border-bottom:
+1px solid rgba(255,255,255,0.08);
+}
+
+.sales-table tr:hover{
+background:rgba(255,255,255,0.05);
+}
 /* MOBILE */
 @media(max-width:768px){
 
@@ -355,6 +421,60 @@ cursor:pointer;
 </div>
 
 </div>
+  <!-- FILTER -->
+<div class="report-filter">
+
+<div class="filter-box">
+
+<label>From Date</label>
+<input type="date" id="fromDate">
+
+</div>
+
+<div class="filter-box">
+
+<label>To Date</label>
+<input type="date" id="toDate">
+
+</div>
+
+<div class="filter-box">
+
+<label>Payment</label>
+
+<select id="paymentFilter">
+
+<option value="">All</option>
+<option value="GCASH">GCASH</option>
+<option value="CASH">CASH</option>
+
+</select>
+
+</div>
+
+<div class="filter-box">
+
+<label>Status</label>
+
+<select id="statusFilter">
+
+<option value="">All</option>
+<option value="PENDING">PENDING</option>
+<option value="DELIVERED">DELIVERED</option>
+
+</select>
+
+</div>
+
+<button onclick="loadDailySales()">
+🔍 Preview
+</button>
+
+<button onclick="window.print()">
+🖨 Print
+</button>
+
+</div>
 <!-- CARDS -->
 <div class="cards">
 
@@ -397,7 +517,40 @@ cursor:pointer;
 
 </div>
 </div>
+<!-- DAILY SALES -->
+<div class="report-box">
 
+<h2>
+📊 Daily Sales Report
+</h2>
+
+<div style="overflow:auto;">
+
+<table class="sales-table">
+
+<thead>
+
+<tr>
+
+<th>Date</th>
+<th>Order ID</th>
+<th>Total</th>
+<th>Payment</th>
+<th>Status</th>
+
+</tr>
+
+</thead>
+
+<tbody id="dailySalesBody">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
 <!-- BEST SELLERS -->
 <div class="report-box">
 
@@ -710,6 +863,72 @@ document.getElementById("totalSales")
 
 document.getElementById("totalOrders")
 .innerText = orders;
+
+});
+
+}
+  function loadDailySales(){
+
+const fromDate =
+document.getElementById("fromDate").value;
+
+const toDate =
+document.getElementById("toDate").value;
+
+const payment =
+document.getElementById("paymentFilter").value;
+
+const status =
+document.getElementById("statusFilter").value;
+
+firebase.database()
+.ref("orders")
+.once("value", snapshot=>{
+
+let html = "";
+
+snapshot.forEach(child=>{
+
+const order = child.val();
+
+const orderDate =
+new Date(order.createdAt);
+
+const formatted =
+orderDate.toISOString().split("T")[0];
+
+if(
+(!fromDate || formatted >= fromDate) &&
+(!toDate || formatted <= toDate) &&
+(!payment || order.payment === payment) &&
+(!status || order.status === status)
+){
+
+html += `
+
+<tr>
+
+<td>${formatted}</td>
+
+<td>#${child.key.slice(-5)}</td>
+
+<td>₱${order.total}</td>
+
+<td>${order.payment}</td>
+
+<td>${order.status}</td>
+
+</tr>
+
+`;
+
+}
+
+});
+
+document.getElementById(
+"dailySalesBody"
+).innerHTML = html;
 
 });
 
