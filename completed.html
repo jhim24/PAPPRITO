@@ -3,6 +3,7 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
@@ -29,6 +30,7 @@ background:#0f172a;
 color:white;
 display:flex;
 min-height:100vh;
+overflow:hidden;
 }
 
 /* SIDEBAR */
@@ -37,6 +39,7 @@ min-height:100vh;
 width:230px;
 background:#020617;
 padding:20px;
+flex-shrink:0;
 }
 
 .logo{
@@ -69,7 +72,7 @@ color:#ffcc00;
 .main{
 flex:1;
 padding:25px;
-overflow-x:auto;
+overflow:auto;
 }
 
 h1{
@@ -77,20 +80,35 @@ margin-bottom:20px;
 font-size:40px;
 }
 
-/* TABLE */
+/* TABLE BOX */
 
 .table-box{
+
 background:#111827;
+
 border-radius:18px;
-overflow:hidden;
+
+overflow-x:auto;
+
+overflow-y:hidden;
+
+width:100%;
+
 box-shadow:
 0 10px 25px rgba(0,0,0,0.3);
+
 }
 
+/* TABLE */
+
 table{
+
 width:100%;
+
+min-width:1400px;
+
 border-collapse:collapse;
-min-width:1200px;
+
 }
 
 th{
@@ -100,12 +118,14 @@ color:#ffcc00;
 font-size:12px;
 border:1px solid rgba(255,255,255,0.08);
 text-align:left;
+white-space:nowrap;
 }
 
 td{
 padding:12px;
 font-size:13px;
 border:1px solid rgba(255,255,255,0.05);
+white-space:nowrap;
 }
 
 tr:hover{
@@ -113,12 +133,37 @@ background:
 rgba(255,255,255,0.03);
 }
 
+/* STATUS */
+
 .status{
+
 background:#22c55e;
+
 padding:6px 12px;
+
 border-radius:20px;
+
 font-size:11px;
+
 font-weight:bold;
+
+display:inline-block;
+
+}
+
+/* SCROLLBAR */
+
+.table-box::-webkit-scrollbar{
+height:10px;
+}
+
+.table-box::-webkit-scrollbar-track{
+background:#111827;
+}
+
+.table-box::-webkit-scrollbar-thumb{
+background:#334155;
+border-radius:20px;
 }
 
 /* MOBILE */
@@ -127,6 +172,7 @@ font-weight:bold;
 
 body{
 flex-direction:column;
+overflow:auto;
 }
 
 .sidebar{
@@ -151,6 +197,10 @@ td,
 th{
 font-size:11px;
 padding:8px;
+}
+
+.main{
+padding:15px;
 }
 
 }
