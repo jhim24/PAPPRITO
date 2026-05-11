@@ -189,7 +189,41 @@ transform:scale(1.08);
 box-shadow:
 0 0 10px #ffcc00,
 0 0 20px #ff0000;
+/* INSTALL BUTTON */
+.install-btn{
 
+margin-top:15px;
+
+background:
+rgba(255,255,255,0.15);
+
+backdrop-filter:blur(10px);
+
+border:2px solid white;
+
+color:white;
+
+padding:12px 28px;
+
+border-radius:40px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+transition:0.3s;
+
+}
+
+.install-btn:hover{
+
+background:white;
+
+color:black;
+
+transform:scale(1.05);
+
+}
 }
 /* SOUND BUTTON */
 .sound-btn{
@@ -1042,7 +1076,13 @@ class="video-btn">
 ORDER NOW
 
 </a>
+<button
+id="installBtn"
+class="install-btn">
 
+📲 INSTALL APP
+
+</button>
 </div>
 
 </div>
@@ -1526,6 +1566,51 @@ new Date().toLocaleString()
 console.log(
 "PWA USER TRACKED"
 );
+
+}
+
+});
+    /* PWA INSTALL BUTTON */
+
+let deferredPrompt;
+
+const installBtn =
+document.getElementById(
+"installBtn"
+);
+
+installBtn.style.display =
+"none";
+
+window.addEventListener(
+"beforeinstallprompt",
+(e)=>{
+
+e.preventDefault();
+
+deferredPrompt = e;
+
+installBtn.style.display =
+"inline-block";
+
+});
+
+installBtn.addEventListener(
+"click",
+async()=>{
+
+if(deferredPrompt){
+
+deferredPrompt.prompt();
+
+const {
+outcome
+} =
+await deferredPrompt.userChoice;
+
+console.log(outcome);
+
+deferredPrompt = null;
 
 }
 
