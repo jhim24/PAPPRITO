@@ -1579,9 +1579,6 @@ document.getElementById(
 "installBtn"
 );
 
-installBtn.style.display =
-"none";
-
 window.addEventListener(
 "beforeinstallprompt",
 (e)=>{
@@ -1599,18 +1596,29 @@ installBtn.addEventListener(
 "click",
 async()=>{
 
+/* ANDROID / DESKTOP */
 if(deferredPrompt){
 
 deferredPrompt.prompt();
 
-const {
-outcome
-} =
 await deferredPrompt.userChoice;
 
-console.log(outcome);
+}
 
-deferredPrompt = null;
+/* IPHONE */
+else{
+
+alert(
+
+`IPHONE INSTALL GUIDE
+
+1. Tap Share Button
+
+2. Tap "Add to Home Screen"
+
+3. Tap ADD`
+
+);
 
 }
 
