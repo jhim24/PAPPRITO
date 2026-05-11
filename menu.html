@@ -281,7 +281,63 @@ body{
     cursor:pointer;
     font-size:12px;
 }
+/* FLOATING CART */
 
+#floatingCart{
+
+position:fixed;
+
+bottom:15px;
+
+left:50%;
+
+transform:translateX(-50%);
+
+width:95%;
+
+max-width:500px;
+
+background:
+linear-gradient(
+45deg,
+#ffcc00,
+#ff3b3b
+);
+
+padding:15px 20px;
+
+border-radius:20px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+z-index:999999;
+
+box-shadow:
+0 10px 25px rgba(0,0,0,0.4);
+
+}
+
+#floatingCart button{
+
+background:white;
+
+color:black;
+
+border:none;
+
+padding:10px 18px;
+
+border-radius:12px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+}
 /* MOBILE */
 @media(max-width:768px){
 
@@ -389,7 +445,31 @@ color:white;
 <img id="zoomImg">
 
 </div>
+<!-- FLOATING CART BAR -->
 
+<div id="floatingCart">
+
+<div>
+
+🛒
+<span id="floatingCount">
+0
+</span>
+items
+
+</div>
+
+<div id="floatingTotal">
+₱0
+</div>
+
+<button onclick="openCart()">
+
+View Cart
+
+</button>
+
+</div>
 <!-- CART MODAL -->
 <div id="cartModal" class="cart-modal">
 
@@ -818,7 +898,13 @@ onclick="removeItem('${item.name}')">
 
 document.getElementById("cartTotal")
 .innerText = "Total: ₱" + total;
+document.getElementById(
+"floatingCount"
+).innerText = cart.length;
 
+document.getElementById(
+"floatingTotal"
+).innerText = "₱" + total;
 }
 
 /* OPEN CART */
@@ -829,7 +915,13 @@ document.getElementById("cartModal")
 .style.display="flex";
 
 });
+function openCart(){
 
+document.getElementById(
+"cartModal"
+).style.display = "flex";
+
+}
 /* CLOSE CART */
 function closeCart(){
 
