@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Inventory</title>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+<style>
+
+body{
+font-family:Segoe UI;
+background:#0f172a;
+color:white;
+padding:20px;
+}
+
+h1{
+margin-bottom:20px;
+}
+
+.form{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+margin-bottom:20px;
+}
+
+.form input{
+padding:12px;
+border:none;
+border-radius:10px;
+}
+
+.form button{
+padding:12px 20px;
+border:none;
+border-radius:10px;
+background:#22c55e;
+color:white;
+cursor:pointer;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+background:#111827;
+border-radius:12px;
+overflow:hidden;
+}
+
+th{
+background:#2563eb;
+padding:12px;
+text-align:left;
+}
+
+td{
+padding:12px;
+border-bottom:
+1px solid rgba(255,255,255,0.08);
+}
+
+.low{
+color:#ef4444;
+font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>
+📦 Product Inventory
+</h1>
+
+<div class="form">
+
+<input type="text"
+id="productName"
+placeholder="Product Name">
+
+<input type="number"
+id="productPrice"
+placeholder="Price">
+
+<input type="number"
+id="productStock"
+placeholder="Stock">
+
+<button onclick="addProduct()">
+Add Product
+</button>
+
+</div>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Product</th>
+<th>Price</th>
+<th>Stock</th>
+<th>Status</th>
+
+</tr>
+
+</thead>
+
+<tbody id="inventoryBody">
+
+</tbody>
+
+</table>
+
+<script>
+
+/* FIREBASE */
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyAV9T5w_1azmPHIJcZpraXP06TItj7HEuA",
+
+authDomain: "papprito-orders.firebaseapp.com",
+
+databaseURL:
+"https://papprito-orders-default-rtdb.firebaseio.com",
+
+projectId: "papprito-orders",
+
+storageBucket:
+"papprito-orders.firebasestorage.app",
+
+messagingSenderId: "831941801424",
+
+appId:
+"1:831941801424:web:40a99cdfb312dac2d275d5"
+
+};
+
+firebase.initializeApp(firebaseConfig);
+
+/* ADD PRODUCT */
+
+function addProduct(){
+
+const name =
+document.getElementById("productName").value;
+
+const price =
+document.getElementById("productPrice").value;
+
+const stock =
+document.getElementById("productStock").value;
+
+if(!name || !price || !stock){
+
+alert("Complete all fields");
+return;
+
+}
+
+firebase.database()
+.ref("products")
+.push({
+
+name,
+price,
+stock
+
+});
+
+document.getElementById(
+"productName"
+).value = "";
+
+document.getElementById(
+"productPrice"
+).value = "";
+
+document.getElementById(
+"productStock"
+).value = "";
+
+}
+
+/* LOAD PRODUCTS */
+
+firebase.database()
+.ref("products")
+.on("value", snapshot=>{
+
+let html = "";
+
+snapshot.forEach(child=>{
+
+const product = child.val();
+
+const lowStock =
+product.stock <= 5;
+
+html += `
+
+<tr>
+
+<td>${product.name}</td>
+
+<td>₱${product.price}</td>
+
+<td class="${
+lowStock ? 'low' : ''
+}">
+${product.stock}
+</td>
+
+<td>
+${
+lowStock
+? 'LOW STOCK'
+: 'AVAILABLE'
+}
+</td>
+
+</tr>
+
+`;
+
+});
+
+document.getElementById(
+"inventoryBody"
+).innerHTML = html;
+
+});
+
+</script>
+
+</body>
+</html>
