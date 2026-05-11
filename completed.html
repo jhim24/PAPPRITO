@@ -3,7 +3,8 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>PAPPRITO COMPLETED</title>
 
@@ -11,6 +12,7 @@
 href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 
 <style>
@@ -30,6 +32,7 @@ min-height:100vh;
 }
 
 /* SIDEBAR */
+
 .sidebar{
 width:230px;
 background:#020617;
@@ -62,6 +65,7 @@ color:#ffcc00;
 }
 
 /* MAIN */
+
 .main{
 flex:1;
 padding:25px;
@@ -70,38 +74,55 @@ overflow-x:auto;
 
 h1{
 margin-bottom:20px;
+font-size:40px;
 }
 
 /* TABLE */
+
+.table-box{
+background:#111827;
+border-radius:18px;
+overflow:hidden;
+box-shadow:
+0 10px 25px rgba(0,0,0,0.3);
+}
+
 table{
 width:100%;
 border-collapse:collapse;
-min-width:1100px;
-background:#111827;
+min-width:1200px;
 }
 
 th{
-padding:10px;
+padding:14px;
 background:#1e293b;
 color:#ffcc00;
 font-size:12px;
 border:1px solid rgba(255,255,255,0.08);
+text-align:left;
 }
 
 td{
-padding:8px;
-font-size:11px;
+padding:12px;
+font-size:13px;
 border:1px solid rgba(255,255,255,0.05);
 }
 
+tr:hover{
+background:
+rgba(255,255,255,0.03);
+}
+
 .status{
-background:#8b5cf6;
-padding:5px 10px;
+background:#22c55e;
+padding:6px 12px;
 border-radius:20px;
-font-size:10px;
+font-size:11px;
+font-weight:bold;
 }
 
 /* MOBILE */
+
 @media(max-width:768px){
 
 body{
@@ -122,6 +143,16 @@ gap:8px;
 white-space:nowrap;
 }
 
+h1{
+font-size:28px;
+}
+
+td,
+th{
+font-size:11px;
+padding:8px;
+}
+
 }
 
 </style>
@@ -131,28 +162,41 @@ white-space:nowrap;
 <body>
 
 <!-- SIDEBAR -->
+
 <div class="sidebar">
 
 <div class="logo">
+
 <i class="fa-solid fa-burger"></i>
+
 PAPPRITO
+
 </div>
 
 <ul class="menu">
 
 <li onclick="location.href='dashboard.html'">
+
 <i class="fa-solid fa-house"></i>
+
 Dashboard
+
 </li>
 
 <li onclick="location.href='reports.html'">
+
 <i class="fa-solid fa-chart-line"></i>
+
 Reports
+
 </li>
 
 <li class="active">
+
 <i class="fa-solid fa-circle-check"></i>
+
 Completed
+
 </li>
 
 </ul>
@@ -160,11 +204,14 @@ Completed
 </div>
 
 <!-- MAIN -->
+
 <div class="main">
 
 <h1>
 ✅ Completed Orders
 </h1>
+
+<div class="table-box">
 
 <table>
 
@@ -173,12 +220,23 @@ Completed
 <tr>
 
 <th>ORDER #</th>
+
 <th>CUSTOMER</th>
+
 <th>PHONE</th>
+
 <th>PRODUCT</th>
+
+<th>QTY</th>
+
 <th>PAYMENT</th>
+
 <th>TOTAL</th>
+
+<th>ORDER TYPE</th>
+
 <th>TIME</th>
+
 <th>STATUS</th>
 
 </tr>
@@ -190,6 +248,8 @@ Completed
 </tbody>
 
 </table>
+
+</div>
 
 </div>
 
@@ -221,7 +281,11 @@ appId:
 firebase.initializeApp(firebaseConfig);
 
 const table =
-document.getElementById("completedTable");
+document.getElementById(
+"completedTable"
+);
+
+/* LOAD COMPLETED */
 
 firebase.database()
 .ref("orders")
@@ -233,7 +297,24 @@ snapshot.forEach(child=>{
 
 const order = child.val();
 
-if(order.status === "DELIVERED"){
+/* CHECK STATUS */
+
+if(
+order.status === "COMPLETED"
+||
+order.status === "DELIVERED"
+){
+
+/* FORMAT DATE */
+
+const date = new Date(
+order.createdAt
+);
+
+const formattedDate =
+date.toLocaleString();
+
+/* ITEMS */
 
 order.items.forEach(item=>{
 
@@ -258,21 +339,31 @@ ${item.name}
 </td>
 
 <td>
+${item.qty}
+</td>
+
+<td>
 ${order.payment}
 </td>
 
 <td>
-₱${order.total}
+₱${item.price * item.qty}
 </td>
 
 <td>
-${order.createdAt}
+${order.orderType}
+</td>
+
+<td>
+${formattedDate}
 </td>
 
 <td>
 
 <span class="status">
-DELIVERED
+
+COMPLETED
+
 </span>
 
 </td>
