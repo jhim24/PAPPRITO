@@ -348,7 +348,25 @@ App Installs
 <h3>GCash Payments</h3>
 <p id="gcashTotal">₱0</p>
 </div>
+<div class="card sales">
 
+<h3>Today Sales</h3>
+
+<p id="todaySales">
+₱0
+</p>
+
+</div>
+
+<div class="card orders">
+
+<h3>This Week</h3>
+
+<p id="weekSales">
+₱0
+</p>
+
+</div>
 </div>
 
 <!-- BEST SELLERS -->
@@ -419,7 +437,8 @@ let sales = 0;
 let totalOrders = 0;
 let completed = 0;
 let gcash = 0;
-
+let todaySales = 0;
+let weekSales = 0;
 let products = {};
 let payments = {};
 let types = {};
@@ -443,7 +462,8 @@ sales = 0;
 totalOrders = 0;
 completed = 0;
 gcash = 0;
-
+todaySales = 0;
+weekSales = 0;
 products = {};
 payments = {};
 types = {};
@@ -451,7 +471,39 @@ types = {};
 snapshot.forEach(child=>{
 
 const order = child.val();
+const orderDate =
+new Date(order.createdAt);
 
+const now =
+new Date();
+
+/* TODAY */
+
+if(
+orderDate.toDateString()
+=== now.toDateString()
+){
+
+todaySales +=
+Number(order.total);
+
+}
+
+/* WEEK */
+
+const diffTime =
+now - orderDate;
+
+const diffDays =
+diffTime /
+(1000 * 60 * 60 * 24);
+
+if(diffDays <= 7){
+
+weekSales +=
+Number(order.total);
+
+}
 totalOrders++;
 
 sales += Number(order.total);
@@ -504,7 +556,15 @@ document.getElementById("completedOrders")
 
 document.getElementById("gcashTotal")
 .innerText = "₱" + gcash;
+document.getElementById(
+"todaySales"
+).innerText =
+"₱" + todaySales;
 
+document.getElementById(
+"weekSales"
+).innerText =
+"₱" + weekSales;
 /* BEST SELLERS */
 
 let bestHTML = "";
