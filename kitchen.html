@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Kitchen Dashboard</title>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI;
+}
+
+body{
+background:#0f172a;
+color:white;
+padding:20px;
+}
+
+h1{
+margin-bottom:20px;
+}
+
+.orders{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(320px,1fr));
+
+gap:20px;
+
+}
+
+.order-card{
+
+background:#111827;
+
+padding:20px;
+
+border-radius:20px;
+
+border-left:8px solid orange;
+
+box-shadow:
+0 10px 25px rgba(0,0,0,0.3);
+
+}
+
+.order-card h2{
+
+margin-bottom:10px;
+
+font-size:20px;
+
+}
+
+.order-card p{
+
+margin-bottom:8px;
+
+color:#ddd;
+
+}
+
+.items{
+
+margin-top:15px;
+
+padding-top:15px;
+
+border-top:
+1px solid rgba(255,255,255,0.08);
+
+}
+
+.item{
+
+margin-bottom:8px;
+
+padding:8px;
+
+background:
+rgba(255,255,255,0.05);
+
+border-radius:10px;
+
+}
+
+.btns{
+
+display:flex;
+
+gap:10px;
+
+margin-top:20px;
+
+}
+
+.btn{
+
+flex:1;
+
+padding:12px;
+
+border:none;
+
+border-radius:12px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+}
+
+.prepare{
+background:#f59e0b;
+color:white;
+}
+
+.ready{
+background:#22c55e;
+color:white;
+}
+
+.complete{
+background:#3b82f6;
+color:white;
+}
+
+.status{
+
+margin-top:10px;
+
+font-weight:bold;
+
+font-size:14px;
+
+}
+
+.new{
+color:#f59e0b;
+}
+
+.preparing{
+color:#22c55e;
+}
+
+.ready-status{
+color:#3b82f6;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>
+🍳 Kitchen Dashboard
+</h1>
+
+<div class="orders"
+id="ordersContainer">
+
+</div>
+
+<script>
+
+/* FIREBASE */
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyAV9T5w_1azmPHIJcZpraXP06TItj7HEuA",
+
+authDomain: "papprito-orders.firebaseapp.com",
+
+databaseURL:
+"https://papprito-orders-default-rtdb.firebaseio.com",
+
+projectId: "papprito-orders",
+
+storageBucket:
+"papprito-orders.firebasestorage.app",
+
+messagingSenderId: "831941801424",
+
+appId:
+"1:831941801424:web:40a99cdfb312dac2d275d5"
+
+};
+
+firebase.initializeApp(firebaseConfig);
+
+/* LOAD ORDERS */
+
+firebase.database()
+.ref("orders")
+.on("value", snapshot=>{
+
+let html = "";
+
+snapshot.forEach(child=>{
+
+const order = child.val();
+
+let itemsHTML = "";
+
+order.items.forEach(item=>{
+
+itemsHTML += `
+
+<div class="item">
+
+${item.name}
+
+x${item.qty}
+
+</div>
+
+`;
+
+});
+
+html += `
+
+<div class="order-card">
+
+<h2>
+${order.orderNumber}
+</h2>
+
+<p>
+👤 ${order.customer}
+</p>
+
+<p>
+📞 ${order.phone}
+</p>
+
+<p>
+📦 ${order.orderType}
+</p>
+
+<p>
+💳 ${order.payment}
+</p>
+
+<p>
+💰 ₱${order.total}
+</p>
+
+<div class="status
+${order.status.toLowerCase()}
+">
+
+${order.status}
+
+</div>
+
+<div class="items">
+
+${itemsHTML}
+
+</div>
+
+<div class="btns">
+
+<button
+class="btn prepare"
+onclick="updateStatus(
+'${child.key}',
+'PREPARING'
+)">
+
+Preparing
+
+</button>
+
+<button
+class="btn ready"
+onclick="updateStatus(
+'${child.key}',
+'READY'
+)">
+
+Ready
+
+</button>
+
+<button
+class="btn complete"
+onclick="updateStatus(
+'${child.key}',
+'COMPLETED'
+)">
+
+Completed
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+document.getElementById(
+"ordersContainer"
+).innerHTML = html;
+
+});
+
+/* UPDATE STATUS */
+
+function updateStatus(id,status){
+
+firebase.database()
+.ref("orders/" + id)
+.update({
+
+status:status
+
+});
+
+}
+
+</script>
+
+</body>
+</html>
