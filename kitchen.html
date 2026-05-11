@@ -30,18 +30,23 @@ padding:20px;
 
 h1{
 margin-bottom:20px;
+font-size:32px;
 }
+
+/* ORDERS GRID */
 
 .orders{
 
 display:grid;
 
 grid-template-columns:
-repeat(auto-fit,minmax(320px,1fr));
+repeat(auto-fit,minmax(350px,1fr));
 
 gap:20px;
 
 }
+
+/* CARD */
 
 .order-card{
 
@@ -58,13 +63,19 @@ box-shadow:
 
 }
 
+/* HEADER */
+
 .order-card h2{
 
-margin-bottom:10px;
+margin-bottom:15px;
 
-font-size:20px;
+font-size:22px;
+
+color:#ffcc00;
 
 }
+
+/* DETAILS */
 
 .order-card p{
 
@@ -72,7 +83,51 @@ margin-bottom:8px;
 
 color:#ddd;
 
+font-size:14px;
+
 }
+
+/* STATUS */
+
+.status{
+
+margin-top:10px;
+
+margin-bottom:15px;
+
+font-weight:bold;
+
+font-size:14px;
+
+padding:8px 12px;
+
+border-radius:10px;
+
+display:inline-block;
+
+}
+
+.new{
+background:#f59e0b;
+color:white;
+}
+
+.preparing{
+background:#22c55e;
+color:white;
+}
+
+.ready{
+background:#3b82f6;
+color:white;
+}
+
+.completed{
+background:#64748b;
+color:white;
+}
+
+/* ITEMS */
 
 .items{
 
@@ -85,18 +140,53 @@ border-top:
 
 }
 
-.item{
+/* TABLE */
 
-margin-bottom:8px;
+.items-table{
 
-padding:8px;
+width:100%;
 
-background:
-rgba(255,255,255,0.05);
+border-collapse:collapse;
 
-border-radius:10px;
+margin-top:10px;
+
+overflow:hidden;
+
+border-radius:12px;
 
 }
+
+.items-table th{
+
+background:#1e293b;
+
+padding:12px;
+
+font-size:13px;
+
+text-align:left;
+
+}
+
+.items-table td{
+
+padding:12px;
+
+border-bottom:
+1px solid rgba(255,255,255,0.08);
+
+font-size:14px;
+
+}
+
+.items-table tr:hover{
+
+background:
+rgba(255,255,255,0.04);
+
+}
+
+/* BUTTONS */
 
 .btns{
 
@@ -122,6 +212,14 @@ font-weight:bold;
 
 cursor:pointer;
 
+transition:0.3s;
+
+}
+
+.btn:hover{
+
+transform:scale(1.03);
+
 }
 
 .prepare{
@@ -129,7 +227,7 @@ background:#f59e0b;
 color:white;
 }
 
-.ready{
+.ready-btn{
 background:#22c55e;
 color:white;
 }
@@ -139,26 +237,43 @@ background:#3b82f6;
 color:white;
 }
 
-.status{
+/* MOBILE */
 
-margin-top:10px;
+@media(max-width:768px){
 
-font-weight:bold;
+.orders{
 
-font-size:14px;
+grid-template-columns:1fr;
 
 }
 
-.new{
-color:#f59e0b;
+h1{
+
+font-size:24px;
+
 }
 
-.preparing{
-color:#22c55e;
+.order-card{
+
+padding:15px;
+
 }
 
-.ready-status{
-color:#3b82f6;
+.items-table th,
+.items-table td{
+
+padding:8px;
+font-size:12px;
+
+}
+
+.btn{
+
+padding:10px;
+font-size:12px;
+
+}
+
 }
 
 </style>
@@ -217,21 +332,57 @@ const order = child.val();
 
 let itemsHTML = "";
 
+itemsHTML += `
+
+<table class="items-table">
+
+<thead>
+
+<tr>
+
+<th>ITEM</th>
+<th>QTY</th>
+<th>AMOUNT</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+`;
+
 order.items.forEach(item=>{
 
 itemsHTML += `
 
-<div class="item">
+<tr>
 
+<td>
 ${item.name}
+</td>
 
-x${item.qty}
+<td>
+${item.qty}
+</td>
 
-</div>
+<td>
+₱${item.price * item.qty}
+</td>
+
+</tr>
 
 `;
 
 });
+
+itemsHTML += `
+
+</tbody>
+
+</table>
+
+`;
 
 html += `
 
@@ -289,7 +440,7 @@ Preparing
 </button>
 
 <button
-class="btn ready"
+class="btn ready-btn"
 onclick="updateStatus(
 '${child.key}',
 'READY'
