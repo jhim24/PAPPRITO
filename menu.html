@@ -826,7 +826,51 @@ updateCart();
 alert(name + " added to cart!");
 
 }
+/* INCREASE */
 
+function increaseQty(name){
+
+const item =
+cart.find(
+i => i.name === name
+);
+
+if(item){
+
+item.qty++;
+
+}
+
+updateCart();
+
+}
+
+/* DECREASE */
+
+function decreaseQty(name){
+
+const item =
+cart.find(
+i => i.name === name
+);
+
+if(item){
+
+item.qty--;
+
+if(item.qty <= 0){
+
+cart = cart.filter(
+i => i.name !== name
+);
+
+}
+
+}
+
+updateCart();
+
+}
 /* REMOVE */
 function removeItem(name){
 
@@ -868,9 +912,53 @@ gap:10px;
 
 ${item.name}
 
-<br>
+<br><br>
 
-x${item.qty}
+<div style="
+display:flex;
+align-items:center;
+gap:10px;
+">
+
+<button
+onclick="decreaseQty('${item.name}')"
+style="
+width:30px;
+height:30px;
+border:none;
+border-radius:50%;
+background:#ff3b3b;
+color:white;
+cursor:pointer;
+">
+
+−
+
+</button>
+
+<span>
+
+${item.qty}
+
+</span>
+
+<button
+onclick="increaseQty('${item.name}')"
+style="
+width:30px;
+height:30px;
+border:none;
+border-radius:50%;
+background:#22c55e;
+color:white;
+cursor:pointer;
+">
+
++
+
+</button>
+
+</div>
 
 </div>
 
