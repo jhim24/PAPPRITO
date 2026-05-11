@@ -75,7 +75,52 @@ font-size:14px;
 background:#111827;
 color:#ffcc00;
 }
+/* INSTALL BOX */
+.install-box{
 
+margin-top:30px;
+
+padding:20px;
+
+border-radius:20px;
+
+text-align:center;
+
+background:
+linear-gradient(
+135deg,
+#ec4899,
+#be185d
+);
+
+box-shadow:
+0 10px 25px rgba(0,0,0,0.3);
+
+}
+
+.install-box i{
+
+font-size:28px;
+
+margin-bottom:10px;
+
+}
+
+.install-box h3{
+
+font-size:14px;
+
+margin-bottom:8px;
+
+}
+
+.install-box p{
+
+font-size:32px;
+
+font-weight:bold;
+
+}
 /* MAIN */
 .main{
 flex:1;
@@ -254,7 +299,19 @@ Reports
 </li>
 
 </ul>
+<div class="install-box">
 
+<i class="fa-solid fa-mobile-screen"></i>
+
+<h3>
+App Installs
+</h3>
+
+<p id="installCount">
+0
+</p>
+
+</div>
 </div>
 
 <!-- MAIN -->
@@ -366,7 +423,18 @@ let gcash = 0;
 let products = {};
 let payments = {};
 let types = {};
+/* APP INSTALLS */
 
+firebase.database()
+.ref("analytics/pwaInstalls")
+.on("value", snapshot=>{
+
+document.getElementById(
+"installCount"
+).innerText =
+snapshot.numChildren();
+
+});
 firebase.database()
 .ref("orders")
 .on("value", snapshot=>{
