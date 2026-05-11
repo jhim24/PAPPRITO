@@ -1463,28 +1463,40 @@ document.getElementById(
 video.muted = !video.muted;
 
 }
-    /* TRACK PWA INSTALL */
 
-window.addEventListener(
-'appinstalled',
-()=>{
+/* APP OPEN TRACKER */
+
+if(
+window.matchMedia(
+'(display-mode: standalone)'
+).matches
+){
+
+const deviceID =
+localStorage.getItem(
+"pappritoDevice"
+) || Math.random().toString(36);
+
+localStorage.setItem(
+"pappritoDevice",
+deviceID
+);
 
 firebase.database()
-.ref("analytics/pwaInstalls")
-.push({
+.ref(
+"analytics/pwaUsers/" +
+deviceID
+)
+.set({
 
 device:navigator.userAgent,
 
-installedAt:
+lastOpen:
 new Date().toLocaleString()
 
 });
 
-console.log(
-"PAPPRITO APP INSTALLED"
-);
-
-});
+}
     /* FIREBASE */
 
 const firebaseConfig = {
