@@ -1488,18 +1488,41 @@ appId:
 };
 
 firebase.initializeApp(firebaseConfig);
-    /* APP OPEN TRACKER */
+/* APP OPEN TRACKER */
 
-if(
+window.addEventListener(
+"load",
+()=>{
+
+const isStandalone =
+
 window.matchMedia(
 '(display-mode: standalone)'
 ).matches
-){
+
+||
+
+window.navigator.standalone
+
+||
+
+document.referrer.includes(
+'android-app://'
+);
+
+if(isStandalone){
 
 const deviceID =
+
 localStorage.getItem(
 "pappritoDevice"
-) || Math.random().toString(36);
+)
+
+||
+
+Math.random()
+.toString(36)
+.substring(2);
 
 localStorage.setItem(
 "pappritoDevice",
@@ -1513,7 +1536,8 @@ deviceID
 )
 .set({
 
-device:navigator.userAgent,
+device:
+navigator.userAgent,
 
 lastOpen:
 new Date().toLocaleString()
@@ -1525,6 +1549,8 @@ console.log(
 );
 
 }
+
+});
 </script>
     
     
