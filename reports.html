@@ -324,8 +324,37 @@ App Installs
 📊 Reports Overview
 </h1>
 
+<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+
+<input type="date" id="startDate">
+
+<input type="date" id="endDate">
+
+<button onclick="filterReports()" style="
+padding:10px 15px;
+border:none;
+border-radius:10px;
+background:#22c55e;
+color:white;
+cursor:pointer;
+">
+Filter
+</button>
+
+<button onclick="window.print()" style="
+padding:10px 15px;
+border:none;
+border-radius:10px;
+background:#3b82f6;
+color:white;
+cursor:pointer;
+">
+🖨 Print
+</button>
+
 </div>
 
+</div>
 <!-- CARDS -->
 <div class="cards">
 
@@ -639,7 +668,52 @@ document.getElementById("orderTypes")
 .innerHTML = typeHTML;
 
 });
+function filterReports(){
 
+const start =
+document.getElementById("startDate").value;
+
+const end =
+document.getElementById("endDate").value;
+
+firebase.database()
+.ref("orders")
+.once("value", snapshot=>{
+
+let sales = 0;
+let orders = 0;
+
+snapshot.forEach(child=>{
+
+const order = child.val();
+
+const orderDate =
+new Date(order.createdAt);
+
+const formatted =
+orderDate.toISOString().split("T")[0];
+
+if(
+(!start || formatted >= start) &&
+(!end || formatted <= end)
+){
+
+sales += Number(order.total);
+orders++;
+
+}
+
+});
+
+document.getElementById("totalSales")
+.innerText = "₱" + sales;
+
+document.getElementById("totalOrders")
+.innerText = orders;
+
+});
+
+}
 </script>
 
 </body>
