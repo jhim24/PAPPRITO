@@ -761,12 +761,16 @@ type="audio/mpeg">
 
 <script>
 
-/* LOGIN */
+/* =====================================
+   LOGIN
+===================================== */
 
 function login(){
 
 const pass =
-document.getElementById("password").value;
+document.getElementById(
+"password"
+).value;
 
 if(pass === "papprito123"){
 
@@ -775,53 +779,67 @@ localStorage.setItem(
 "true"
 );
 
-document.getElementById("loginPage")
-.style.display = "none";
+document.getElementById(
+"loginPage"
+).style.display = "none";
 
-document.getElementById("dashboardContent")
-.style.display = "flex";
+document.getElementById(
+"dashboardContent"
+).style.display = "flex";
 
 }else{
 
-document.getElementById("errorMsg")
-.innerText = "Wrong Password";
+document.getElementById(
+"errorMsg"
+).innerText = "Wrong Password";
 
 }
 
 }
 
-/* AUTO LOGIN */
+/* =====================================
+   AUTO LOGIN
+===================================== */
 
 if(
-localStorage.getItem("pappritoLogin")
-=== "true"
+localStorage.getItem(
+"pappritoLogin"
+) === "true"
 ){
 
-document.getElementById("loginPage")
-.style.display = "none";
+document.getElementById(
+"loginPage"
+).style.display = "none";
 
-document.getElementById("dashboardContent")
-.style.display = "flex";
+document.getElementById(
+"dashboardContent"
+).style.display = "flex";
 
 }
 
-/* FIREBASE */
+/* =====================================
+   FIREBASE
+===================================== */
 
 const firebaseConfig = {
 
-apiKey: "AIzaSyAV9T5w_1azmPHIJcZpraXP06TItj7HEuA",
+apiKey:
+"AIzaSyAV9T5w_1azmPHIJcZpraXP06TItj7HEuA",
 
-authDomain: "papprito-orders.firebaseapp.com",
+authDomain:
+"papprito-orders.firebaseapp.com",
 
 databaseURL:
 "https://papprito-orders-default-rtdb.firebaseio.com",
 
-projectId: "papprito-orders",
+projectId:
+"papprito-orders",
 
 storageBucket:
 "papprito-orders.firebasestorage.app",
 
-messagingSenderId: "831941801424",
+messagingSenderId:
+"831941801424",
 
 appId:
 "1:831941801424:web:40a99cdfb312dac2d275d5"
@@ -831,36 +849,13 @@ appId:
 firebase.initializeApp(firebaseConfig);
 
 const table =
-document.getElementById("ordersTable");
+document.getElementById(
+"ordersTable"
+);
 
-let loadedOrders = {};
-
-/* NOTIFICATION */
-
-function showNotification(){
-
-const sound =
-document.getElementById("notifSound");
-
-sound.currentTime = 0;
-
-sound.play()
-.catch(err=>console.log(err));
-
-const toast =
-document.getElementById("toast");
-
-toast.style.display = "block";
-
-setTimeout(()=>{
-
-toast.style.display = "none";
-
-},4000);
-
-}
-
-/* FORMAT */
+/* =====================================
+   FORMAT MONEY
+===================================== */
 
 function peso(num){
 
@@ -871,15 +866,75 @@ Number(num || 0)
 
 }
 
-/* LOAD ORDERS */
+/* =====================================
+   SHOW NOTIFICATION
+===================================== */
+
+function showNotification(customerName){
+
+/* SOUND */
+
+const sound =
+
+document.getElementById(
+"notifSound"
+);
+
+if(sound){
+
+sound.currentTime = 0;
+
+sound.play()
+
+.catch(err=>{
+
+console.log(err);
+
+});
+
+}
+
+/* TOAST */
+
+const toast =
+
+document.getElementById(
+"toast"
+);
+
+toast.innerHTML = `
+
+🔔 New Order From
+
+<b>
+
+${customerName || "Customer"}
+
+</b>
+
+`;
+
+toast.style.display =
+"block";
+
+setTimeout(()=>{
+
+toast.style.display =
+"none";
+
+},4000);
+
+}
+
+/* =====================================
+   LOAD ORDERS
+===================================== */
 
 firebase.database()
 .ref("orders")
 .on("value", snapshot=>{
 
 table.innerHTML = "";
-
-loadedOrders = {};
 
 let totalSales = 0;
 let totalOrders = 0;
@@ -893,8 +948,6 @@ child.val();
 
 const key =
 child.key;
-
-loadedOrders[key] = true;
 
 totalOrders++;
 
@@ -1075,21 +1128,44 @@ document.getElementById(
 
 });
 
-/* NOTIFICATION */
+/* =====================================
+   NEW ORDER NOTIFICATION
+===================================== */
+
+let initialized = false;
+
+/* WAIT INITIAL LOAD */
+
+setTimeout(()=>{
+
+initialized = true;
+
+},3000);
 
 firebase.database()
 .ref("orders")
 .on("child_added", snapshot=>{
 
-if(Object.keys(loadedOrders).length > 0){
+/* SKIP OLD ORDERS */
 
-showNotification();
-
+if(!initialized){
+return;
 }
+
+let order =
+snapshot.val();
+
+/* SHOW */
+
+showNotification(
+order.customer
+);
 
 });
 
-/* UPDATE STATUS */
+/* =====================================
+   UPDATE STATUS
+===================================== */
 
 function updateStatus(orderKey,status){
 
@@ -1103,14 +1179,18 @@ status:status
 
 }
 
-/* ASSIGN RIDER */
+/* =====================================
+   ASSIGN RIDER
+===================================== */
 
 function assignRider(orderKey){
 
 const riderName =
 prompt("Rider Name");
 
-if(!riderName) return;
+if(!riderName){
+return;
+}
 
 const riderPhone =
 prompt("Rider Phone");
@@ -1134,7 +1214,9 @@ alert("Rider Assigned");
 
 }
 
-/* DELETE */
+/* =====================================
+   DELETE ORDER
+===================================== */
 
 function deleteOrder(orderKey){
 
@@ -1148,7 +1230,9 @@ firebase.database()
 
 }
 
-/* LOGOUT */
+/* =====================================
+   LOGOUT
+===================================== */
 
 function logout(){
 
@@ -1160,7 +1244,9 @@ location.reload();
 
 }
 
-/* SERVICE WORKER */
+/* =====================================
+   SERVICE WORKER
+===================================== */
 
 if("serviceWorker" in navigator){
 
