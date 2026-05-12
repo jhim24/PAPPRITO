@@ -940,9 +940,13 @@ let lastOrderCount = 0;
 
 function showNotification(){
 
-document
-.getElementById("notifSound")
-.play();
+const sound =
+document.getElementById("notifSound");
+
+sound.currentTime = 0;
+
+sound.play()
+.catch(err=>console.log(err));
 
 const toast =
 document.getElementById("toast");
@@ -963,7 +967,7 @@ firebase.database()
 
 table.innerHTML = "";
 const currentOrderCount =
-snapshot.size;
+snapshot.numChildren();
 
 if(
 lastOrderCount !== 0 &&
