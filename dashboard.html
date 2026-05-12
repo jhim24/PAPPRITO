@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>PAPPRITO DASHBOARD</title>
+<title>PAPPRITO DAfirebase.database()SHBOARD</title>
 <link rel="stylesheet"
 href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
   
@@ -963,45 +963,20 @@ toast.style.display = "none";
 /* LIVE DATA */
 firebase.database()
 .ref("orders")
-.on("value", snapshot=>{
-
-table.innerHTML = "";
-const currentOrderCount =
-snapshot.numChildren();
-
-if(
-lastOrderCount !== 0 &&
-currentOrderCount > lastOrderCount
-){
+.on("child_added", snapshot=>{
 
 showNotification();
 
-}
-
-lastOrderCount =
-currentOrderCount;
-let sales = 0;
-let totalOrders = 0;
-let completed = 0;
-
-snapshot.forEach(child=>{
-
-const order = child.val();
+const order = snapshot.val();
 
 const orderId =
-child.key.slice(-5);
+snapshot.key.slice(-5);
 
-totalOrders++;
-
-sales += Number(order.total);
-
-if(order.status === "DELIVERED"){
-completed++;
-}
+let row = "";
 
 order.items.forEach(item=>{
 
-table.innerHTML += `
+row += `
 
 <tr>
 
@@ -1040,6 +1015,7 @@ ${order.notes || "-"}
 <td>
 ${item.qty || 1}
 </td>
+
 <td>
 ₱${item.price * (item.qty || 1)}
 </td>
@@ -1063,7 +1039,7 @@ ${order.createdAt}
 <button class="accept-btn"
 onclick="
 updateStatus(
-'${child.key}',
+'${snapshot.key}',
 'ACCEPTED'
 )">
 ACCEPT
@@ -1072,22 +1048,16 @@ ACCEPT
 <button class="preparing-btn"
 onclick="
 updateStatus(
-'${child.key}',
+'${snapshot.key}',
 'PREPARING'
 )">
 PREP
 </button>
-<button class="accept-btn"
-onclick="
-assignRider(
-'${child.key}'
-)">
-RIDER
-</button>
+
 <button class="ready-btn"
 onclick="
 updateStatus(
-'${child.key}',
+'${snapshot.key}',
 'READY'
 )">
 READY
@@ -1096,7 +1066,7 @@ READY
 <button class="done-btn"
 onclick="
 updateStatus(
-'${child.key}',
+'${snapshot.key}',
 'DELIVERED'
 )">
 DONE
@@ -1105,7 +1075,7 @@ DONE
 <button class="delete-btn"
 onclick="
 deleteOrder(
-'${child.key}'
+'${snapshot.key}'
 )">
 DELETE
 </button>
@@ -1119,6 +1089,8 @@ DELETE
 `;
 
 });
+
+table.innerHTML += row;
 
 });
 
