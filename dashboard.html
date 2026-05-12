@@ -3,13 +3,28 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>PAPPRITO DASHBOARD</title>
+
+<!-- PWA -->
+
+<link rel="manifest" href="manifest.json">
+
+<meta name="theme-color"
+content="#ffcc00">
+
+<!-- FONT AWESOME -->
+
 <link rel="stylesheet"
 href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
-  
+
+<!-- FIREBASE -->
+
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 
 <style>
@@ -36,6 +51,7 @@ overflow:hidden;
 }
 
 /* LOGIN */
+
 .login-page{
 position:fixed;
 inset:0;
@@ -104,6 +120,7 @@ color:#ff6b81;
 }
 
 /* SIDEBAR */
+
 .sidebar{
 width:240px;
 background:
@@ -153,6 +170,7 @@ color:#ffcc00;
 }
 
 /* MAIN */
+
 .main{
 flex:1;
 padding:25px;
@@ -160,6 +178,7 @@ overflow-y:auto;
 }
 
 /* TOPBAR */
+
 .topbar{
 display:flex;
 justify-content:space-between;
@@ -186,6 +205,7 @@ border:
 }
 
 /* DASHBOARD */
+
 .dashboard-grid{
 display:grid;
 grid-template-columns:
@@ -248,6 +268,7 @@ linear-gradient(
 }
 
 /* LIVE ORDERS */
+
 .orders-section{
 background:
 rgba(255,255,255,0.04);
@@ -259,60 +280,38 @@ overflow-x:auto;
 }
 
 .order-table{
-
 width:100%;
-
 border-collapse:collapse;
-
 margin-top:20px;
-
 min-width:1400px;
-
 background:#0f172a;
-
 }
 
 .order-table th{
-
 padding:8px;
-
 color:#ffcc00;
-
 font-size:11px;
-
 font-weight:bold;
-
 text-align:left;
-
 border:1px solid rgba(255,255,255,0.08);
-
 background:#111827;
-
 position:sticky;
-
 top:0;
-
 z-index:10;
-
 white-space:nowrap;
-
 }
+
 .order-table td{
-
 padding:6px 8px;
-
 font-size:11px;
-
 vertical-align:middle;
-
 line-height:1.2;
-
 border:1px solid rgba(255,255,255,0.06);
-
 white-space:nowrap;
-
 }
+
 /* STATUS */
+
 .status{
 padding:6px 12px;
 border-radius:20px;
@@ -345,7 +344,8 @@ background:#8b5cf6;
 color:white;
 }
 
-/* ACTION BUTTONS */
+/* BUTTONS */
+
 .action-buttons{
 display:flex;
 gap:5px;
@@ -387,7 +387,46 @@ background:#64748b;
 background:#ef4444;
 }
 
+/* TOAST */
+
+#toast{
+position:fixed;
+top:20px;
+right:20px;
+background:
+linear-gradient(
+135deg,
+#10b981,
+#059669
+);
+padding:16px 25px;
+border-radius:15px;
+font-weight:bold;
+box-shadow:
+0 10px 25px rgba(0,0,0,0.4);
+display:none;
+z-index:999999;
+animation:slideIn .4s ease;
+}
+
+@keyframes slideIn{
+
+from{
+transform:
+translateX(120px);
+opacity:0;
+}
+
+to{
+transform:
+translateX(0);
+opacity:1;
+}
+
+}
+
 /* MOBILE */
+
 @media(max-width:768px){
 
 body{
@@ -396,296 +435,85 @@ height:auto;
 overflow:auto;
 }
 
-/* DASHBOARD CONTAINER */
 #dashboardContent{
 flex-direction:column;
 }
 
-/* SIDEBAR */
 .sidebar{
-
 width:100%;
-
 padding:10px;
-
 flex-direction:row;
-
 align-items:center;
-
 justify-content:space-between;
-
 overflow-x:auto;
-
 gap:10px;
-
 position:sticky;
-
 top:0;
-
 z-index:999;
-
 background:#020617;
-
 }
 
-/* LOGO */
 .logo{
-
 font-size:18px;
-
 margin-bottom:0;
-
 white-space:nowrap;
-
 }
 
-/* MENU */
 .menu{
-
 display:flex;
-
 gap:8px;
-
 overflow-x:auto;
-
 flex:1;
-
 padding-bottom:3px;
-
-}
-
-.menu::-webkit-scrollbar{
-display:none;
 }
 
 .menu li{
-
 white-space:nowrap;
-
 margin-bottom:0;
-
 padding:10px 14px;
-
 font-size:12px;
-
 flex-shrink:0;
-
 }
 
-/* LOGOUT BUTTON */
-.sidebar .delete-btn{
-
-white-space:nowrap;
-
-padding:8px 12px;
-
-font-size:11px;
-
-flex-shrink:0;
-
-}
-
-/* MAIN */
 .main{
-
 padding:12px;
-
 }
 
-/* TOPBAR */
 .topbar{
-
 flex-direction:column;
-
 align-items:flex-start;
-
 gap:10px;
-
 margin-bottom:18px;
-
 }
 
 .topbar h1{
-
 font-size:26px;
-
 }
 
-/* TOP RIGHT */
-.top-right{
-
-width:100%;
-
-display:flex;
-
-overflow-x:auto;
-
-gap:8px;
-
-}
-
-.top-box{
-
-white-space:nowrap;
-
-font-size:12px;
-
-padding:10px 14px;
-
-}
-
-/* DASHBOARD CARDS */
 .dashboard-grid{
-
 display:flex;
-
 overflow-x:auto;
-
 gap:12px;
-
 padding-bottom:5px;
-
-}
-
-.dashboard-grid::-webkit-scrollbar{
-display:none;
 }
 
 .card{
-
 min-width:220px;
-
 flex-shrink:0;
-
 padding:20px;
-
 }
 
-.card h3{
-
-font-size:14px;
-
-}
-
-.card p{
-
-font-size:28px;
-
-}
-
-/* LIVE ORDERS */
 .orders-section{
-
 padding:15px;
-
 overflow-x:auto;
-
 }
 
-/* TABLE */
 .order-table{
-
-width:100%;
-
-border-collapse:collapse;
-
-margin-top:20px;
-
 min-width:1300px;
-
-background:#0f172a;
-
-}
-.order-table th{
-
-font-size:11px;
-
-padding:10px;
-
-}
-
-.order-table td{
-
-font-size:10px;
-
-padding:10px;
-
-}
-
-/* BUTTONS */
-.action-buttons{
-
-gap:4px;
-
-}
-
-.accept-btn,
-.preparing-btn,
-.ready-btn,
-.done-btn,
-.delete-btn{
-
-font-size:9px;
-
-padding:6px 8px;
-
-white-space:nowrap;
-
 }
 
 }
-  #toast{
 
-position:fixed;
-
-top:20px;
-right:20px;
-
-background:
-linear-gradient(
-135deg,
-#10b981,
-#059669
-);
-
-padding:16px 25px;
-
-border-radius:15px;
-
-font-weight:bold;
-
-box-shadow:
-0 10px 25px rgba(0,0,0,0.4);
-
-display:none;
-
-z-index:999999;
-
-animation:slideIn .4s ease;
-
-}
-
-@keyframes slideIn{
-
-from{
-
-transform:
-translateX(120px);
-
-opacity:0;
-
-}
-
-to{
-
-transform:
-translateX(0);
-
-opacity:1;
-
-}
-
-}
 </style>
 
 </head>
@@ -693,7 +521,9 @@ opacity:1;
 <body>
 
 <!-- LOGIN -->
-<div id="loginPage" class="login-page">
+
+<div id="loginPage"
+class="login-page">
 
 <div class="login-box">
 
@@ -717,17 +547,20 @@ LOGIN
 </div>
 
 <!-- DASHBOARD -->
-<div id="dashboardContent"
-style="display:none;width:100%;display:flex;">
 
-<!-- SIDEBAR -->
+<div id="dashboardContent"
+style="display:none;width:100%;">
+
 <div class="sidebar">
 
 <div>
 
 <div class="logo">
+
 <i class="fa-solid fa-burger"></i>
+
 PAPPRITO
+
 </div>
 
 <ul class="menu">
@@ -762,7 +595,6 @@ Reports
 Settings
 </li>
 
-</ul>
 <li onclick="location.href='inventory.html'">
 
 <i class="fa-solid fa-boxes-stacked"></i>
@@ -770,6 +602,9 @@ Settings
 Inventory
 
 </li>
+
+</ul>
+
 </div>
 
 <button
@@ -782,28 +617,34 @@ onclick="logout()">
 
 </div>
 
-<!-- MAIN -->
 <div class="main">
 
-<!-- TOPBAR -->
 <div class="topbar">
 
 <div>
+
 <h1>
 Dashboard Overview
 </h1>
+
 </div>
 
 <div class="top-right">
 
 <div class="top-box">
+
 <i class="fa-regular fa-calendar"></i>
+
 May 10, 2026
+
 </div>
 
 <div class="top-box">
+
 <i class="fa-solid fa-user"></i>
+
 Admin
+
 </div>
 
 </div>
@@ -811,36 +652,69 @@ Admin
 </div>
 
 <!-- CARDS -->
+
 <div class="dashboard-grid">
 
 <div class="card sales">
-<h3>Net Sales Today</h3>
-<p id="salesToday">₱0</p>
+
+<h3>
+Net Sales Today
+</h3>
+
+<p id="salesToday">
+₱0
+</p>
+
 </div>
 
 <div class="card orders">
-<h3>Total Orders</h3>
-<p id="totalOrders">0</p>
+
+<h3>
+Total Orders
+</h3>
+
+<p id="totalOrders">
+0
+</p>
+
 </div>
 
 <div class="card completed">
-<h3>Completed Orders</h3>
-<p id="completedOrders">0</p>
+
+<h3>
+Completed Orders
+</h3>
+
+<p id="completedOrders">
+0
+</p>
+
 </div>
 
 <div class="card profit">
-<h3>Gross Profit</h3>
-<p id="grossProfit">₱0</p>
+
+<h3>
+Gross Profit
+</h3>
+
+<p id="grossProfit">
+₱0
+</p>
+
 </div>
 
 </div>
 
 <!-- LIVE ORDERS -->
+
 <div class="orders-section">
 
 <h2>
+
 <i class="fa-solid fa-box-open"></i>
+
 Live Orders
+
 </h2>
 
 <table class="order-table">
@@ -879,9 +753,28 @@ Live Orders
 
 </div>
 
+<!-- AUDIO -->
+
+<audio id="notifSound">
+
+<source
+src="https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3"
+type="audio/mpeg">
+
+</audio>
+
+<!-- TOAST -->
+
+<div id="toast">
+
+🔔 New Order Received
+
+</div>
+
 <script>
 
 /* LOGIN */
+
 function login(){
 
 const pass =
@@ -906,6 +799,21 @@ document.getElementById("errorMsg")
 .innerText = "Wrong Password";
 
 }
+
+}
+
+/* AUTO LOGIN */
+
+if(
+localStorage.getItem("pappritoLogin")
+=== "true"
+){
+
+document.getElementById("loginPage")
+.style.display = "none";
+
+document.getElementById("dashboardContent")
+.style.display = "flex";
 
 }
 
@@ -936,7 +844,10 @@ firebase.initializeApp(firebaseConfig);
 
 const table =
 document.getElementById("ordersTable");
-let lastOrderCount = 0;
+
+let loadedOrders = {};
+
+/* NOTIFICATION */
 
 function showNotification(){
 
@@ -960,28 +871,76 @@ toast.style.display = "none";
 },4000);
 
 }
-/* LIVE DATA */
+
+/* FORMAT MONEY */
+
+function peso(num){
+
+return "₱" +
+
+Number(num || 0)
+.toLocaleString();
+
+}
+
+/* LOAD ORDERS */
+
 firebase.database()
 .ref("orders")
-.on("child_added", snapshot=>{
+.on("value", snapshot=>{
 
-showNotification();
+table.innerHTML = "";
 
-const order = snapshot.val();
+loadedOrders = {};
 
-const orderId =
-snapshot.key.slice(-5);
+let totalSales = 0;
+let totalOrders = 0;
+let completed = 0;
+let gross = 0;
+
+snapshot.forEach(child=>{
+
+const order =
+child.val();
+
+const key =
+child.key;
+
+loadedOrders[key] = true;
+
+totalOrders++;
+
+if(
+(order.status || "NEW")
+.toUpperCase()
+=== "DELIVERED"
+){
+completed++;
+}
 
 let row = "";
 
-order.items.forEach(item=>{
+(order.items || [])
+.forEach(item=>{
+
+let amount =
+
+Number(item.price || 0)
+
+*
+
+Number(item.qty || 1);
+
+totalSales += amount;
+
+gross += amount;
 
 row += `
 
 <tr>
 
 <td>
-${order.orderNumber || "#" + orderId}
+${order.orderNumber || "#" + key.slice(-5)}
 </td>
 
 <td>
@@ -1001,7 +960,7 @@ ${order.payment || "-"}
 </td>
 
 <td>
-${item.name}
+${item.name || "-"}
 </td>
 
 <td>
@@ -1017,19 +976,21 @@ ${item.qty || 1}
 </td>
 
 <td>
-₱${item.price * (item.qty || 1)}
+${peso(amount)}
 </td>
 
 <td>
 
-<span class="status ${order.status.toLowerCase()}">
-${order.status}
+<span class="status ${(order.status || "NEW").toLowerCase()}">
+
+${order.status || "NEW"}
+
 </span>
 
 </td>
 
 <td>
-${order.createdAt}
+${order.createdAt || "-"}
 </td>
 
 <td>
@@ -1037,45 +998,40 @@ ${order.createdAt}
 <div class="action-buttons">
 
 <button class="accept-btn"
-onclick="
-updateStatus(
-'${snapshot.key}',
+onclick="updateStatus(
+'${key}',
 'ACCEPTED'
 )">
 ACCEPT
 </button>
 
 <button class="preparing-btn"
-onclick="
-updateStatus(
-'${snapshot.key}',
+onclick="updateStatus(
+'${key}',
 'PREPARING'
 )">
 PREP
 </button>
 
 <button class="ready-btn"
-onclick="
-updateStatus(
-'${snapshot.key}',
+onclick="updateStatus(
+'${key}',
 'READY'
 )">
 READY
 </button>
 
 <button class="done-btn"
-onclick="
-updateStatus(
-'${snapshot.key}',
+onclick="updateStatus(
+'${key}',
 'DELIVERED'
 )">
 DONE
 </button>
 
 <button class="delete-btn"
-onclick="
-deleteOrder(
-'${snapshot.key}'
+onclick="deleteOrder(
+'${key}'
 )">
 DELETE
 </button>
@@ -1094,7 +1050,40 @@ table.innerHTML += row;
 
 });
 
+document.getElementById(
+"salesToday"
+).innerText = peso(totalSales);
+
+document.getElementById(
+"totalOrders"
+).innerText = totalOrders;
+
+document.getElementById(
+"completedOrders"
+).innerText = completed;
+
+document.getElementById(
+"grossProfit"
+).innerText = peso(gross);
+
+});
+
+/* NEW ORDER NOTIFICATION */
+
+firebase.database()
+.ref("orders")
+.on("child_added", snapshot=>{
+
+if(Object.keys(loadedOrders).length > 0){
+
+showNotification();
+
+}
+
+});
+
 /* UPDATE STATUS */
+
 function updateStatus(orderKey,status){
 
 firebase.database()
@@ -1108,6 +1097,7 @@ status:status
 }
 
 /* DELETE */
+
 function deleteOrder(orderKey){
 
 if(confirm("Delete this order?")){
@@ -1119,6 +1109,7 @@ firebase.database()
 }
 
 }
+
 /* LOGOUT */
 
 function logout(){
@@ -1130,21 +1121,8 @@ localStorage.removeItem(
 location.reload();
 
 }
-  /* AUTO LOGIN */
 
-if(
-localStorage.getItem("pappritoLogin")
-=== "true"
-){
-
-document.getElementById("loginPage")
-.style.display = "none";
-
-document.getElementById("dashboardContent")
-.style.display = "flex";
-
-}
-  /* ASSIGN RIDER */
+/* ASSIGN RIDER */
 
 function assignRider(orderKey){
 
@@ -1174,19 +1152,25 @@ riderVehicle:riderVehicle
 alert("Rider Assigned");
 
 }
+
+/* SERVICE WORKER */
+
+if("serviceWorker" in navigator){
+
+navigator.serviceWorker
+.register("sw.js")
+
+.then(()=>{
+
+console.log(
+"Service Worker Registered"
+);
+
+});
+
+}
+
 </script>
-<audio id="notifSound">
 
-<source
-src="https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3"
-type="audio/mpeg">
-
-</audio>
-
-<div id="toast">
-
-🔔 New Order Received
-
-</div>
 </body>
 </html>
