@@ -634,6 +634,58 @@ white-space:nowrap;
 }
 
 }
+  #toast{
+
+position:fixed;
+
+top:20px;
+right:20px;
+
+background:
+linear-gradient(
+135deg,
+#10b981,
+#059669
+);
+
+padding:16px 25px;
+
+border-radius:15px;
+
+font-weight:bold;
+
+box-shadow:
+0 10px 25px rgba(0,0,0,0.4);
+
+display:none;
+
+z-index:999999;
+
+animation:slideIn .4s ease;
+
+}
+
+@keyframes slideIn{
+
+from{
+
+transform:
+translateX(120px);
+
+opacity:0;
+
+}
+
+to{
+
+transform:
+translateX(0);
+
+opacity:1;
+
+}
+
+}
 </style>
 
 </head>
@@ -884,14 +936,46 @@ firebase.initializeApp(firebaseConfig);
 
 const table =
 document.getElementById("ordersTable");
+let lastOrderCount = 0;
 
+function showNotification(){
+
+document
+.getElementById("notifSound")
+.play();
+
+const toast =
+document.getElementById("toast");
+
+toast.style.display = "block";
+
+setTimeout(()=>{
+
+toast.style.display = "none";
+
+},4000);
+
+}
 /* LIVE DATA */
 firebase.database()
 .ref("orders")
 .on("value", snapshot=>{
 
 table.innerHTML = "";
+const currentOrderCount =
+snapshot.size;
 
+if(
+lastOrderCount !== 0 &&
+currentOrderCount > lastOrderCount
+){
+
+showNotification();
+
+}
+
+lastOrderCount =
+currentOrderCount;
 let sales = 0;
 let totalOrders = 0;
 let completed = 0;
@@ -1129,6 +1213,18 @@ alert("Rider Assigned");
 
 }
 </script>
+<audio id="notifSound">
 
+<source
+src="https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3"
+type="audio/mpeg">
+
+</audio>
+
+<div id="toast">
+
+🔔 New Order Received
+
+</div>
 </body>
 </html>
