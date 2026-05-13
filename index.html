@@ -692,105 +692,6 @@ height:700px;
 
     box-shadow:0 0 5px rgba(0,0,0,0.5);
 }
-    /* FACEBOOK DESKTOP LAYOUT */
-
-.facebook-section{
-
-display:flex;
-
-gap:20px;
-
-align-items:flex-start;
-
-}
-
-/* RIGHT SIDE */
-
-.facebook-side-design{
-
-width:320px;
-
-display:flex;
-
-flex-direction:column;
-
-gap:20px;
-
-}
-
-/* CARD */
-
-.side-card{
-
-background:
-linear-gradient(
-135deg,
-#d71920,
-#5c0000
-);
-
-padding:25px;
-
-border-radius:20px;
-
-text-align:center;
-
-box-shadow:
-0 5px 20px rgba(0,0,0,0.3);
-
-transition:0.3s;
-
-}
-
-.side-card:hover{
-
-transform:translateY(-5px);
-
-}
-
-.side-card i{
-
-font-size:42px;
-
-color:#ffcc00;
-
-margin-bottom:15px;
-
-}
-
-.side-card h3{
-
-margin-bottom:10px;
-
-font-size:22px;
-
-}
-
-.side-card p{
-
-color:#f1f1f1;
-
-line-height:1.6;
-
-}
-
-/* MOBILE HIDE */
-
-@media(max-width:768px){
-
-.facebook-section{
-
-display:block;
-
-}
-
-.facebook-side-design{
-
-display:none;
-
-}
-
-}
     /* TEAM FLIP CARD */
 .flip-card{
 background:transparent;
@@ -865,30 +766,21 @@ align-items:center;
 text-align:center;
 padding:20px;
 }
-/* FACEBOOK FEED */
-
+    /* FACEBOOK FEED */
 .facebook-wrapper{
-
-flex:1;
-
-background:white;
-
-border-radius:20px;
-
+width:100vw;
+margin-left:calc(50% - 50vw);
+padding:0;
 overflow:hidden;
-
+background:white;
 }
-
-.facebook-wrapper iframe{
-
-width:100% !important;
-
+   .facebook-wrapper iframe{
+width:100vw !important;
+max-width:100vw !important;
 height:760px;
-
 display:block;
-
-border:none;
-
+margin:0;
+padding:0;
 }
     /* TEAM SECTION */
 .team-section{
@@ -1261,22 +1153,20 @@ class="install-btn">
 
 <h2>FOLLOW US ON FACEBOOK</h2>
 
-<div class="facebook-section">
-
-<!-- FACEBOOK -->
-
 <div class="facebook-wrapper">
 
 <iframe 
 src="https://www.facebook.com/plugins/page.php?href=https://www.facebook.com/papprito&tabs=timeline&width=377&height=700&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true"
 
 style="
-width:100%;
+width:100vw;
 height:760px;
 border:none;
 overflow:hidden;
 background:white;
 display:block;
+margin:0 auto;
+padding:0;
 "
 
 scrolling="no"
@@ -1287,106 +1177,9 @@ allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share
 
 </div>
 
-<!-- DESKTOP SIDE DESIGN -->
-
-<div class="facebook-side-design">
-
-<div class="side-card">
-
-<i class="fa-solid fa-bowl-food"></i>
-
-<h3>
-Authentic Filipino Food
-</h3>
-
-<p>
-Enjoy Bulalo, Sisig, Tawilis and more.
-</p>
-
-</div>
-
-<div class="side-card">
-
-<i class="fa-solid fa-utensils"></i>
-
-<h3>
-Family Dining
-</h3>
-
-<p>
-Perfect for family gatherings and barkada.
-</p>
-
-</div>
-
-<div class="side-card">
-
-<i class="fa-solid fa-mug-hot"></i>
-
-<h3>
-Cozy Tagaytay Experience
-</h3>
-
-<p>
-Warm ambiance with affordable meals.
-</p>
-
 </div>
 
 </div>
-
-</div>
-
-<!-- DESKTOP SIDE DESIGN -->
-
-<div class="facebook-side-design">
-
-<div class="side-card">
-
-<i class="fa-solid fa-bowl-food"></i>
-
-<h3>
-Authentic Filipino Food
-</h3>
-
-<p>
-Enjoy Bulalo, Sisig, Tawilis and more.
-</p>
-
-</div>
-
-<div class="side-card">
-
-<i class="fa-solid fa-utensils"></i>
-
-<h3>
-Family Dining
-</h3>
-
-<p>
-Perfect for family gatherings and barkada.
-</p>
-
-</div>
-
-<div class="side-card">
-
-<i class="fa-solid fa-mug-hot"></i>
-
-<h3>
-Cozy Tagaytay Experience
-</h3>
-
-<p>
-Warm ambiance with affordable meals.
-</p>
-
-</div>
-
-</div>
-
-</div>
-
 </div>
     <div style="
 text-align:center;
