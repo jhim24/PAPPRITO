@@ -1,4 +1,4 @@
-const CACHE_NAME = "papprito-cache-v1";
+const CACHE_NAME = "papprito-cache-v2";
 
 const urlsToCache = [
   "/",
@@ -23,4 +23,24 @@ self.addEventListener("fetch", event => {
         return response || fetch(event.request);
       })
   );
+});
+self.addEventListener("activate", event => {
+
+event.waitUntil(
+
+caches.keys().then(keys => {
+
+return Promise.all(
+
+keys
+.filter(key => key !== CACHE_NAME)
+
+.map(key => caches.delete(key))
+
+);
+
+})
+
+);
+
 });
