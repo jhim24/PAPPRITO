@@ -1633,13 +1633,40 @@ function closeDYK(){
     if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
    navigator.serviceWorker.register(
-"service-worker.js?v=13"
+"service-worker.js?v=12"
 )
-      .then(() => {
-        console.log("PWA Ready");
-      });
-  });
+.then(registration => {
+
+console.log("PWA Ready");
+
+/* CHECK NEW UPDATE */
+registration.onupdatefound = () => {
+
+const newWorker = registration.installing;
+
+newWorker.onstatechange = () => {
+
+if(
+newWorker.state === "installed" &&
+navigator.serviceWorker.controller
+){
+
+/* UPDATE POPUP */
+if(confirm(
+"🔥 New version available!\n\nRefresh app now?"
+)){
+
+window.location.reload();
+
 }
+
+}
+
+};
+
+};
+
+});
     /* VIDEO SOUND */
 
 function toggleSound(){
