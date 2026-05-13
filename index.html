@@ -319,9 +319,10 @@ text-overflow:ellipsis;
 
 /* EVENTS */
 .events-container{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:10px;
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:25px;
 }
 
 .event-card{
@@ -571,10 +572,11 @@ width:100%;
 max-width:320px;
 }
 
-/* PARTNERS LEFT RIGHT */
+/* PARTNERS MOBILE FULL WIDTH */
 .flip-card:nth-child(2),
 .flip-card:nth-child(3){
-width:48%;
+width:100%;
+max-width:320px;
 height:360px;
 }
 
