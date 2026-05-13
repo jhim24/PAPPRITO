@@ -1,4 +1,4 @@
-const CACHE_NAME = "papprito-cache-v4";
+const CACHE_NAME = "papprito-cache-v5";
 
 const urlsToCache = [
   "/",
@@ -17,26 +17,34 @@ self.addEventListener("install", event => {
 });
 
 self.addEventListener("fetch", event => {
-  event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        return response || fetch(event.request);
-      })
-  );
+
+event.respondWith(
+
+fetch(event.request)
+
+.then(response => {
+
+const responseClone =
+response.clone();
+
+caches.open(CACHE_NAME)
+.then(cache => {
+
+cache.put(
+event.request,
+responseClone
+);
+
 });
-self.addEventListener("activate", event => {
 
-event.waitUntil(
+return response;
 
-caches.keys().then(keys => {
+})
 
-return Promise.all(
+.catch(() => {
 
-keys
-.filter(key => key !== CACHE_NAME)
-
-.map(key => caches.delete(key))
-
+return caches.match(
+event.request
 );
 
 })
