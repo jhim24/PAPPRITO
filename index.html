@@ -712,7 +712,11 @@ transform-style:preserve-3d;
 .flip-card:hover .flip-card-inner{
 transform:rotateY(180deg);
 }
+/* MOBILE CLICK FLIP */
 
+.flip-card.active .flip-card-inner{
+transform:rotateY(180deg);
+}
 .flip-card-front,
 .flip-card-back{
 position:absolute;
@@ -1708,6 +1712,23 @@ alert(
 );
 
 }
+
+});
+    /* MOBILE FLIP CARD */
+
+document.querySelectorAll(
+'.flip-card'
+).forEach(card=>{
+
+card.addEventListener(
+'click',
+()=>{
+
+card.classList.toggle(
+'active'
+);
+
+});
 
 });
 </script>
