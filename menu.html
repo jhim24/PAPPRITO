@@ -1,286 +1,414 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>PAPPRITO MENU</title>
 
 <style>
+
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Segoe UI',sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
 }
 
 body{
-    background:#111;
-    color:white;
-    overflow-x:hidden;
+background:#111;
+color:white;
+overflow-x:hidden;
 }
 
 /* HEADER */
+
 .header{
-    background:#d71920;
-    color:white;
-    padding:12px;
-    display:flex;
-    align-items:center;
-    gap:10px;
-    position:sticky;
-    top:0;
-    z-index:999;
+
+background:#d71920;
+
+color:white;
+
+padding:12px;
+
+display:flex;
+
+align-items:center;
+
+gap:10px;
+
+position:sticky;
+
+top:0;
+
+z-index:999;
 }
 
 .back-btn{
-    background:#ffcc00;
-    border:none;
-    padding:8px 14px;
-    cursor:pointer;
-    font-weight:bold;
-    border-radius:8px;
+
+background:#ffcc00;
+
+border:none;
+
+padding:8px 14px;
+
+cursor:pointer;
+
+font-weight:bold;
+
+border-radius:8px;
 }
 
 #cartIcon{
-    margin-left:auto;
-    background:#ffcc00;
-    color:black;
-    padding:8px 14px;
-    border-radius:10px;
-    font-weight:bold;
-    cursor:pointer;
+
+margin-left:auto;
+
+background:#ffcc00;
+
+color:black;
+
+padding:8px 14px;
+
+border-radius:10px;
+
+font-weight:bold;
+
+cursor:pointer;
 }
 
 /* LAYOUT */
+
 .container{
-    display:flex;
-    min-height:100vh;
+display:flex;
+min-height:100vh;
 }
 
 /* SIDEBAR */
+
 .sidebar{
-    width:140px;
-    background:#d71920;
-    color:white;
-    padding:12px;
-    overflow-y:auto;
+
+width:160px;
+
+background:#d71920;
+
+color:white;
+
+padding:12px;
+
+overflow-y:auto;
 }
 
 .sidebar h3{
-    font-size:14px;
-    margin-bottom:12px;
-    text-align:center;
+
+font-size:14px;
+
+margin-bottom:12px;
+
+text-align:center;
 }
 
 .sidebar ul{
-    list-style:none;
+list-style:none;
 }
 
 .sidebar li{
-    padding:10px;
-    cursor:pointer;
-    font-size:13px;
-    border-radius:8px;
-    margin-bottom:5px;
-    transition:0.3s;
+
+padding:10px;
+
+cursor:pointer;
+
+font-size:13px;
+
+border-radius:8px;
+
+margin-bottom:5px;
+
+transition:0.3s;
 }
 
 .sidebar li:hover{
-    background:#ffcc00;
-    color:black;
+
+background:#ffcc00;
+
+color:black;
 }
 
 /* PRODUCTS */
-.products{
-    flex:1;
-    padding:15px;
 
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:15px;
+.products{
+
+flex:1;
+
+padding:15px;
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:15px;
 }
 
 /* CARD */
+
 .card{
-    background:#1a1a1a;
-    border-radius:18px;
-    overflow:hidden;
-    border:2px solid #ffcc00;
-    box-shadow:0 6px 18px rgba(0,0,0,0.4);
-    transition:0.3s;
+
+background:#1a1a1a;
+
+border-radius:18px;
+
+overflow:hidden;
+
+border:2px solid #ffcc00;
+
+box-shadow:0 6px 18px rgba(0,0,0,0.4);
+
+transition:0.3s;
 }
 
 .card:hover{
-    transform:scale(1.03);
+transform:scale(1.03);
 }
 
 /* IMAGE */
+
 .card img{
-    width:100%;
-    height:220px;
-    object-fit:cover;
-    display:block;
-    cursor:pointer;
+
+width:100%;
+
+height:220px;
+
+object-fit:cover;
+
+display:block;
+
+cursor:pointer;
 }
 
 /* INFO */
+
 .card-info{
-    text-align:center;
+text-align:center;
 }
 
 .card-info h4{
-    background:#ffcc00;
-    color:black;
-    padding:10px;
-    font-size:15px;
-    font-weight:bold;
+
+background:#ffcc00;
+
+color:black;
+
+padding:10px;
+
+font-size:15px;
+
+font-weight:bold;
 }
 
 .card-info p{
-    background:#d71920;
-    color:white;
-    padding:10px;
-    font-size:14px;
-    font-weight:bold;
+
+background:#d71920;
+
+color:white;
+
+padding:10px;
+
+font-size:14px;
+
+font-weight:bold;
 }
 
 /* CART BUTTON */
+
 .cart-btn{
-    width:90%;
-    margin:12px auto 15px;
-    display:block;
 
-    background:linear-gradient(45deg,#ffcc00,#ff3b3b);
-    color:white;
+width:90%;
 
-    border:none;
-    padding:10px;
+margin:12px auto 15px;
 
-    border-radius:30px;
+display:block;
 
-    font-weight:bold;
-    cursor:pointer;
+background:linear-gradient(
+45deg,
+#ffcc00,
+#ff3b3b
+);
 
-    transition:0.3s;
+color:white;
+
+border:none;
+
+padding:10px;
+
+border-radius:30px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+transition:0.3s;
 }
 
 .cart-btn:hover{
-    transform:scale(1.05);
 
-    box-shadow:
-    0 0 10px #ffcc00,
-    0 0 20px #ff0000;
+transform:scale(1.05);
+
+box-shadow:
+0 0 10px #ffcc00,
+0 0 20px #ff0000;
 }
 
 /* ZOOM */
+
 .zoom-modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,0.95);
-    justify-content:center;
-    align-items:center;
-    z-index:99999;
+
+display:none;
+
+position:fixed;
+
+inset:0;
+
+background:rgba(0,0,0,0.95);
+
+justify-content:center;
+
+align-items:center;
+
+z-index:99999;
 }
 
 .zoom-modal img{
-    max-width:95%;
-    max-height:90%;
-    border-radius:12px;
+
+max-width:95%;
+
+max-height:90%;
+
+border-radius:12px;
 }
 
 .zoom-close{
-    position:absolute;
-    top:20px;
-    right:20px;
-    color:white;
-    font-size:30px;
-    cursor:pointer;
+
+position:absolute;
+
+top:20px;
+
+right:20px;
+
+color:white;
+
+font-size:30px;
+
+cursor:pointer;
 }
 
 /* CART MODAL */
+
 .cart-modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,0.7);
 
-    justify-content:center;
-    align-items:center;
+display:none;
 
-    z-index:999999;
+position:fixed;
+
+inset:0;
+
+background:rgba(0,0,0,0.7);
+
+justify-content:center;
+
+align-items:center;
+
+z-index:999999;
 }
 
 .cart-content{
-    background:#1a1a1a;
-    width:90%;
-    max-width:420px;
 
-    padding:20px;
+background:#1a1a1a;
 
-    border-radius:15px;
+width:90%;
 
-    max-height:80vh;
-    overflow-y:auto;
+max-width:420px;
+
+padding:20px;
+
+border-radius:15px;
+
+max-height:80vh;
+
+overflow-y:auto;
 }
 
 .cart-content h2{
-    margin-bottom:15px;
-    text-align:center;
+
+margin-bottom:15px;
+
+text-align:center;
 }
 
 .cart-item{
-    padding:12px 0;
-    border-bottom:1px solid #333;
+
+padding:12px 0;
+
+border-bottom:1px solid #333;
 }
 
 .checkout-btn{
-    display:block;
 
-    margin-top:20px;
+display:block;
 
-    background:#0084ff;
-    color:white;
+margin-top:20px;
 
-    text-align:center;
+background:#0084ff;
 
-    padding:12px;
+color:white;
 
-    border-radius:30px;
+text-align:center;
 
-    text-decoration:none;
+padding:12px;
 
-    font-weight:bold;
+border-radius:30px;
+
+text-decoration:none;
+
+font-weight:bold;
 }
 
 .close-cart{
-    margin-top:10px;
 
-    width:100%;
+margin-top:10px;
 
-    padding:10px;
+width:100%;
 
-    background:#ff3b3b;
+padding:10px;
 
-    border:none;
+background:#ff3b3b;
 
-    color:white;
+border:none;
 
-    border-radius:30px;
+color:white;
 
-    cursor:pointer;
+border-radius:30px;
+
+cursor:pointer;
 }
 
 .remove-btn{
-    background:#ff3b3b;
-    border:none;
-    color:white;
-    padding:5px 10px;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:12px;
+
+background:#ff3b3b;
+
+border:none;
+
+color:white;
+
+padding:5px 10px;
+
+border-radius:8px;
+
+cursor:pointer;
+
+font-size:12px;
 }
+
 /* FLOATING CART */
 
 #floatingCart{
@@ -297,8 +425,7 @@ width:95%;
 
 max-width:500px;
 
-background:
-linear-gradient(
+background:linear-gradient(
 45deg,
 #ffcc00,
 #ff3b3b
@@ -316,9 +443,7 @@ align-items:center;
 
 z-index:999999;
 
-box-shadow:
-0 10px 25px rgba(0,0,0,0.4);
-
+box-shadow:0 10px 25px rgba(0,0,0,0.4);
 }
 
 #floatingCart button{
@@ -336,116 +461,112 @@ border-radius:12px;
 font-weight:bold;
 
 cursor:pointer;
-
 }
+
 /* MOBILE */
+
 @media(max-width:768px){
 
 .container{
-    flex-direction:column;
+flex-direction:column;
 }
 
 .sidebar{
-    width:100%;
-    overflow-x:auto;
+width:100%;
+overflow-x:auto;
 }
 
 .sidebar ul{
-    display:flex;
-    gap:8px;
+display:flex;
+gap:8px;
 }
 
 .sidebar li{
-    white-space:nowrap;
+white-space:nowrap;
 }
 
 .products{
-    grid-template-columns:repeat(2,1fr);
-    gap:12px;
+grid-template-columns:repeat(2,1fr);
+gap:12px;
 }
 
 .card img{
-    height:180px;
-}
-
-.card-info h4{
-    font-size:13px;
-}
-
-.card-info p{
-    font-size:12px;
+height:180px;
 }
 
 }
+
 </style>
+
 </head>
 
 <body>
 
 <!-- HEADER -->
+
 <div class="header">
 
-<button class="back-btn" onclick="history.back()">
+<button
+class="back-btn"
+onclick="history.back()">
+
 ← Back
+
 </button>
 
 <h2>MENU</h2>
 
 <div id="cartIcon">
-🛒 Cart (<span id="cartCount">0</span>)
+
+🛒 Cart
+(<span id="cartCount">0</span>)
+
 </div>
-<button
-onclick="openTrackModal()"
-style="
-background:#00b894;
-border:none;
-padding:8px 14px;
-border-radius:10px;
-font-weight:bold;
-cursor:pointer;
-color:white;
-">
 
-📦 Track Order
-
-</button>
 </div>
 
 <div class="container">
 
 <!-- SIDEBAR -->
+
 <div class="sidebar">
 
 <h3>Category</h3>
 
-<ul>
-<li onclick="show('beef')">Beef</li>
-<li onclick="show('pork')">Pork</li>
-<li onclick="show('chicken')">Chicken</li>
-<li onclick="show('seafood')">Seafood</li>
-<li onclick="show('veggies')">Veggies</li>
-<li onclick="show('noodles')">Noodles</li>
-<li onclick="show('sides')">Sides</li>
-<li onclick="show('drinks')">Drinks</li>
-<li onclick="show('beers')">Beers</li>
+<ul id="categoryList">
+
 </ul>
 
 </div>
 
 <!-- PRODUCTS -->
-<div class="products" id="products"></div>
+
+<div
+class="products"
+id="products">
+
+</div>
 
 </div>
 
 <!-- ZOOM -->
-<div id="zoomModal" class="zoom-modal" onclick="closeZoom()">
 
-<span class="zoom-close">✖</span>
+<div
+id="zoomModal"
+class="zoom-modal"
+onclick="closeZoom()">
+
+<span class="zoom-close">
+
+✖
+
+</span>
 
 <img id="zoomImg">
 
 </div>
-<!-- FLOATING CART BAR -->
+
+<!-- FLOATING CART -->
 
 <div id="floatingCart">
 
@@ -470,8 +591,11 @@ View Cart
 </button>
 
 </div>
+
 <!-- CART MODAL -->
-<div id="cartModal" class="cart-modal">
+
+<div id="cartModal"
+class="cart-modal">
 
 <div class="cart-content">
 
@@ -479,189 +603,18 @@ View Cart
 🛒 Your Cart
 </h2>
 
-<div id="cartItems"></div>
-
-<h3 id="cartTotal">
-Total: ₱0
-</h3>
-
-<input
-type="text"
-id="customerName"
-placeholder="Customer Name"
-style="
-width:100%;
-padding:12px;
-margin-top:15px;
-border:none;
-border-radius:10px;
-background:#222;
-color:white;
-">
-
-<input
-type="text"
-id="customerPhone"
-placeholder="Phone Number"
-style="
-width:100%;
-padding:12px;
-margin-top:10px;
-border:none;
-border-radius:10px;
-background:#222;
-color:white;
-">
-
-<input
-type="text"
-id="tableNumber"
-placeholder="Table Number"
-style="
-width:100%;
-padding:12px;
-margin-top:10px;
-border:none;
-border-radius:10px;
-background:#222;
-color:white;
-">
-
-<textarea
-id="customerAddress"
-placeholder="Address"
-style="
-width:100%;
-padding:12px;
-margin-top:10px;
-border:none;
-border-radius:10px;
-background:#222;
-color:white;
-resize:none;
-height:80px;
-"></textarea>
-
-<textarea
-id="customerNotes"
-placeholder="Order Notes (Optional)"
-style="
-width:100%;
-padding:12px;
-margin-top:10px;
-border:none;
-border-radius:10px;
-background:#222;
-color:white;
-resize:none;
-height:70px;
-"></textarea>
-
-<select
-id="orderType"
-style="
-width:100%;
-padding:12px;
-margin-top:10px;
-border:none;
-border-radius:10px;
-background:#222;
-color:white;
-">
-
-<option value="DINE IN">
-🍽 DINE IN
-</option>
-
-<option value="TAKE OUT">
-🥡 TAKE OUT
-</option>
-
-<option value="DELIVERY">
-🚚 DELIVERY
-</option>
-
-</select>
-
-<select
-id="paymentMethod"
-style="
-width:100%;
-padding:12px;
-margin-top:10px;
-border:none;
-border-radius:10px;
-background:#222;
-color:white;
-">
-<!-- PAYMENT INFO -->
-
-<div id="paymentInfo"
-style="
-display:none;
-margin-top:15px;
-background:#111827;
-padding:15px;
-border-radius:15px;
-text-align:center;
-">
-
-<h3 style="
-margin-bottom:10px;
-color:#ffcc00;
-">
-
-📱 Scan to Pay
-
-</h3>
-
-<img
-id="paymentQR"
-src=""
-style="
-width:220px;
-max-width:100%;
-border-radius:12px;
-margin-bottom:10px;
-border:3px solid #ffcc00;
-">
-
-<p id="paymentText"
-style="
-line-height:1.8;
-font-size:14px;
-">
-
-</p>
+<div id="cartItems">
 
 </div>
-<option value="CASH">
-💵 CASH
-</option>
 
-<option value="GCASH">
-📱 GCASH
-</option>
+<h3 id="cartTotal">
 
-<option value="MAYA">
-💳 MAYA
-</option>
+Total: ₱0
 
-<option value="CARD">
-🏦 CARD
-</option>
+</h3>
 
-</select>
-
-<a href="#"
-onclick="sendOrder()"
-class="checkout-btn">
-
-📩 PLACE ORDER
-
-</a>
-
-<button class="close-cart"
+<button
+class="close-cart"
 onclick="closeCart()">
 
 Close
@@ -672,27 +625,35 @@ Close
 
 </div>
 
+<!-- FIREBASE -->
+
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 
 <script>
 
+/* FIREBASE */
+
 const firebaseConfig = {
 
-apiKey: "AIzaSyAV9T5w_1azmPHIJcZpraXP06TItj7HEuA",
+apiKey:
+"AIzaSyAV9T5w_1azmPHIJcZpraXP06TItj7HEuA",
 
-authDomain: "papprito-orders.firebaseapp.com",
+authDomain:
+"papprito-orders.firebaseapp.com",
 
 databaseURL:
 "https://papprito-orders-default-rtdb.firebaseio.com",
 
-projectId: "papprito-orders",
+projectId:
+"papprito-orders",
 
 storageBucket:
 "papprito-orders.firebasestorage.app",
 
-messagingSenderId: "831941801424",
+messagingSenderId:
+"831941801424",
 
 appId:
 "1:831941801424:web:40a99cdfb312dac2d275d5"
@@ -703,159 +664,138 @@ firebase.initializeApp(firebaseConfig);
 
 const db = firebase.database();
 
-const data = {
+/* PRODUCTS */
 
-beef:[
-{name:"Bulalo Grupo",price:"₱710",img:"bulalogroup.jpg"},
-{name:"Bulalo Solo",price:"₱185",img:"bulalo.jpg"},
-{name:"Bistek Tagalog",price:"₱279",img:"bistek.jpg"}
-],
+let allProducts = [];
 
-pork:[
-{name:"Lechon Kawali",price:"₱395",img:"lechon.jpg"},
-{name:"Pork Sisig",price:"₱315",img:"sisig.jpg"},
-{name:"Lumpiang Shanghai",price:"₱235",img:"lumpia.jpg"},
-{name:"Coming Soon",price:"Soon",img:"no-image.jpg"}
-],
+/* LOAD PRODUCTS */
 
-chicken:[
-{name:"PapsChicken Platter",price:"₱315",img:"chicken.jpg"},
-{name:"Chicken Sisig",price:"₱295",img:"chicken-sisig.jpg"}
-],
+firebase.database()
+.ref("products")
+.on("value", snapshot=>{
 
-seafood:[
-{name:"Crispy Bangusarap",price:"₱315",img:"bangus.jpg"},
-{name:"Calamares",price:"₱305",img:"calamares.jpg"},
-{name:"Crispy Tawilis",price:"₱285",img:"tawilis.jpg"}
-],
+allProducts = [];
 
-veggies:[
-{name:"Chop Suey",price:"₱235",img:"chopsuey.jpg"},
-{name:"Tortang Talong",price:"₱192",img:"talong.jpg"},
-{name:"Coming Soon",price:"Soon",img:"no-image.jpg"},
-{name:"Coming Soon",price:"Soon",img:"no-image.jpg"}
-],
+const productsData =
+snapshot.val();
 
-noodles:[
-{name:"Canton-Bihon",price:"₱278",img:"canton.jpg"},
-{name:"Palabok",price:"₱195",img:"palabok.jpg"},
-{name:"Beef Mami",price:"₱159",img:"mami.jpg"},
-{name:"Chicken Mami",price:"₱149",img:"mami2.jpg"}
-],
+if(!productsData){
+return;
+}
 
-sides:[
-{name:"PapShots",price:"₱72",img:"restaurant-hero.jpg"},
-{name:"Spicy Tofu",price:"₱65",img:"tofu.jpg"},
-{name:"Bola Bola Soup",price:"₱68",img:"soup.jpg"},
-{name:"Lumpiang Shanghai",price:"₱49",img:"lumpia.jpg"},
-{name:"Fried Banana",price:"₱35",img:"banana.jpg"},
-{name:"Garlic Rice",price:"₱46",img:"rice.jpg"},
-{name:"Plain Rice",price:"₱32",img:"rice.jpg"}
-],
+let categories = [];
 
-drinks:[
-{name:"Softdrinks",price:"₱52",img:"drinks.jpg"},
-{name:"1.5L Softdrinks",price:"₱145",img:"drinks.jpg"},
-{name:"Iced Tea",price:"₱52",img:"icedtea.jpg"},
-{name:"Black Gulaman",price:"₱52",img:"gulaman.jpg"},
-{name:"Pineapple Juice",price:"₱62",img:"juice.jpg"},
-{name:"Calamansi Juice",price:"₱62",img:"juice.jpg"},
-{name:"Iced Coffee",price:"₱59",img:"coffee.jpg"},
-{name:"Hot Choco",price:"₱55",img:"choco.jpg"},
-{name:"Water",price:"₱35",img:"water.jpg"}
-],
+Object.keys(productsData)
+.forEach(key=>{
 
-beers:[
-{name:"San Mig Light",price:"₱95",img:"sanmig-light.jpg"},
-{name:"San Miguel Pale",price:"₱95",img:"sanmig-pale.jpg"},
-{name:"San Miguel Flavored",price:"₱95",img:"sanmig-flavored.jpg"},
-{name:"Red Horse",price:"₱105",img:"redhorse.jpg"}
-]
+const product =
+productsData[key];
 
-};
+allProducts.push(product);
 
-/* SHOW CATEGORY */
+if(
+!categories.includes(
+product.category
+)
+){
+
+categories.push(
+product.category
+);
+
+}
+
+});
+
+/* RENDER CATEGORY */
+
+renderCategories(
+categories
+);
+
+/* DEFAULT */
+
+show(categories[0]);
+
+});
+
+/* CATEGORY */
+
+function renderCategories(categories){
+
+const sidebar =
+document.getElementById(
+"categoryList"
+);
+
+sidebar.innerHTML = "";
+
+categories.forEach(cat=>{
+
+sidebar.innerHTML += `
+
+<li onclick="show('${cat}')">
+
+${cat.toUpperCase()}
+
+</li>
+
+`;
+
+});
+
+}
+
+/* SHOW PRODUCTS */
+
 function show(cat){
 
 const container =
-document.getElementById("products");
+document.getElementById(
+"products"
+);
 
 container.innerHTML = "";
 
-data[cat].forEach(item=>{
+const filtered =
+
+allProducts.filter(
+item =>
+item.category === cat
+);
+
+filtered.forEach(item=>{
 
 container.innerHTML += `
 
 <div class="card">
 
-<img src="${item.img}"
-onclick="openZoom('${item.img}')">
+<img
+src="${item.image}"
+onclick="openZoom('${item.image}')">
 
 <div class="card-info">
 
-<h4>${item.name}</h4>
+<h4>
 
-<p>${item.price}</p>
+${item.name}
 
-<div style="
-display:flex;
-justify-content:center;
-align-items:center;
-gap:10px;
-padding:12px;
-">
+</h4>
+
+<p>
+
+₱${item.price}
+
+</p>
 
 <button
-onclick="decreaseQtyCard(
-'${item.name}'
-)"
-style="
-width:38px;
-height:38px;
-border:none;
-border-radius:50%;
-background:#ff3b3b;
-color:white;
-font-size:20px;
-cursor:pointer;
-">
-
-−
-
-</button>
-
-<button class="cart-btn"
-style="
-margin:0;
-width:auto;
-padding:10px 20px;
-"
+class="cart-btn"
 onclick="addToCart(
 '${item.name}',
-'${item.price}'
+'₱${item.price}'
 )">
 
-ADD
-
-</button>
-
-<button
-onclick="increaseQtyCard(
-'${item.name}',
-'${item.price}'
-)"
-style="
-width:38px;
-height:38px;
-border:none;
-border-radius:50%;
-background:#22c55e;
-color:white;
-font-size:20px;
-cursor:pointer;
-">
-
-+
+ADD TO CART
 
 </button>
 
@@ -870,34 +810,44 @@ cursor:pointer;
 }
 
 /* ZOOM */
+
 function openZoom(img){
 
-document.getElementById("zoomModal")
-.style.display="flex";
+document.getElementById(
+"zoomModal"
+).style.display="flex";
 
-document.getElementById("zoomImg")
-.src = img;
+document.getElementById(
+"zoomImg"
+).src = img;
 
 }
 
 function closeZoom(){
 
-document.getElementById("zoomModal")
-.style.display="none";
+document.getElementById(
+"zoomModal"
+).style.display="none";
 
 }
 
 /* CART */
+
 let cart = [];
 
-/* ADD */
+/* ADD TO CART */
+
 function addToCart(name,price){
 
 const cleanPrice =
-parseInt(price.replace(/[₱,]/g,"")) || 0;
+parseInt(
+price.replace(/[₱,]/g,"")
+) || 0;
 
 const existing =
-cart.find(item=>item.name === name);
+cart.find(
+item => item.name === name
+);
 
 if(existing){
 
@@ -906,112 +856,48 @@ existing.qty += 1;
 }else{
 
 cart.push({
+
 name:name,
 price:cleanPrice,
 qty:1
+
 });
 
 }
 
 updateCart();
 
-alert(name + " added to cart!");
-
-}
-/* INCREASE */
-
-function increaseQty(name){
-
-const item =
-cart.find(
-i => i.name === name
-);
-
-if(item){
-
-item.qty++;
-
 }
 
-updateCart();
-
-}
-
-/* DECREASE */
-
-function decreaseQty(name){
-
-const item =
-cart.find(
-i => i.name === name
-);
-
-if(item){
-
-item.qty--;
-
-if(item.qty <= 0){
-
-cart = cart.filter(
-i => i.name !== name
-);
-
-}
-
-}
-
-updateCart();
-
-}
-    /* CARD QTY */
-
-function increaseQtyCard(name,price){
-
-addToCart(name,price);
-
-}
-
-function decreaseQtyCard(name){
-
-const item =
-cart.find(
-i => i.name === name
-);
-
-if(item){
-
-item.qty--;
-
-if(item.qty <= 0){
-
-cart = cart.filter(
-i => i.name !== name
-);
-
-}
-
-updateCart();
-
-}
-
-}
 /* REMOVE */
+
 function removeItem(name){
 
-cart = cart.filter(item=>item.name !== name);
+cart =
+cart.filter(
+item => item.name !== name
+);
 
 updateCart();
 
 }
 
-/* UPDATE */
+/* UPDATE CART */
+
 function updateCart(){
 
-document.getElementById("cartCount")
-.innerText = cart.length;
+document.getElementById(
+"cartCount"
+).innerText = cart.length;
+
+document.getElementById(
+"floatingCount"
+).innerText = cart.length;
 
 const items =
-document.getElementById("cartItems");
+document.getElementById(
+"cartItems"
+);
 
 items.innerHTML = "";
 
@@ -1019,7 +905,8 @@ let total = 0;
 
 cart.forEach(item=>{
 
-total += item.price * item.qty;
+total +=
+item.price * item.qty;
 
 items.innerHTML += `
 
@@ -1029,60 +916,17 @@ items.innerHTML += `
 display:flex;
 justify-content:space-between;
 align-items:center;
-gap:10px;
 ">
 
 <div>
 
 ${item.name}
 
-<br><br>
+<br>
 
-<div style="
-display:flex;
-align-items:center;
-gap:10px;
-">
-
-<button
-onclick="decreaseQty('${item.name}')"
-style="
-width:30px;
-height:30px;
-border:none;
-border-radius:50%;
-background:#ff3b3b;
-color:white;
-cursor:pointer;
-">
-
-−
-
-</button>
-
-<span>
-
+₱${item.price}
+x
 ${item.qty}
-
-</span>
-
-<button
-onclick="increaseQty('${item.name}')"
-style="
-width:30px;
-height:30px;
-border:none;
-border-radius:50%;
-background:#22c55e;
-color:white;
-cursor:pointer;
-">
-
-+
-
-</button>
-
-</div>
 
 </div>
 
@@ -1108,325 +952,53 @@ onclick="removeItem('${item.name}')">
 
 });
 
-document.getElementById("cartTotal")
-.innerText = "Total: ₱" + total;
 document.getElementById(
-"floatingCount"
-).innerText = cart.length;
+"cartTotal"
+).innerText =
+"Total: ₱" + total;
 
 document.getElementById(
 "floatingTotal"
-).innerText = "₱" + total;
+).innerText =
+"₱" + total;
+
 }
 
 /* OPEN CART */
-document.getElementById("cartIcon")
-.addEventListener("click",()=>{
 
-document.getElementById("cartModal")
-.style.display="flex";
+document.getElementById(
+"cartIcon"
+).addEventListener(
+"click",
+()=>{
+
+document.getElementById(
+"cartModal"
+).style.display="flex";
 
 });
+
+/* FLOATING BUTTON */
+
 function openCart(){
 
 document.getElementById(
 "cartModal"
-).style.display = "flex";
+).style.display="flex";
 
 }
+
 /* CLOSE CART */
+
 function closeCart(){
 
-document.getElementById("cartModal")
-.style.display="none";
-
-}
-/* PAYMENT QR */
-
 document.getElementById(
-"paymentMethod"
-).addEventListener(
-"change",
-function(){
-
-const payment =
-this.value;
-
-const info =
-document.getElementById(
-"paymentInfo"
-);
-
-const qr =
-document.getElementById(
-"paymentQR"
-);
-
-const text =
-document.getElementById(
-"paymentText"
-);
-
-/* GCASH */
-
-if(payment === "GCASH"){
-
-info.style.display =
-"block";
-
-qr.src = "gcash-qr.jpg";
-
-text.innerHTML = `
-
-<b>GCASH</b><br>
-
-09123456789<br>
-
-JUAN DELA CRUZ
-
-`;
+"cartModal"
+).style.display="none";
 
 }
 
-/* MAYA */
-
-else if(payment === "MAYA"){
-
-info.style.display =
-"block";
-
-qr.src = "maya-qr.jpg";
-
-text.innerHTML = `
-
-<b>MAYA</b><br>
-
-09123456789<br>
-
-JUAN DELA CRUZ
-
-`;
-
-}
-
-/* CARD */
-
-else if(payment === "CARD"){
-
-info.style.display =
-"block";
-
-qr.src = "card-payment.jpg";
-
-text.innerHTML = `
-
-<b>CARD PAYMENT</b><br>
-
-Pay at cashier terminal
-
-`;
-
-}
-
-/* CASH */
-
-else{
-
-info.style.display =
-"none";
-
-}
-
-});
-/* SEND ORDER */
-function sendOrder(){
-
-if(cart.length === 0){
-
-alert("Cart is empty!");
-
-return;
-
-}
-
-const customer =
-document.getElementById("customerName").value;
-
-if(customer === ""){
-
-alert("Enter customer name");
-
-return;
-
-}
-
-const phone =
-document.getElementById("customerPhone").value;
-
-if(phone === ""){
-
-alert("Enter phone number");
-
-return;
-
-}
-
-let total = 0;
-
-cart.forEach(item=>{
-
-total += item.price * item.qty;
-
-});
-
-const order = {
-
-orderNumber:
-"PAP-" + Date.now(),
-
-customer:
-document.getElementById("customerName").value,
-
-phone:
-document.getElementById("customerPhone").value,
-
-address:
-document.getElementById("customerAddress").value,
-
-notes:
-document.getElementById("customerNotes").value,
-
-table:
-document.getElementById("tableNumber").value,
-
-payment:
-document.getElementById("paymentMethod").value,
-
-orderType:
-document.getElementById("orderType").value,
-
-items: cart,
-
-total: total,
-
-status: "NEW",
-
-createdAt:
-new Date().toISOString()
-
-};
-
-/* SAVE TO FIREBASE */
-firebase.database()
-.ref("orders")
-.push(order)
-.then(()=>{
-
-window.location.href =
-
-"track.html?order=" +
-
-order.orderNumber;
-
-});
-
-cart = [];
-
-updateCart();
-
-closeCart();
-
-}
-
-/* DEFAULT */
-show('beef');
-/* TRACK MODAL */
-
-function openTrackModal(){
-
-document.getElementById(
-"trackModal"
-).style.display = "flex";
-
-}
-
-function closeTrackModal(){
-
-document.getElementById(
-"trackModal"
-).style.display = "none";
-
-}
-
-/* GO TRACK */
-
-function goTrackOrder(){
-
-const orderNumber =
-document.getElementById(
-"trackOrderInput"
-).value;
-
-if(orderNumber === ""){
-
-alert("Enter order number");
-
-return;
-
-}
-
-window.location.href =
-
-"track.html?order=" +
-
-orderNumber;
-
-}
 </script>
-<!-- TRACK MODAL -->
 
-<div id="trackModal"
-class="cart-modal">
-
-<div class="cart-content">
-
-<h2>
-📦 Track Your Order
-</h2>
-
-<input
-type="text"
-id="trackOrderInput"
-placeholder="Enter Order Number"
-style="
-width:100%;
-padding:12px;
-border:none;
-border-radius:10px;
-background:#222;
-color:white;
-margin-top:10px;
-">
-
-<button
-onclick="goTrackOrder()"
-class="checkout-btn"
-style="border:none;cursor:pointer;">
-
-TRACK ORDER
-
-</button>
-
-<button
-class="close-cart"
-onclick="closeTrackModal()">
-
-Close
-
-</button>
-
-</div>
-
-</div>
 </body>
 </html>
