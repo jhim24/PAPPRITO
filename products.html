@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Products Manager</title>
+
+<link
+href="https://fonts.googleapis.com/icon?family=Material+Icons"
+rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Tahoma,sans-serif;
+}
+
+body{
+
+background:#1f1f1f;
+
+color:white;
+
+padding:15px;
+}
+
+/* CONTAINER */
+
+.container{
+
+max-width:1500px;
+
+margin:auto;
+
+background:#2b2b2b;
+
+border:3px solid #ffcc00;
+
+border-radius:15px;
+
+overflow:hidden;
+}
+
+/* HEADER */
+
+.header{
+
+background:
+linear-gradient(
+135deg,
+#ffcc00,
+#ff8800
+);
+
+padding:15px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+flex-wrap:wrap;
+}
+
+.title{
+
+font-size:28px;
+
+font-weight:bold;
+
+color:black;
+
+display:flex;
+
+align-items:center;
+
+gap:10px;
+}
+
+/* BUTTONS */
+
+.btn{
+
+padding:10px 18px;
+
+border:none;
+
+border-radius:10px;
+
+cursor:pointer;
+
+font-weight:bold;
+
+font-size:13px;
+
+transition:0.3s;
+}
+
+.btn:hover{
+transform:scale(1.03);
+}
+
+.back-btn{
+background:#0066cc;
+color:white;
+}
+
+.save-btn{
+background:#008000;
+color:white;
+}
+
+.delete-btn{
+background:#cc0000;
+color:white;
+}
+
+.edit-btn{
+background:#ff8800;
+color:black;
+}
+
+/* FORM */
+
+.form-section{
+padding:20px;
+}
+
+.form-grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(250px,1fr));
+
+gap:15px;
+}
+
+input,
+select{
+
+width:100%;
+
+padding:12px;
+
+border-radius:10px;
+
+border:2px solid #555;
+
+background:#1f1f1f;
+
+color:white;
+}
+
+/* IMAGE */
+
+.preview-box{
+
+margin-top:15px;
+
+text-align:center;
+}
+
+.preview-box img{
+
+width:180px;
+
+height:180px;
+
+object-fit:cover;
+
+border-radius:15px;
+
+border:3px solid #ffcc00;
+}
+
+/* TABLE */
+
+.table-wrapper{
+
+padding:20px;
+
+overflow:auto;
+}
+
+table{
+
+width:100%;
+
+border-collapse:collapse;
+
+min-width:1200px;
+
+background:white;
+}
+
+th,
+td{
+
+border:1px solid #999;
+
+padding:10px;
+
+text-align:center;
+}
+
+th{
+
+background:#ffcc00;
+
+color:black;
+}
+
+td{
+color:black;
+}
+
+.product-img{
+
+width:80px;
+
+height:80px;
+
+object-fit:cover;
+
+border-radius:10px;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.title{
+font-size:22px;
+}
+
+table{
+min-width:1000px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- HEADER -->
+
+<div class="header">
+
+<div class="title">
+
+<span class="material-icons">
+inventory_2
+</span>
+
+PRODUCTS MANAGER
+
+</div>
+
+<button
+class="btn back-btn"
+onclick="window.location.href='index.html'">
+
+← BACK
+
+</button>
+
+</div>
+
+<!-- FORM -->
+
+<div class="form-section">
+
+<div class="form-grid">
+
+<input
+type="text"
+id="productName"
+placeholder="Product Name">
+
+<select id="productCategory">
+
+<option value="">
+Select Category
+</option>
+
+<option>beef</option>
+<option>pork</option>
+<option>chicken</option>
+<option>drinks</option>
+<option>dessert</option>
+
+</select>
+
+<input
+type="number"
+id="productPrice"
+placeholder="Price">
+
+<input
+type="text"
+id="productImage"
+placeholder="Image URL">
+
+</div>
+
+<div class="preview-box">
+
+<img
+id="previewImage"
+src="https://via.placeholder.com/180">
+
+</div>
+
+<br>
+
+<button
+class="btn save-btn"
+onclick="saveProduct()">
+
+SAVE PRODUCT
+
+</button>
+
+</div>
+
+<!-- TABLE -->
+
+<div class="table-wrapper">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>IMAGE</th>
+<th>PRODUCT NAME</th>
+<th>CATEGORY</th>
+<th>PRICE</th>
+<th>ACTION</th>
+
+</tr>
+
+</thead>
+
+<tbody id="productBody">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<!-- FIREBASE -->
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+<script>
+
+/* FIREBASE */
+
+const firebaseConfig = {
+
+apiKey:
+"AIzaSyAV9T5w_1azmPHIJcZpraXP06TItj7HEuA",
+
+authDomain:
+"papprito-orders.firebaseapp.com",
+
+databaseURL:
+"https://papprito-orders-default-rtdb.firebaseio.com",
+
+projectId:
+"papprito-orders",
+
+storageBucket:
+"papprito-orders.firebasestorage.app",
+
+messagingSenderId:
+"831941801424",
+
+appId:
+"1:831941801424:web:40a99cdfb312dac2d275d5"
+
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const db = firebase.database();
+
+/* VARIABLES */
+
+let editKey = null;
+
+/* IMAGE PREVIEW */
+
+productImage.addEventListener(
+'input',
+()=>{
+
+previewImage.src =
+productImage.value;
+
+});
+
+/* SAVE PRODUCT */
+
+function saveProduct(){
+
+const name =
+productName.value;
+
+const category =
+productCategory.value;
+
+const price =
+productPrice.value;
+
+const image =
+productImage.value;
+
+if(
+name === '' ||
+category === '' ||
+price === '' ||
+image === ''
+){
+
+alert(
+'Complete all fields'
+);
+
+return;
+
+}
+
+const productData = {
+
+name:name,
+category:category,
+price:price,
+image:image
+
+};
+
+/* UPDATE */
+
+if(editKey){
+
+db.ref(
+'products/' + editKey
+).update(productData);
+
+alert(
+'Product Updated'
+);
+
+editKey = null;
+
+}else{
+
+/* SAVE */
+
+db.ref('products')
+.push(productData);
+
+alert(
+'Product Saved'
+);
+
+}
+
+clearForm();
+
+}
+
+/* LOAD PRODUCTS */
+
+function loadProducts(){
+
+db.ref('products')
+.on('value',snapshot=>{
+
+productBody.innerHTML='';
+
+const data =
+snapshot.val();
+
+if(!data){
+return;
+}
+
+Object.keys(data)
+.forEach(key=>{
+
+const item =
+data[key];
+
+productBody.innerHTML += `
+
+<tr>
+
+<td>
+
+<img
+src="${item.image}"
+class="product-img">
+
+</td>
+
+<td>
+
+${item.name}
+
+</td>
+
+<td>
+
+${item.category}
+
+</td>
+
+<td>
+
+₱${item.price}
+
+</td>
+
+<td>
+
+<button
+class="btn edit-btn"
+onclick="editProduct(
+'${key}',
+'${item.name}',
+'${item.category}',
+'${item.price}',
+'${item.image}'
+)">
+
+EDIT
+
+</button>
+
+<button
+class="btn delete-btn"
+onclick="deleteProduct('${key}')">
+
+DELETE
+
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+});
+
+}
+
+/* EDIT */
+
+function editProduct(
+key,
+name,
+category,
+price,
+image
+){
+
+editKey = key;
+
+productName.value = name;
+
+productCategory.value =
+category;
+
+productPrice.value =
+price;
+
+productImage.value =
+image;
+
+previewImage.src =
+image;
+
+window.scrollTo({
+
+top:0,
+behavior:'smooth'
+
+});
+
+}
+
+/* DELETE */
+
+function deleteProduct(key){
+
+const confirmDelete =
+confirm(
+'Delete Product?'
+);
+
+if(confirmDelete){
+
+db.ref(
+'products/' + key
+).remove();
+
+alert(
+'Product Deleted'
+);
+
+}
+
+}
+
+/* CLEAR */
+
+function clearForm(){
+
+productName.value='';
+
+productCategory.value='';
+
+productPrice.value='';
+
+productImage.value='';
+
+previewImage.src =
+'https://via.placeholder.com/180';
+
+}
+
+/* AUTO LOAD */
+
+loadProducts();
+
+</script>
+
+</body>
+</html>
