@@ -322,6 +322,11 @@ type="text"
 id="productImage"
 placeholder="Image URL">
 
+<input
+type="file"
+id="productFile"
+accept="image/*">
+
 </div>
 
 <div class="preview-box">
@@ -500,7 +505,38 @@ previewImage.src =
 productImage.value;
 
 });
+/* FILE PREVIEW */
 
+document.getElementById(
+'productFile'
+).addEventListener(
+'change',
+function(e){
+
+const file = e.target.files[0];
+
+if(file){
+
+const reader =
+new FileReader();
+
+reader.onload = function(event){
+
+previewImage.src =
+event.target.result;
+
+/* SAVE TEMP IMAGE */
+
+window.uploadedImage =
+event.target.result;
+
+};
+
+reader.readAsDataURL(file);
+
+}
+
+});
 /* SAVE PRODUCT */
 
 function saveProduct(){
@@ -515,6 +551,7 @@ const price =
 productPrice.value;
 
 const image =
+window.uploadedImage ||
 productImage.value;
 
 if(
