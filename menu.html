@@ -613,6 +613,51 @@ Total: ₱0
 
 </h3>
 
+<input
+type="text"
+id="customerName"
+placeholder="Customer Name"
+style="
+width:100%;
+padding:12px;
+margin-top:10px;
+border:none;
+border-radius:10px;
+">
+
+<select
+id="orderType"
+style="
+width:100%;
+padding:12px;
+margin-top:10px;
+border:none;
+border-radius:10px;
+">
+
+<option>DINE IN</option>
+<option>TAKE OUT</option>
+
+</select>
+
+<button
+onclick="placeOrder()"
+style="
+width:100%;
+padding:12px;
+margin-top:15px;
+background:#008000;
+color:white;
+border:none;
+border-radius:30px;
+font-weight:bold;
+cursor:pointer;
+">
+
+PLACE ORDER
+
+</button>
+
 <button
 class="close-cart"
 onclick="closeCart()">
@@ -998,6 +1043,81 @@ document.getElementById(
 
 }
 
+/* PLACE ORDER */
+
+function placeOrder(){
+
+if(cart.length === 0){
+
+alert('Cart is empty');
+
+return;
+
+}
+
+const customerName =
+document.getElementById(
+'customerName'
+).value;
+
+const orderType =
+document.getElementById(
+'orderType'
+).value;
+
+if(customerName === ''){
+
+alert('Enter Customer Name');
+
+return;
+
+}
+
+let total = 0;
+
+cart.forEach(item=>{
+
+total +=
+item.price * item.qty;
+
+});
+
+const orderData = {
+
+customer:customerName,
+
+type:orderType,
+
+items:cart,
+
+total:total,
+
+status:'PENDING',
+
+timestamp:Date.now()
+
+};
+
+/* SAVE ORDER */
+
+db.ref('orders')
+.push(orderData);
+
+alert('Order Placed Successfully');
+
+/* CLEAR CART */
+
+cart = [];
+
+updateCart();
+
+closeCart();
+
+document.getElementById(
+'customerName'
+).value='';
+
+}
 </script>
 
 </body>
