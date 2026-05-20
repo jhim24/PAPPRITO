@@ -516,7 +516,41 @@ onclick="history.back()">
 
 <h2>MENU</h2>
 
+<input
+type="text"
+id="trackingSearch"
+placeholder="Enter Tracking Number"
+style="
+padding:10px;
+border:none;
+border-radius:10px;
+width:220px;
+margin-left:auto;
+">
+
+<button
+onclick="trackOrder()"
+style="
+background:#0084ff;
+color:white;
+border:none;
+padding:10px 15px;
+border-radius:10px;
+font-weight:bold;
+cursor:pointer;
+margin-left:8px;
+">
+
+TRACK
+
+</button>
+
 <div id="cartIcon">
+
+🛒 Cart
+(<span id="cartCount">0</span>)
+
+</div>
 
 🛒 Cart
 (<span id="cartCount">0</span>)
@@ -719,23 +753,6 @@ PLACE ORDER
 
 </button>
 
-<select
-id="orderType"
-style="
-width:100%;
-padding:12px;
-margin-top:10px;
-border:none;
-border-radius:10px;
-">
-
-<option>DINE IN</option>
-<option>TAKE OUT</option>
-
-</select>
-
-<button
-onclick="placeOrder()"
 style="
 width:100%;
 padding:12px;
@@ -1205,6 +1222,9 @@ const orderData = {
 trackingnumber:
 trackingNumber,
 
+orderNumber:
+trackingNumber,
+
 customer:
 customerName,
 
@@ -1214,14 +1234,17 @@ customerPhone,
 address:
 customerAddress,
 
-type:
+orderType:
 orderType,
 
-paymentmode:
+payment:
 paymentMode,
 
 reference:
 referenceNumber,
+
+notes:
+'',
 
 items:
 cart,
@@ -1230,7 +1253,10 @@ total:
 total,
 
 status:
-'PENDING',
+'NEW',
+
+createdAt:
+new Date().toLocaleString(),
 
 timestamp:
 Date.now()
@@ -1240,10 +1266,40 @@ Date.now()
 /* SAVE ORDER */
 
 db.ref('orders')
-.push(orderData);
+.push(orderData)
+.then(()=>{
 
 alert(
 'ORDER SUCCESSFUL\n\n' +
+
+'TRACKING NUMBER:\n' +
+
+trackingNumber
+);
+
+cart = [];
+
+updateCart();
+
+closeCart();
+
+document.getElementById(
+'customerName'
+).value='';
+
+document.getElementById(
+'customerPhone'
+).value='';
+
+document.getElementById(
+'customerAddress'
+).value='';
+
+document.getElementById(
+'referenceNumber'
+).value='';
+
+});
 
 'TRACKING NUMBER:\n' +
 
@@ -1275,6 +1331,78 @@ document.getElementById(
 ).value='';
 
 }
+/* TRACK ORDER */
+
+function trackOrder(){
+
+const trackingNumber =
+
+document.getElementById(
+'trackingSearch'
+).value.trim();
+
+if(trackingNumber === ''){
+
+alert('Enter Tracking Number');
+
+return;
+
+}
+
+db.ref('orders')
+.once('value',snapshot=>{
+
+let found = false;
+
+snapshot.forEach(child=>{
+
+const order = child.val();
+
+if(
+order.trackingnumber ===
+trackingNumber
+){
+
+found = true;
+
+alert(
+
+'ORDER FOUND\n\n' +
+
+'Customer: ' +
+(order.customer || '-') +
+
+'\n\nStatus: ' +
+(order.status || '-') +
+
+'\n\nPayment: ' +
+(order.payment || '-') +
+
+'\n\nReference: ' +
+(order.reference || '-') +
+
+'\n\nType: ' +
+(order.orderType || '-') +
+
+'\n\nAddress: ' +
+(order.address || '-')
+
+);
+
+}
+
+});
+
+if(!found){
+
+alert('Tracking Number Not Found');
+
+}
+
+});
+
+}
+  
 </script>
 
 </body>
