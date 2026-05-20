@@ -720,7 +720,7 @@ Live Orders
 <th>PAYMENT</th>
 <th>PRODUCT</th>
 <th>ADDRESS</th>
-<th>NOTES</th>
+<th>REFERENCE #</th>
 <th>QTY</th>
 <th>AMOUNT</th>
 <th>STATUS</th>
@@ -986,7 +986,7 @@ row += `
 <tr>
 
 <td>
-${order.orderNumber || "#" + key.slice(-5)}
+${order.trackingnumber || "#" + key.slice(-5)}
 </td>
 
 <td>
@@ -998,11 +998,11 @@ ${order.phone || "-"}
 </td>
 
 <td>
-${order.orderType || "-"}
+${order.type || "-"}
 </td>
 
 <td>
-${order.payment || "-"}
+${order.paymentmode || "-"}
 </td>
 
 <td>
@@ -1014,7 +1014,7 @@ ${order.address || "-"}
 </td>
 
 <td>
-${order.notes || "-"}
+${order.reference || "-"}
 </td>
 
 <td>
@@ -1036,7 +1036,8 @@ ${order.status || "NEW"}
 </td>
 
 <td>
-${order.createdAt || "-"}
+${new Date(order.timestamp || Date.now())
+.toLocaleString()}
 </td>
 
 <td>
