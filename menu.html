@@ -1269,14 +1269,15 @@ document.getElementById(
 
 });
 
-}
+db.ref('orders')
+.push(orderData)
+.then(()=>{
 
+alert(
+'ORDER SUCCESSFUL\n\n' +
 'TRACKING NUMBER:\n' +
-
 trackingNumber
 );
-
-/* CLEAR CART */
 
 cart = [];
 
@@ -1299,7 +1300,9 @@ document.getElementById(
 document.getElementById(
 'referenceNumber'
 ).value='';
+
 });
+
 }
 /* TRACK ORDER */
 
