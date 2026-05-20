@@ -291,19 +291,26 @@ type="text"
 id="productName"
 placeholder="Product Name">
 
+<div style="display:flex;gap:10px;">
+
 <select id="productCategory">
 
 <option value="">
 Select Category
 </option>
 
-<option>beef</option>
-<option>pork</option>
-<option>chicken</option>
-<option>drinks</option>
-<option>dessert</option>
-
 </select>
+
+<button
+type="button"
+class="btn save-btn"
+onclick="addCategory()">
+
+ADD CATEGORY
+
+</button>
+
+</div>
 
 <input
 type="number"
@@ -410,6 +417,79 @@ const db = firebase.database();
 
 let editKey = null;
 
+/* CATEGORY LIST */
+
+let categories = [
+
+'BEEF',
+'PORK',
+'CHICKEN',
+'DRINKS',
+'DESSERT'
+
+];
+
+/* LOAD CATEGORY */
+
+function loadCategories(){
+
+productCategory.innerHTML = `
+
+<option value="">
+Select Category
+</option>
+
+`;
+
+categories.forEach(cat=>{
+
+productCategory.innerHTML += `
+
+<option value="${cat}">
+${cat}
+</option>
+
+`;
+
+});
+
+}
+
+/* ADD CATEGORY */
+
+function addCategory(){
+
+let newCategory = prompt(
+'Enter New Category'
+);
+
+if(!newCategory){
+return;
+}
+
+newCategory =
+newCategory
+.trim()
+.toUpperCase();
+
+if(
+categories.includes(newCategory)
+){
+
+alert('Category already exists');
+
+return;
+
+}
+
+categories.push(newCategory);
+
+loadCategories();
+
+alert('Category Added');
+
+}
+  
 /* IMAGE PREVIEW */
 
 productImage.addEventListener(
@@ -657,8 +737,9 @@ previewImage.src =
 
 /* AUTO LOAD */
 
-loadProducts();
+loadCategories();
 
+loadProducts();
 </script>
 
 </body>
