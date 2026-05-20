@@ -625,6 +625,100 @@ border:none;
 border-radius:10px;
 ">
 
+<input
+type="text"
+id="customerPhone"
+placeholder="Customer Phone Number"
+style="
+width:100%;
+padding:12px;
+margin-top:10px;
+border:none;
+border-radius:10px;
+">
+
+<textarea
+id="customerAddress"
+placeholder="Customer Address"
+style="
+width:100%;
+padding:12px;
+margin-top:10px;
+border:none;
+border-radius:10px;
+resize:none;
+height:80px;
+"></textarea>
+
+<select
+id="orderType"
+style="
+width:100%;
+padding:12px;
+margin-top:10px;
+border:none;
+border-radius:10px;
+">
+
+<option>DINE IN</option>
+<option>TAKE OUT</option>
+<option>DELIVERY</option>
+
+</select>
+
+<select
+id="paymentMode"
+style="
+width:100%;
+padding:12px;
+margin-top:10px;
+border:none;
+border-radius:10px;
+">
+
+<option>CASH</option>
+<option>GCASH</option>
+<option>MAYA</option>
+<option>CARD</option>
+
+</select>
+
+<input
+type="text"
+id="referenceNumber"
+placeholder="Reference Number"
+style="
+width:100%;
+padding:12px;
+margin-top:10px;
+border:none;
+border-radius:10px;
+">
+
+<button
+onclick="placeOrder()"
+style="
+width:100%;
+padding:14px;
+margin-top:15px;
+background:linear-gradient(
+45deg,
+#008000,
+#00cc66
+);
+color:white;
+border:none;
+border-radius:30px;
+font-weight:bold;
+font-size:15px;
+cursor:pointer;
+box-shadow:0 5px 15px rgba(0,0,0,0.3);
+">
+
+PLACE ORDER
+
+</button>
+
 <select
 id="orderType"
 style="
@@ -1060,6 +1154,30 @@ document.getElementById(
 'customerName'
 ).value;
 
+const customerPhone =
+document.getElementById(
+'customerPhone'
+).value;
+
+const customerAddress =
+document.getElementById(
+'customerAddress'
+).value;
+
+const paymentMode =
+document.getElementById(
+'paymentMode'
+).value;
+
+const referenceNumber =
+document.getElementById(
+'referenceNumber'
+).value;
+
+const trackingNumber =
+'PAP-' +
+Date.now();
+
 const orderType =
 document.getElementById(
 'orderType'
@@ -1084,17 +1202,38 @@ item.price * item.qty;
 
 const orderData = {
 
-customer:customerName,
+trackingnumber:
+trackingNumber,
 
-type:orderType,
+customer:
+customerName,
 
-items:cart,
+phone:
+customerPhone,
 
-total:total,
+address:
+customerAddress,
 
-status:'PENDING',
+type:
+orderType,
 
-timestamp:Date.now()
+paymentmode:
+paymentMode,
+
+reference:
+referenceNumber,
+
+items:
+cart,
+
+total:
+total,
+
+status:
+'PENDING',
+
+timestamp:
+Date.now()
 
 };
 
@@ -1103,7 +1242,13 @@ timestamp:Date.now()
 db.ref('orders')
 .push(orderData);
 
-alert('Order Placed Successfully');
+alert(
+'ORDER SUCCESSFUL\n\n' +
+
+'TRACKING NUMBER:\n' +
+
+trackingNumber
+);
 
 /* CLEAR CART */
 
@@ -1115,6 +1260,18 @@ closeCart();
 
 document.getElementById(
 'customerName'
+).value='';
+
+document.getElementById(
+'customerPhone'
+).value='';
+
+document.getElementById(
+'customerAddress'
+).value='';
+
+document.getElementById(
+'referenceNumber'
 ).value='';
 
 }
