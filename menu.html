@@ -1688,55 +1688,7 @@ trackingNumber
 
 found = true;
 
-let itemsList = '';
-
-(order.items || []).forEach(item=>{
-
-itemsList +=
-'• ' + item.name +
-' x' + item.qty +
-' - ₱' +
-(item.price * item.qty) +
-'\n';
-
-});
-
-alert(
-
-'🍔 PAPPRITO ORDER DETAILS\n\n' +
-
-'━━━━━━━━━━━━━━\n' +
-
-'🧾 Tracking No:\n' +
-(order.trackingnumber || '-') +
-
-'\n\n👤 Customer:\n' +
-(order.customer || '-') +
-
-'\n\n📞 Phone:\n' +
-(order.phone || '-') +
-
-'\n\n📍 Address:\n' +
-(order.address || '-') +
-
-'\n\n🛍 Order Type:\n' +
-(order.orderType || '-') +
-
-'\n\n💳 Payment:\n' +
-(order.payment || '-') +
-
-'\n\n📌 Status:\n' +
-(order.status || '-') +
-
-'\n\n🍟 ITEMS:\n' +
-itemsList +
-
-'\n━━━━━━━━━━━━━━\n' +
-
-'💰 TOTAL: ₱' +
-(order.total || 0)
-
-);
+showTrackModal(order);
 }
 
 });
