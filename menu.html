@@ -571,7 +571,7 @@ grid-template-columns:repeat(2,1fr);
 
 gap:8px;
 
-ppadding:8px;
+padding:8px;
 
 padding-bottom:160px;
 
@@ -1470,30 +1470,55 @@ trackingNumber
 
 found = true;
 
+let itemsList = '';
+
+(order.items || []).forEach(item=>{
+
+itemsList +=
+'• ' + item.name +
+' x' + item.qty +
+' - ₱' +
+(item.price * item.qty) +
+'\n';
+
+});
+
 alert(
 
-'ORDER FOUND\n\n' +
+'🍔 PAPPRITO ORDER DETAILS\n\n' +
 
-'Customer: ' +
+'━━━━━━━━━━━━━━\n' +
+
+'🧾 Tracking No:\n' +
+(order.trackingnumber || '-') +
+
+'\n\n👤 Customer:\n' +
 (order.customer || '-') +
 
-'\n\nStatus: ' +
-(order.status || '-') +
+'\n\n📞 Phone:\n' +
+(order.phone || '-') +
 
-'\n\nPayment: ' +
-(order.payment || '-') +
+'\n\n📍 Address:\n' +
+(order.address || '-') +
 
-'\n\nReference: ' +
-(order.reference || '-') +
-
-'\n\nType: ' +
+'\n\n🛍 Order Type:\n' +
 (order.orderType || '-') +
 
-'\n\nAddress: ' +
-(order.address || '-')
+'\n\n💳 Payment:\n' +
+(order.payment || '-') +
+
+'\n\n📌 Status:\n' +
+(order.status || '-') +
+
+'\n\n🍟 ITEMS:\n' +
+itemsList +
+
+'\n━━━━━━━━━━━━━━\n' +
+
+'💰 TOTAL: ₱' +
+(order.total || 0)
 
 );
-
 }
 
 });
