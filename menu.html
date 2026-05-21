@@ -1302,6 +1302,133 @@ document.getElementById(
 
 }
 
+/* RECEIPT */
+
+function showReceipt(orderData){
+
+let itemsHTML = '';
+
+orderData.items.forEach(item=>{
+
+itemsHTML += `
+
+<div style="
+display:flex;
+justify-content:space-between;
+margin-bottom:12px;
+font-size:18px;
+">
+
+<div>
+
+${item.qty}x ${item.name}
+
+</div>
+
+<div>
+
+₱${item.price * item.qty}
+
+</div>
+
+</div>
+
+`;
+
+});
+
+document.getElementById(
+'receiptContent'
+).innerHTML = `
+
+${itemsHTML}
+
+<hr style="margin:15px 0;">
+
+<div style="
+display:flex;
+justify-content:space-between;
+font-size:20px;
+margin-bottom:10px;
+">
+
+<div>Subtotal</div>
+
+<div>₱${orderData.total}</div>
+
+</div>
+
+<div style="
+display:flex;
+justify-content:space-between;
+font-size:28px;
+font-weight:bold;
+margin-bottom:25px;
+">
+
+<div>Total</div>
+
+<div>₱${orderData.total}</div>
+
+</div>
+
+<div style="line-height:1.8;font-size:16px;">
+
+<div>
+<b>Tracking No:</b>
+${orderData.trackingnumber}
+</div>
+
+<div>
+<b>Order Time:</b>
+${orderData.createdAt}
+</div>
+
+<div>
+<b>Payment:</b>
+${orderData.payment}
+</div>
+
+<div>
+<b>Customer:</b>
+${orderData.customer}
+</div>
+
+<div>
+<b>Phone:</b>
+${orderData.phone}
+</div>
+
+<div>
+<b>Address:</b>
+${orderData.address}
+</div>
+
+<div>
+<b>Order Type:</b>
+${orderData.orderType}
+</div>
+
+</div>
+
+`;
+
+document.getElementById(
+'receiptModal'
+).style.display='flex';
+
+}
+
+/* CLOSE RECEIPT */
+
+function closeReceipt(){
+
+document.getElementById(
+'receiptModal'
+).style.display='none';
+
+}
+  
 /* PLACE ORDER */
 
 function placeOrder(){
@@ -1409,12 +1536,7 @@ db.ref('orders')
 .push(orderData)
 .then(()=>{
 
-alert(
-'ORDER SUCCESSFUL\n\n' +
-'TRACKING NUMBER:\n' +
-trackingNumber
-);
-
+showReceipt(orderData);
 cart = [];
 
 updateCart();
@@ -1538,6 +1660,83 @@ alert('Tracking Number Not Found');
 }
   
 </script>
+<!-- ORDER RECEIPT MODAL -->
+
+<div
+id="receiptModal"
+style="
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.6);
+z-index:9999999;
+justify-content:center;
+align-items:flex-end;
+">
+
+<div
+style="
+background:white;
+width:100%;
+max-width:500px;
+border-radius:30px 30px 0 0;
+padding:20px;
+color:black;
+max-height:90vh;
+overflow-y:auto;
+">
+
+<div style="
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
+">
+
+<h2 style="font-size:32px;">
+Order Summary
+</h2>
+
+<button
+onclick="closeReceipt()"
+style="
+border:none;
+background:none;
+font-size:30px;
+cursor:pointer;
+">
+
+✕
+
+</button>
+
+</div>
+
+<div id="receiptContent">
+
+</div>
+
+<button
+onclick="closeReceipt()"
+style="
+width:100%;
+padding:18px;
+border:none;
+border-radius:18px;
+background:#ffdd00;
+font-size:22px;
+font-weight:bold;
+margin-top:20px;
+cursor:pointer;
+">
+
+Got it
+
+</button>
+
+</div>
+
+</div>
 
 </body>
 </html>
