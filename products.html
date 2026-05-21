@@ -422,21 +422,12 @@ const db = firebase.database();
 
 let editKey = null;
 
-/* CATEGORY LIST */
-
-let categories = [
-
-'BEEF',
-'PORK',
-'CHICKEN',
-'DRINKS',
-'DESSERT'
-
-];
-
 /* LOAD CATEGORY */
 
 function loadCategories(){
+
+db.ref('categories')
+.on('value',snapshot=>{
 
 productCategory.innerHTML = `
 
@@ -446,15 +437,24 @@ Select Category
 
 `;
 
-categories.forEach(cat=>{
+const data = snapshot.val();
+
+if(!data){
+return;
+}
+
+Object.keys(data)
+.forEach(key=>{
 
 productCategory.innerHTML += `
 
-<option value="${cat}">
-${cat}
+<option value="${data[key].name}">
+${data[key].name}
 </option>
 
 `;
+
+});
 
 });
 
@@ -477,19 +477,12 @@ newCategory
 .trim()
 .toUpperCase();
 
-if(
-categories.includes(newCategory)
-){
+db.ref('categories')
+.push({
 
-alert('Category already exists');
+name:newCategory
 
-return;
-
-}
-
-categories.push(newCategory);
-
-loadCategories();
+});
 
 alert('Category Added');
 
