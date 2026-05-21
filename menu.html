@@ -665,7 +665,19 @@ font-size:14px;
 }
 
 }
-  
+@keyframes popup{
+
+from{
+transform:scale(.8);
+opacity:0;
+}
+
+to{
+transform:scale(1);
+opacity:1;
+}
+
+}
 </style>
 
 </head>
@@ -1562,6 +1574,86 @@ document.getElementById(
 });
 
 }
+  /* TRACK MODAL */
+
+function closeTrackModal(){
+
+document.getElementById(
+'trackModal'
+).style.display='none';
+
+}
+
+function showTrackModal(order){
+
+document.getElementById(
+'trackStatus'
+).innerText =
+order.status || 'NEW';
+
+document.getElementById(
+'trackContent'
+).innerHTML = `
+
+<div>
+
+<b>Customer:</b><br>
+${order.customer || '-'}
+
+</div>
+
+<hr style="margin:12px 0;">
+
+<div>
+
+<b>Tracking Number:</b><br>
+${order.trackingnumber || '-'}
+
+</div>
+
+<hr style="margin:12px 0;">
+
+<div>
+
+<b>Payment Method:</b><br>
+${order.payment || '-'}
+
+</div>
+
+<hr style="margin:12px 0;">
+
+<div>
+
+<b>Reference Number:</b><br>
+${order.reference || '-'}
+
+</div>
+
+<hr style="margin:12px 0;">
+
+<div>
+
+<b>Order Type:</b><br>
+${order.orderType || '-'}
+
+</div>
+
+<hr style="margin:12px 0;">
+
+<div>
+
+<b>Delivery Address:</b><br>
+${order.address || '-'}
+
+</div>
+
+`;
+
+document.getElementById(
+'trackModal'
+).style.display='flex';
+
+}
 /* TRACK ORDER */
 
 function trackOrder(){
@@ -1738,5 +1830,92 @@ Got it
 
 </div>
 
+<!-- TRACK ORDER MODAL -->
+
+<div
+id="trackModal"
+style="
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.6);
+z-index:99999999;
+justify-content:center;
+align-items:center;
+padding:15px;
+">
+
+<div
+style="
+background:white;
+width:100%;
+max-width:450px;
+border-radius:25px;
+overflow:hidden;
+color:black;
+animation:popup .3s ease;
+">
+
+<div style="
+background:linear-gradient(45deg,#ffcc00,#ff3b3b);
+padding:20px;
+text-align:center;
+color:white;
+">
+
+<h2 style="
+font-size:30px;
+margin-bottom:5px;
+">
+
+ORDER STATUS
+
+</h2>
+
+<div id="trackStatus"
+style="
+font-size:22px;
+font-weight:bold;
+">
+
+NEW
+
+</div>
+
+</div>
+
+<div
+id="trackContent"
+style="
+padding:20px;
+line-height:1.8;
+font-size:16px;
+">
+
+</div>
+
+<button
+onclick="closeTrackModal()"
+style="
+width:90%;
+margin:0 auto 20px;
+display:block;
+padding:15px;
+border:none;
+border-radius:18px;
+background:#ffcc00;
+font-size:20px;
+font-weight:bold;
+cursor:pointer;
+">
+
+GOT IT
+
+</button>
+
+</div>
+
+</div>
+  
 </body>
 </html>
