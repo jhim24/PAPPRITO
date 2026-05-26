@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>PAPPRITO POS</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:#0f172a;
+color:white;
+display:flex;
+height:100vh;
+overflow:hidden;
+}
+
+/* LEFT */
+
+.left{
+
+flex:2;
+padding:15px;
+overflow-y:auto;
+
+}
+
+/* RIGHT */
+
+.right{
+
+width:350px;
+background:#111827;
+padding:15px;
+display:flex;
+flex-direction:column;
+border-left:2px solid #ffcc00;
+
+}
+
+/* TITLE */
+
+.title{
+
+font-size:30px;
+font-weight:bold;
+margin-bottom:20px;
+color:#ffcc00;
+
+}
+
+/* PRODUCTS */
+
+.products{
+
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:12px;
+
+}
+
+.card{
+
+background:#1f2937;
+border-radius:18px;
+overflow:hidden;
+border:2px solid #ffcc00;
+cursor:pointer;
+transition:.3s;
+
+}
+
+.card:hover{
+
+transform:scale(1.03);
+
+}
+
+.card img{
+
+width:100%;
+height:150px;
+object-fit:cover;
+
+}
+
+.card-info{
+
+padding:10px;
+
+}
+
+.card-info h3{
+
+font-size:15px;
+margin-bottom:8px;
+
+}
+
+.card-info p{
+
+font-size:18px;
+font-weight:bold;
+color:#ffcc00;
+
+}
+
+/* CART */
+
+.cart-title{
+
+font-size:25px;
+font-weight:bold;
+margin-bottom:15px;
+
+}
+
+.cart-items{
+
+flex:1;
+overflow-y:auto;
+
+}
+
+.cart-item{
+
+background:#1f2937;
+padding:12px;
+border-radius:15px;
+margin-bottom:10px;
+
+}
+
+.cart-item h4{
+
+margin-bottom:5px;
+
+}
+
+.qty-box{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-top:8px;
+
+}
+
+.qty-buttons{
+
+display:flex;
+gap:5px;
+
+}
+
+.qty-buttons button{
+
+width:30px;
+height:30px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-weight:bold;
+
+}
+
+.minus{
+
+background:#ef4444;
+color:white;
+
+}
+
+.plus{
+
+background:#22c55e;
+color:white;
+
+}
+
+/* TOTAL */
+
+.total{
+
+font-size:28px;
+font-weight:bold;
+margin-top:15px;
+color:#ffcc00;
+
+}
+
+/* CHECKOUT */
+
+.checkout-btn{
+
+margin-top:15px;
+padding:15px;
+border:none;
+border-radius:15px;
+background:#ffcc00;
+color:black;
+font-size:20px;
+font-weight:bold;
+cursor:pointer;
+
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+body{
+
+flex-direction:column;
+
+}
+
+.left{
+
+height:55vh;
+
+}
+
+.right{
+
+width:100%;
+height:45vh;
+
+}
+
+.products{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+.card img{
+
+height:120px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- LEFT -->
+
+<div class="left">
+
+<div class="title">
+
+🧾 PAPPRITO POS
+
+</div>
+
+<div
+class="products"
+id="products">
+
+</div>
+
+</div>
+
+<!-- RIGHT -->
+
+<div class="right">
+
+<div class="cart-title">
+
+🛒 CART
+
+</div>
+
+<div
+class="cart-items"
+id="cartItems">
+
+</div>
+
+<div
+class="total"
+id="total">
+
+₱0
+
+</div>
+
+<button
+class="checkout-btn"
+onclick="checkout()">
+
+CHECKOUT
+
+</button>
+
+</div>
+
+<!-- FIREBASE -->
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+<script>
+
+/* FIREBASE */
+
+const firebaseConfig = {
+
+apiKey:
+"AIzaSyAV9T5w_1azmPHIJcZpraXP06TItj7HEuA",
+
+authDomain:
+"papprito-orders.firebaseapp.com",
+
+databaseURL:
+"https://papprito-orders-default-rtdb.firebaseio.com",
+
+projectId:
+"papprito-orders",
+
+storageBucket:
+"papprito-orders.firebasestorage.app",
+
+messagingSenderId:
+"831941801424",
+
+appId:
+"1:831941801424:web:40a99cdfb312dac2d275d5"
+
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const db = firebase.database();
+
+/* CART */
+
+let cart = [];
+
+/* LOAD PRODUCTS */
+
+firebase.database()
+.ref('products')
+.on('value',snapshot=>{
+
+products.innerHTML='';
+
+const data = snapshot.val();
+
+if(!data){
+return;
+}
+
+Object.keys(data)
+.forEach(key=>{
+
+const item = data[key];
+
+products.innerHTML += `
+
+<div
+class="card"
+onclick="addToCart(
+'${item.name}',
+${item.price}
+)">
+
+<img src="${item.image}">
+
+<div class="card-info">
+
+<h3>
+${item.name}
+</h3>
+
+<p>
+₱${item.price}
+</p>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+});
+
+/* ADD TO CART */
+
+function addToCart(name,price){
+
+const existing = cart.find(
+item => item.name === name
+);
+
+if(existing){
+
+existing.qty++;
+
+}else{
+
+cart.push({
+
+name:name,
+price:Number(price),
+qty:1
+
+});
+
+}
+
+updateCart();
+
+}
+
+/* UPDATE CART */
+
+function updateCart(){
+
+cartItems.innerHTML='';
+
+let total = 0;
+
+cart.forEach(item=>{
+
+total += item.price * item.qty;
+
+cartItems.innerHTML += `
+
+<div class="cart-item">
+
+<h4>
+${item.name}
+</h4>
+
+<div>
+
+₱${item.price}
+x
+${item.qty}
+
+=
+₱${item.price * item.qty}
+
+</div>
+
+<div class="qty-box">
+
+<div class="qty-buttons">
+
+<button
+class="minus"
+onclick="decreaseQty('${item.name}')">
+
+-
+
+</button>
+
+<button
+class="plus"
+onclick="increaseQty('${item.name}')">
+
++
+
+</button>
+
+</div>
+
+<button
+onclick="removeItem('${item.name}')"
+style="
+padding:6px 10px;
+border:none;
+border-radius:8px;
+background:#ef4444;
+color:white;
+cursor:pointer;
+">
+
+REMOVE
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+document.getElementById(
+'total'
+).innerText =
+
+'₱' + total;
+
+}
+
+/* INCREASE */
+
+function increaseQty(name){
+
+const item = cart.find(
+i => i.name === name
+);
+
+if(item){
+
+item.qty++;
+
+}
+
+updateCart();
+
+}
+
+/* DECREASE */
+
+function decreaseQty(name){
+
+const item = cart.find(
+i => i.name === name
+);
+
+if(item){
+
+item.qty--;
+
+if(item.qty <= 0){
+
+cart = cart.filter(
+i => i.name !== name
+);
+
+}
+
+}
+
+updateCart();
+
+}
+
+/* REMOVE */
+
+function removeItem(name){
+
+cart = cart.filter(
+item => item.name !== name
+);
+
+updateCart();
+
+}
+
+/* CHECKOUT */
+
+function checkout(){
+
+if(cart.length === 0){
+
+alert('Cart Empty');
+
+return;
+
+}
+
+let total = 0;
+
+cart.forEach(item=>{
+
+total += item.price * item.qty;
+
+});
+
+const trackingNumber =
+
+'POS-' + Date.now();
+
+const orderData = {
+
+trackingnumber:trackingNumber,
+
+customer:'WALK-IN CUSTOMER',
+
+phone:'-',
+
+address:'-',
+
+orderType:'DINE IN',
+
+payment:'CASH',
+
+reference:'-',
+
+items:cart,
+
+total:total,
+
+status:'NEW',
+
+source:'POS',
+
+timestamp:Date.now(),
+
+createdAt:
+new Date().toLocaleString()
+
+};
+
+db.ref('orders')
+.push(orderData)
+.then(()=>{
+
+alert(
+
+'ORDER SUCCESSFUL\n\n' +
+
+'Tracking Number:\n' +
+
+trackingNumber
+
+);
+
+cart = [];
+
+updateCart();
+
+});
+
+}
+
+</script>
+
+</body>
+</html>
