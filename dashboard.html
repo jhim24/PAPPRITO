@@ -31,109 +31,27 @@ font-family:'Segoe UI',sans-serif;
 }
 
 body{
-background:
-linear-gradient(
-135deg,
-#020617,
-#071226,
-#0f172a
-);
+background:#0f172a;
 color:white;
 display:flex;
 height:100vh;
 overflow:hidden;
 }
 
-/* LOGIN */
-
-.login-page{
-position:fixed;
-inset:0;
-background:
-linear-gradient(
-135deg,
-#020617,
-#071226,
-#0f172a
-);
-display:flex;
-justify-content:center;
-align-items:center;
-z-index:99999;
-}
-
-.login-box{
-width:340px;
-background:
-rgba(255,255,255,0.05);
-padding:35px;
-border-radius:25px;
-backdrop-filter:blur(12px);
-border:
-1px solid rgba(255,255,255,0.08);
-box-shadow:
-0 15px 35px rgba(0,0,0,0.35);
-}
-
-.login-box h2{
-margin-bottom:20px;
-text-align:center;
-color:#ffcc00;
-}
-
-.login-box input{
-width:100%;
-padding:14px;
-border:none;
-border-radius:14px;
-background:#111827;
-color:white;
-margin-bottom:15px;
-outline:none;
-}
-
-.login-box button{
-width:100%;
-padding:14px;
-border:none;
-border-radius:14px;
-background:
-linear-gradient(
-135deg,
-#ffcc00,
-#f59e0b
-);
-font-weight:bold;
-cursor:pointer;
-}
-
-#errorMsg{
-margin-top:10px;
-text-align:center;
-color:#ff6b81;
-}
-
 /* SIDEBAR */
 
 .sidebar{
 width:240px;
-background:
-linear-gradient(
-180deg,
-#020617,
-#081226,
-#0f172a
-);
+background:#020617;
 padding:20px;
 display:flex;
 flex-direction:column;
 justify-content:space-between;
-border-right:
-1px solid rgba(255,255,255,0.08);
+border-right:1px solid rgba(255,255,255,0.08);
 }
 
 .logo{
-font-size:26px;
+font-size:28px;
 font-weight:bold;
 color:#ffcc00;
 margin-bottom:30px;
@@ -144,22 +62,17 @@ list-style:none;
 }
 
 .menu li{
-padding:15px;
+padding:14px;
 margin-bottom:10px;
-border-radius:16px;
+border-radius:15px;
 cursor:pointer;
-transition:0.3s;
+transition:.3s;
 font-size:14px;
 }
 
 .menu li:hover,
 .menu li.active{
-background:
-linear-gradient(
-135deg,
-#111827,
-#1e293b
-);
+background:#111827;
 color:#ffcc00;
 }
 
@@ -167,122 +80,95 @@ color:#ffcc00;
 
 .main{
 flex:1;
-padding:25px;
-overflow-y:auto;
+padding:20px;
+overflow:auto;
 }
 
-/* TOPBAR */
+/* TOP */
 
 .topbar{
 display:flex;
 justify-content:space-between;
 align-items:center;
-margin-bottom:25px;
+margin-bottom:20px;
 }
 
 .topbar h1{
-font-size:40px;
+font-size:35px;
 }
 
-/* DASHBOARD */
+/* CARDS */
 
 .dashboard-grid{
 display:grid;
 grid-template-columns:
 repeat(auto-fit,minmax(220px,1fr));
-gap:18px;
-margin-bottom:25px;
+gap:15px;
+margin-bottom:20px;
 }
 
 .card{
 padding:25px;
-border-radius:24px;
-box-shadow:
-0 10px 30px rgba(0,0,0,0.3);
+border-radius:20px;
+}
+
+.sales{
+background:linear-gradient(135deg,#ff4d6d,#c9184a);
+}
+
+.orders{
+background:linear-gradient(135deg,#1e90ff,#2563eb);
+}
+
+.completed{
+background:linear-gradient(135deg,#10b981,#059669);
+}
+
+.profit{
+background:linear-gradient(135deg,#8b5cf6,#6d28d9);
 }
 
 .card h3{
-font-size:16px;
+font-size:15px;
 margin-bottom:10px;
 }
 
 .card p{
-font-size:36px;
+font-size:35px;
 font-weight:bold;
-}
-
-.sales{
-background:
-linear-gradient(
-135deg,
-#ff4d6d,
-#c9184a
-);
-}
-
-.orders{
-background:
-linear-gradient(
-135deg,
-#1e90ff,
-#2563eb
-);
-}
-
-.completed{
-background:
-linear-gradient(
-135deg,
-#10b981,
-#059669
-);
-}
-
-.profit{
-background:
-linear-gradient(
-135deg,
-#8b5cf6,
-#6d28d9
-);
 }
 
 /* LIVE ORDERS */
 
 .orders-section{
-background:
-rgba(255,255,255,0.04);
-padding:25px;
-border-radius:24px;
-border:
-1px solid rgba(255,255,255,0.08);
-overflow-x:auto;
+background:#111827;
+padding:20px;
+border-radius:20px;
+overflow:auto;
 }
 
 .order-table{
 width:100%;
 border-collapse:collapse;
+min-width:2100px;
 margin-top:20px;
-min-width:1800px;
-background:#0f172a;
 }
 
 .order-table th{
-padding:10px;
+background:#1e293b;
 color:#ffcc00;
+padding:12px;
 font-size:12px;
-font-weight:bold;
-text-align:left;
 border:1px solid rgba(255,255,255,0.08);
-background:#111827;
-white-space:nowrap;
+text-align:center;
 }
 
 .order-table td{
-padding:8px;
-font-size:12px;
-border:1px solid rgba(255,255,255,0.06);
-white-space:nowrap;
+padding:10px;
+font-size:11px;
+border:1px solid rgba(255,255,255,0.05);
+text-align:center;
+vertical-align:middle;
 }
 
 /* STATUS */
@@ -297,12 +183,10 @@ display:inline-block;
 
 .new{
 background:#ef4444;
-color:white;
 }
 
 .accepted{
 background:#22c55e;
-color:white;
 }
 
 .preparing{
@@ -312,55 +196,31 @@ color:black;
 
 .ready{
 background:#3b82f6;
-color:white;
 }
 
 .delivered{
 background:#8b5cf6;
-color:white;
 }
 
-/* CONNECTED MENU STATUS BORDER */
-
-.order-new{
-border-left:6px solid #ef4444;
-}
-
-.order-accepted{
-border-left:6px solid #22c55e;
-}
-
-.order-preparing{
-border-left:6px solid #f59e0b;
-}
-
-.order-ready{
-border-left:6px solid #3b82f6;
-}
-
-.order-delivered{
-border-left:6px solid #8b5cf6;
-}
-
-/* BUTTONS */
+/* ACTIONS */
 
 .action-buttons{
 display:flex;
-gap:5px;
+justify-content:center;
+align-items:center;
+gap:6px;
+flex-wrap:wrap;
 }
 
-.accept-btn,
-.preparing-btn,
-.ready-btn,
-.done-btn,
-.delete-btn{
+.action-buttons button{
 border:none;
 padding:7px 10px;
-border-radius:12px;
+border-radius:10px;
 font-size:11px;
 font-weight:bold;
-color:white;
 cursor:pointer;
+color:white;
+min-width:70px;
 }
 
 .accept-btn{
@@ -383,6 +243,19 @@ background:#64748b;
 background:#ef4444;
 }
 
+.rider-btn{
+background:#8b5cf6;
+}
+
+/* ADDRESS */
+
+.address-cell{
+max-width:220px;
+white-space:normal;
+word-break:break-word;
+line-height:1.5;
+}
+
 /* MOBILE */
 
 @media(max-width:768px){
@@ -395,20 +268,25 @@ overflow:auto;
 
 .sidebar{
 width:100%;
-padding:10px;
 overflow-x:auto;
 }
 
 .main{
-padding:12px;
+padding:10px;
 }
 
 .topbar h1{
-font-size:24px;
+font-size:25px;
 }
 
-.order-table{
-min-width:1800px;
+.dashboard-grid{
+display:flex;
+overflow-x:auto;
+gap:10px;
+}
+
+.card{
+min-width:220px;
 }
 
 }
@@ -419,37 +297,6 @@ min-width:1800px;
 
 <body>
 
-<!-- LOGIN -->
-
-<div id="loginPage"
-class="login-page">
-
-<div class="login-box">
-
-<h2>
-🔐 PAPPRITO LOGIN
-</h2>
-
-<input
-type="password"
-id="password"
-placeholder="Enter Password">
-
-<button onclick="login()">
-LOGIN
-</button>
-
-<p id="errorMsg"></p>
-
-</div>
-
-</div>
-
-<!-- DASHBOARD -->
-
-<div id="dashboardContent"
-style="display:none;width:100%;">
-
 <!-- SIDEBAR -->
 
 <div class="sidebar">
@@ -457,9 +304,7 @@ style="display:none;width:100%;">
 <div>
 
 <div class="logo">
-
 🍔 PAPPRITO
-
 </div>
 
 <ul class="menu">
@@ -470,6 +315,10 @@ Dashboard
 
 <li>
 Live Orders
+</li>
+
+<li>
+Sales
 </li>
 
 <li onclick="location.href='products.html'">
@@ -483,9 +332,7 @@ Products
 <button
 class="delete-btn"
 onclick="logout()">
-
 Logout
-
 </button>
 
 </div>
@@ -510,7 +357,9 @@ Dashboard Overview
 
 <h3>Net Sales</h3>
 
-<p id="salesToday">₱0</p>
+<p id="salesToday">
+₱0
+</p>
 
 </div>
 
@@ -518,7 +367,9 @@ Dashboard Overview
 
 <h3>Total Orders</h3>
 
-<p id="totalOrders">0</p>
+<p id="totalOrders">
+0
+</p>
 
 </div>
 
@@ -526,7 +377,9 @@ Dashboard Overview
 
 <h3>Completed</h3>
 
-<p id="completedOrders">0</p>
+<p id="completedOrders">
+0
+</p>
 
 </div>
 
@@ -534,7 +387,9 @@ Dashboard Overview
 
 <h3>Gross Profit</h3>
 
-<p id="grossProfit">₱0</p>
+<p id="grossProfit">
+₱0
+</p>
 
 </div>
 
@@ -554,15 +409,20 @@ Dashboard Overview
 
 <tr>
 
-<th>TRACKING</th>
+<th>ORDER #</th>
 <th>CUSTOMER</th>
 <th>PHONE</th>
+<th>TYPE</th>
+<th>PAYMENT MODE</th>
+<th>REFERENCE #</th>
+<th>ADDRESS</th>
 <th>PRODUCT</th>
 <th>QTY</th>
-<th>TOTAL</th>
+<th>AMOUNT</th>
 <th>STATUS</th>
+<th>TIME</th>
 <th>DRIVER</th>
-<th>PHONE</th>
+<th>DRIVER PHONE</th>
 <th>VEHICLE</th>
 <th>ACTIONS</th>
 
@@ -580,62 +440,7 @@ Dashboard Overview
 
 </div>
 
-</div>
-
 <script>
-
-/* LOGIN */
-
-function login(){
-
-const pass =
-document.getElementById(
-"password"
-).value;
-
-if(pass === "papprito123"){
-
-localStorage.setItem(
-"pappritoLogin",
-"true"
-);
-
-document.getElementById(
-"loginPage"
-).style.display = "none";
-
-document.getElementById(
-"dashboardContent"
-).style.display = "flex";
-
-}else{
-
-document.getElementById(
-"errorMsg"
-).innerText =
-"Wrong Password";
-
-}
-
-}
-
-/* AUTO LOGIN */
-
-if(
-localStorage.getItem(
-"pappritoLogin"
-) === "true"
-){
-
-document.getElementById(
-"loginPage"
-).style.display = "none";
-
-document.getElementById(
-"dashboardContent"
-).style.display = "flex";
-
-}
 
 /* FIREBASE */
 
@@ -666,8 +471,6 @@ appId:
 
 firebase.initializeApp(firebaseConfig);
 
-const db = firebase.database();
-
 const table =
 document.getElementById(
 "ordersTable"
@@ -678,6 +481,7 @@ document.getElementById(
 function peso(num){
 
 return "₱" +
+
 Number(num || 0)
 .toLocaleString();
 
@@ -685,7 +489,8 @@ Number(num || 0)
 
 /* LOAD ORDERS */
 
-db.ref("orders")
+firebase.database()
+.ref("orders")
 .on("value", snapshot=>{
 
 table.innerHTML = "";
@@ -693,10 +498,12 @@ table.innerHTML = "";
 let totalSales = 0;
 let totalOrders = 0;
 let completed = 0;
+let gross = 0;
 
 snapshot.forEach(child=>{
 
 const order = child.val();
+
 const key = child.key;
 
 totalOrders++;
@@ -712,16 +519,21 @@ completed++;
 (order.items || [])
 .forEach(item=>{
 
-const amount =
-(item.price || 0)
+let amount =
+
+Number(item.price || 0)
+
 *
-(item.qty || 1);
+
+Number(item.qty || 1);
 
 totalSales += amount;
 
+gross += amount;
+
 table.innerHTML += `
 
-<tr class="order-${(order.status || 'NEW').toLowerCase()}">
+<tr>
 
 <td>
 ${order.trackingnumber || '-'}
@@ -733,6 +545,26 @@ ${order.customer || '-'}
 
 <td>
 ${order.phone || '-'}
+</td>
+
+<td>
+${order.orderType || '-'}
+</td>
+
+<td>
+${order.payment || '-'}
+</td>
+
+<td>
+
+${order.payment !== 'CASH'
+? (order.reference || '-')
+: '-'}
+
+</td>
+
+<td class="address-cell">
+${order.address || '-'}
 </td>
 
 <td>
@@ -758,6 +590,14 @@ ${order.status || 'NEW'}
 </td>
 
 <td>
+
+${new Date(
+order.timestamp || Date.now()
+).toLocaleString()}
+
+</td>
+
+<td>
 ${order.riderName || '-'}
 </td>
 
@@ -774,7 +614,7 @@ ${order.riderVehicle || '-'}
 <div class="action-buttons">
 
 <button
-class="accept-btn"
+class="rider-btn"
 onclick="assignRider('${key}')">
 
 RIDER
@@ -825,6 +665,14 @@ DONE
 
 </button>
 
+<button
+class="delete-btn"
+onclick="deleteOrder('${key}')">
+
+DELETE
+
+</button>
+
 </div>
 
 </td>
@@ -855,15 +703,19 @@ completed;
 document.getElementById(
 "grossProfit"
 ).innerText =
-peso(totalSales);
+peso(gross);
 
 });
 
 /* UPDATE STATUS */
 
-function updateStatus(orderKey,status){
+function updateStatus(
+orderKey,
+status
+){
 
-db.ref("orders/" + orderKey)
+firebase.database()
+.ref("orders/" + orderKey)
 .update({
 
 status:status
@@ -872,7 +724,7 @@ status:status
 
 }
 
-/* ASSIGN RIDER */
+/* RIDER */
 
 function assignRider(orderKey){
 
@@ -889,7 +741,8 @@ prompt("Driver Phone");
 const riderVehicle =
 prompt("Vehicle");
 
-db.ref("orders/" + orderKey)
+firebase.database()
+.ref("orders/" + orderKey)
 .update({
 
 riderName:riderName,
@@ -901,6 +754,22 @@ riderVehicle:riderVehicle
 });
 
 alert("Driver Assigned");
+
+}
+
+/* DELETE */
+
+function deleteOrder(orderKey){
+
+if(confirm(
+"Delete this order?"
+)){
+
+firebase.database()
+.ref("orders/" + orderKey)
+.remove();
+
+}
 
 }
 
