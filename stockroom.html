@@ -3,7 +3,9 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>Stockroom Inventory</title>
 
@@ -16,12 +18,12 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Segoe UI,sans-serif;
+font-family:'Segoe UI',sans-serif;
 }
 
 body{
 display:flex;
-background:#f1f5f9;
+background:#e2e8f0;
 height:100vh;
 overflow:hidden;
 }
@@ -29,17 +31,31 @@ overflow:hidden;
 /* SIDEBAR */
 
 .sidebar{
+
 width:250px;
-background:#0f172a;
+
+background:
+linear-gradient(
+180deg,
+#020617,
+#0f172a
+);
+
 color:white;
+
 padding:20px;
+
 overflow-y:auto;
 }
 
 .logo{
-font-size:24px;
+
+font-size:25px;
+
 font-weight:bold;
+
 margin-bottom:30px;
+
 color:#ffcc00;
 }
 
@@ -48,60 +64,166 @@ list-style:none;
 }
 
 .menu li{
+
 padding:14px;
+
 margin-bottom:10px;
-border-radius:12px;
+
+border-radius:14px;
+
 cursor:pointer;
+
 transition:.3s;
+
+font-size:14px;
 }
 
 .menu li:hover{
+
 background:#1e293b;
+
 color:#ffcc00;
 }
 
 .menu i{
+
 margin-right:10px;
 }
 
 /* MAIN */
 
 .main{
+
 flex:1;
+
 padding:20px;
+
 overflow-y:auto;
 }
 
+/* HEADER */
+
 .header{
-background:white;
+
+background:#dbeafe;
+
 padding:25px;
+
 border-radius:15px;
+
 margin-bottom:20px;
-box-shadow:0 2px 10px rgba(0,0,0,.1);
+
+border:2px solid #94a3b8;
 }
 
+.header h1{
+
+font-size:40px;
+
+margin-bottom:8px;
+}
+
+/* CARDS */
+
 .cards{
+
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+grid-template-columns:
+repeat(auto-fit,minmax(220px,1fr));
+
 gap:15px;
+
 margin-bottom:20px;
 }
 
 .card{
+
 background:white;
+
 padding:20px;
+
 border-radius:15px;
-box-shadow:0 2px 10px rgba(0,0,0,.1);
+
+box-shadow:
+0 2px 10px rgba(0,0,0,.1);
 }
 
 .card h3{
-font-size:15px;
+
+font-size:16px;
+
 margin-bottom:10px;
 }
 
 .card p{
+
 font-size:35px;
+
 font-weight:bold;
+}
+
+/* TABLE */
+
+.table-box{
+
+background:white;
+
+padding:20px;
+
+border-radius:15px;
+
+overflow:auto;
+}
+
+table{
+
+width:100%;
+
+border-collapse:collapse;
+
+min-width:1000px;
+}
+
+th{
+
+background:#1e293b;
+
+color:white;
+
+padding:12px;
+
+font-size:13px;
+}
+
+td{
+
+padding:12px;
+
+border-bottom:1px solid #ddd;
+
+font-size:13px;
+}
+
+/* BUTTON */
+
+.add-btn{
+
+background:#008000;
+
+color:white;
+
+border:none;
+
+padding:12px 18px;
+
+border-radius:10px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+margin-bottom:15px;
 }
 
 /* MOBILE */
@@ -110,22 +232,62 @@ font-weight:bold;
 
 body{
 flex-direction:column;
+height:auto;
+overflow:auto;
 }
 
 .sidebar{
+
 width:100%;
+
 display:flex;
+
 overflow-x:auto;
-gap:10px;
+
+padding:10px;
+}
+
+.logo{
+
+display:none;
 }
 
 .menu{
+
 display:flex;
+
 gap:10px;
 }
 
 .menu li{
+
 white-space:nowrap;
+
+margin-bottom:0;
+}
+
+.main{
+
+padding:12px;
+}
+
+.header h1{
+
+font-size:26px;
+}
+
+.cards{
+
+display:flex;
+
+overflow-x:auto;
+
+gap:10px;
+}
+
+.card{
+
+min-width:220px;
 }
 
 }
@@ -149,48 +311,83 @@ white-space:nowrap;
 <ul class="menu">
 
 <li onclick="location.href='dashboard.html'">
+
 <i class="fa-solid fa-house"></i>
+
 Dashboard
+
 </li>
 
 <li>
+
 <i class="fa-solid fa-layer-group"></i>
+
 Categories
+
 </li>
 
 <li>
+
 <i class="fa-solid fa-box"></i>
+
 Items Masterlist
+
 </li>
 
 <li>
+
 <i class="fa-solid fa-money-bill"></i>
+
 Inventory Costing
+
 </li>
 
 <li>
+
 <i class="fa-solid fa-arrow-down"></i>
+
 Stock In
+
 </li>
 
 <li>
+
 <i class="fa-solid fa-arrow-up"></i>
+
 Stock Out
+
 </li>
 
 <li>
+
 <i class="fa-solid fa-trash"></i>
+
 Waste
+
 </li>
 
 <li>
+
 <i class="fa-solid fa-clipboard"></i>
+
 Daily Inventory
+
 </li>
 
 <li>
+
+<i class="fa-solid fa-truck"></i>
+
+Suppliers
+
+</li>
+
+<li>
+
 <i class="fa-solid fa-chart-line"></i>
+
 Reports
+
 </li>
 
 </ul>
@@ -201,43 +398,123 @@ Reports
 
 <div class="main">
 
+<!-- HEADER -->
+
 <div class="header">
 
 <h1>
 
-Stockroom Inventory
+Items Masterlist 📦
 
 </h1>
 
 <p>
 
-Manage all inventory and warehouse stocks
+Manage all warehouse inventory stocks
 
 </p>
 
 </div>
 
+<!-- CARDS -->
+
 <div class="cards">
 
 <div class="card">
+
 <h3>Total Items</h3>
-<p>0</p>
+
+<p id="totalItems">
+0
+</p>
+
 </div>
 
 <div class="card">
-<h3>Low Stocks</h3>
-<p>0</p>
+
+<h3>Low Stock</h3>
+
+<p id="lowStock">
+0
+</p>
+
 </div>
 
 <div class="card">
+
 <h3>Categories</h3>
-<p>0</p>
+
+<p id="categories">
+0
+</p>
+
 </div>
 
 <div class="card">
+
 <h3>Suppliers</h3>
-<p>0</p>
+
+<p id="suppliers">
+0
+</p>
+
 </div>
+
+</div>
+
+<!-- TABLE -->
+
+<div class="table-box">
+
+<button class="add-btn">
+
++ Add Item
+
+</button>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Item Code</th>
+<th>Item Name</th>
+<th>Category</th>
+<th>Unit</th>
+<th>Current Stock</th>
+<th>Reorder</th>
+<th>Supplier</th>
+<th>Cost</th>
+<th>Selling</th>
+<th>Expiry</th>
+<th>Location</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>1001</td>
+<td>Chicken Breast</td>
+<td>MEAT</td>
+<td>KG</td>
+<td>20</td>
+<td>5</td>
+<td>ABC Supplier</td>
+<td>₱150</td>
+<td>₱220</td>
+<td>05/30/2026</td>
+<td>Freezer A</td>
+
+</tr>
+
+</tbody>
+
+</table>
 
 </div>
 
