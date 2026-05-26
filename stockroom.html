@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Stockroom Inventory</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI,sans-serif;
+}
+
+body{
+display:flex;
+background:#f1f5f9;
+height:100vh;
+overflow:hidden;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+width:250px;
+background:#0f172a;
+color:white;
+padding:20px;
+overflow-y:auto;
+}
+
+.logo{
+font-size:24px;
+font-weight:bold;
+margin-bottom:30px;
+color:#ffcc00;
+}
+
+.menu{
+list-style:none;
+}
+
+.menu li{
+padding:14px;
+margin-bottom:10px;
+border-radius:12px;
+cursor:pointer;
+transition:.3s;
+}
+
+.menu li:hover{
+background:#1e293b;
+color:#ffcc00;
+}
+
+.menu i{
+margin-right:10px;
+}
+
+/* MAIN */
+
+.main{
+flex:1;
+padding:20px;
+overflow-y:auto;
+}
+
+.header{
+background:white;
+padding:25px;
+border-radius:15px;
+margin-bottom:20px;
+box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:15px;
+margin-bottom:20px;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:15px;
+box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+
+.card h3{
+font-size:15px;
+margin-bottom:10px;
+}
+
+.card p{
+font-size:35px;
+font-weight:bold;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+body{
+flex-direction:column;
+}
+
+.sidebar{
+width:100%;
+display:flex;
+overflow-x:auto;
+gap:10px;
+}
+
+.menu{
+display:flex;
+gap:10px;
+}
+
+.menu li{
+white-space:nowrap;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+<div class="logo">
+
+📦 STOCKROOM
+
+</div>
+
+<ul class="menu">
+
+<li onclick="location.href='dashboard.html'">
+<i class="fa-solid fa-house"></i>
+Dashboard
+</li>
+
+<li>
+<i class="fa-solid fa-layer-group"></i>
+Categories
+</li>
+
+<li>
+<i class="fa-solid fa-box"></i>
+Items Masterlist
+</li>
+
+<li>
+<i class="fa-solid fa-money-bill"></i>
+Inventory Costing
+</li>
+
+<li>
+<i class="fa-solid fa-arrow-down"></i>
+Stock In
+</li>
+
+<li>
+<i class="fa-solid fa-arrow-up"></i>
+Stock Out
+</li>
+
+<li>
+<i class="fa-solid fa-trash"></i>
+Waste
+</li>
+
+<li>
+<i class="fa-solid fa-clipboard"></i>
+Daily Inventory
+</li>
+
+<li>
+<i class="fa-solid fa-chart-line"></i>
+Reports
+</li>
+
+</ul>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="main">
+
+<div class="header">
+
+<h1>
+
+Stockroom Inventory
+
+</h1>
+
+<p>
+
+Manage all inventory and warehouse stocks
+
+</p>
+
+</div>
+
+<div class="cards">
+
+<div class="card">
+<h3>Total Items</h3>
+<p>0</p>
+</div>
+
+<div class="card">
+<h3>Low Stocks</h3>
+<p>0</p>
+</div>
+
+<div class="card">
+<h3>Categories</h3>
+<p>0</p>
+</div>
+
+<div class="card">
+<h3>Suppliers</h3>
+<p>0</p>
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>
