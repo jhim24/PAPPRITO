@@ -7,10 +7,14 @@
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>Stockroom Inventory</title>
+<title>STOCKROOM INVENTORY</title>
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 
 <style>
 
@@ -18,12 +22,12 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:'Segoe UI',sans-serif;
+font-family:Segoe UI,sans-serif;
 }
 
 body{
 display:flex;
-background:#e2e8f0;
+background:#f1f5f9;
 height:100vh;
 overflow:hidden;
 }
@@ -31,31 +35,17 @@ overflow:hidden;
 /* SIDEBAR */
 
 .sidebar{
-
-width:250px;
-
-background:
-linear-gradient(
-180deg,
-#020617,
-#0f172a
-);
-
+width:260px;
+background:#0f172a;
 color:white;
-
 padding:20px;
-
 overflow-y:auto;
 }
 
 .logo{
-
-font-size:25px;
-
+font-size:24px;
 font-weight:bold;
-
-margin-bottom:30px;
-
+margin-bottom:25px;
 color:#ffcc00;
 }
 
@@ -64,166 +54,143 @@ list-style:none;
 }
 
 .menu li{
-
 padding:14px;
-
 margin-bottom:10px;
-
-border-radius:14px;
-
+background:#1e293b;
+border-radius:12px;
 cursor:pointer;
-
 transition:.3s;
-
 font-size:14px;
 }
 
 .menu li:hover{
-
-background:#1e293b;
-
+background:#334155;
 color:#ffcc00;
-}
-
-.menu i{
-
-margin-right:10px;
 }
 
 /* MAIN */
 
 .main{
-
 flex:1;
-
 padding:20px;
-
-overflow-y:auto;
+overflow:auto;
 }
 
-/* HEADER */
+/* TOP */
 
-.header{
-
-background:#dbeafe;
-
-padding:25px;
-
-border-radius:15px;
-
+.topbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
 margin-bottom:20px;
-
-border:2px solid #94a3b8;
+flex-wrap:wrap;
+gap:10px;
 }
 
-.header h1{
-
-font-size:40px;
-
-margin-bottom:8px;
+.topbar h1{
+font-size:30px;
 }
 
 /* CARDS */
 
 .cards{
-
 display:grid;
-
-grid-template-columns:
-repeat(auto-fit,minmax(220px,1fr));
-
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
 gap:15px;
-
 margin-bottom:20px;
 }
 
 .card{
-
 background:white;
-
 padding:20px;
-
-border-radius:15px;
-
-box-shadow:
-0 2px 10px rgba(0,0,0,.1);
+border-radius:16px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
 }
 
 .card h3{
-
-font-size:16px;
-
+font-size:15px;
 margin-bottom:10px;
 }
 
 .card p{
-
-font-size:35px;
-
+font-size:30px;
 font-weight:bold;
+}
+
+/* FORM */
+
+.form-box{
+background:white;
+padding:20px;
+border-radius:16px;
+margin-bottom:20px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.form-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:15px;
+}
+
+input,
+select{
+width:100%;
+padding:12px;
+border:1px solid #ccc;
+border-radius:10px;
+}
+
+button{
+border:none;
+padding:12px 18px;
+border-radius:10px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.save-btn{
+background:#16a34a;
+color:white;
 }
 
 /* TABLE */
 
 .table-box{
-
 background:white;
-
 padding:20px;
-
-border-radius:15px;
-
+border-radius:16px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
 overflow:auto;
 }
 
 table{
-
 width:100%;
-
 border-collapse:collapse;
-
-min-width:1000px;
+min-width:900px;
 }
 
 th{
-
-background:#1e293b;
-
+background:#0f172a;
 color:white;
-
 padding:12px;
-
 font-size:13px;
 }
 
 td{
-
 padding:12px;
-
 border-bottom:1px solid #ddd;
-
 font-size:13px;
 }
 
-/* BUTTON */
-
-.add-btn{
-
-background:#008000;
-
+.edit-btn{
+background:#f59e0b;
 color:white;
+}
 
-border:none;
-
-padding:12px 18px;
-
-border-radius:10px;
-
-font-weight:bold;
-
-cursor:pointer;
-
-margin-bottom:15px;
+.delete-btn{
+background:#dc2626;
+color:white;
 }
 
 /* MOBILE */
@@ -237,57 +204,31 @@ overflow:auto;
 }
 
 .sidebar{
-
 width:100%;
-
-display:flex;
-
-overflow-x:auto;
-
-padding:10px;
-}
-
-.logo{
-
-display:none;
+height:auto;
 }
 
 .menu{
-
 display:flex;
-
+overflow-x:auto;
 gap:10px;
 }
 
 .menu li{
-
 white-space:nowrap;
-
-margin-bottom:0;
+flex-shrink:0;
 }
 
 .main{
-
-padding:12px;
+padding:10px;
 }
 
-.header h1{
-
-font-size:26px;
+.topbar h1{
+font-size:24px;
 }
 
 .cards{
-
-display:flex;
-
-overflow-x:auto;
-
-gap:10px;
-}
-
-.card{
-
-min-width:220px;
+grid-template-columns:1fr;
 }
 
 }
@@ -310,84 +251,34 @@ min-width:220px;
 
 <ul class="menu">
 
-<li onclick="location.href='dashboard.html'">
-
+<li>
 <i class="fa-solid fa-house"></i>
-
-Dashboard
-
+ Dashboard
 </li>
 
 <li>
-
-<i class="fa-solid fa-layer-group"></i>
-
-Categories
-
-</li>
-
-<li>
-
 <i class="fa-solid fa-box"></i>
-
-Items Masterlist
-
+ Items
 </li>
 
 <li>
-
-<i class="fa-solid fa-money-bill"></i>
-
-Inventory Costing
-
-</li>
-
-<li>
-
 <i class="fa-solid fa-arrow-down"></i>
-
-Stock In
-
+ Stock In
 </li>
 
 <li>
-
 <i class="fa-solid fa-arrow-up"></i>
-
-Stock Out
-
+ Stock Out
 </li>
 
 <li>
-
 <i class="fa-solid fa-trash"></i>
-
-Waste
-
+ Waste
 </li>
 
 <li>
-
-<i class="fa-solid fa-clipboard"></i>
-
-Daily Inventory
-
-</li>
-
-<li>
-
-<i class="fa-solid fa-truck"></i>
-
-Suppliers
-
-</li>
-
-<li>
-
 <i class="fa-solid fa-chart-line"></i>
-
-Reports
-
+ Reports
 </li>
 
 </ul>
@@ -398,21 +289,13 @@ Reports
 
 <div class="main">
 
-<!-- HEADER -->
-
-<div class="header">
+<div class="topbar">
 
 <h1>
 
-Items Masterlist 📦
+Stockroom Inventory
 
 </h1>
-
-<p>
-
-Manage all warehouse inventory stocks
-
-</p>
 
 </div>
 
@@ -432,9 +315,9 @@ Manage all warehouse inventory stocks
 
 <div class="card">
 
-<h3>Low Stock</h3>
+<h3>Total Stocks</h3>
 
-<p id="lowStock">
+<p id="totalStocks">
 0
 </p>
 
@@ -442,21 +325,66 @@ Manage all warehouse inventory stocks
 
 <div class="card">
 
-<h3>Categories</h3>
+<h3>Low Stocks</h3>
 
-<p id="categories">
+<p id="lowStocks">
 0
 </p>
 
 </div>
 
-<div class="card">
+</div>
 
-<h3>Suppliers</h3>
+<!-- FORM -->
 
-<p id="suppliers">
-0
-</p>
+<div class="form-box">
+
+<h2 style="margin-bottom:15px;">
+
+Add Item
+
+</h2>
+
+<div class="form-grid">
+
+<input
+type="text"
+id="itemName"
+placeholder="Item Name">
+
+<select id="itemCategory">
+
+<option value="">
+Select Category
+</option>
+
+<option>MEAT</option>
+
+<option>DRINKS</option>
+
+<option>VEGETABLES</option>
+
+<option>PACKAGING</option>
+
+</select>
+
+<input
+type="number"
+id="itemStocks"
+placeholder="Stocks">
+
+<input
+type="number"
+id="itemCost"
+placeholder="Cost">
+
+<button
+class="save-btn"
+onclick="saveItem()">
+
+SAVE ITEM
+
+</button>
 
 </div>
 
@@ -466,51 +394,29 @@ Manage all warehouse inventory stocks
 
 <div class="table-box">
 
-<button class="add-btn">
-
-+ Add Item
-
-</button>
-
 <table>
 
 <thead>
 
 <tr>
 
-<th>Item Code</th>
-<th>Item Name</th>
-<th>Category</th>
-<th>Unit</th>
-<th>Current Stock</th>
-<th>Reorder</th>
-<th>Supplier</th>
-<th>Cost</th>
-<th>Selling</th>
-<th>Expiry</th>
-<th>Location</th>
+<th>ITEM</th>
+
+<th>CATEGORY</th>
+
+<th>STOCKS</th>
+
+<th>COST</th>
+
+<th>TOTAL</th>
+
+<th>ACTION</th>
 
 </tr>
 
 </thead>
 
-<tbody>
-
-<tr>
-
-<td>1001</td>
-<td>Chicken Breast</td>
-<td>MEAT</td>
-<td>KG</td>
-<td>20</td>
-<td>5</td>
-<td>ABC Supplier</td>
-<td>₱150</td>
-<td>₱220</td>
-<td>05/30/2026</td>
-<td>Freezer A</td>
-
-</tr>
+<tbody id="inventoryTable">
 
 </tbody>
 
@@ -519,6 +425,300 @@ Manage all warehouse inventory stocks
 </div>
 
 </div>
+
+<script>
+
+/* FIREBASE */
+
+const firebaseConfig = {
+
+apiKey:
+"AIzaSyAV9T5w_1azmPHIJcZpraXP06TItj7HEuA",
+
+authDomain:
+"papprito-orders.firebaseapp.com",
+
+databaseURL:
+"https://papprito-orders-default-rtdb.firebaseio.com",
+
+projectId:
+"papprito-orders",
+
+storageBucket:
+"papprito-orders.appspot.com",
+
+messagingSenderId:
+"831941801424",
+
+appId:
+"1:831941801424:web:40a99cdfb312dac2d275d5"
+
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const db = firebase.database();
+
+let editKey = null;
+
+/* SAVE ITEM */
+
+function saveItem(){
+
+const itemName =
+document.getElementById(
+'itemName'
+).value;
+
+const itemCategory =
+document.getElementById(
+'itemCategory'
+).value;
+
+const itemStocks =
+document.getElementById(
+'itemStocks'
+).value;
+
+const itemCost =
+document.getElementById(
+'itemCost'
+).value;
+
+if(
+itemName === '' ||
+itemCategory === '' ||
+itemStocks === '' ||
+itemCost === ''
+){
+
+alert('Complete all fields');
+
+return;
+
+}
+
+const data = {
+
+name:itemName,
+
+category:itemCategory,
+
+stocks:Number(itemStocks),
+
+cost:Number(itemCost),
+
+timestamp:Date.now()
+
+};
+
+/* UPDATE */
+
+if(editKey){
+
+db.ref(
+'inventory/' + editKey
+).update(data);
+
+alert('Item Updated');
+
+editKey = null;
+
+}else{
+
+db.ref('inventory')
+.push(data);
+
+alert('Item Saved');
+
+}
+
+clearForm();
+
+}
+
+/* LOAD ITEMS */
+
+db.ref('inventory')
+.on('value',snapshot=>{
+
+const table =
+document.getElementById(
+'inventoryTable'
+);
+
+table.innerHTML='';
+
+let totalItems = 0;
+
+let totalStocks = 0;
+
+let lowStocks = 0;
+
+snapshot.forEach(child=>{
+
+const item = child.val();
+
+const key = child.key;
+
+totalItems++;
+
+totalStocks +=
+Number(item.stocks || 0);
+
+if(
+Number(item.stocks) <= 5
+){
+
+lowStocks++;
+
+}
+
+table.innerHTML += `
+
+<tr>
+
+<td>
+${item.name}
+</td>
+
+<td>
+${item.category}
+</td>
+
+<td>
+${item.stocks}
+</td>
+
+<td>
+₱${item.cost}
+</td>
+
+<td>
+₱${item.stocks * item.cost}
+</td>
+
+<td>
+
+<button
+class="edit-btn"
+onclick="editItem(
+'${key}',
+'${item.name}',
+'${item.category}',
+'${item.stocks}',
+'${item.cost}'
+)">
+
+EDIT
+
+</button>
+
+<button
+class="delete-btn"
+onclick="deleteItem('${key}')">
+
+DELETE
+
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+document.getElementById(
+'totalItems'
+).innerText = totalItems;
+
+document.getElementById(
+'totalStocks'
+).innerText = totalStocks;
+
+document.getElementById(
+'lowStocks'
+).innerText = lowStocks;
+
+});
+
+/* EDIT */
+
+function editItem(
+key,
+name,
+category,
+stocks,
+cost
+){
+
+editKey = key;
+
+document.getElementById(
+'itemName'
+).value = name;
+
+document.getElementById(
+'itemCategory'
+).value = category;
+
+document.getElementById(
+'itemStocks'
+).value = stocks;
+
+document.getElementById(
+'itemCost'
+).value = cost;
+
+window.scrollTo({
+top:0,
+behavior:'smooth'
+});
+
+}
+
+/* DELETE */
+
+function deleteItem(key){
+
+const confirmDelete =
+confirm('Delete Item?');
+
+if(confirmDelete){
+
+db.ref(
+'inventory/' + key
+).remove();
+
+}
+
+}
+
+/* CLEAR */
+
+function clearForm(){
+
+document.getElementById(
+'itemName'
+).value='';
+
+document.getElementById(
+'itemCategory'
+).value='';
+
+document.getElementById(
+'itemStocks'
+).value='';
+
+document.getElementById(
+'itemCost'
+).value='';
+
+}
+
+</script>
 
 </body>
 </html>
