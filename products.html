@@ -445,7 +445,12 @@ return;
 Object.keys(data)
 .forEach(key=>{
 
-productCategory.innerHTML += `
+const select =
+document.getElementById(
+'productCategory'
+);
+
+select.innerHTML += `
 
 <option value="${data[key].name}">
 ${data[key].name}
