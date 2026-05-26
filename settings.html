@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>PAPPRITO SETTINGS</title>
+
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+
+background:
+linear-gradient(
+135deg,
+#020617,
+#071226,
+#0f172a
+);
+
+color:white;
+
+padding:20px;
+
+}
+
+/* CONTAINER */
+
+.settings-container{
+
+max-width:700px;
+
+margin:auto;
+
+background:
+rgba(255,255,255,0.05);
+
+border:
+1px solid rgba(255,255,255,0.08);
+
+border-radius:25px;
+
+padding:25px;
+
+backdrop-filter:blur(10px);
+
+box-shadow:
+0 10px 30px rgba(0,0,0,0.4);
+
+}
+
+/* HEADER */
+
+.header{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-bottom:25px;
+
+flex-wrap:wrap;
+
+gap:10px;
+
+}
+
+.header h1{
+
+font-size:35px;
+
+color:#ffcc00;
+
+}
+
+/* BUTTONS */
+
+.btn{
+
+width:100%;
+
+padding:16px;
+
+border:none;
+
+border-radius:18px;
+
+font-size:15px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+margin-bottom:15px;
+
+transition:.3s;
+
+}
+
+.btn:hover{
+
+transform:scale(1.02);
+
+}
+
+/* COLORS */
+
+.blue{
+
+background:
+linear-gradient(
+135deg,
+#2563eb,
+#1d4ed8
+);
+
+color:white;
+
+}
+
+.red{
+
+background:
+linear-gradient(
+135deg,
+#dc2626,
+#991b1b
+);
+
+color:white;
+
+}
+
+.green{
+
+background:
+linear-gradient(
+135deg,
+#10b981,
+#059669
+);
+
+color:white;
+
+}
+
+.gray{
+
+background:
+linear-gradient(
+135deg,
+#374151,
+#1f2937
+);
+
+color:white;
+
+}
+
+/* INFO */
+
+.info-box{
+
+background:
+rgba(255,255,255,0.04);
+
+padding:18px;
+
+border-radius:18px;
+
+margin-bottom:20px;
+
+line-height:1.8;
+
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.header h1{
+
+font-size:26px;
+
+}
+
+.settings-container{
+
+padding:18px;
+
+}
+
+.btn{
+
+padding:14px;
+font-size:14px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="settings-container">
+
+<!-- HEADER -->
+
+<div class="header">
+
+<h1>
+
+<i class="fa-solid fa-gear"></i>
+
+SETTINGS
+
+</h1>
+
+<button
+class="btn gray"
+style="
+width:auto;
+padding:12px 20px;
+margin:0;
+"
+onclick="window.location.href='dashboard.html'">
+
+← BACK
+
+</button>
+
+</div>
+
+<!-- INFO -->
+
+<div class="info-box">
+
+<div>
+
+<b>System:</b>
+PAPPRITO MANAGEMENT
+
+</div>
+
+<div>
+
+<b>Version:</b>
+1.0
+
+</div>
+
+<div>
+
+<b>Status:</b>
+ONLINE
+
+</div>
+
+</div>
+
+<!-- BUTTONS -->
+
+<button
+class="btn blue"
+onclick="changePassword()">
+
+<i class="fa-solid fa-lock"></i>
+
+CHANGE PASSWORD
+
+</button>
+
+<button
+class="btn green"
+onclick="clearCache()">
+
+<i class="fa-solid fa-broom"></i>
+
+CLEAR CACHE
+
+</button>
+
+<button
+class="btn red"
+onclick="clearOrders()">
+
+<i class="fa-solid fa-trash"></i>
+
+DELETE ALL ORDERS
+
+</button>
+
+<button
+class="btn red"
+onclick="resetProducts()">
+
+<i class="fa-solid fa-box"></i>
+
+DELETE ALL PRODUCTS
+
+</button>
+
+<button
+class="btn gray"
+onclick="logout()">
+
+<i class="fa-solid fa-right-from-bracket"></i>
+
+LOGOUT
+
+</button>
+
+</div>
+
+<!-- FIREBASE -->
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+<script>
+
+/* FIREBASE */
+
+const firebaseConfig = {
+
+apiKey:
+"AIzaSyAV9T5w_1azmPHIJcZpraXP06TItj7HEuA",
+
+authDomain:
+"papprito-orders.firebaseapp.com",
+
+databaseURL:
+"https://papprito-orders-default-rtdb.firebaseio.com",
+
+projectId:
+"papprito-orders",
+
+storageBucket:
+"papprito-orders.firebasestorage.app",
+
+messagingSenderId:
+"831941801424",
+
+appId:
+"1:831941801424:web:40a99cdfb312dac2d275d5"
+
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const db = firebase.database();
+
+/* CHANGE PASSWORD */
+
+function changePassword(){
+
+const newPass =
+prompt(
+'Enter New Password'
+);
+
+if(!newPass){
+return;
+}
+
+localStorage.setItem(
+'pappritoPassword',
+newPass
+);
+
+alert(
+'Password Updated'
+);
+
+}
+
+/* CLEAR CACHE */
+
+function clearCache(){
+
+localStorage.clear();
+
+alert(
+'Cache Cleared'
+);
+
+location.reload();
+
+}
+
+/* DELETE ORDERS */
+
+function clearOrders(){
+
+const confirmDelete =
+confirm(
+'Delete All Orders?'
+);
+
+if(confirmDelete){
+
+db.ref('orders')
+.remove();
+
+alert(
+'All Orders Deleted'
+);
+
+}
+
+}
+
+/* DELETE PRODUCTS */
+
+function resetProducts(){
+
+const confirmDelete =
+confirm(
+'Delete All Products?'
+);
+
+if(confirmDelete){
+
+db.ref('products')
+.remove();
+
+alert(
+'All Products Deleted'
+);
+
+}
+
+}
+
+/* LOGOUT */
+
+function logout(){
+
+localStorage.removeItem(
+'pappritoLogin'
+);
+
+window.location.href =
+'index.html';
+
+}
+
+</script>
+
+</body>
+</html>
