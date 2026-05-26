@@ -17,6 +17,10 @@ content="#ffcc00">
 <link rel="stylesheet"
 href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
 
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
 <style>
 
 *{
@@ -27,363 +31,356 @@ font-family:'Segoe UI',sans-serif;
 }
 
 body{
-background:#f5f5f5;
+background:
+linear-gradient(
+135deg,
+#020617,
+#071226,
+#0f172a
+);
+color:white;
 display:flex;
-min-height:100vh;
+height:100vh;
 overflow:hidden;
+}
+
+/* LOGIN */
+
+.login-page{
+position:fixed;
+inset:0;
+background:
+linear-gradient(
+135deg,
+#020617,
+#071226,
+#0f172a
+);
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:99999;
+}
+
+.login-box{
+width:340px;
+background:
+rgba(255,255,255,0.05);
+padding:35px;
+border-radius:25px;
+backdrop-filter:blur(12px);
+border:
+1px solid rgba(255,255,255,0.08);
+box-shadow:
+0 15px 35px rgba(0,0,0,0.35);
+}
+
+.login-box h2{
+margin-bottom:20px;
+text-align:center;
+color:#ffcc00;
+}
+
+.login-box input{
+width:100%;
+padding:14px;
+border:none;
+border-radius:14px;
+background:#111827;
+color:white;
+margin-bottom:15px;
+outline:none;
+}
+
+.login-box button{
+width:100%;
+padding:14px;
+border:none;
+border-radius:14px;
+background:
+linear-gradient(
+135deg,
+#ffcc00,
+#f59e0b
+);
+font-weight:bold;
+cursor:pointer;
+}
+
+#errorMsg{
+margin-top:10px;
+text-align:center;
+color:#ff6b81;
 }
 
 /* SIDEBAR */
 
 .sidebar{
-
-width:250px;
-
-background:white;
-
-border-right:2px solid #eee;
-
+width:240px;
+background:
+linear-gradient(
+180deg,
+#020617,
+#081226,
+#0f172a
+);
 padding:20px;
-
 display:flex;
-
 flex-direction:column;
-
 justify-content:space-between;
-
+border-right:
+1px solid rgba(255,255,255,0.08);
 }
 
 .logo{
-
-font-size:28px;
-
+font-size:26px;
 font-weight:bold;
-
-color:#ff8800;
-
+color:#ffcc00;
 margin-bottom:30px;
-
 }
 
 .menu{
-
 list-style:none;
-
 }
 
 .menu li{
-
 padding:15px;
-
 margin-bottom:10px;
-
-border-radius:15px;
-
+border-radius:16px;
 cursor:pointer;
-
+transition:0.3s;
 font-size:14px;
-
-font-weight:bold;
-
-transition:.3s;
-
-display:flex;
-
-align-items:center;
-
-gap:10px;
-
 }
 
-.menu li:hover{
-
-background:#ffcc00;
-
-color:black;
-
-transform:translateX(5px);
-
-}
-
-.active{
-
-background:#ffcc00;
-
-color:black;
-
+.menu li:hover,
+.menu li.active{
+background:
+linear-gradient(
+135deg,
+#111827,
+#1e293b
+);
+color:#ffcc00;
 }
 
 /* MAIN */
 
 .main{
-
 flex:1;
-
 padding:25px;
-
 overflow-y:auto;
-
 }
 
 /* TOPBAR */
 
 .topbar{
-
 display:flex;
-
 justify-content:space-between;
-
 align-items:center;
-
 margin-bottom:25px;
-
-flex-wrap:wrap;
-
-gap:10px;
-
 }
 
 .topbar h1{
-
-font-size:35px;
-
-color:#222;
-
+font-size:40px;
 }
 
-.top-boxes{
-
-display:flex;
-
-gap:10px;
-
-}
-
-.top-box{
-
-background:white;
-
-padding:12px 18px;
-
-border-radius:15px;
-
-box-shadow:0 5px 15px rgba(0,0,0,0.08);
-
-font-weight:bold;
-
-}
-
-/* CARDS */
+/* DASHBOARD */
 
 .dashboard-grid{
-
 display:grid;
-
 grid-template-columns:
 repeat(auto-fit,minmax(220px,1fr));
-
 gap:18px;
-
 margin-bottom:25px;
-
 }
 
 .card{
-
 padding:25px;
-
-border-radius:20px;
-
-color:white;
-
-box-shadow:0 10px 25px rgba(0,0,0,0.1);
-
+border-radius:24px;
+box-shadow:
+0 10px 30px rgba(0,0,0,0.3);
 }
 
 .card h3{
-
-font-size:15px;
-
+font-size:16px;
 margin-bottom:10px;
-
 }
 
 .card p{
-
-font-size:32px;
-
+font-size:36px;
 font-weight:bold;
-
 }
 
 .sales{
-
 background:
-linear-gradient(135deg,#ff8800,#ffcc00);
-
+linear-gradient(
+135deg,
+#ff4d6d,
+#c9184a
+);
 }
 
 .orders{
-
 background:
-linear-gradient(135deg,#0084ff,#00aaff);
-
+linear-gradient(
+135deg,
+#1e90ff,
+#2563eb
+);
 }
 
 .completed{
-
 background:
-linear-gradient(135deg,#00b894,#00d084);
-
+linear-gradient(
+135deg,
+#10b981,
+#059669
+);
 }
 
 .profit{
-
 background:
-linear-gradient(135deg,#6c5ce7,#8e7dff);
-
+linear-gradient(
+135deg,
+#8b5cf6,
+#6d28d9
+);
 }
 
 /* LIVE ORDERS */
 
 .orders-section{
-
-background:white;
-
-padding:20px;
-
-border-radius:20px;
-
-box-shadow:0 10px 25px rgba(0,0,0,0.08);
-
-overflow:auto;
-
-}
-
-.orders-section h2{
-
-margin-bottom:20px;
-
-color:#222;
-
+background:
+rgba(255,255,255,0.04);
+padding:25px;
+border-radius:24px;
+border:
+1px solid rgba(255,255,255,0.08);
+overflow-x:auto;
 }
 
 .order-table{
-
 width:100%;
-
 border-collapse:collapse;
-
-min-width:1500px;
-
+margin-top:20px;
+min-width:1800px;
+background:#0f172a;
 }
 
 .order-table th{
-
-background:#ffcc00;
-
-padding:12px;
-
+padding:10px;
+color:#ffcc00;
 font-size:12px;
-
+font-weight:bold;
 text-align:left;
-
+border:1px solid rgba(255,255,255,0.08);
+background:#111827;
+white-space:nowrap;
 }
 
 .order-table td{
-
-padding:10px;
-
+padding:8px;
 font-size:12px;
-
-border-bottom:1px solid #eee;
-
+border:1px solid rgba(255,255,255,0.06);
+white-space:nowrap;
 }
 
 /* STATUS */
 
 .status{
-
 padding:6px 12px;
-
 border-radius:20px;
-
 font-size:11px;
-
 font-weight:bold;
-
-color:white;
-
+display:inline-block;
 }
 
 .new{
-background:#ff3b3b;
+background:#ef4444;
+color:white;
 }
 
 .accepted{
-background:#00b894;
+background:#22c55e;
+color:white;
 }
 
 .preparing{
-background:#ff8800;
+background:#f59e0b;
+color:black;
 }
 
 .ready{
-background:#0984e3;
+background:#3b82f6;
+color:white;
 }
 
 .delivered{
-background:#6c5ce7;
+background:#8b5cf6;
+color:white;
+}
+
+/* CONNECTED MENU STATUS BORDER */
+
+.order-new{
+border-left:6px solid #ef4444;
+}
+
+.order-accepted{
+border-left:6px solid #22c55e;
+}
+
+.order-preparing{
+border-left:6px solid #f59e0b;
+}
+
+.order-ready{
+border-left:6px solid #3b82f6;
+}
+
+.order-delivered{
+border-left:6px solid #8b5cf6;
 }
 
 /* BUTTONS */
 
 .action-buttons{
-
 display:flex;
-
 gap:5px;
-
-flex-wrap:wrap;
-
 }
 
-.action-buttons button{
-
+.accept-btn,
+.preparing-btn,
+.ready-btn,
+.done-btn,
+.delete-btn{
 border:none;
-
 padding:7px 10px;
-
-border-radius:10px;
-
+border-radius:12px;
 font-size:11px;
-
 font-weight:bold;
-
-cursor:pointer;
-
 color:white;
-
+cursor:pointer;
 }
 
 .accept-btn{
-background:#00b894;
+background:#10b981;
 }
 
 .preparing-btn{
-background:#ff8800;
+background:#f59e0b;
 }
 
 .ready-btn{
-background:#0984e3;
+background:#2563eb;
 }
 
 .done-btn{
-background:#6c5ce7;
+background:#64748b;
 }
 
 .delete-btn{
-background:#ff3b3b;
+background:#ef4444;
 }
 
 /* MOBILE */
@@ -391,73 +388,27 @@ background:#ff3b3b;
 @media(max-width:768px){
 
 body{
-
 flex-direction:column;
-
+height:auto;
 overflow:auto;
-
 }
 
 .sidebar{
-
 width:100%;
-
 padding:10px;
-
 overflow-x:auto;
-
-}
-
-.logo{
-
-font-size:22px;
-
-margin-bottom:10px;
-
-}
-
-.menu{
-
-display:flex;
-
-gap:10px;
-
-overflow-x:auto;
-
-}
-
-.menu li{
-
-white-space:nowrap;
-
-margin-bottom:0;
-
 }
 
 .main{
-
-padding:15px;
-
+padding:12px;
 }
 
 .topbar h1{
-
-font-size:25px;
-
+font-size:24px;
 }
 
-.dashboard-grid{
-
-display:flex;
-
-overflow-x:auto;
-
-}
-
-.card{
-
-min-width:220px;
-
+.order-table{
+min-width:1800px;
 }
 
 }
@@ -467,6 +418,37 @@ min-width:220px;
 </head>
 
 <body>
+
+<!-- LOGIN -->
+
+<div id="loginPage"
+class="login-page">
+
+<div class="login-box">
+
+<h2>
+🔐 PAPPRITO LOGIN
+</h2>
+
+<input
+type="password"
+id="password"
+placeholder="Enter Password">
+
+<button onclick="login()">
+LOGIN
+</button>
+
+<p id="errorMsg"></p>
+
+</div>
+
+</div>
+
+<!-- DASHBOARD -->
+
+<div id="dashboardContent"
+style="display:none;width:100%;">
 
 <!-- SIDEBAR -->
 
@@ -482,76 +464,16 @@ min-width:220px;
 
 <ul class="menu">
 
-<li class="active"
-onclick="location.href='dashboard.html'">
-
-<i class="fa-solid fa-house"></i>
-
+<li class="active">
 Dashboard
-
 </li>
 
-<li
-onclick="document.getElementById('liveOrders').scrollIntoView({behavior:'smooth'})">
-
-<i class="fa-solid fa-receipt"></i>
-
+<li>
 Live Orders
-
 </li>
 
-<li
-onclick="location.href='sales.html'">
-
-<i class="fa-solid fa-wallet"></i>
-
-Sales
-
-</li>
-
-<li
-onclick="location.href='completed.html'">
-
-<i class="fa-solid fa-circle-check"></i>
-
-Completed
-
-</li>
-
-<li
-onclick="location.href='stockroom.html'">
-
-<i class="fa-solid fa-warehouse"></i>
-
-Stockroom Inventory
-
-</li>
-
-<li
-onclick="location.href='products.html'">
-
-<i class="fa-solid fa-burger"></i>
-
+<li onclick="location.href='products.html'">
 Products
-
-</li>
-
-<li
-onclick="location.href='reports.html'">
-
-<i class="fa-solid fa-chart-line"></i>
-
-Reports
-
-</li>
-
-<li
-onclick="location.href='settings.html'">
-
-<i class="fa-solid fa-gear"></i>
-
-Settings
-
 </li>
 
 </ul>
@@ -560,17 +482,9 @@ Settings
 
 <button
 class="delete-btn"
-onclick="logout()"
-style="
-width:100%;
-padding:14px;
-border:none;
-border-radius:15px;
-font-weight:bold;
-cursor:pointer;
-">
+onclick="logout()">
 
-🚪 Logout
+Logout
 
 </button>
 
@@ -580,31 +494,11 @@ cursor:pointer;
 
 <div class="main">
 
-<!-- TOPBAR -->
-
 <div class="topbar">
 
 <h1>
-
 Dashboard Overview
-
 </h1>
-
-<div class="top-boxes">
-
-<div class="top-box">
-
-📅 May 26 2026
-
-</div>
-
-<div class="top-box">
-
-👤 Admin
-
-</div>
-
-</div>
 
 </div>
 
@@ -614,13 +508,9 @@ Dashboard Overview
 
 <div class="card sales">
 
-<h3>Net Sales Today</h3>
+<h3>Net Sales</h3>
 
-<p id="salesToday">
-
-₱0
-
-</p>
+<p id="salesToday">₱0</p>
 
 </div>
 
@@ -628,23 +518,15 @@ Dashboard Overview
 
 <h3>Total Orders</h3>
 
-<p id="totalOrders">
-
-0
-
-</p>
+<p id="totalOrders">0</p>
 
 </div>
 
 <div class="card completed">
 
-<h3>Completed Orders</h3>
+<h3>Completed</h3>
 
-<p id="completedOrders">
-
-0
-
-</p>
+<p id="completedOrders">0</p>
 
 </div>
 
@@ -652,11 +534,7 @@ Dashboard Overview
 
 <h3>Gross Profit</h3>
 
-<p id="grossProfit">
-
-₱0
-
-</p>
+<p id="grossProfit">₱0</p>
 
 </div>
 
@@ -664,13 +542,10 @@ Dashboard Overview
 
 <!-- LIVE ORDERS -->
 
-<div class="orders-section"
-id="liveOrders">
+<div class="orders-section">
 
 <h2>
-
 📦 Live Orders
-
 </h2>
 
 <table class="order-table">
@@ -679,14 +554,16 @@ id="liveOrders">
 
 <tr>
 
-<th>ORDER #</th>
+<th>TRACKING</th>
 <th>CUSTOMER</th>
 <th>PHONE</th>
 <th>PRODUCT</th>
 <th>QTY</th>
-<th>AMOUNT</th>
+<th>TOTAL</th>
 <th>STATUS</th>
 <th>DRIVER</th>
+<th>PHONE</th>
+<th>VEHICLE</th>
 <th>ACTIONS</th>
 
 </tr>
@@ -694,67 +571,6 @@ id="liveOrders">
 </thead>
 
 <tbody id="ordersTable">
-
-<tr>
-
-<td>PAP-001</td>
-<td>Juan Dela Cruz</td>
-<td>09123456789</td>
-<td>Burger</td>
-<td>2</td>
-<td>₱300</td>
-
-<td>
-
-<span class="status preparing">
-
-PREPARING
-
-</span>
-
-</td>
-
-<td>Rider 1</td>
-
-<td>
-
-<div class="action-buttons">
-
-<button class="accept-btn">
-
-ACCEPT
-
-</button>
-
-<button class="preparing-btn">
-
-PREP
-
-</button>
-
-<button class="ready-btn">
-
-READY
-
-</button>
-
-<button class="done-btn">
-
-DONE
-
-</button>
-
-<button class="delete-btn">
-
-DELETE
-
-</button>
-
-</div>
-
-</td>
-
-</tr>
 
 </tbody>
 
@@ -764,7 +580,331 @@ DELETE
 
 </div>
 
+</div>
+
 <script>
+
+/* LOGIN */
+
+function login(){
+
+const pass =
+document.getElementById(
+"password"
+).value;
+
+if(pass === "papprito123"){
+
+localStorage.setItem(
+"pappritoLogin",
+"true"
+);
+
+document.getElementById(
+"loginPage"
+).style.display = "none";
+
+document.getElementById(
+"dashboardContent"
+).style.display = "flex";
+
+}else{
+
+document.getElementById(
+"errorMsg"
+).innerText =
+"Wrong Password";
+
+}
+
+}
+
+/* AUTO LOGIN */
+
+if(
+localStorage.getItem(
+"pappritoLogin"
+) === "true"
+){
+
+document.getElementById(
+"loginPage"
+).style.display = "none";
+
+document.getElementById(
+"dashboardContent"
+).style.display = "flex";
+
+}
+
+/* FIREBASE */
+
+const firebaseConfig = {
+
+apiKey:
+"AIzaSyAV9T5w_1azmPHIJcZpraXP06TItj7HEuA",
+
+authDomain:
+"papprito-orders.firebaseapp.com",
+
+databaseURL:
+"https://papprito-orders-default-rtdb.firebaseio.com",
+
+projectId:
+"papprito-orders",
+
+storageBucket:
+"papprito-orders.firebasestorage.app",
+
+messagingSenderId:
+"831941801424",
+
+appId:
+"1:831941801424:web:40a99cdfb312dac2d275d5"
+
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const db = firebase.database();
+
+const table =
+document.getElementById(
+"ordersTable"
+);
+
+/* MONEY */
+
+function peso(num){
+
+return "₱" +
+Number(num || 0)
+.toLocaleString();
+
+}
+
+/* LOAD ORDERS */
+
+db.ref("orders")
+.on("value", snapshot=>{
+
+table.innerHTML = "";
+
+let totalSales = 0;
+let totalOrders = 0;
+let completed = 0;
+
+snapshot.forEach(child=>{
+
+const order = child.val();
+const key = child.key;
+
+totalOrders++;
+
+if(
+(order.status || "")
+.toUpperCase() ===
+"DELIVERED"
+){
+completed++;
+}
+
+(order.items || [])
+.forEach(item=>{
+
+const amount =
+(item.price || 0)
+*
+(item.qty || 1);
+
+totalSales += amount;
+
+table.innerHTML += `
+
+<tr class="order-${(order.status || 'NEW').toLowerCase()}">
+
+<td>
+${order.trackingnumber || '-'}
+</td>
+
+<td>
+${order.customer || '-'}
+</td>
+
+<td>
+${order.phone || '-'}
+</td>
+
+<td>
+${item.name || '-'}
+</td>
+
+<td>
+${item.qty || 1}
+</td>
+
+<td>
+${peso(amount)}
+</td>
+
+<td>
+
+<span class="status ${(order.status || 'NEW').toLowerCase()}">
+
+${order.status || 'NEW'}
+
+</span>
+
+</td>
+
+<td>
+${order.riderName || '-'}
+</td>
+
+<td>
+${order.riderPhone || '-'}
+</td>
+
+<td>
+${order.riderVehicle || '-'}
+</td>
+
+<td>
+
+<div class="action-buttons">
+
+<button
+class="accept-btn"
+onclick="assignRider('${key}')">
+
+RIDER
+
+</button>
+
+<button
+class="accept-btn"
+onclick="updateStatus(
+'${key}',
+'ACCEPTED'
+)">
+
+ACCEPT
+
+</button>
+
+<button
+class="preparing-btn"
+onclick="updateStatus(
+'${key}',
+'PREPARING'
+)">
+
+PREP
+
+</button>
+
+<button
+class="ready-btn"
+onclick="updateStatus(
+'${key}',
+'READY'
+)">
+
+READY
+
+</button>
+
+<button
+class="done-btn"
+onclick="updateStatus(
+'${key}',
+'DELIVERED'
+)">
+
+DONE
+
+</button>
+
+</div>
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+});
+
+document.getElementById(
+"salesToday"
+).innerText =
+peso(totalSales);
+
+document.getElementById(
+"totalOrders"
+).innerText =
+totalOrders;
+
+document.getElementById(
+"completedOrders"
+).innerText =
+completed;
+
+document.getElementById(
+"grossProfit"
+).innerText =
+peso(totalSales);
+
+});
+
+/* UPDATE STATUS */
+
+function updateStatus(orderKey,status){
+
+db.ref("orders/" + orderKey)
+.update({
+
+status:status
+
+});
+
+}
+
+/* ASSIGN RIDER */
+
+function assignRider(orderKey){
+
+const riderName =
+prompt("Driver Name");
+
+if(!riderName){
+return;
+}
+
+const riderPhone =
+prompt("Driver Phone");
+
+const riderVehicle =
+prompt("Vehicle");
+
+db.ref("orders/" + orderKey)
+.update({
+
+riderName:riderName,
+
+riderPhone:riderPhone,
+
+riderVehicle:riderVehicle
+
+});
+
+alert("Driver Assigned");
+
+}
+
+/* LOGOUT */
 
 function logout(){
 
@@ -772,7 +912,7 @@ localStorage.removeItem(
 "pappritoLogin"
 );
 
-location.href='index.html';
+location.reload();
 
 }
 
