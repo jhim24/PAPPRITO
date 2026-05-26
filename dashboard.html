@@ -17,10 +17,6 @@ content="#ffcc00">
 <link rel="stylesheet"
 href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
 
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
-
 <style>
 
 *{
@@ -31,361 +27,363 @@ font-family:'Segoe UI',sans-serif;
 }
 
 body{
-background:#f5f7fb;
-color:#222;
+background:#f5f5f5;
 display:flex;
-height:100vh;
+min-height:100vh;
 overflow:hidden;
-}
-
-/* LOGIN */
-
-.login-page{
-position:fixed;
-inset:0;
-background:#f5f7fb;
-display:flex;
-justify-content:center;
-align-items:center;
-z-index:99999;
-}
-
-.login-box{
-width:340px;
-background:white;
-padding:35px;
-border-radius:25px;
-box-shadow:
-0 10px 30px rgba(0,0,0,0.08);
-border:1px solid #eee;
-}
-
-.login-box h2{
-margin-bottom:20px;
-text-align:center;
-color:#d71920;
-}
-
-.login-box input{
-width:100%;
-padding:14px;
-border:1px solid #ddd;
-border-radius:14px;
-margin-bottom:15px;
-outline:none;
-font-size:14px;
-}
-
-.login-box button{
-width:100%;
-padding:14px;
-border:none;
-border-radius:14px;
-background:
-linear-gradient(
-135deg,
-#ffcc00,
-#ff8800
-);
-font-weight:bold;
-cursor:pointer;
-font-size:15px;
-}
-
-#errorMsg{
-margin-top:10px;
-text-align:center;
-color:red;
 }
 
 /* SIDEBAR */
 
 .sidebar{
+
 width:250px;
+
 background:white;
+
+border-right:2px solid #eee;
+
 padding:20px;
+
 display:flex;
+
 flex-direction:column;
+
 justify-content:space-between;
-border-right:1px solid #e5e7eb;
-box-shadow:0 0 15px rgba(0,0,0,0.05);
+
 }
 
 .logo{
+
 font-size:28px;
+
 font-weight:bold;
-color:#d71920;
+
+color:#ff8800;
+
 margin-bottom:30px;
+
 }
 
 .menu{
+
 list-style:none;
+
 }
 
 .menu li{
-padding:14px 16px;
+
+padding:15px;
+
 margin-bottom:10px;
-border-radius:14px;
+
+border-radius:15px;
+
 cursor:pointer;
-transition:.3s;
+
 font-size:14px;
-font-weight:600;
-color:#444;
-background:#f9fafb;
-border:1px solid #eee;
+
+font-weight:bold;
+
+transition:.3s;
+
+display:flex;
+
+align-items:center;
+
+gap:10px;
+
 }
 
-.menu li:hover,
-.menu li.active{
-background:#fff3cd;
-color:#d71920;
-border-color:#ffe08a;
+.menu li:hover{
+
+background:#ffcc00;
+
+color:black;
+
+transform:translateX(5px);
+
+}
+
+.active{
+
+background:#ffcc00;
+
+color:black;
+
 }
 
 /* MAIN */
 
 .main{
+
 flex:1;
+
 padding:25px;
+
 overflow-y:auto;
+
 }
 
 /* TOPBAR */
 
 .topbar{
+
 display:flex;
+
 justify-content:space-between;
+
 align-items:center;
+
 margin-bottom:25px;
+
 flex-wrap:wrap;
+
 gap:10px;
+
 }
 
 .topbar h1{
-font-size:38px;
+
+font-size:35px;
+
 color:#222;
+
 }
 
-/* TOP INFO */
+.top-boxes{
 
-.top-right{
 display:flex;
+
 gap:10px;
-flex-wrap:wrap;
+
 }
 
 .top-box{
-padding:12px 18px;
+
 background:white;
+
+padding:12px 18px;
+
 border-radius:15px;
-border:1px solid #eee;
-box-shadow:0 2px 10px rgba(0,0,0,0.05);
-font-weight:600;
+
+box-shadow:0 5px 15px rgba(0,0,0,0.08);
+
+font-weight:bold;
+
 }
 
-/* DASHBOARD CARDS */
+/* CARDS */
 
 .dashboard-grid{
+
 display:grid;
+
 grid-template-columns:
 repeat(auto-fit,minmax(220px,1fr));
+
 gap:18px;
+
 margin-bottom:25px;
+
 }
 
 .card{
-padding:25px;
-border-radius:24px;
-background:white;
-box-shadow:
-0 5px 20px rgba(0,0,0,0.06);
-border:1px solid #eee;
-transition:.3s;
-}
 
-.card:hover{
-transform:translateY(-5px);
+padding:25px;
+
+border-radius:20px;
+
+color:white;
+
+box-shadow:0 10px 25px rgba(0,0,0,0.1);
+
 }
 
 .card h3{
+
 font-size:15px;
+
 margin-bottom:10px;
-color:#666;
+
 }
 
 .card p{
-font-size:34px;
+
+font-size:32px;
+
 font-weight:bold;
-color:#111;
+
 }
 
 .sales{
-border-left:8px solid #ff6b6b;
+
+background:
+linear-gradient(135deg,#ff8800,#ffcc00);
+
 }
 
 .orders{
-border-left:8px solid #4dabf7;
+
+background:
+linear-gradient(135deg,#0084ff,#00aaff);
+
 }
 
 .completed{
-border-left:8px solid #51cf66;
+
+background:
+linear-gradient(135deg,#00b894,#00d084);
+
 }
 
 .profit{
-border-left:8px solid #845ef7;
+
+background:
+linear-gradient(135deg,#6c5ce7,#8e7dff);
+
 }
 
 /* LIVE ORDERS */
 
 .orders-section{
+
 background:white;
-padding:25px;
-border-radius:24px;
-border:1px solid #eee;
-overflow-x:auto;
-box-shadow:0 5px 20px rgba(0,0,0,0.05);
+
+padding:20px;
+
+border-radius:20px;
+
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
+
+overflow:auto;
+
 }
 
 .orders-section h2{
+
 margin-bottom:20px;
+
+color:#222;
+
 }
 
-/* TABLE */
-
 .order-table{
+
 width:100%;
+
 border-collapse:collapse;
-margin-top:20px;
-min-width:1800px;
-background:white;
+
+min-width:1500px;
+
 }
 
 .order-table th{
+
+background:#ffcc00;
+
 padding:12px;
-color:#444;
+
 font-size:12px;
-font-weight:bold;
-background:#fff8e1;
-border-bottom:2px solid #eee;
-white-space:nowrap;
+
+text-align:left;
+
 }
 
 .order-table td{
-padding:12px;
+
+padding:10px;
+
 font-size:12px;
-border-bottom:1px solid #f1f1f1;
-white-space:nowrap;
-color:#333;
+
+border-bottom:1px solid #eee;
+
 }
 
 /* STATUS */
 
 .status{
+
 padding:6px 12px;
+
 border-radius:20px;
+
 font-size:11px;
+
 font-weight:bold;
+
+color:white;
+
 }
 
 .new{
-background:#ffe3e3;
-color:#c92a2a;
+background:#ff3b3b;
 }
 
 .accepted{
-background:#d3f9d8;
-color:#2b8a3e;
+background:#00b894;
 }
 
 .preparing{
-background:#fff3bf;
-color:#e67700;
+background:#ff8800;
 }
 
 .ready{
-background:#d0ebff;
-color:#1864ab;
+background:#0984e3;
 }
 
 .delivered{
-background:#e5dbff;
-color:#5f3dc4;
+background:#6c5ce7;
 }
 
 /* BUTTONS */
 
 .action-buttons{
+
 display:flex;
+
 gap:5px;
+
 flex-wrap:wrap;
+
 }
 
-.accept-btn,
-.preparing-btn,
-.ready-btn,
-.done-btn,
-.delete-btn{
+.action-buttons button{
+
 border:none;
-padding:8px 12px;
-border-radius:12px;
+
+padding:7px 10px;
+
+border-radius:10px;
+
 font-size:11px;
+
 font-weight:bold;
+
 cursor:pointer;
+
 color:white;
+
 }
 
 .accept-btn{
-background:#40c057;
+background:#00b894;
 }
 
 .preparing-btn{
-background:#fab005;
+background:#ff8800;
 }
 
 .ready-btn{
-background:#228be6;
+background:#0984e3;
 }
 
 .done-btn{
-background:#845ef7;
+background:#6c5ce7;
 }
 
 .delete-btn{
-background:#fa5252;
-}
-
-/* TOAST */
-
-#toast{
-position:fixed;
-top:20px;
-right:20px;
-background:#40c057;
-color:white;
-padding:16px 25px;
-border-radius:15px;
-font-weight:bold;
-box-shadow:
-0 10px 25px rgba(0,0,0,0.15);
-display:none;
-z-index:999999;
-animation:slideIn .4s ease;
-}
-
-@keyframes slideIn{
-
-from{
-transform:
-translateX(120px);
-opacity:0;
-}
-
-to{
-transform:
-translateX(0);
-opacity:1;
-}
-
+background:#ff3b3b;
 }
 
 /* MOBILE */
@@ -393,86 +391,73 @@ opacity:1;
 @media(max-width:768px){
 
 body{
-flex-direction:column;
-height:auto;
-overflow:auto;
-}
 
-#dashboardContent{
 flex-direction:column;
+
+overflow:auto;
+
 }
 
 .sidebar{
+
 width:100%;
+
 padding:10px;
-flex-direction:row;
-align-items:center;
-justify-content:space-between;
+
 overflow-x:auto;
-gap:10px;
-position:sticky;
-top:0;
-z-index:999;
-background:white;
+
 }
 
 .logo{
-font-size:18px;
-margin-bottom:0;
-white-space:nowrap;
+
+font-size:22px;
+
+margin-bottom:10px;
+
 }
 
 .menu{
+
 display:flex;
-gap:8px;
+
+gap:10px;
+
 overflow-x:auto;
-flex:1;
-padding-bottom:3px;
+
 }
 
 .menu li{
+
 white-space:nowrap;
+
 margin-bottom:0;
-padding:10px 14px;
-font-size:12px;
-flex-shrink:0;
+
 }
 
 .main{
-padding:12px;
-}
 
-.topbar{
-flex-direction:column;
-align-items:flex-start;
-gap:10px;
-margin-bottom:18px;
+padding:15px;
+
 }
 
 .topbar h1{
-font-size:26px;
+
+font-size:25px;
+
 }
 
 .dashboard-grid{
+
 display:flex;
+
 overflow-x:auto;
-gap:12px;
-padding-bottom:5px;
+
 }
 
 .card{
+
 min-width:220px;
-flex-shrink:0;
-padding:20px;
-}
 
-.orders-section{
-padding:15px;
-overflow-x:auto;
-}
-
-.order-table{
-min-width:1800px;
 }
 
 }
@@ -482,41 +467,6 @@ min-width:1800px;
 </head>
 
 <body>
-
-<!-- LOGIN -->
-
-<div id="loginPage"
-class="login-page">
-
-<div class="login-box">
-
-<h2>
-
-🍔 PAPPRITO LOGIN
-
-</h2>
-
-<input
-type="password"
-id="password"
-placeholder="Enter Password">
-
-<button onclick="login()">
-
-LOGIN
-
-</button>
-
-<p id="errorMsg"></p>
-
-</div>
-
-</div>
-
-<!-- DASHBOARD -->
-
-<div id="dashboardContent"
-style="display:none;width:100%;">
 
 <!-- SIDEBAR -->
 
@@ -532,44 +482,76 @@ style="display:none;width:100%;">
 
 <ul class="menu">
 
-<li class="active">
+<li class="active"
+onclick="location.href='dashboard.html'">
+
 <i class="fa-solid fa-house"></i>
- Dashboard
+
+Dashboard
+
 </li>
 
-<li>
+<li
+onclick="document.getElementById('liveOrders').scrollIntoView({behavior:'smooth'})">
+
 <i class="fa-solid fa-receipt"></i>
- Live Orders
+
+Live Orders
+
 </li>
 
-<li>
+<li
+onclick="location.href='sales.html'">
+
 <i class="fa-solid fa-wallet"></i>
- Sales
+
+Sales
+
 </li>
 
-<li onclick="location.href='completed.html'">
+<li
+onclick="location.href='completed.html'">
+
 <i class="fa-solid fa-circle-check"></i>
- Completed
+
+Completed
+
 </li>
 
-<li onclick="location.href='stockroom.html'">
+<li
+onclick="location.href='stockroom.html'">
+
 <i class="fa-solid fa-warehouse"></i>
- Stockroom
+
+Stockroom Inventory
+
 </li>
 
-<li onclick="location.href='products.html'">
+<li
+onclick="location.href='products.html'">
+
 <i class="fa-solid fa-burger"></i>
- Products
+
+Products
+
 </li>
 
-<li>
+<li
+onclick="location.href='reports.html'">
+
 <i class="fa-solid fa-chart-line"></i>
- Reports
+
+Reports
+
 </li>
 
-<li onclick="window.location.href='settings.html'">
+<li
+onclick="location.href='settings.html'">
+
 <i class="fa-solid fa-gear"></i>
- Settings
+
+Settings
+
 </li>
 
 </ul>
@@ -578,7 +560,15 @@ style="display:none;width:100%;">
 
 <button
 class="delete-btn"
-onclick="logout()">
+onclick="logout()"
+style="
+width:100%;
+padding:14px;
+border:none;
+border-radius:15px;
+font-weight:bold;
+cursor:pointer;
+">
 
 🚪 Logout
 
@@ -590,6 +580,8 @@ onclick="logout()">
 
 <div class="main">
 
+<!-- TOPBAR -->
+
 <div class="topbar">
 
 <h1>
@@ -598,11 +590,11 @@ Dashboard Overview
 
 </h1>
 
-<div class="top-right">
+<div class="top-boxes">
 
 <div class="top-box">
 
-📅 May 10, 2026
+📅 May 26 2026
 
 </div>
 
@@ -624,7 +616,11 @@ Dashboard Overview
 
 <h3>Net Sales Today</h3>
 
-<p id="salesToday">₱0</p>
+<p id="salesToday">
+
+₱0
+
+</p>
 
 </div>
 
@@ -632,7 +628,11 @@ Dashboard Overview
 
 <h3>Total Orders</h3>
 
-<p id="totalOrders">0</p>
+<p id="totalOrders">
+
+0
+
+</p>
 
 </div>
 
@@ -640,7 +640,11 @@ Dashboard Overview
 
 <h3>Completed Orders</h3>
 
-<p id="completedOrders">0</p>
+<p id="completedOrders">
+
+0
+
+</p>
 
 </div>
 
@@ -648,7 +652,11 @@ Dashboard Overview
 
 <h3>Gross Profit</h3>
 
-<p id="grossProfit">₱0</p>
+<p id="grossProfit">
+
+₱0
+
+</p>
 
 </div>
 
@@ -656,7 +664,8 @@ Dashboard Overview
 
 <!-- LIVE ORDERS -->
 
-<div class="orders-section">
+<div class="orders-section"
+id="liveOrders">
 
 <h2>
 
@@ -677,7 +686,6 @@ Dashboard Overview
 <th>QTY</th>
 <th>AMOUNT</th>
 <th>STATUS</th>
-<th>TIME</th>
 <th>DRIVER</th>
 <th>ACTIONS</th>
 
@@ -687,257 +695,59 @@ Dashboard Overview
 
 <tbody id="ordersTable">
 
-</tbody>
-
-</table>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- AUDIO -->
-
-<audio id="notifSound">
-
-<source
-src="https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3"
-type="audio/mpeg">
-
-</audio>
-
-<!-- TOAST -->
-
-<div id="toast">
-
-🔔 New Order
-
-</div>
-
-<script>
-
-/* LOGIN */
-
-function login(){
-
-const pass =
-document.getElementById(
-"password"
-).value;
-
-if(pass === "papprito123"){
-
-localStorage.setItem(
-"pappritoLogin",
-"true"
-);
-
-document.getElementById(
-"loginPage"
-).style.display = "none";
-
-document.getElementById(
-"dashboardContent"
-).style.display = "flex";
-
-}else{
-
-document.getElementById(
-"errorMsg"
-).innerText = "Wrong Password";
-
-}
-
-}
-
-/* AUTO LOGIN */
-
-if(
-localStorage.getItem(
-"pappritoLogin"
-) === "true"
-){
-
-document.getElementById(
-"loginPage"
-).style.display = "none";
-
-document.getElementById(
-"dashboardContent"
-).style.display = "flex";
-
-}
-
-/* FIREBASE */
-
-const firebaseConfig = {
-
-apiKey:
-"AIzaSyAV9T5w_1azmPHIJcZpraXP06TItj7HEuA",
-
-authDomain:
-"papprito-orders.firebaseapp.com",
-
-databaseURL:
-"https://papprito-orders-default-rtdb.firebaseio.com",
-
-projectId:
-"papprito-orders",
-
-storageBucket:
-"papprito-orders.appspot.com",
-
-messagingSenderId:
-"831941801424",
-
-appId:
-"1:831941801424:web:40a99cdfb312dac2d275d5"
-
-};
-
-firebase.initializeApp(firebaseConfig);
-
-const table =
-document.getElementById(
-"ordersTable"
-);
-
-function peso(num){
-
-return "₱" +
-Number(num || 0)
-.toLocaleString();
-
-}
-
-/* LOAD ORDERS */
-
-firebase.database()
-.ref("orders")
-.on("value", snapshot=>{
-
-table.innerHTML = "";
-
-let totalSales = 0;
-let totalOrders = 0;
-let completed = 0;
-let gross = 0;
-
-snapshot.forEach(child=>{
-
-const order =
-child.val();
-
-const key =
-child.key;
-
-totalOrders++;
-
-if(
-(order.status || "NEW")
-.toUpperCase()
-=== "DELIVERED"
-){
-completed++;
-}
-
-(order.items || [])
-.forEach(item=>{
-
-let amount =
-Number(item.price || 0)
-*
-Number(item.qty || 1);
-
-totalSales += amount;
-gross += amount;
-
-table.innerHTML += `
-
 <tr>
 
-<td>
-${order.trackingnumber || "-"}
-</td>
-
-<td>
-${order.customer || "-"}
-</td>
-
-<td>
-${order.phone || "-"}
-</td>
-
-<td>
-${item.name || "-"}
-</td>
-
-<td>
-${item.qty || 1}
-</td>
-
-<td>
-${peso(amount)}
-</td>
+<td>PAP-001</td>
+<td>Juan Dela Cruz</td>
+<td>09123456789</td>
+<td>Burger</td>
+<td>2</td>
+<td>₱300</td>
 
 <td>
 
-<span class="status ${(order.status || "NEW").toLowerCase()}">
+<span class="status preparing">
 
-${order.status || "NEW"}
+PREPARING
 
 </span>
 
 </td>
 
-<td>
-
-${new Date(order.timestamp || Date.now())
-.toLocaleString()}
-
-</td>
-
-<td>
-
-${order.riderName || "-"}
-
-</td>
+<td>Rider 1</td>
 
 <td>
 
 <div class="action-buttons">
 
-<button class="accept-btn"
-onclick="updateStatus(
-'${key}',
-'ACCEPTED'
-)">
+<button class="accept-btn">
+
 ACCEPT
+
 </button>
 
-<button class="preparing-btn"
-onclick="updateStatus(
-'${key}',
-'PREPARING'
-)">
+<button class="preparing-btn">
+
 PREP
+
 </button>
 
-<button class="ready-btn"
-onclick="updateStatus(
-'${key}',
-'READY'
-)">
+<button class="ready-btn">
+
 READY
+
 </button>
 
-<button class="done-btn"
-onclick="updateStatus(
-'${key}',
-'DELIVERED'
-)">
+<button class="done-btn">
+
 DONE
+
+</button>
+
+<button class="delete-btn">
+
+DELETE
+
 </button>
 
 </div>
@@ -946,45 +756,15 @@ DONE
 
 </tr>
 
-`;
+</tbody>
 
-});
+</table>
 
-});
+</div>
 
-document.getElementById(
-"salesToday"
-).innerText = peso(totalSales);
+</div>
 
-document.getElementById(
-"totalOrders"
-).innerText = totalOrders;
-
-document.getElementById(
-"completedOrders"
-).innerText = completed;
-
-document.getElementById(
-"grossProfit"
-).innerText = peso(gross);
-
-});
-
-/* UPDATE STATUS */
-
-function updateStatus(orderKey,status){
-
-firebase.database()
-.ref("orders/" + orderKey)
-.update({
-
-status:status
-
-});
-
-}
-
-/* LOGOUT */
+<script>
 
 function logout(){
 
@@ -992,7 +772,7 @@ localStorage.removeItem(
 "pappritoLogin"
 );
 
-location.reload();
+location.href='index.html';
 
 }
 
