@@ -3,18 +3,22 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>PAPPRITO DASHBOARD</title>
 
 <link rel="manifest" href="manifest.json">
 
-<meta name="theme-color" content="#ffcc00">
+<meta name="theme-color"
+content="#ffcc00">
 
 <link rel="stylesheet"
 href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 
 <style>
@@ -32,56 +36,6 @@ color:white;
 display:flex;
 height:100vh;
 overflow:hidden;
-}
-
-/* LOGIN */
-
-#loginPage{
-position:fixed;
-inset:0;
-background:#0f172a;
-display:flex;
-justify-content:center;
-align-items:center;
-z-index:999999;
-}
-
-.login-box{
-width:320px;
-background:#111827;
-padding:30px;
-border-radius:20px;
-border:2px solid #ffcc00;
-}
-
-.login-box h2{
-text-align:center;
-margin-bottom:20px;
-color:#ffcc00;
-}
-
-.login-box input{
-width:100%;
-padding:14px;
-border:none;
-border-radius:12px;
-margin-bottom:15px;
-}
-
-.login-box button{
-width:100%;
-padding:14px;
-border:none;
-border-radius:12px;
-background:#ffcc00;
-font-weight:bold;
-cursor:pointer;
-}
-
-#errorMsg{
-margin-top:10px;
-color:red;
-text-align:center;
 }
 
 /* SIDEBAR */
@@ -130,6 +84,8 @@ padding:20px;
 overflow:auto;
 }
 
+/* TOP */
+
 .topbar{
 display:flex;
 justify-content:space-between;
@@ -145,7 +101,8 @@ font-size:35px;
 
 .dashboard-grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+grid-template-columns:
+repeat(auto-fit,minmax(220px,1fr));
 gap:15px;
 margin-bottom:20px;
 }
@@ -193,7 +150,7 @@ overflow:auto;
 .order-table{
 width:100%;
 border-collapse:collapse;
-min-width:2100px;
+min-width:2400px;
 margin-top:20px;
 }
 
@@ -213,6 +170,8 @@ border:1px solid rgba(255,255,255,0.05);
 text-align:center;
 vertical-align:middle;
 }
+
+/* STATUS */
 
 .status{
 padding:6px 12px;
@@ -242,6 +201,8 @@ background:#3b82f6;
 .delivered{
 background:#8b5cf6;
 }
+
+/* ACTIONS */
 
 .action-buttons{
 display:flex;
@@ -285,6 +246,12 @@ background:#ef4444;
 .rider-btn{
 background:#8b5cf6;
 }
+
+.print-btn{
+background:#111;
+}
+
+/* ADDRESS */
 
 .address-cell{
 max-width:220px;
@@ -334,33 +301,7 @@ min-width:220px;
 
 <body>
 
-<!-- LOGIN -->
-
-<div id="loginPage">
-
-<div class="login-box">
-
-<h2>🍔 PAPPRITO LOGIN</h2>
-
-<input
-type="password"
-id="password"
-placeholder="Enter Password">
-
-<button onclick="login()">
-LOGIN
-</button>
-
-<p id="errorMsg"></p>
-
-</div>
-
-</div>
-
-<!-- DASHBOARD -->
-
-<div id="dashboardContent"
-style="display:none;width:100%;">
+<!-- SIDEBAR -->
 
 <div class="sidebar">
 
@@ -380,8 +321,7 @@ Dashboard
 Live Orders
 </li>
 
-<li onclick="location.href='sales.html'">
-<i class="fa-solid fa-wallet"></i>
+<li>
 Sales
 </li>
 
@@ -401,44 +341,78 @@ Logout
 
 </div>
 
+<!-- MAIN -->
+
 <div class="main">
 
 <div class="topbar">
-<h1>Dashboard Overview</h1>
+
+<h1>
+Dashboard Overview
+</h1>
+
 </div>
+
+<!-- CARDS -->
 
 <div class="dashboard-grid">
 
 <div class="card sales">
+
 <h3>Net Sales</h3>
-<p id="salesToday">₱0</p>
+
+<p id="salesToday">
+₱0
+</p>
+
 </div>
 
 <div class="card orders">
+
 <h3>Total Orders</h3>
-<p id="totalOrders">0</p>
+
+<p id="totalOrders">
+0
+</p>
+
 </div>
 
 <div class="card completed">
+
 <h3>Completed</h3>
-<p id="completedOrders">0</p>
+
+<p id="completedOrders">
+0
+</p>
+
 </div>
 
 <div class="card profit">
+
 <h3>Gross Profit</h3>
-<p id="grossProfit">₱0</p>
+
+<p id="grossProfit">
+₱0
+</p>
+
 </div>
 
 </div>
+
+<!-- LIVE ORDERS -->
 
 <div class="orders-section">
 
-<h2>📦 Live Orders</h2>
+<h2>
+📦 Live Orders
+</h2>
 
 <table class="order-table">
 
 <thead>
+
 <tr>
+
 <th>ORDER #</th>
 <th>CUSTOMER</th>
 <th>PHONE</th>
@@ -455,10 +429,13 @@ Logout
 <th>DRIVER PHONE</th>
 <th>VEHICLE</th>
 <th>ACTIONS</th>
+
 </tr>
+
 </thead>
 
 <tbody id="ordersTable">
+
 </tbody>
 
 </table>
@@ -467,61 +444,7 @@ Logout
 
 </div>
 
-</div>
-
 <script>
-
-/* LOGIN */
-
-function login(){
-
-const pass =
-document.getElementById(
-'password'
-).value;
-
-if(pass === 'papprito123'){
-
-localStorage.setItem(
-'pappritoLogin',
-'true'
-);
-
-document.getElementById(
-'loginPage'
-).style.display='none';
-
-document.getElementById(
-'dashboardContent'
-).style.display='flex';
-
-}else{
-
-document.getElementById(
-'errorMsg'
-).innerText='Wrong Password';
-
-}
-
-}
-
-/* AUTO LOGIN */
-
-if(
-localStorage.getItem(
-'pappritoLogin'
-) === 'true'
-){
-
-document.getElementById(
-'loginPage'
-).style.display='none';
-
-document.getElementById(
-'dashboardContent'
-).style.display='flex';
-
-}
 
 /* FIREBASE */
 
@@ -557,13 +480,18 @@ document.getElementById(
 "ordersTable"
 );
 
+/* MONEY */
+
 function peso(num){
 
 return "₱" +
+
 Number(num || 0)
 .toLocaleString();
 
 }
+
+/* LOAD ORDERS */
 
 firebase.database()
 .ref("orders")
@@ -579,97 +507,200 @@ let gross = 0;
 snapshot.forEach(child=>{
 
 const order = child.val();
+
 const key = child.key;
 
 totalOrders++;
 
-if((order.status || '').toUpperCase() === 'DELIVERED'){
+if(
+(order.status || "")
+.toUpperCase() ===
+"DELIVERED"
+){
 completed++;
 }
 
-(order.items || []).forEach(item=>{
+(order.items || [])
+.forEach(item=>{
 
 let amount =
+
 Number(item.price || 0)
+
 *
+
 Number(item.qty || 1);
 
 totalSales += amount;
+
 gross += amount;
 
 table.innerHTML += `
 
 <tr>
 
-<td>${order.trackingnumber || '-'}</td>
-<td>${order.customer || '-'}</td>
-<td>${order.phone || '-'}</td>
-<td>${order.orderType || '-'}</td>
-<td>${order.payment || '-'}</td>
 <td>
-${order.payment !== 'CASH' ? (order.reference || '-') : '-'}
+${order.trackingnumber || '-'}
 </td>
+
+<td>
+${order.customer || '-'}
+</td>
+
+<td>
+${order.phone || '-'}
+</td>
+
+<td>
+${order.orderType || '-'}
+</td>
+
+<td>
+${order.payment || '-'}
+</td>
+
+<td>
+
+${order.payment !== 'CASH'
+? (order.reference || '-')
+: '-'}
+
+</td>
+
 <td class="address-cell">
 ${order.address || '-'}
 </td>
-<td>${item.name || '-'}</td>
-<td>${item.qty || 1}</td>
-<td>${peso(amount)}</td>
 
 <td>
+${item.name || '-'}
+</td>
+
+<td>
+${item.qty || 1}
+</td>
+
+<td>
+${peso(amount)}
+</td>
+
+<td>
+
 <span class="status ${(order.status || 'NEW').toLowerCase()}">
+
 ${order.status || 'NEW'}
+
 </span>
+
 </td>
 
 <td>
-${new Date(order.timestamp || Date.now()).toLocaleString()}
+
+${new Date(
+order.timestamp || Date.now()
+).toLocaleString()}
+
 </td>
 
-<td>${order.riderName || '-'}</td>
-<td>${order.riderPhone || '-'}</td>
-<td>${order.riderVehicle || '-'}</td>
+<td>
+${order.riderName || '-'}
+</td>
 
 <td>
+${order.riderPhone || '-'}
+</td>
+
+<td>
+${order.riderVehicle || '-'}
+</td>
+
+<td>
+
 <div class="action-buttons">
+
+<button
+class="print-btn"
+onclick="printReceipt(
+'${order.trackingnumber}',
+'${order.customer}',
+'${order.phone}',
+'${order.address}',
+'${item.name}',
+'${item.qty}',
+'${amount}',
+'${order.payment}',
+'${order.reference}',
+'${order.orderType}',
+'${order.riderName || "-"}',
+'${order.riderPhone || "-"}',
+'${order.riderVehicle || "-"}'
+)">
+
+PRINT
+
+</button>
 
 <button
 class="rider-btn"
 onclick="assignRider('${key}')">
+
 RIDER
+
 </button>
 
 <button
 class="accept-btn"
-onclick="updateStatus('${key}','ACCEPTED')">
+onclick="updateStatus(
+'${key}',
+'ACCEPTED'
+)">
+
 ACCEPT
+
 </button>
 
 <button
 class="preparing-btn"
-onclick="updateStatus('${key}','PREPARING')">
+onclick="updateStatus(
+'${key}',
+'PREPARING'
+)">
+
 PREP
+
 </button>
 
 <button
 class="ready-btn"
-onclick="updateStatus('${key}','READY')">
+onclick="updateStatus(
+'${key}',
+'READY'
+)">
+
 READY
+
 </button>
 
 <button
 class="done-btn"
-onclick="updateStatus('${key}','DELIVERED')">
+onclick="updateStatus(
+'${key}',
+'DELIVERED'
+)">
+
 DONE
+
 </button>
 
 <button
 class="delete-btn"
 onclick="deleteOrder('${key}')">
+
 DELETE
+
 </button>
 
 </div>
+
 </td>
 
 </tr>
@@ -680,46 +711,85 @@ DELETE
 
 });
 
-document.getElementById("salesToday").innerText = peso(totalSales);
-document.getElementById("totalOrders").innerText = totalOrders;
-document.getElementById("completedOrders").innerText = completed;
-document.getElementById("grossProfit").innerText = peso(gross);
+document.getElementById(
+"salesToday"
+).innerText =
+peso(totalSales);
+
+document.getElementById(
+"totalOrders"
+).innerText =
+totalOrders;
+
+document.getElementById(
+"completedOrders"
+).innerText =
+completed;
+
+document.getElementById(
+"grossProfit"
+).innerText =
+peso(gross);
 
 });
 
-function updateStatus(orderKey,status){
+/* UPDATE STATUS */
+
+function updateStatus(
+orderKey,
+status
+){
 
 firebase.database()
 .ref("orders/" + orderKey)
 .update({
+
 status:status
+
 });
 
 }
 
+/* RIDER */
+
 function assignRider(orderKey){
 
-const riderName = prompt("Driver Name");
-if(!riderName){ return; }
+const riderName =
+prompt("Driver Name");
 
-const riderPhone = prompt("Driver Phone");
-const riderVehicle = prompt("Vehicle");
+if(!riderName){
+return;
+}
+
+const riderPhone =
+prompt("Driver Phone");
+
+const riderVehicle =
+prompt("Vehicle");
 
 firebase.database()
 .ref("orders/" + orderKey)
 .update({
+
 riderName:riderName,
+
 riderPhone:riderPhone,
+
 riderVehicle:riderVehicle
+
 });
 
 alert("Driver Assigned");
 
 }
 
+/* DELETE */
+
 function deleteOrder(orderKey){
 
-if(confirm("Delete this order?")){
+if(confirm(
+"Delete this order?"
+)){
 
 firebase.database()
 .ref("orders/" + orderKey)
@@ -729,10 +799,258 @@ firebase.database()
 
 }
 
+/* LOGOUT */
+
 function logout(){
 
-localStorage.removeItem('pappritoLogin');
+localStorage.removeItem(
+"pappritoLogin"
+);
+
 location.reload();
+
+}
+
+/* PRINT RECEIPT */
+
+function printReceipt(
+tracking,
+customer,
+phone,
+address,
+product,
+qty,
+amount,
+payment,
+reference,
+type,
+driver,
+driverPhone,
+vehicle
+){
+
+const receiptWindow =
+window.open(
+'',
+'',
+'width=400,height=700'
+);
+
+receiptWindow.document.write(`
+
+<html>
+
+<head>
+
+<title>
+PAPPRITO RECEIPT
+</title>
+
+<style>
+
+body{
+font-family:monospace;
+padding:15px;
+color:black;
+}
+
+.center{
+text-align:center;
+}
+
+.logo{
+font-size:28px;
+font-weight:bold;
+margin-bottom:5px;
+}
+
+hr{
+border:none;
+border-top:1px dashed black;
+margin:12px 0;
+}
+
+.row{
+display:flex;
+justify-content:space-between;
+margin-bottom:8px;
+}
+
+.total{
+font-size:22px;
+font-weight:bold;
+}
+
+.footer{
+text-align:center;
+margin-top:25px;
+font-size:12px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="center">
+
+<div class="logo">
+🍔 PAPPRITO
+</div>
+
+<div>
+THERMAL RECEIPT
+</div>
+
+</div>
+
+<hr>
+
+<div>
+
+<b>Tracking:</b><br>
+${tracking}
+
+</div>
+
+<hr>
+
+<div>
+
+<b>Customer:</b><br>
+${customer}
+
+</div>
+
+<div>
+
+<b>Phone:</b><br>
+${phone}
+
+</div>
+
+<div>
+
+<b>Address:</b><br>
+${address}
+
+</div>
+
+<div>
+
+<b>Order Type:</b><br>
+${type}
+
+</div>
+
+<hr>
+
+<div class="row">
+
+<div>
+${qty}x ${product}
+</div>
+
+<div>
+₱${amount}
+</div>
+
+</div>
+
+<hr>
+
+<div class="row">
+
+<div>
+Payment
+</div>
+
+<div>
+${payment}
+</div>
+
+</div>
+
+<div class="row">
+
+<div>
+Reference
+</div>
+
+<div>
+${reference || "-"}
+</div>
+
+</div>
+
+<hr>
+
+<div>
+
+<b>Driver:</b><br>
+${driver}
+
+</div>
+
+<div>
+
+<b>Driver Phone:</b><br>
+${driverPhone}
+
+</div>
+
+<div>
+
+<b>Vehicle:</b><br>
+${vehicle}
+
+</div>
+
+<hr>
+
+<div class="row total">
+
+<div>
+TOTAL
+</div>
+
+<div>
+₱${amount}
+</div>
+
+</div>
+
+<div class="footer">
+
+Thank You!<br>
+Please Come Again
+
+</div>
+
+<script>
+
+window.onload = function(){
+
+window.print();
+
+window.onafterprint = function(){
+
+window.close();
+
+}
+
+}
+
+<\/script>
+
+</body>
+
+</html>
+
+`);
+
+receiptWindow.document.close();
 
 }
 
