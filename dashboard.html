@@ -852,7 +852,8 @@ appId:
 };
 
 firebase.initializeApp(firebaseConfig);
-
+firebase.database().setPersistence
+&& firebase.database().setPersistence('local');
 const table =
 document.getElementById(
 "ordersTable"
