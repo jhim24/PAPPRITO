@@ -1,25 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PAPPRITO V2 Dashboard</title>
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>PAPPRITO DASHBOARD</title>
-
-<link rel="manifest" href="manifest.json">
-
-<meta name="theme-color"
-content="#ffcc00">
-
-<link rel="stylesheet"
-href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
-
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 <style>
 
@@ -31,8 +17,7 @@ font-family:'Segoe UI',sans-serif;
 }
 
 body{
-background:#0f172a;
-color:white;
+background:#f5f7fb;
 display:flex;
 height:100vh;
 overflow:hidden;
@@ -41,271 +26,178 @@ overflow:hidden;
 /* SIDEBAR */
 
 .sidebar{
-width:240px;
-background:#020617;
-padding:20px;
+width:260px;
+background:#111827;
+color:white;
 display:flex;
 flex-direction:column;
-justify-content:space-between;
-border-right:1px solid rgba(255,255,255,0.08);
 }
 
 .logo{
+padding:25px;
 font-size:28px;
 font-weight:bold;
-color:#ffcc00;
-margin-bottom:30px;
+color:#E91E63;
+border-bottom:1px solid rgba(255,255,255,.1);
 }
 
 .menu{
 list-style:none;
+padding:15px;
 }
 
 .menu li{
-padding:14px;
-margin-bottom:10px;
-border-radius:15px;
-cursor:pointer;
-transition:.3s;
-font-size:14px;
+margin-bottom:8px;
 }
 
-.menu li:hover,
-.menu li.active{
-background:#111827;
-color:#ffcc00;
+.menu a{
+display:flex;
+align-items:center;
+gap:12px;
+padding:14px;
+border-radius:12px;
+text-decoration:none;
+color:white;
+transition:.3s;
+}
+
+.menu a:hover,
+.menu a.active{
+background:#E91E63;
 }
 
 /* MAIN */
 
 .main{
 flex:1;
-padding:20px;
+padding:25px;
 overflow:auto;
 }
 
-/* TOP */
-
-.topbar{
+.header{
 display:flex;
 justify-content:space-between;
 align-items:center;
-margin-bottom:20px;
+margin-bottom:25px;
 }
 
-.topbar h1{
-font-size:35px;
+.header h1{
+color:#1f2937;
+}
+
+.user{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.avatar{
+width:45px;
+height:45px;
+border-radius:50%;
+background:#E91E63;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+font-weight:bold;
 }
 
 /* CARDS */
 
-.dashboard-grid{
+.cards{
 display:grid;
-grid-template-columns:
-repeat(auto-fit,minmax(220px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
 gap:15px;
-margin-bottom:20px;
+margin-bottom:25px;
 }
 
 .card{
-padding:25px;
+background:white;
+padding:20px;
 border-radius:20px;
-}
-
-.sales{
-background:linear-gradient(135deg,#ff4d6d,#c9184a);
-}
-
-.orders{
-background:linear-gradient(135deg,#1e90ff,#2563eb);
-}
-
-.completed{
-background:linear-gradient(135deg,#10b981,#059669);
-}
-
-.profit{
-background:linear-gradient(135deg,#8b5cf6,#6d28d9);
+box-shadow:0 5px 15px rgba(0,0,0,.08);
 }
 
 .card h3{
-font-size:15px;
+font-size:14px;
+color:#6b7280;
 margin-bottom:10px;
 }
 
-.card p{
-font-size:35px;
-font-weight:bold;
+.card h2{
+font-size:32px;
+color:#111827;
 }
 
-/* LIVE ORDERS */
+/* CONTENT */
 
-.orders-section{
-background:#111827;
+.section{
+background:white;
 padding:20px;
 border-radius:20px;
-overflow:auto;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+margin-bottom:20px;
 }
 
-.order-table{
+.section h2{
+margin-bottom:15px;
+}
+
+.orders-table{
 width:100%;
 border-collapse:collapse;
-min-width:2400px;
-margin-top:20px;
 }
 
-.order-table th{
-background:#1e293b;
-color:#ffcc00;
+.orders-table th,
+.orders-table td{
 padding:12px;
-font-size:12px;
-border:1px solid rgba(255,255,255,0.08);
-text-align:center;
+border-bottom:1px solid #eee;
+text-align:left;
 }
-
-.order-table td{
-padding:10px;
-font-size:11px;
-border:1px solid rgba(255,255,255,0.05);
-text-align:center;
-vertical-align:middle;
-}
-
-/* STATUS */
 
 .status{
-padding:6px 12px;
+padding:6px 10px;
 border-radius:20px;
-font-size:11px;
-font-weight:bold;
-display:inline-block;
+font-size:12px;
+color:white;
 }
 
 .new{
 background:#ef4444;
 }
 
-.accepted{
-background:#22c55e;
-}
-
-.preparing{
-background:#f59e0b;
-color:black;
-}
-
 .ready{
 background:#3b82f6;
 }
 
-.delivered{
-background:#8b5cf6;
+.done{
+background:#22c55e;
 }
-
-/* ACTIONS */
-
-.action-buttons{
-display:flex;
-justify-content:center;
-align-items:center;
-gap:6px;
-flex-wrap:wrap;
-}
-
-.action-buttons button{
-border:none;
-padding:7px 10px;
-border-radius:10px;
-font-size:11px;
-font-weight:bold;
-cursor:pointer;
-color:white;
-min-width:70px;
-}
-
-.accept-btn{
-background:#10b981;
-}
-
-.preparing-btn{
-background:#f59e0b;
-}
-
-.ready-btn{
-background:#2563eb;
-}
-
-.done-btn{
-background:#64748b;
-}
-
-.delete-btn{
-background:#ef4444;
-}
-
-.rider-btn{
-background:#8b5cf6;
-}
-
-.print-btn{
-background:#111;
-}
-
-/* ADDRESS */
-
-.address-cell{
-max-width:220px;
-white-space:normal;
-word-break:break-word;
-line-height:1.5;
-}
-
-/* MOBILE */
 
 @media(max-width:768px){
 
-body{
-flex-direction:column;
-height:auto;
-overflow:auto;
-}
-
 .sidebar{
-width:100%;
-overflow-x:auto;
+width:80px;
 }
 
-.main{
-padding:10px;
+.logo{
+font-size:18px;
+text-align:center;
 }
 
-.topbar h1{
-font-size:25px;
-}
-
-.dashboard-grid{
-display:flex;
-overflow-x:auto;
-gap:10px;
-}
-
-.card{
-min-width:220px;
+.menu a span{
+display:none;
 }
 
 }
 
 </style>
-
 </head>
 
 <body>
 
-<!-- SIDEBAR -->
-
 <div class="sidebar">
-
-<div>
 
 <div class="logo">
 PAPPRITO
@@ -313,752 +205,138 @@ PAPPRITO
 
 <ul class="menu">
 
-<li class="active">
-Dashboard
+<li>
+<a href="dashboard.html" class="active">
+<i class="fas fa-chart-line"></i>
+<span>Dashboard</span>
+</a>
 </li>
 
 <li>
-Live Orders
+<a href="pos.html">
+<i class="fas fa-cash-register"></i>
+<span>POS</span>
+</a>
 </li>
 
 <li>
-Sales
+<a href="kitchen.html">
+<i class="fas fa-utensils"></i>
+<span>Kitchen</span>
+</a>
 </li>
 
-<li onclick="location.href='products.html'">
-Products
+<li>
+<a href="products.html">
+<i class="fas fa-burger"></i>
+<span>Products</span>
+</a>
 </li>
 
-<li onclick="location.href='pos.html'">
-POS
+<li>
+<a href="inventory.html">
+<i class="fas fa-boxes"></i>
+<span>Inventory</span>
+</a>
 </li>
-  
+
+<li>
+<a href="sales.html">
+<i class="fas fa-peso-sign"></i>
+<span>Sales</span>
+</a>
+</li>
+
+<li>
+<a href="reports.html">
+<i class="fas fa-file-chart-column"></i>
+<span>Reports</span>
+</a>
+</li>
+
+<li>
+<a href="settings.html">
+<i class="fas fa-gear"></i>
+<span>Settings</span>
+</a>
+</li>
+
 </ul>
 
 </div>
 
-<button
-class="delete-btn"
-onclick="logout()">
-Logout
-</button>
-
-</div>
-
-<!-- MAIN -->
-
 <div class="main">
 
-<div class="topbar">
+<div class="header">
 
-<h1>
-Dashboard Overview
-</h1>
+<h1>Dashboard Overview</h1>
+
+<div class="user">
+<div class="avatar">P</div>
+Admin
+</div>
 
 </div>
 
-<!-- CARDS -->
+<div class="cards">
 
-<div class="dashboard-grid">
-
-<div class="card sales">
-
+<div class="card">
 <h3>Net Sales</h3>
-
-<p id="salesToday">
-₱0
-</p>
-
+<h2>₱0</h2>
 </div>
 
-<div class="card orders">
-
+<div class="card">
 <h3>Total Orders</h3>
-
-<p id="totalOrders">
-0
-</p>
-
+<h2>0</h2>
 </div>
 
-<div class="card completed">
-
-<h3>Completed</h3>
-
-<p id="completedOrders">
-0
-</p>
-
+<div class="card">
+<h3>Completed Orders</h3>
+<h2>0</h2>
 </div>
 
-<div class="card profit">
-
-<h3>Gross Profit</h3>
-
-<p id="grossProfit">
-₱0
-</p>
-
+<div class="card">
+<h3>Profit</h3>
+<h2>₱0</h2>
 </div>
 
 </div>
 
-<!-- LIVE ORDERS -->
+<div class="section">
 
-<div class="orders-section">
+<h2>Recent Orders</h2>
 
-<h2>
-📦 Live Orders
-</h2>
-
-<table class="order-table">
-
-<thead>
+<table class="orders-table">
 
 <tr>
-
-<th>ORDER #</th>
-<th>CUSTOMER</th>
-<th>PHONE</th>
-<th>TYPE</th>
-<th>PAYMENT MODE</th>
-<th>REFERENCE #</th>
-<th>ADDRESS</th>
-<th>PRODUCT</th>
-<th>QTY</th>
-<th>AMOUNT</th>
-<th>STATUS</th>
-<th>TIME</th>
-<th>DRIVER</th>
-<th>DRIVER PHONE</th>
-<th>VEHICLE</th>
-<th>ACTIONS</th>
-
+<th>Order #</th>
+<th>Customer</th>
+<th>Status</th>
 </tr>
 
-</thead>
-
-<tbody id="ordersTable">
-
-</tbody>
+<tr>
+<td>POS-001</td>
+<td>Walk In Customer</td>
+<td>
+<span class="status new">NEW</span>
+</td>
+</tr>
 
 </table>
 
 </div>
 
-</div>
+<div class="section">
 
-<script>
+<h2>Sales Analytics</h2>
 
-/* FIREBASE */
-
-const firebaseConfig = {
-
-apiKey:
-"AIzaSyAV9T5w_1azmPHIJcZpraXP06TItj7HEuA",
-
-authDomain:
-"papprito-orders.firebaseapp.com",
-
-databaseURL:
-"https://papprito-orders-default-rtdb.firebaseio.com",
-
-projectId:
-"papprito-orders",
-
-storageBucket:
-"papprito-orders.firebasestorage.app",
-
-messagingSenderId:
-"831941801424",
-
-appId:
-"1:831941801424:web:40a99cdfb312dac2d275d5"
-
-};
-
-firebase.initializeApp(firebaseConfig);
-
-const table =
-document.getElementById(
-"ordersTable"
-);
-
-/* MONEY */
-
-function peso(num){
-
-return "₱" +
-
-Number(num || 0)
-.toLocaleString();
-
-}
-
-/* LOAD ORDERS */
-
-firebase.database()
-.ref("orders")
-.on("value", snapshot=>{
-
-table.innerHTML = "";
-
-let totalSales = 0;
-let totalOrders = 0;
-let completed = 0;
-let gross = 0;
-
-snapshot.forEach(child=>{
-
-const order = child.val();
-
-const key = child.key;
-
-totalOrders++;
-
-if(
-(order.status || "")
-.toUpperCase() ===
-"DELIVERED"
-){
-completed++;
-}
-
-(order.items || [])
-.forEach(item=>{
-
-let amount =
-
-Number(item.price || 0)
-
-*
-
-Number(item.qty || 1);
-
-totalSales += amount;
-
-gross += amount;
-
-table.innerHTML += `
-
-<tr>
-
-<td>
-${order.trackingnumber || '-'}
-</td>
-
-<td>
-${order.customer || '-'}
-</td>
-
-<td>
-${order.phone || '-'}
-</td>
-
-<td>
-${order.orderType || '-'}
-</td>
-
-<td>
-${order.payment || '-'}
-</td>
-
-<td>
-
-${order.payment !== 'CASH'
-? (order.reference || '-')
-: '-'}
-
-</td>
-
-<td class="address-cell">
-${order.address || '-'}
-</td>
-
-<td>
-${item.name || '-'}
-</td>
-
-<td>
-${item.qty || 1}
-</td>
-
-<td>
-${peso(amount)}
-</td>
-
-<td>
-
-<span class="status ${(order.status || 'NEW').toLowerCase()}">
-
-${order.status || 'NEW'}
-
-</span>
-
-</td>
-
-<td>
-
-${new Date(
-order.timestamp || Date.now()
-).toLocaleString()}
-
-</td>
-
-<td>
-${order.riderName || '-'}
-</td>
-
-<td>
-${order.riderPhone || '-'}
-</td>
-
-<td>
-${order.riderVehicle || '-'}
-</td>
-
-<td>
-
-<div class="action-buttons">
-
-<button
-class="print-btn"
-onclick="printReceipt(
-'${order.trackingnumber}',
-'${order.customer}',
-'${order.phone}',
-'${order.address}',
-'${item.name}',
-'${item.qty}',
-'${amount}',
-'${order.payment}',
-'${order.reference}',
-'${order.orderType}',
-'${order.riderName || "-"}',
-'${order.riderPhone || "-"}',
-'${order.riderVehicle || "-"}'
-)">
-
-PRINT
-
-</button>
-
-<button
-class="rider-btn"
-onclick="assignRider('${key}')">
-
-RIDER
-
-</button>
-
-<button
-class="accept-btn"
-onclick="updateStatus(
-'${key}',
-'ACCEPTED'
-)">
-
-ACCEPT
-
-</button>
-
-<button
-class="preparing-btn"
-onclick="updateStatus(
-'${key}',
-'PREPARING'
-)">
-
-PREP
-
-</button>
-
-<button
-class="ready-btn"
-onclick="updateStatus(
-'${key}',
-'READY'
-)">
-
-READY
-
-</button>
-
-<button
-class="done-btn"
-onclick="updateStatus(
-'${key}',
-'DELIVERED'
-)">
-
-DONE
-
-</button>
-
-<button
-class="delete-btn"
-onclick="deleteOrder('${key}')">
-
-DELETE
-
-</button>
+<p>
+Ready for Chart.js integration
+</p>
 
 </div>
 
-</td>
-
-</tr>
-
-`;
-
-});
-
-});
-
-document.getElementById(
-"salesToday"
-).innerText =
-peso(totalSales);
-
-document.getElementById(
-"totalOrders"
-).innerText =
-totalOrders;
-
-document.getElementById(
-"completedOrders"
-).innerText =
-completed;
-
-document.getElementById(
-"grossProfit"
-).innerText =
-peso(gross);
-
-});
-
-/* UPDATE STATUS */
-
-function updateStatus(
-orderKey,
-status
-){
-
-firebase.database()
-.ref("orders/" + orderKey)
-.update({
-
-status:status
-
-});
-
-}
-
-/* RIDER */
-
-function assignRider(orderKey){
-
-const riderName =
-prompt("Driver Name");
-
-if(!riderName){
-return;
-}
-
-const riderPhone =
-prompt("Driver Phone");
-
-const riderVehicle =
-prompt("Vehicle");
-
-firebase.database()
-.ref("orders/" + orderKey)
-.update({
-
-riderName:riderName,
-
-riderPhone:riderPhone,
-
-riderVehicle:riderVehicle
-
-});
-
-alert("Driver Assigned");
-
-}
-
-/* DELETE */
-
-function deleteOrder(orderKey){
-
-if(confirm(
-"Delete this order?"
-)){
-
-firebase.database()
-.ref("orders/" + orderKey)
-.remove();
-
-}
-
-}
-
-/* LOGOUT */
-
-function logout(){
-
-localStorage.removeItem(
-"pappritoLogin"
-);
-
-location.reload();
-
-}
-
-/* PRINT RECEIPT */
-
-function printReceipt(
-tracking,
-customer,
-phone,
-address,
-product,
-qty,
-amount,
-payment,
-reference,
-type,
-driver,
-driverPhone,
-vehicle
-){
-
-const receiptWindow =
-window.open(
-'',
-'',
-'width=400,height=700'
-);
-
-receiptWindow.document.write(`
-
-<html>
-
-<head>
-
-<title>
-PAPPRITO RECEIPT
-</title>
-
-<style>
-
-body{
-font-family:monospace;
-padding:15px;
-color:black;
-}
-
-.center{
-text-align:center;
-}
-
-.logo{
-font-size:28px;
-font-weight:bold;
-margin-bottom:5px;
-}
-
-hr{
-border:none;
-border-top:1px dashed black;
-margin:12px 0;
-}
-
-.row{
-display:flex;
-justify-content:space-between;
-margin-bottom:8px;
-}
-
-.total{
-font-size:22px;
-font-weight:bold;
-}
-
-.footer{
-text-align:center;
-margin-top:25px;
-font-size:12px;
-}
-
-</style>
-
-</head>
-
-<body>
-
-<div class="center">
-
-<div class="logo">
-🍔 PAPPRITO
 </div>
-
-<div>
-THERMAL RECEIPT
-</div>
-
-</div>
-
-<hr>
-
-<div>
-
-<b>Tracking:</b><br>
-${tracking}
-
-</div>
-
-<hr>
-
-<div>
-
-<b>Customer:</b><br>
-${customer}
-
-</div>
-
-<div>
-
-<b>Phone:</b><br>
-${phone}
-
-</div>
-
-<div>
-
-<b>Address:</b><br>
-${address}
-
-</div>
-
-<div>
-
-<b>Order Type:</b><br>
-${type}
-
-</div>
-
-<hr>
-
-<div class="row">
-
-<div>
-${qty}x ${product}
-</div>
-
-<div>
-₱${amount}
-</div>
-
-</div>
-
-<hr>
-
-<div class="row">
-
-<div>
-Payment
-</div>
-
-<div>
-${payment}
-</div>
-
-</div>
-
-<div class="row">
-
-<div>
-Reference
-</div>
-
-<div>
-${reference || "-"}
-</div>
-
-</div>
-
-<hr>
-
-<div>
-
-<b>Driver:</b><br>
-${driver}
-
-</div>
-
-<div>
-
-<b>Driver Phone:</b><br>
-${driverPhone}
-
-</div>
-
-<div>
-
-<b>Vehicle:</b><br>
-${vehicle}
-
-</div>
-
-<hr>
-
-<div class="row total">
-
-<div>
-TOTAL
-</div>
-
-<div>
-₱${amount}
-</div>
-
-</div>
-
-<div class="footer">
-
-Thank You!<br>
-Please Come Again
-
-</div>
-
-<script>
-
-window.onload = function(){
-
-window.print();
-
-window.onafterprint = function(){
-
-window.close();
-
-}
-
-}
-
-<\/script>
-
-</body>
-
-</html>
-
-`);
-
-receiptWindow.document.close();
-
-}
-
-</script>
 
 </body>
 </html>
