@@ -282,10 +282,78 @@ id="products">
 <div class="right">
 
 <div class="cart-title">
-
-🛒 CART
-
+🛒 POS CART
 </div>
+
+<input
+type="text"
+id="customerName"
+placeholder="Customer Name"
+style="
+width:100%;
+padding:10px;
+margin-bottom:10px;
+border:none;
+border-radius:10px;
+">
+
+<select
+id="orderType"
+style="
+width:100%;
+padding:10px;
+margin-bottom:10px;
+border:none;
+border-radius:10px;
+">
+
+<option>DINE IN</option>
+<option>TAKE OUT</option>
+<option>DELIVERY</option>
+
+</select>
+
+<select
+id="paymentMode"
+style="
+width:100%;
+padding:10px;
+margin-bottom:10px;
+border:none;
+border-radius:10px;
+">
+
+<option>CASH</option>
+<option>GCASH</option>
+<option>MAYA</option>
+<option>CARD</option>
+
+</select>
+
+<input
+type="text"
+id="referenceNumber"
+placeholder="Reference Number"
+style="
+width:100%;
+padding:10px;
+margin-bottom:10px;
+border:none;
+border-radius:10px;
+">
+
+<input
+type="number"
+id="discount"
+placeholder="Discount %"
+value="0"
+style="
+width:100%;
+padding:10px;
+margin-bottom:10px;
+border:none;
+border-radius:10px;
+">
 
 <div
 class="cart-items"
