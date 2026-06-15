@@ -424,6 +424,49 @@ document.getElementById("productsGrid");
 db.ref("products")
 .on("value",snapshot=>{
 
+console.log(snapshot.val());
+
+productsGrid.innerHTML="";
+
+const data=snapshot.val();
+
+if(!data){
+alert("No products found");
+return;
+}
+
+Object.keys(data).forEach(key=>{
+
+const product=data[key];
+
+console.log(product);
+
+productsGrid.innerHTML+=`
+
+<div class="product-card">
+
+<img src="${product.image || ''}">
+
+<div class="product-info">
+
+<div class="product-name">
+${product.name || ''}
+</div>
+
+<div class="product-price">
+₱${product.price || 0}
+</div>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+});
+
 productsGrid.innerHTML = "";
 
 const data = snapshot.val();
