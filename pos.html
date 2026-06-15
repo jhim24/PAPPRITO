@@ -22,6 +22,14 @@ input,select,textarea,button{width:100%;padding:10px;margin:5px 0}
 <div class="left">
 <h2>PAPPRITO POS</h2>
 <input id="searchProduct" placeholder="Search product">
+
+<div id="categories" style="
+display:flex;
+gap:10px;
+margin:15px 0;
+flex-wrap:wrap;
+"></div>
+
 <div id="productsGrid" class="grid"></div>
 </div>
 
@@ -51,20 +59,112 @@ appId:"1:831941801424:web:40a99cdfb312dac2d275d5"
 firebase.initializeApp(firebaseConfig);
 const db=firebase.database();
 let cart=[];
+let allProducts=[];
+let currentCategory="ALL";
 
-db.ref("products").on("value",snap=>{
- const data=snap.val()||{};
- let html="";
- Object.keys(data).forEach(k=>{
-   const p=data[k];
-   html+=`<div class="card" onclick="addToCart('${(p.name||'').replace(/'/g,'')}',
-   ${Number(p.price||0)})">
-   <img src="${p.image||''}">
-   <h4>${p.name||''}</h4><b>₱${p.price||0}</b></div>`;
+db.ref("products").on("value",snapshot=>{
+
+ const productsData = snapshot.val();
+
+ if(!productsData) return;
+
+ allProducts = [];
+
+ let categories = [];
+
+ Object.keys(productsData).forEach(key=>{
+
+   const product = productsData[key];
+
+   allProducts.push(product);
+
+   if(
+      product.category &&
+      !categories.includes(product.category)
+   ){
+      categories.push(product.category);
+   }
+
  });
- document.getElementById("productsGrid").innerHTML=html;
+
+ renderCategories(categories);
+
+ showCategory("ALL");
+
 });
 
+ function renderCategories(categories){
+
+ let html = `
+ <button onclick="showCategory('ALL')">
+ ALL
+ </button>
+ `;
+
+ categories.forEach(cat=>{
+
+   html += `
+   <button onclick="showCategory('${cat}')">
+   ${cat}
+   </button>
+   `;
+
+ });
+
+ document.getElementById(
+ "categories"
+ ).innerHTML = html;
+
+}
+ function showCategory(category){
+
+ let html = "";
+
+ let products = allProducts;
+
+ if(category !== "ALL"){
+
+   products =
+   allProducts.filter(
+   item =>
+   item.category === category
+   );
+
+ }
+
+ products.forEach(product=>{
+
+ html += `
+
+ <div class="card"
+ onclick="addToCart(
+ '${product.name.replace(/'/g,'')}',
+ ${product.price}
+ )">
+
+ <img src="${product.image||''}">
+
+ <h4>${product.name}</h4>
+
+ <p>
+ ${product.category||''}
+ </p>
+
+ <b>
+ ₱${product.price}
+ </b>
+
+ </div>
+
+ `;
+
+ });
+
+ document.getElementById(
+ "productsGrid"
+ ).innerHTML = html;
+
+}
 function addToCart(name,price){
  let x=cart.find(a=>a.name===name);
  if(x){x.qty++}else{cart.push({name,price,qty:1})}
