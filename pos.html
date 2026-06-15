@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>PAPPRITO POS</title>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<style>
+body{font-family:Segoe UI,sans-serif;margin:0;background:#f5f7fb;display:flex}
+.left{flex:1;padding:20px}.right{width:380px;background:#fff;padding:20px;border-left:1px solid #ddd;height:100vh;overflow:auto}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:15px}
+.card{background:#fff;border-radius:12px;padding:10px;box-shadow:0 2px 8px rgba(0,0,0,.1);cursor:pointer}
+.card img{width:100%;height:160px;object-fit:cover}
+input,select,textarea,button{width:100%;padding:10px;margin:5px 0}
+.item{padding:8px;border-bottom:1px solid #eee}
+.del{background:red;color:#fff;border:none;padding:5px 10px;width:auto}
+.place{background:#e91e63;color:#fff;border:none}
+</style>
+</head>
+<body>
+<div class="left">
+<h2>PAPPRITO POS</h2>
+<input id="searchProduct" placeholder="Search product">
+<div id="productsGrid" class="grid"></div>
+</div>
+
+<div class="right">
+<h3>Order Cart</h3>
+<input id="customerName" placeholder="Customer Name">
+<input id="customerAddress" placeholder="Address">
+<select id="orderType"><option>DINE IN</option><option>TAKE OUT</option><option>DELIVERY</option></select>
+<select id="paymentMode"><option>CASH</option><option>GCASH</option><option>MAYA</option><option>CARD</option></select>
+<input id="referenceNumber" placeholder="Reference Number">
+<textarea id="notes" placeholder="Notes"></textarea>
+<div id="cartItems"></div>
+<h2 id="total">₱0</h2>
+<button class="place" onclick="checkout()">PLACE ORDER</button>
+</div>
+
+<script>
+const firebaseConfig={
+apiKey:"AIzaSyAV9T5w_1azmPHIJcZpraXP06TItj7HEuA",
+authDomain:"papprito-orders.firebaseapp.com",
+databaseURL:"https://papprito-orders-default-rtdb.firebaseio.com",
+projectId:"papprito-orders",
+storageBucket:"papprito-orders.firebasestorage.app",
+messagingSenderId:"831941801424",
+appId:"1:831941801424:web:40a99cdfb312dac2d275d5"
+};
+firebase.initializeApp(firebaseConfig);
+const db=firebase.database();
+let cart=[];
+
+db.ref("products").on("value",snap=>{
+ const data=snap.val()||{};
+ let html="";
+ Object.keys(data).forEach(k=>{
+   const p=data[k];
+   html+=`<div class="card" onclick="addToCart('${(p.name||'').replace(/'/g,'')}',
+   ${Number(p.price||0)})">
+   <img src="${p.image||''}">
+   <h4>${p.name||''}</h4><b>₱${p.price||0}</b></div>`;
+ });
+ document.getElementById("productsGrid").innerHTML=html;
+});
+
+function addToCart(name,price){
+ let x=cart.find(a=>a.name===name);
+ if(x){x.qty++}else{cart.push({name,price,qty:1})}
+ renderCart();
+}
+function removeItem(i){cart.splice(i,1);renderCart();}
+function renderCart(){
+ let html="",total=0;
+ cart.forEach((i,idx)=>{
+ total+=i.price*i.qty;
+ html+=`<div class='item'><b>${i.name}</b><br>${i.qty} x ₱${i.price}
+ <button class='del' onclick='removeItem(${idx})'>Delete</button></div>`;
+ });
+ document.getElementById("cartItems").innerHTML=html;
+ document.getElementById("total").innerText="₱"+total;
+}
+function checkout(){
+ if(!cart.length){alert("Cart Empty");return;}
+ let total=cart.reduce((a,b)=>a+b.price*b.qty,0);
+ db.ref("orders").push({
+ customerName:customerName.value,
+ address:customerAddress.value,
+ orderType:orderType.value,
+ paymentMode:paymentMode.value,
+ referenceNumber:referenceNumber.value,
+ notes:notes.value,
+ items:cart,total:total,status:"Pending",
+ timestamp:Date.now(),
+ date:new Date().toLocaleDateString(),
+ time:new Date().toLocaleTimeString()
+ }).then(()=>{
+ alert("Order Successfully Placed");
+ cart=[];renderCart();
+ });
+}
+searchProduct.addEventListener("keyup",function(){
+ const k=this.value.toLowerCase();
+ document.querySelectorAll(".card").forEach(c=>{
+ c.style.display=c.innerText.toLowerCase().includes(k)?"":"none";
+ });
+});
+</script>
+</body>
+</html>
