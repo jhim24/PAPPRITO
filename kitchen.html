@@ -248,7 +248,60 @@ color:white;
 /* MOBILE */
 
 @media(max-width:768px){
+/* NOTIFICATION */
 
+#notificationContainer{
+
+position:fixed;
+
+top:20px;
+
+right:20px;
+
+z-index:99999;
+
+}
+
+.notification{
+
+background:#22c55e;
+
+color:white;
+
+padding:15px;
+
+border-radius:15px;
+
+width:280px;
+
+margin-bottom:10px;
+
+box-shadow:
+0 10px 25px rgba(0,0,0,.3);
+
+animation:slideIn .3s ease;
+
+}
+
+.notification h4{
+
+margin-bottom:5px;
+
+}
+
+@keyframes slideIn{
+
+from{
+transform:translateX(100%);
+opacity:0;
+}
+
+to{
+transform:translateX(0);
+opacity:1;
+}
+
+}
 body{
 padding:15px;
 }
@@ -297,7 +350,9 @@ font-size:11px;
 <h1>
 🍳 Kitchen Dashboard
 </h1>
-
+  
+<div id="notificationContainer"></div>
+  
 <div class="orders"
 id="ordersContainer">
 
@@ -329,9 +384,78 @@ appId:
 };
 
 firebase.initializeApp(firebaseConfig);
+let knownOrders = [];
 
+function showNotification(order){
+
+const box =
+document.getElementById(
+"notificationContainer"
+);
+
+const div =
+document.createElement("div");
+
+div.className =
+"notification";
+
+div.innerHTML = `
+
+<h4>
+🍔 New Order
+</h4>
+
+<div>
+${order.customer}
+</div>
+
+<div>
+${order.orderType}
+</div>
+
+`;
+
+box.appendChild(div);
+
+document
+.getElementById(
+"newOrderSound"
+)
+.play();
+
+setTimeout(()=>{
+
+div.remove();
+
+},5000);
+
+}
 /* LOAD ORDERS */
+  
+const currentKeys = [];
 
+snapshot.forEach(child=>{
+
+currentKeys.push(
+child.key
+);
+
+if(
+!knownOrders.includes(
+child.key
+)
+){
+
+showNotification(
+child.val()
+);
+
+}
+
+});
+
+knownOrders =
+currentKeys;
 firebase.database()
 .ref("orders")
 .on("value", snapshot=>{
@@ -516,6 +640,11 @@ status:status
 }
 
 </script>
-
+  
+<audio id="newOrderSound">
+<source src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg" type="audio/ogg">
+</audio>
+  
 </body>
+  
 </html>
