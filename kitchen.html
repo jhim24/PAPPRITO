@@ -244,7 +244,60 @@ color:white;
 background:#3b82f6;
 color:white;
 }
+/* NOTIFICATION */
 
+#notificationContainer{
+
+position:fixed;
+
+top:20px;
+
+right:20px;
+
+z-index:99999;
+
+}
+
+.notification{
+
+background:#22c55e;
+
+color:white;
+
+padding:15px;
+
+border-radius:15px;
+
+width:280px;
+
+margin-bottom:10px;
+
+box-shadow:
+0 10px 25px rgba(0,0,0,.3);
+
+animation:slideIn .3s ease;
+
+}
+
+.notification h4{
+
+margin-bottom:5px;
+
+}
+
+@keyframes slideIn{
+
+from{
+transform:translateX(100%);
+opacity:0;
+}
+
+to{
+transform:translateX(0);
+opacity:1;
+}
+
+}
 /* MOBILE */
 
 @media(max-width:768px){
@@ -430,8 +483,13 @@ div.remove();
 },5000);
 
 }
-/* LOAD ORDERS */
-  
+
+firebase.database()
+.ref("orders")
+.on("value", snapshot=>{
+
+let html = "";
+
 const currentKeys = [];
 
 snapshot.forEach(child=>{
@@ -441,9 +499,15 @@ child.key
 );
 
 if(
+
 !knownOrders.includes(
 child.key
 )
+
+&&
+
+knownOrders.length > 0
+
 ){
 
 showNotification(
@@ -456,11 +520,6 @@ child.val()
 
 knownOrders =
 currentKeys;
-firebase.database()
-.ref("orders")
-.on("value", snapshot=>{
-
-let html = "";
 
 snapshot.forEach(child=>{
 
@@ -539,7 +598,7 @@ html += `
 <div class="order-card">
 
 <h2>
-${order.orderNumber}
+${order.trackingnumber || child.key}
 </h2>
 
 <p>
