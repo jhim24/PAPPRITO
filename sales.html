@@ -278,6 +278,7 @@ onclick="history.back()">
 <th>AMOUNT</th>
 <th>STATUS</th>
 <th>DATE</th>
+<th>ACTION</th>
 
 </tr>
 
@@ -354,6 +355,8 @@ let grossProfit = 0;
 snapshot.forEach(child=>{
 
 const order = child.val();
+
+const orderKey = child.key;
 
 totalOrders++;
 
@@ -451,6 +454,41 @@ order.timestamp || Date.now()
 
 </td>
 
+<td>
+
+<button
+onclick="editOrder('${orderKey}')"
+style="
+background:#3b82f6;
+color:white;
+border:none;
+padding:6px 10px;
+border-radius:8px;
+cursor:pointer;
+margin-right:5px;
+">
+
+EDIT
+
+</button>
+
+<button
+onclick="deleteOrder('${orderKey}')"
+style="
+background:#ef4444;
+color:white;
+border:none;
+padding:6px 10px;
+border-radius:8px;
+cursor:pointer;
+">
+
+DELETE
+
+</button>
+
+</td>
+
 </tr>
 
 `;
@@ -481,7 +519,56 @@ peso(grossProfit);
 
 });
 
-</script>
+/* DELETE */
 
+function deleteOrder(orderKey){
+
+if(confirm(
+"Delete this transaction?"
+)){
+
+firebase.database()
+.ref("orders/" + orderKey)
+.remove()
+.then(()=>{
+
+alert(
+"Transaction Deleted"
+);
+
+});
+
+}
+
+}
+
+/* EDIT */
+
+function editOrder(orderKey){
+
+const customer =
+prompt(
+"Customer Name"
+);
+
+if(customer===null){
+return;
+}
+
+firebase.database()
+.ref("orders/" + orderKey)
+.update({
+
+customer:customer
+
+});
+
+alert(
+"Customer Updated"
+);
+
+}
+
+</script>
 </body>
 </html>
