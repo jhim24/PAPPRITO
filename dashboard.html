@@ -84,7 +84,30 @@ margin-bottom:25px;
 .header h1{
 color:#1f2937;
 }
+#dashboardTitle{
 
+color:#ef4444;
+
+animation:
+blink 1s infinite;
+
+}
+
+@keyframes blink{
+
+0%{
+opacity:1;
+}
+
+50%{
+opacity:.4;
+}
+
+100%{
+opacity:1;
+}
+
+}
 .user{
 display:flex;
 align-items:center;
@@ -290,7 +313,7 @@ Admin
 
 <div class="card">
 <h3>Net Sales</h3>
-<h2>₱0</h2>
+<h2 id="salesToday">₱0</h2>
 </div>
 
 <div class="card">
@@ -305,7 +328,7 @@ Admin
 
 <div class="card">
 <h3>Profit</h3>
-<h2>₱0</h2>
+<h2 id="totalOrders">0</h2>
 </div>
 
 </div>
@@ -322,14 +345,9 @@ Admin
 <th>Status</th>
 </tr>
 
-<tr>
-<td>POS-001</td>
-<td>Walk In Customer</td>
-<td>
-<span class="status new">NEW</span>
-</td>
-</tr>
+<tbody id="ordersTable">
 
+</tbody>
 </table>
 
 </div>
@@ -345,6 +363,142 @@ Ready for Chart.js integration
 </div>
 
 </div>
+<script>
 
+setInterval(()=>{
+
+document.getElementById(
+"liveClock"
+).innerText=
+
+new Date()
+.toLocaleString();
+
+},1000);
+
+</script>
+ 
+const firebaseConfig = {
+
+apiKey:"AIzaSyAV9T5w_1azmPHIJcZpraXP06TItj7HEuA",
+
+authDomain:"papprito-orders.firebaseapp.com",
+
+databaseURL:
+"https://papprito-orders-default-rtdb.firebaseio.com",
+
+projectId:"papprito-orders",
+
+storageBucket:
+"papprito-orders.firebasestorage.app",
+
+messagingSenderId:"831941801424",
+
+appId:
+"1:831941801424:web:40a99cdfb312dac2d275d5"
+
+};
+
+firebase.initializeApp(firebaseConfig);
+
+function peso(num){
+
+return "₱"+
+
+Number(num||0)
+.toLocaleString();
+
+}
+
+firebase.database()
+.ref("orders")
+.on("value",snapshot=>{
+
+let sales=0;
+let orders=0;
+let completed=0;
+
+const table=
+document.getElementById(
+"ordersTable"
+);
+
+table.innerHTML="";
+
+snapshot.forEach(child=>{
+
+const order=
+child.val();
+
+orders++;
+
+if(
+(order.status||"")
+.toUpperCase()==="DELIVERED"
+){
+completed++;
+}
+
+(order.items||[])
+.forEach(item=>{
+
+sales+=
+Number(item.price||0)
+*
+Number(item.qty||1);
+
+});
+
+table.innerHTML += `
+
+<tr>
+
+<td>
+${order.trackingnumber||"-"}
+</td>
+
+<td>
+${order.customer||"-"}
+</td>
+
+<td>
+
+<span class="status new">
+
+${order.status||"NEW"}
+
+</span>
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+document.getElementById(
+"salesToday"
+).innerText=
+peso(sales);
+
+document.getElementById(
+"totalOrders"
+).innerText=
+orders;
+
+document.getElementById(
+"completedOrders"
+).innerText=
+completed;
+
+document.getElementById(
+"grossProfit"
+).innerText=
+peso(sales);
+
+});
+
+</script>
 </body>
 </html>
