@@ -409,38 +409,6 @@ Number(num||0).toLocaleString();
 
 }
  
-const firebaseConfig = {
-
-apiKey:"AIzaSyAV9T5w_1azmPHIJcZpraXP06TItj7HEuA",
-
-authDomain:"papprito-orders.firebaseapp.com",
-
-databaseURL:
-"https://papprito-orders-default-rtdb.firebaseio.com",
-
-projectId:"papprito-orders",
-
-storageBucket:
-"papprito-orders.firebasestorage.app",
-
-messagingSenderId:"831941801424",
-
-appId:
-"1:831941801424:web:40a99cdfb312dac2d275d5"
-
-};
-
-firebase.initializeApp(firebaseConfig);
-
-function peso(num){
-
-return "₱"+
-
-Number(num||0)
-.toLocaleString();
-
-}
-
 firebase.database()
 .ref("orders")
 .on("value",snapshot=>{
@@ -494,7 +462,14 @@ ${order.customer||"-"}
 
 <td>
 
-<span class="status new">
+<span class="status ${
+(order.status||"").toUpperCase()==="DELIVERED"
+? "done"
+:
+(order.status||"").toUpperCase()==="READY"
+? "ready"
+: "new"
+}">
 
 ${order.status||"NEW"}
 
