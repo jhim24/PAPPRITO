@@ -346,6 +346,7 @@ Admin
 <th>Order #</th>
 <th>Customer</th>
 <th>Status</th>
+<th>Date</th>
 </tr>
 
 <tbody id="ordersTable">
@@ -429,8 +430,24 @@ snapshot.forEach(child=>{
 const order=
 child.val();
 
+const today =
+new Date()
+.toDateString();
+
+const orderDate =
+new Date(
+order.timestamp || Date.now()
+).toDateString();
+
+if(orderDate !== today){
+return;
+}
+
 orders++;
 
+ if(orderDate !== today){
+return;
+}
 if(
 (order.status||"")
 .toUpperCase()==="DELIVERED"
@@ -463,17 +480,34 @@ ${order.customer||"-"}
 <td>
 
 <span class="status ${
-(order.status||"").toUpperCase()==="DELIVERED"
+
+(order.status||"")
+.toUpperCase()==="DELIVERED"
+
 ? "done"
+
 :
-(order.status||"").toUpperCase()==="READY"
+
+(order.status||"")
+.toUpperCase()==="READY"
+
 ? "ready"
+
 : "new"
+
 }">
 
 ${order.status||"NEW"}
 
 </span>
+
+</td>
+
+<td>
+
+${new Date(
+order.timestamp || Date.now()
+).toLocaleString()}
 
 </td>
 
