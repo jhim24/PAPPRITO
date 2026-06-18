@@ -4,7 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PAPPRITO POS V3</title>
+  
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+  
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -246,68 +250,16 @@ placeholder="Search Menu">
 
 <div class="left">
 
-<div class="categories">
-
-<button class="active">
-Favorites
-</button>
-
-<button>
-Beef
-</button>
-
-<button>
-Pork
-</button>
-
-<button>
-Chicken
-</button>
-
-<button>
-Seafood
-</button>
-
-<button>
-Drinks
-</button>
-
+<div
+class="categories"
+id="categories">
 </div>
-
-<div class="products-grid">
-
-<div class="product-card">
-
-<img src="https://picsum.photos/300/200?1">
-
-<div class="product-name">
-Bulalo Solo
+  
+<div
+class="products-grid"
+id="productsGrid">
 </div>
-
-<div class="product-price">
-₱185
-</div>
-
-</div>
-
-<div class="product-card">
-
-<img src="https://picsum.photos/300/200?2">
-
-<div class="product-name">
-Lechon Kawali
-</div>
-
-<div class="product-price">
-₱395
-</div>
-
-</div>
-
-</div>
-
-</div>
-
+  
 <!-- RIGHT -->
 
 <div class="right">
@@ -362,6 +314,115 @@ PROCEED TO KITCHEN
 </div>
 
 </div>
+<script>
 
+const firebaseConfig={
+
+apiKey:"AIzaSyAV9T5w_1azmPHIJcZpraXP06TItj7HEuA",
+
+authDomain:"papprito-orders.firebaseapp.com",
+
+databaseURL:
+"https://papprito-orders-default-rtdb.firebaseio.com",
+
+projectId:"papprito-orders",
+
+storageBucket:
+"papprito-orders.firebasestorage.app",
+
+messagingSenderId:"831941801424",
+
+appId:
+"1:831941801424:web:40a99cdfb312dac2d275d5"
+
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const db=firebase.database();
+
+let cart=[];
+
+let allProducts=[];
+  
+db.ref("products")
+.on("value",snapshot=>{
+
+const productsData =
+snapshot.val();
+
+if(!productsData) return;
+
+allProducts=[];
+
+let categories=[];
+
+Object.keys(productsData)
+.forEach(key=>{
+
+const product =
+productsData[key];
+
+allProducts.push(product);
+
+if(
+product.category &&
+!categories.includes(
+product.category
+)
+){
+
+categories.push(
+product.category
+);
+
+}
+
+});
+
+renderCategories(
+categories
+);
+
+showCategory(
+"ALL"
+);
+
+});
+  function renderCategories(categories){
+
+let html=`
+
+<button
+onclick="showCategory('ALL')">
+
+ALL
+
+</button>
+
+`;
+
+categories.forEach(cat=>{
+
+html+=`
+
+<button
+onclick="showCategory('${cat}')">
+
+${cat}
+
+</button>
+
+`;
+
+});
+
+document.getElementById(
+"categories"
+).innerHTML=html;
+
+}
+</script>
+  
 </body>
 </html>
