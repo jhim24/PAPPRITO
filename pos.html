@@ -2,210 +2,366 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>PAPPRITO POS</title>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
-<style>
-body{font-family:Segoe UI,sans-serif;margin:0;background:#f5f7fb;display:flex}
-.left{flex:1;padding:20px}.right{width:380px;background:#fff;padding:20px;border-left:1px solid #ddd;height:100vh;overflow:auto}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:15px}
-.card{background:#fff;border-radius:12px;padding:10px;box-shadow:0 2px 8px rgba(0,0,0,.1);cursor:pointer}
-.card img{width:100%;height:160px;object-fit:cover}
-input,select,textarea,button{width:100%;padding:10px;margin:5px 0}
-.item{padding:8px;border-bottom:1px solid #eee}
-.del{background:red;color:#fff;border:none;padding:5px 10px;width:auto}
-.place{background:#e91e63;color:#fff;border:none}
-</style>
-</head>
-<body>
-<div class="left">
-<h2>PAPPRITO POS</h2>
-<input id="searchProduct" placeholder="Search product">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PAPPRITO POS V3</title>
 
-<div id="categories" style="
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:#eef1f5;
+height:100vh;
+overflow:hidden;
+}
+
+/* TOPBAR */
+
+.topbar{
+height:70px;
+background:#2f3b4f;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 20px;
+color:white;
+}
+
+.logo{
+font-size:28px;
+font-weight:bold;
+}
+
+.search-box{
+width:500px;
+}
+
+.search-box input{
+width:100%;
+padding:12px;
+border:none;
+border-radius:10px;
+font-size:15px;
+}
+
+/* MAIN */
+
+.container{
+display:flex;
+height:calc(100vh - 70px);
+}
+
+/* LEFT */
+
+.left{
+flex:1;
+padding:20px;
+overflow:auto;
+}
+
+/* CATEGORY */
+
+.categories{
 display:flex;
 gap:10px;
-margin:15px 0;
-flex-wrap:wrap;
-"></div>
+margin-bottom:20px;
+overflow-x:auto;
+}
 
-<div id="productsGrid" class="grid"></div>
+.categories button{
+padding:12px 20px;
+border:none;
+border-radius:10px;
+background:white;
+cursor:pointer;
+font-weight:bold;
+}
+
+.categories button.active{
+background:#4a90e2;
+color:white;
+}
+
+/* PRODUCTS */
+
+.products-grid{
+display:grid;
+grid-template-columns:
+repeat(auto-fill,minmax(220px,1fr));
+gap:15px;
+}
+
+.product-card{
+background:white;
+border-radius:12px;
+overflow:hidden;
+cursor:pointer;
+box-shadow:0 3px 10px rgba(0,0,0,.1);
+transition:.3s;
+}
+
+.product-card:hover{
+transform:translateY(-5px);
+}
+
+.product-card img{
+width:100%;
+height:180px;
+object-fit:cover;
+}
+
+.product-name{
+padding:12px;
+text-align:center;
+font-weight:bold;
+}
+
+.product-price{
+background:#2f3b4f;
+color:white;
+padding:12px;
+text-align:center;
+font-size:18px;
+font-weight:bold;
+}
+
+/* RIGHT CART */
+
+.right{
+width:420px;
+background:white;
+border-left:1px solid #ddd;
+display:flex;
+flex-direction:column;
+}
+
+.cart-header{
+background:#2f3b4f;
+color:white;
+padding:20px;
+font-size:30px;
+font-weight:bold;
+}
+
+.cart-body{
+padding:20px;
+flex:1;
+overflow:auto;
+}
+
+.cart-body input,
+.cart-body select{
+width:100%;
+padding:12px;
+margin-bottom:10px;
+border:1px solid #ddd;
+border-radius:10px;
+}
+
+.cart-items{
+margin-top:15px;
+}
+
+.cart-item{
+padding:12px;
+border-bottom:1px solid #eee;
+}
+
+.total{
+font-size:32px;
+font-weight:bold;
+margin-top:20px;
+color:#4a90e2;
+}
+
+.checkout-btn{
+width:100%;
+padding:20px;
+background:#4a90e2;
+color:white;
+border:none;
+font-size:22px;
+font-weight:bold;
+cursor:pointer;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.container{
+flex-direction:column;
+}
+
+.right{
+width:100%;
+height:45vh;
+}
+
+.products-grid{
+grid-template-columns:
+repeat(2,1fr);
+}
+
+.search-box{
+width:200px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- TOPBAR -->
+
+<div class="topbar">
+
+<div class="logo">
+🍔 PAPPRITO
 </div>
+
+<div class="search-box">
+<input
+type="text"
+placeholder="Search Menu">
+</div>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="container">
+
+<!-- LEFT -->
+
+<div class="left">
+
+<div class="categories">
+
+<button class="active">
+Favorites
+</button>
+
+<button>
+Beef
+</button>
+
+<button>
+Pork
+</button>
+
+<button>
+Chicken
+</button>
+
+<button>
+Seafood
+</button>
+
+<button>
+Drinks
+</button>
+
+</div>
+
+<div class="products-grid">
+
+<div class="product-card">
+
+<img src="https://picsum.photos/300/200?1">
+
+<div class="product-name">
+Bulalo Solo
+</div>
+
+<div class="product-price">
+₱185
+</div>
+
+</div>
+
+<div class="product-card">
+
+<img src="https://picsum.photos/300/200?2">
+
+<div class="product-name">
+Lechon Kawali
+</div>
+
+<div class="product-price">
+₱395
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- RIGHT -->
 
 <div class="right">
-<h3>Order Cart</h3>
-<input id="customerName" placeholder="Customer Name">
-<input id="customerAddress" placeholder="Address">
-<select id="orderType"><option>DINE IN</option><option>TAKE OUT</option><option>DELIVERY</option></select>
-<select id="paymentMode"><option>CASH</option><option>GCASH</option><option>MAYA</option><option>CARD</option></select>
-<input id="referenceNumber" placeholder="Reference Number">
-<textarea id="notes" placeholder="Notes"></textarea>
-<div id="cartItems"></div>
-<h2 id="total">₱0</h2>
-<button class="place" onclick="checkout()">PLACE ORDER</button>
+
+<div class="cart-header">
+DINE-IN
 </div>
 
-<script>
-const firebaseConfig={
-apiKey:"AIzaSyAV9T5w_1azmPHIJcZpraXP06TItj7HEuA",
-authDomain:"papprito-orders.firebaseapp.com",
-databaseURL:"https://papprito-orders-default-rtdb.firebaseio.com",
-projectId:"papprito-orders",
-storageBucket:"papprito-orders.firebasestorage.app",
-messagingSenderId:"831941801424",
-appId:"1:831941801424:web:40a99cdfb312dac2d275d5"
-};
-firebase.initializeApp(firebaseConfig);
-const db=firebase.database();
-let cart=[];
-let allProducts=[];
-let currentCategory="ALL";
+<div class="cart-body">
 
-db.ref("products").on("value",snapshot=>{
+<input
+placeholder="Customer Name">
 
- const productsData = snapshot.val();
+<select>
+<option>Table 1</option>
+<option>Table 2</option>
+<option>Table 3</option>
+</select>
 
- if(!productsData) return;
+<select>
+<option>DINE IN</option>
+<option>TAKE OUT</option>
+<option>DELIVERY</option>
+</select>
 
- allProducts = [];
+<div class="cart-items">
 
- let categories = [];
+<div class="cart-item">
 
- Object.keys(productsData).forEach(key=>{
+Bulalo Solo
 
-   const product = productsData[key];
+<br>
 
-   allProducts.push(product);
+2 x ₱185
 
-   if(
-      product.category &&
-      !categories.includes(product.category)
-   ){
-      categories.push(product.category);
-   }
+</div>
 
- });
+</div>
 
- renderCategories(categories);
+<div class="total">
+₱370
+</div>
 
- showCategory("ALL");
+</div>
 
-});
+<button class="checkout-btn">
 
- function renderCategories(categories){
+PROCEED TO KITCHEN
 
- let html = `
- <button onclick="showCategory('ALL')">
- ALL
- </button>
- `;
+</button>
 
- categories.forEach(cat=>{
+</div>
 
-   html += `
-   <button onclick="showCategory('${cat}')">
-   ${cat}
-   </button>
-   `;
+</div>
 
- });
-
- document.getElementById(
- "categories"
- ).innerHTML = html;
-
-}
- function showCategory(category){
-
- let html = "";
-
- let products = allProducts;
-
- if(category !== "ALL"){
-
-   products =
-   allProducts.filter(
-   item =>
-   item.category === category
-   );
-
- }
-
- products.forEach(product=>{
-
- html += `
-
- <div class="card"
- onclick="addToCart(
- '${product.name.replace(/'/g,'')}',
- ${product.price}
- )">
-
- <img src="${product.image||''}">
-
- <h4>${product.name}</h4>
-
- <p>
- ${product.category||''}
- </p>
-
- <b>
- ₱${product.price}
- </b>
-
- </div>
-
- `;
-
- });
-
- document.getElementById(
- "productsGrid"
- ).innerHTML = html;
-
-}
-function addToCart(name,price){
- let x=cart.find(a=>a.name===name);
- if(x){x.qty++}else{cart.push({name,price,qty:1})}
- renderCart();
-}
-function removeItem(i){cart.splice(i,1);renderCart();}
-function renderCart(){
- let html="",total=0;
- cart.forEach((i,idx)=>{
- total+=i.price*i.qty;
- html+=`<div class='item'><b>${i.name}</b><br>${i.qty} x ₱${i.price}
- <button class='del' onclick='removeItem(${idx})'>Delete</button></div>`;
- });
- document.getElementById("cartItems").innerHTML=html;
- document.getElementById("total").innerText="₱"+total;
-}
-function checkout(){
- if(!cart.length){alert("Cart Empty");return;}
- let total=cart.reduce((a,b)=>a+b.price*b.qty,0);
- db.ref("orders").push({
- customerName:customerName.value,
- address:customerAddress.value,
- orderType:orderType.value,
- paymentMode:paymentMode.value,
- referenceNumber:referenceNumber.value,
- notes:notes.value,
- items:cart,total:total,status:"Pending",
- timestamp:Date.now(),
- date:new Date().toLocaleDateString(),
- time:new Date().toLocaleTimeString()
- }).then(()=>{
- alert("Order Successfully Placed");
- cart=[];renderCart();
- });
-}
-searchProduct.addEventListener("keyup",function(){
- const k=this.value.toLowerCase();
- document.querySelectorAll(".card").forEach(c=>{
- c.style.display=c.innerText.toLowerCase().includes(k)?"":"none";
- });
-});
-</script>
 </body>
 </html>
