@@ -390,7 +390,144 @@ showCategory(
 
 });
   function renderCategories(categories){
+    
+function showCategory(category){
+  
+function addToCart(name,price){
+function renderCart(){
 
+let html="";
+
+let total=0;
+
+cart.forEach((item,index)=>{
+
+total+=
+item.price*
+item.qty;
+
+html+=`
+
+<div class="item">
+
+<b>
+
+${item.name}
+
+</b>
+
+<br>
+
+${item.qty}
+x
+₱${item.price}
+
+=
+
+₱${item.qty*item.price}
+
+<br><br>
+
+<button
+class="del"
+onclick="removeItem(${index})">
+
+Delete
+
+</button>
+
+</div>
+
+`;
+
+});
+
+document.getElementById(
+"cartItems"
+).innerHTML=html;
+
+document.getElementById(
+"total"
+).innerText=
+"₱"+total;
+
+}
+const existing=
+cart.find(
+item=>item.name===name
+);
+
+if(existing){
+
+existing.qty++;
+
+}else{
+
+cart.push({
+
+name:name,
+
+price:Number(price),
+
+qty:1
+
+});
+
+}
+
+renderCart();
+
+}
+let html="";
+
+let products=allProducts;
+
+if(category!=="ALL"){
+
+products=
+allProducts.filter(
+item=>
+item.category===category
+);
+
+}
+
+products.forEach(product=>{
+
+html+=`
+
+<div
+class="product-card"
+onclick="addToCart(
+'${(product.name||"").replace(/'/g,"")}',
+${product.price||0}
+)">
+
+<img src="${product.image||''}">
+
+<div class="product-name">
+
+${product.name||''}
+
+</div>
+
+<div class="product-price">
+
+₱${product.price||0}
+
+</div>
+
+</div>
+
+`;
+
+});
+
+document.getElementById(
+"productsGrid"
+).innerHTML=html;
+
+}
 let html=`
 
 <button
