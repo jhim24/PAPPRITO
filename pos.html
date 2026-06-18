@@ -271,21 +271,24 @@ DINE-IN
 <div class="cart-body">
 
 <input
+id="customerName"
 placeholder="Customer Name">
 
-<select>
+<select id="tableNumber">
 <option>Table 1</option>
 <option>Table 2</option>
 <option>Table 3</option>
 </select>
 
-<select>
+<select id="orderType">
 <option>DINE IN</option>
 <option>TAKE OUT</option>
 <option>DELIVERY</option>
 </select>
 
-<div class="cart-items">
+<div
+class="cart-items"
+id="cartItems">
 
 <div class="cart-item">
 
@@ -299,8 +302,12 @@ Bulalo Solo
 
 </div>
 
-<div class="total">
-₱370
+<div
+class="total"
+id="total">
+
+₱0
+
 </div>
 
 </div>
@@ -317,24 +324,13 @@ PROCEED TO KITCHEN
 <script>
 
 const firebaseConfig={
-
 apiKey:"AIzaSyAV9T5w_1azmPHIJcZpraXP06TItj7HEuA",
-
 authDomain:"papprito-orders.firebaseapp.com",
-
-databaseURL:
-"https://papprito-orders-default-rtdb.firebaseio.com",
-
+databaseURL:"https://papprito-orders-default-rtdb.firebaseio.com",
 projectId:"papprito-orders",
-
-storageBucket:
-"papprito-orders.firebasestorage.app",
-
+storageBucket:"papprito-orders.firebasestorage.app",
 messagingSenderId:"831941801424",
-
-appId:
-"1:831941801424:web:40a99cdfb312dac2d275d5"
-
+appId:"1:831941801424:web:40a99cdfb312dac2d275d5"
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -342,14 +338,14 @@ firebase.initializeApp(firebaseConfig);
 const db=firebase.database();
 
 let cart=[];
-
 let allProducts=[];
-  
+
+/* LOAD PRODUCTS */
+
 db.ref("products")
 .on("value",snapshot=>{
 
-const productsData =
-snapshot.val();
+const productsData=snapshot.val();
 
 if(!productsData) return;
 
@@ -360,77 +356,165 @@ let categories=[];
 Object.keys(productsData)
 .forEach(key=>{
 
-const product =
-productsData[key];
+const product=productsData[key];
 
 allProducts.push(product);
 
 if(
 product.category &&
-!categories.includes(
-product.category
-)
+!categories.includes(product.category)
 ){
-
-categories.push(
-product.category
-);
-
+categories.push(product.category);
 }
 
 });
 
-renderCategories(
-categories
-);
+renderCategories(categories);
 
-showCategory(
-"ALL"
-);
+showCategory("ALL");
 
 });
-  function renderCategories(categories){
-    
+
+/* CATEGORIES */
+
+function renderCategories(categories){
+
+let html=`
+<button onclick="showCategory('ALL')">
+ALL
+</button>
+`;
+
+categories.forEach(cat=>{
+
+html+=`
+<button onclick="showCategory('${cat}')">
+${cat}
+</button>
+`;
+
+});
+
+document.getElementById(
+"categories"
+).innerHTML=html;
+
+}
+
+/* SHOW PRODUCTS */
+
 function showCategory(category){
-  
-function addToCart(name,price){
-function renderCart(){
 
 let html="";
 
+let products=allProducts;
+
+if(category!=="ALL"){
+
+products=
+allProducts.filter(
+item=>item.category===category
+);
+
+}
+
+products.forEach(product=>{
+
+html+=`
+
+<div
+class="product-card"
+onclick="addToCart(
+'${(product.name||"").replace(/'/g,"")}',
+${product.price||0}
+)">
+
+<img src="${product.image||''}">
+
+<div class="product-name">
+${product.name||''}
+</div>
+
+<div class="product-price">
+₱${product.price||0}
+</div>
+
+</div>
+
+`;
+
+});
+
+document.getElementById(
+"productsGrid"
+).innerHTML=html;
+
+}
+
+/* ADD TO CART */
+
+function addToCart(name,price){
+
+const existing=
+cart.find(
+item=>item.name===name
+);
+
+if(existing){
+
+existing.qty++;
+
+}else{
+
+cart.push({
+name:name,
+price:Number(price),
+qty:1
+});
+
+}
+
+renderCart();
+
+}
+
+/* RENDER CART */
+
+function renderCart(){
+
+let html="";
 let total=0;
 
 cart.forEach((item,index)=>{
 
-total+=
-item.price*
-item.qty;
+total+=item.price*item.qty;
 
 html+=`
 
-<div class="item">
+<div class="cart-item">
 
-<b>
-
-${item.name}
-
-</b>
+<b>${item.name}</b>
 
 <br>
 
-${item.qty}
-x
-₱${item.price}
+${item.qty} x ₱${item.price}
 
-=
+<br>
 
 ₱${item.qty*item.price}
 
 <br><br>
 
 <button
-class="del"
-onclick="removeItem(${index})">
+onclick="removeItem(${index})"
+style="
+background:red;
+color:white;
+border:none;
+padding:6px 12px;
+border-radius:8px;
+cursor:pointer;
+">
 
 Delete
 
@@ -452,114 +536,17 @@ document.getElementById(
 "₱"+total;
 
 }
-const existing=
-cart.find(
-item=>item.name===name
-);
 
-if(existing){
+/* DELETE */
 
-existing.qty++;
+function removeItem(index){
 
-}else{
-
-cart.push({
-
-name:name,
-
-price:Number(price),
-
-qty:1
-
-});
-
-}
+cart.splice(index,1);
 
 renderCart();
 
 }
-let html="";
 
-let products=allProducts;
-
-if(category!=="ALL"){
-
-products=
-allProducts.filter(
-item=>
-item.category===category
-);
-
-}
-
-products.forEach(product=>{
-
-html+=`
-
-<div
-class="product-card"
-onclick="addToCart(
-'${(product.name||"").replace(/'/g,"")}',
-${product.price||0}
-)">
-
-<img src="${product.image||''}">
-
-<div class="product-name">
-
-${product.name||''}
-
-</div>
-
-<div class="product-price">
-
-₱${product.price||0}
-
-</div>
-
-</div>
-
-`;
-
-});
-
-document.getElementById(
-"productsGrid"
-).innerHTML=html;
-
-}
-let html=`
-
-<button
-onclick="showCategory('ALL')">
-
-ALL
-
-</button>
-
-`;
-
-categories.forEach(cat=>{
-
-html+=`
-
-<button
-onclick="showCategory('${cat}')">
-
-${cat}
-
-</button>
-
-`;
-
-});
-
-document.getElementById(
-"categories"
-).innerHTML=html;
-
-}
 </script>
-  
 </body>
 </html>
