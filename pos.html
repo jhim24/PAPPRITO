@@ -89,17 +89,43 @@ overflow-x:auto;
 }
 
 .categories button{
-padding:12px 20px;
+
+display:flex;
+align-items:center;
+gap:8px;
+
+padding:12px 22px;
+
 border:none;
-border-radius:10px;
+
+border-radius:30px;
+
 background:white;
-cursor:pointer;
+
+color:#2f3b4f;
+
 font-weight:bold;
+
+font-size:14px;
+
+cursor:pointer;
+
+box-shadow:0 3px 10px rgba(0,0,0,.08);
+
+transition:.3s;
+
+white-space:nowrap;
+
 }
 
-.categories button.active{
+.categories button:hover{
+
 background:#4a90e2;
+
 color:white;
+
+transform:translateY(-2px);
+
 }
 
 /* PRODUCTS */
