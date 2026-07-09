@@ -863,6 +863,29 @@ cart.splice(index,1);
 renderCart();
 
 }
+  function increaseQty(index){
+
+cart[index].qty++;
+
+renderCart();
+
+}
+
+function decreaseQty(index){
+
+if(cart[index].qty>1){
+
+cart[index].qty--;
+
+}else{
+
+cart.splice(index,1);
+
+}
+
+renderCart();
+
+}
 setInterval(()=>{
 
 document.getElementById(
