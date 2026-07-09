@@ -680,67 +680,59 @@ products.forEach(product=>{
 
 html+=`
 
-<div
-class="product-card"
-onclick="addToCart(
-'${(product.name||"").replace(/'/g,"")}',
-${product.price||0}
-)">
+<div class="product-card">
 
 <img src="${product.image||''}">
 
-<div style="padding:15px;">
-
-<h3 style="
-font-size:18px;
-margin-bottom:8px;
-color:#2f3b4f;
-">
+<div class="product-name">
 
 ${product.name||''}
 
-</h3>
-
-<div style="
-font-size:13px;
-color:#888;
-margin-bottom:10px;
-">
-
-${product.category||''}
-
 </div>
 
 <div style="
-display:flex;
-justify-content:space-between;
-align-items:center;
+text-align:center;
+font-size:13px;
+color:#666;
+margin-bottom:8px;
 ">
 
-<b style="
-font-size:24px;
-color:#4a90e2;
-">
+${product.category || "MENU"}
+
+</div>
+
+<div class="product-price">
 
 ₱${product.price||0}
 
-</b>
+</div>
 
-<button style="
-background:#4a90e2;
-color:white;
-border:none;
-padding:8px 15px;
-border-radius:8px;
-cursor:pointer;
-font-weight:bold;
+<div style="
+padding:15px;
 ">
 
-+ ADD
+<button
+onclick="addToCart(
+'${(product.name||"").replace(/'/g,"")}',
+${product.price||0}
+)"
+style="
+width:100%;
+padding:12px;
+background:#22c55e;
+color:white;
+border:none;
+border-radius:10px;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+">
+
+<i class="fa-solid fa-cart-plus"></i>
+
+ADD TO CART
 
 </button>
-
-</div>
 
 </div>
 
