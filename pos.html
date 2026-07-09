@@ -699,45 +699,122 @@ renderCart();
 
 function renderCart(){
 
-let html="";
 let total=0;
+
+let html=`
+
+<table style="
+width:100%;
+border-collapse:collapse;
+">
+
+<thead>
+
+<tr style="
+background:#4a90e2;
+color:white;
+">
+
+<th style="padding:8px;">SN</th>
+
+<th style="padding:8px;">ITEM</th>
+
+<th style="padding:8px;">QTY</th>
+
+<th style="padding:8px;">AMOUNT</th>
+
+<th style="padding:8px;">ACTION</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+`;
 
 cart.forEach((item,index)=>{
 
-total+=item.price*item.qty;
+total += item.price * item.qty;
 
-html+=`
+html += `
 
-<div class="cart-item">
+<tr>
 
-<b>${item.name}</b>
+<td style="text-align:center;padding:8px;">
+${index+1}
+</td>
 
-<br>
+<td style="padding:8px;">
+${item.name}
+</td>
 
-${item.qty} x ₱${item.price}
+<td style="text-align:center;">
 
-<br>
+<button
+onclick="decreaseQty(${index})"
+style="
+width:28px;
+height:28px;
+border:none;
+background:#ff9800;
+color:white;
+border-radius:6px;
+cursor:pointer;
+">
 
-₱${item.qty*item.price}
+-
 
-<br><br>
+</button>
+
+<b style="margin:0 8px;">
+${item.qty}
+</b>
+
+<button
+onclick="increaseQty(${index})"
+style="
+width:28px;
+height:28px;
+border:none;
+background:#4CAF50;
+color:white;
+border-radius:6px;
+cursor:pointer;
+">
+
++
+
+</button>
+
+</td>
+
+<td style="text-align:right;padding-right:10px;">
+
+₱${item.price * item.qty}
+
+</td>
+
+<td style="text-align:center;">
 
 <button
 onclick="removeItem(${index})"
 style="
-background:red;
+background:#e53935;
 color:white;
 border:none;
-padding:6px 12px;
+padding:6px 10px;
 border-radius:8px;
 cursor:pointer;
 ">
 
-Delete
+🗑
 
 </button>
 
-</div>
+</td>
+
+</tr>
 
 `;
 
