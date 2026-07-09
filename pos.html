@@ -558,18 +558,64 @@ ${product.price||0}
 
 <img src="${product.image||''}">
 
-<div class="product-name">
+<div style="padding:15px;">
+
+<h3 style="
+font-size:18px;
+margin-bottom:8px;
+color:#2f3b4f;
+">
+
 ${product.name||''}
+
+</h3>
+
+<div style="
+font-size:13px;
+color:#888;
+margin-bottom:10px;
+">
+
+${product.category||''}
+
 </div>
 
-<div class="product-price">
+<div style="
+display:flex;
+justify-content:space-between;
+align-items:center;
+">
+
+<b style="
+font-size:24px;
+color:#4a90e2;
+">
+
 ₱${product.price||0}
+
+</b>
+
+<button style="
+background:#4a90e2;
+color:white;
+border:none;
+padding:8px 15px;
+border-radius:8px;
+cursor:pointer;
+font-weight:bold;
+">
+
++ ADD
+
+</button>
+
+</div>
+
 </div>
 
 </div>
 
 `;
-
 });
 
 document.getElementById(
