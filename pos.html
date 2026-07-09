@@ -533,19 +533,37 @@ showCategory("ALL");
 function renderCategories(categories){
 
 let html=`
+
 <button onclick="showCategory('ALL')">
-ALL
+
+🍽 ALL
+
 </button>
+
 `;
 
 categories.forEach(cat=>{
 
-html+=`
-<button onclick="showCategory('${cat}')">
-${cat}
-</button>
-`;
+let icon="🍽";
 
+if(cat.toLowerCase().includes("coffee")) icon="☕";
+else if(cat.toLowerCase().includes("burger")) icon="🍔";
+else if(cat.toLowerCase().includes("drink")) icon="🥤";
+else if(cat.toLowerCase().includes("dessert")) icon="🍰";
+else if(cat.toLowerCase().includes("rice")) icon="🍛";
+else if(cat.toLowerCase().includes("meal")) icon="🍽";
+
+html+=`
+
+<button onclick="showCategory('${cat}')">
+
+${icon}
+
+${cat}
+
+</button>
+
+`;
 });
 
 document.getElementById(
