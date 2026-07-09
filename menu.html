@@ -1007,8 +1007,11 @@ Object.keys(productsData)
 const product =
 productsData[key];
 
-allProducts.push(product);
+if(product.status === "Active"){
 
+    allProducts.push(product);
+
+}
 if(
 !categories.includes(
 product.category
@@ -1100,7 +1103,7 @@ ${item.name}
 
 <p>
 
-₱${item.price}
+₱${Number(item.sellingPrice || 0).toFixed(2)}
 
 </p>
 
@@ -1108,8 +1111,8 @@ ${item.name}
 class="cart-btn"
 onclick="addToCart(
 '${item.name}',
-'₱${item.price}'
-)">
+'₱${Number(item.sellingPrice || 0).toFixed(2)}'
+)"
 
 ADD TO CART
 
