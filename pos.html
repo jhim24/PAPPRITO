@@ -693,7 +693,15 @@ cart.splice(index,1);
 renderCart();
 
 }
+setInterval(()=>{
 
+document.getElementById(
+"liveClock"
+).innerHTML=
+new Date().toLocaleTimeString();
+
+},1000);
+  
 </script>
 </body>
 </html>
