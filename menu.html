@@ -1534,10 +1534,18 @@ Date.now()
 
 };
 
-/* SAVE ORDER */
+/* SAVE ONLINE ORDER */
 
-db.ref('orders')
+orderData.status = "NEW";
+
+orderData.orderSource = "Website";
+
+orderData.createdAt = Date.now();
+
+db.ref("onlineOrders")
+
 .push(orderData)
+
 .then(()=>{
 
 showReceipt(orderData);
