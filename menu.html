@@ -1012,15 +1012,12 @@ if(product.status === "Active"){
     allProducts.push(product);
 
 }
-if(
-!categories.includes(
-product.category
-)
-){
+  
+if (
+    !categories.includes(product.categoryName)
+) {
 
-categories.push(
-product.category
-);
+    categories.push(product.categoryName);
 
 }
 
@@ -1080,7 +1077,7 @@ const filtered =
 
 allProducts.filter(
 item =>
-item.category === cat
+item.categoryName === cat
 );
 
 filtered.forEach(item=>{
