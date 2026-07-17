@@ -1015,13 +1015,13 @@ if(product.status === "Active"){
 }
   
 if (
+    product.categoryName &&
     !categories.includes(product.categoryName)
 ) {
 
     categories.push(product.categoryName);
 
 }
-
 });
 
 /* RENDER CATEGORY */
